@@ -34,12 +34,12 @@ $routes->setAutoRoute(true);
 
 
 $routes->get('/', 'Pages::index');
-$routes->get('/login', 'Pages::login');
 $routes->get('/about', 'Pages::about');
-$routes->get('/register', 'Pages::register');
 $routes->get('/admin', 'Admin::users', ['filter' => 'role:admin']);
 
-
+// Routes untuk authentikasi
+$routes->get('/login', 'AuthController::login');
+$routes->get('/register', 'AuthController::register');
 
 // Route user menu
 // Route untuk manage user profile

@@ -9,7 +9,7 @@ class AtractionSeeder extends Seeder
     public function run()
     {
         $data = [
-            'id' => 'A04',
+            'id' => 'A09',
             'name'    => 'tesSeeder',
             'status'    => 3,
             'price'    => 200,
@@ -17,7 +17,7 @@ class AtractionSeeder extends Seeder
             'description'    => 'okee',
             'lat'    => '-0.601102',
             'lng'    => '100.108668',
-            // 'geom'   => 'ST_LineStringFromText("POLYGON((0 0,10 0,10 10,0 10,0 0),(5 5,7 5,7 7,5 7, 5 5))'
+            // 'geom'   => 'ST_PolygonFromText("POLYGON((0 0,10 0,10 10,0 10,0 0),(5 5,7 5,7 7,5 7, 5 5))'
 
         ];
 
