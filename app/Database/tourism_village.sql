@@ -1,0 +1,1 @@
+SELECT * FROM tourism_village.detail_menu;

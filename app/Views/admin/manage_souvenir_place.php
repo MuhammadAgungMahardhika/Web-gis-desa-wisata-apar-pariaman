@@ -1,0 +1,103 @@
+<?= $this->extend('layout/template.php') ?>
+
+
+<?= $this->section('content') ?>
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+
+    <!-- DataTales  -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary text-center">Manage Souvenir Place</h6>
+            <a href="<?= base_url('manage_souvenir_place/insert') ?> " title="Add souvenir place" role="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <?php $no = 1;
+
+                        ?>
+                        <tr>
+                            <th>No</th>
+                            <th>Sovenir Place Name</th>
+
+                            <th class="text-center">Action</th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <?php foreach ($souvenirPlaceData as $souvenirPlace) : ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $souvenirPlace->name; ?></td>
+
+                                <td class="text-center">
+                                    <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_souvenir_place/detail/' . $souvenirPlace->id); ?>"><i class="fa fa-eye"></i> </a>
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete Souvenir Place" data-toggle="modal" data-target="#deleteModal<?= $souvenirPlace->id; ?>">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+
+                                    <!-- Delete Modal-->
+                                    <div class="modal fade" id="deleteModal<?= $souvenirPlace->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Are you sure delete <b>" <?= $souvenirPlace->name; ?> "</b> souvenir place?</div>
+                                                <div class="modal-footer">
+                                                    <a class="btn btn-danger" href="<?= base_url('manage_souvenir_place/delete/' . $souvenirPlace->id) ?>">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+
+<?php
+if (session()->getFlashdata('success')) : ?>
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: '<?php echo session()->getFlashdata('success') ?>',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+
+<?php elseif (session()->getFlashdata('failed')) : ?>
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: '<?php echo session()->getFlashdata('failed') ?>',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+
+<?php endif; ?>
+<!-- Akhir Flash Message -->
+
+<?= $this->endSection() ?>
