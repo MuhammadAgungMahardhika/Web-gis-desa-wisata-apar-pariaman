@@ -17,23 +17,17 @@
 </head>
 
 <body>
-
     <section class="bg">
-
         <video autoplay muted poster="/img/apar/bg-movie-ss.PNG" loop class="bg-video">
             <source src="/img/apar/bg-movie.MP4">
-
         </video>
-
         <div class="bg-content">
             <h1>Welcome To Apar Tourism Village</h1>
             <p>Pariaman City, West Sumatra, Indonesia</p>
 
             <a class="btn btn-success " href="<?= base_url('list_object') ?>">Explore Now!</a>
         </div>
-
     </section>
-
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <script>

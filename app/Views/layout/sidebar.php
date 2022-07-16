@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="index.html"> <i class="iconify" data-icon="fontisto:holiday-village" data-width="40" data-height="40"></i></a>
+                    <a href="<?= base_url('index'); ?>"> <i class="iconify" data-icon="fontisto:holiday-village" data-width="40" data-height="40"></i></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -31,7 +31,7 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+                <!-- <li class="sidebar-title">Menu</li> -->
 
                 <li class="sidebar-item  ">
                     <a href="<?= base_url('list_object') ?>" class='sidebar-link'>

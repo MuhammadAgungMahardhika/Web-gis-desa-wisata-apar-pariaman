@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="googlemaps" id="map" onload="initMap();" style="height: 350px; width:50vw">
+                    <div class="googlemaps" id="map" onload="initMap();" style="height: 60vh;">
                     </div>
                 </div>
             </div>
