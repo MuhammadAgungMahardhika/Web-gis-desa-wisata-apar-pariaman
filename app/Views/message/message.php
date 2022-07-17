@@ -21,6 +21,5 @@ if (session()->getFlashdata('success')) : ?>
             timer: 1500
         })
     </script>
-
 <?php endif; ?>
 <!-- Akhir Flash Message -->
