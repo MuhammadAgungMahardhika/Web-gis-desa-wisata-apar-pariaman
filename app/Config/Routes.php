@@ -78,7 +78,6 @@ $routes->group('list_object', function ($routes) {
 
 // Menu detail object
 $routes->group('detail_object', function ($routes) {
-
     $routes->get('atraction/(:segment)', 'DetailObjectController::atraction/$1');
     $routes->get('event/(:segment)', 'DetailObjectController::event/$1');
 

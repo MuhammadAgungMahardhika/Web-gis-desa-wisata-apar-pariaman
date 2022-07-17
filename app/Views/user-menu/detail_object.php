@@ -5,7 +5,6 @@
 
 <section class="section">
     <div class="row">
-
         <!-- Object Detail Information -->
         <div class="col-md-6 col-12">
             <div class="card">
@@ -61,9 +60,7 @@
 
             <!--Rating and Review Section-->
 
-
         </div>
-
         <div class="col-md-6 col-12">
             <!-- Object Location on Map -->
             <div class="card">
