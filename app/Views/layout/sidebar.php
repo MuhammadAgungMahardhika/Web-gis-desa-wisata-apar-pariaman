@@ -24,7 +24,6 @@
                     $('#rowObjectArround').css("display", "none")
                     $('#panelListTittle').html(response.panelList)
                     datas = response.objectData
-                    console.log(response.objectData)
                     ajaxUrl = response.url
                     userMarker = null
                     initMap()

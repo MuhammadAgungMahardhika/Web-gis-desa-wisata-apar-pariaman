@@ -1,4 +1,8 @@
 
+let base_url = 'http://localhost:8080'
+let userMarker, directionsRenderer, infoWindow, circle
+let userPosition = null
+
     function initMap() {
         showMap() //show map
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
@@ -203,17 +207,17 @@
             anchor: new google.maps.Point(0, 25) // anchor
         }
         if (ajaxUrl == 'atraction') {
-            icon.url = "/assets/images/marker-icon/marker-atraction.jpg"
+            icon.url = base_url+"/assets/images/marker-icon/marker-atraction.png"
         } else if (ajaxUrl == 'event') {
-            icon.url = "/assets/images/marker-icon/marker_ev.png"
+            icon.url = base_url+"/assets/images/marker-icon/marker_ev.png"
         } else if (ajaxUrl == 'culinary_place') {
-            icon.url = "/assets/images/marker-icon/marker_cp.png"
+            icon.url = base_url+"/assets/images/marker-icon/marker_cp.png"
         } else if (ajaxUrl == 'worship_place') {
-            icon.url = "/assets/images/marker-icon/marker_wp.png"
+            icon.url = base_url+"/assets/images/marker-icon/marker_wp.png"
         } else if (ajaxUrl == 'souvenir_place') {
-            icon.url = "/assets/images/marker-icon/marker_sp.png"
+            icon.url = base_url+"/assets/images/marker-icon/marker_sp.png"
         } else if (ajaxUrl == 'facility') {
-            icon.url = "/assets/images/marker-icon/marker_facility.jpg"
+            icon.url = base_url+"/assets/images/marker-icon/marker_facility.jpg"
         }
         return icon
     }
@@ -224,7 +228,7 @@
         let lat = data.lat
         let lng = data.lng
         let infoMarker = null
-        infoMarker = `<div class="text-center">${name}</div><br><div class="col-md text-center" id="infoWindowDiv" ><a role ="button" title ="Route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="<?= base_url('detail_object/') ?>/${ajaxUrl}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="Detail information"> <i class="fa fa-info"></i></a> 
+        infoMarker = `<div class="text-center">${name}</div><br><div class="col-md text-center" id="infoWindowDiv" ><a role ="button" title ="Route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${ajaxUrl}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="Detail information"> <i class="fa fa-info"></i></a> 
         ${(() => {if (ajaxUrl == 'atraction' || ajaxUrl == 'event') {
         return `<a onclick = "setNearby(${lat},${lng})" target="_blank" role = "button" class="btn btn-outline-primary" title="Object arround you"><i class="fa fa-compass"></i></a >`
         }else{return ''}})()} </div>`
@@ -355,9 +359,9 @@
         let f = $("#fCheck").prop('checked') == true
         $('#sliderVal').html(distance);
         circle.setRadius(distance)
-        const url = "search_nearby"
+        const url = "list_object/search_nearby"
         $.ajax({
-            url: "<?= base_url('list_object') ?>" + "/" + url + "/" + distance,
+            url: base_url + "/" + url + "/" + distance,
             method: "get",
             data: {
                 cp: cp,
