@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="/assets/images/logo/favicon.png" type="image/png">
 
     <!-- My CSS -->
-    <link href="/assets/css/main/style.css">
+    <link rel="stylesheet" href="/assets/css/main/style.css">
 
     <!-- Third Party Icon -->
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>

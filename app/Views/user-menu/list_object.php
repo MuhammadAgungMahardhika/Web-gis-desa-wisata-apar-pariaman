@@ -11,10 +11,10 @@
                             <h5 class="card-title">Google Maps with Location</h5>
                         </div>
                         <div class="col">
-                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Current Location" class="btn icon btn-primary mx-1" id="current-position" onclick="currentLocation()">
+                            <a id="manualLocation" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Current Location" class="btn icon btn-primary mx-1" id="current-position" onclick="currentLocation()">
                                 <span class="material-symbols-outlined">my_location</span>
                             </a>
-                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Set Manual Location" class="btn icon btn-primary mx-1" id="manual-position" onclick="manualLocation()">
+                            <a id="currentLocation" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Set Manual Location" class="btn icon btn-primary mx-1" id="manual-position" onclick="manualLocation()">
                                 <span class="material-symbols-outlined">pin_drop</span>
                             </a>
                             <span id="legendButton">
