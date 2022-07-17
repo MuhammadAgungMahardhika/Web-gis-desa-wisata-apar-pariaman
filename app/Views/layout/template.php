@@ -40,11 +40,14 @@
         <?= $this->include('layout/sidebar'); ?>
         <!-- Main Content -->
         <div id="main">
+            <?= $this->include('message/message.php'); ?>
+            <?= $this->include('layout/navbar'); ?>
             <?= $this->renderSection('content'); ?>
             <?= $this->include('layout/footer'); ?>
         </div>
     </div>
 </body>
 <script src="/assets/js/app.js"></script>
+
 
 </html>

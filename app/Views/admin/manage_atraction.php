@@ -18,17 +18,13 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <?php $no = 1;
-
-                        ?>
+                        <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
                             <th>Atraction</th>
                             <th>Atraction Status</th>
                             <th class="text-center">Action</th>
-
                         </tr>
-
                     </thead>
                     <tbody>
                         <?php foreach ($atractionData as $atraction) : ?>
@@ -73,33 +69,4 @@
 
 </div>
 <!-- /.container-fluid -->
-
-<!-- Flass message -->
-
-<?php
-if (session()->getFlashdata('success')) : ?>
-    <script>
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: '<?php echo session()->getFlashdata('success') ?>',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    </script>
-
-<?php elseif (session()->getFlashdata('failed')) : ?>
-    <script>
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: '<?php echo session()->getFlashdata('failed') ?>',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    </script>
-
-<?php endif; ?>
-<!-- Akhir Flash Message -->
-
 <?= $this->endSection() ?>

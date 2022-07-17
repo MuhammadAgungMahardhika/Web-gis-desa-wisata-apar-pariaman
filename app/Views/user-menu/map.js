@@ -1,97 +1,3 @@
-<?= $this->extend('layout/template.php') ?>
-<?= $this->section('content') ?>
-<section class="section">
-    <div class="row">
-        <!--map-->
-        <div class="col-md-8 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-md-auto">
-                            <h5 class="card-title">Google Maps with Location</h5>
-                        </div>
-                        <div class="col">
-                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Current Location" class="btn icon btn-primary mx-1" id="current-position" onclick="currentLocation()">
-                                <span class="material-symbols-outlined">my_location</span>
-                            </a>
-                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Set Manual Location" class="btn icon btn-primary mx-1" id="manual-position" onclick="manualLocation()">
-                                <span class="material-symbols-outlined">pin_drop</span>
-                            </a>
-                            <span id="legendButton">
-                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="legend();">
-                                    <span class="material-symbols-outlined">visibility</span>
-                                </a>
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="googlemaps" id="map" onload="initMap();" style="height: 60vh;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-12" id="list">
-            <!-- List Object -->
-            <div class="row card shadow mb-2" id="rowObjectArround" style="display:none;">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Object Arround</h6>
-                </div>
-                <div class="card-body">
-                    <div class="card shadow mb-4">
-                        <div class="card-body" id="panelContainer">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="cpCheck">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Culinary place
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="wpCheck">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Worship place
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="spCheck">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Souvenir place
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="fCheck">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Facility
-                                </label>
-                            </div>
-                            <output id="sliderVal"></output>
-                            <input type="range" oninput="sliderChange(this.value)" class="form-range autofocus" min="0" max="500" step="10" id="radiusSlider" value="0">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row card shadow">
-                <div class="card-header">
-                    <h5 class="card-title text-center" id="panelListTittle">List Object</h5>
-                </div>
-                <div class="card-body">
-                    <table class="table-responsive overflow-auto" id="panelTabel" width="100%">
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<script>
-    // Global variabel
-    let datas = JSON.parse('<?= json_encode($objectData) ?>');
-    let userMarker, directionsRenderer, infoWindow, circle
-    let userPosition = null
-    let latApar = parseFloat(<?= $aparData->lat; ?>)
-    let lngApar = parseFloat(<?= $aparData->lng; ?>)
-    let ajaxUrl = null
 
     function initMap() {
         showMap() //show map
@@ -125,16 +31,14 @@
                 let name = datas[i].name
                 let lat = datas[i].lat
                 let lng = datas[i].lng
-                listPanel.push(`<tr class="m-1"><td>${i+1}.</td><td class="fw-bold">${name} </td><td class="text-center"><button onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")})" class="btn btn-primary btn-sm m-1"><i class="fa fa-info fa-xs"></i></button> <button onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button></td></tr>`)
+                listPanel.push(`<tr><td>${i+1}</td><td>${name} </td><td class="text-center"><button onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button></td></tr>`)
             }
-
-
-            $('#panelTabel').html(`<thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="table-data">${listPanel}</tbody>`)
+            $('#panelTabel').html(`<thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody>`)
         }
     }
     //show atraction gallery
     function showAtractionGallery() {
-        $('#panelTabel').html(`<img src="https://source.unsplash.com/random/350x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;">`)
+        $('#panelTabel').html(`<img src="https://source.unsplash.com/random/255x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;">`)
     }
     //show info on map
     function showInfoOnMap(data) {
@@ -299,7 +203,7 @@
             anchor: new google.maps.Point(0, 25) // anchor
         }
         if (ajaxUrl == 'atraction') {
-            icon.url = "/assets/images/marker-icon/marker-atraction.png"
+            icon.url = "/assets/images/marker-icon/marker-atraction.jpg"
         } else if (ajaxUrl == 'event') {
             icon.url = "/assets/images/marker-icon/marker_ev.png"
         } else if (ajaxUrl == 'culinary_place') {
@@ -492,7 +396,8 @@
     //add legend to map
     function legend() {
         $('#legendButton').empty()
-        $('#legendButton').html('<a onclick="hideLegend()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="legend();"><span class="material-symbols-outlined">visibility</span></a><span id="legendButton"></span>')
+        $('#legendButton').append('<button   onclick="hideLegend()" class="btn btn-primary btn-sm mr-1"> <i class="fa fa-eye-slash fa-sm" style="color: white;"> </i> </button >')
+
 
         let legend = document.createElement('div')
         legend.id = 'legendPanel'
@@ -513,9 +418,7 @@
     function hideLegend() {
         $('#legendPanel').remove()
         $('#legendButton').empty()
-        $('#legendButton').append('  <a id="legend" onclick="legend()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="legend();"><span class="material-symbols-outlined">visibility</span></a><span id="legendButton"></span>')
-
-
+        $('#legendButton').append('<button title="Show Legend" id="legend" onclick="legend()" class="btn btn-primary btn-sm mr-1"> <i class="fa fa-eye fa-sm" style="color: white;"> </i> </button >')
     }
     // highlight current and manual location before click the button
     function highlightCurrentManualLocation() {
@@ -530,9 +433,4 @@
             }
         })
     }
-    window.initMap = initMap
-</script>
-<!-- Maps JS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&region=ID&language=en&callback=initMap">
-</script>
-<?= $this->endSection() ?>
+window.initMap = initMap

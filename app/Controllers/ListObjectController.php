@@ -149,6 +149,19 @@ class ListObjectController extends BaseController
         $wp = $_GET['wp'];
         $sp = $_GET['sp'];
         $f =  $_GET['f'];
+
+        if ($cp) {
+        }
+
+        if ($wp) {
+        }
+
+        if ($sp) {
+        }
+
+        if ($f) {
+        }
+
         $data = [
             'cp' => $cp,
             'wp' => $wp,
@@ -156,6 +169,6 @@ class ListObjectController extends BaseController
             'f' => $f
         ];
 
-        return json_encode($data);
+        return json_encode($cp);
     }
 }

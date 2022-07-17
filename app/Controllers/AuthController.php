@@ -14,7 +14,6 @@ class AuthController extends BaseController
         if (logged_in() == true && uri_string() == 'login') {
             return redirect('list_object');
         }
-
         return view('auth/login', $data);
     }
 

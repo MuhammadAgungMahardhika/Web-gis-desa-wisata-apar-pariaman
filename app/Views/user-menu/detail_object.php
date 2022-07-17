@@ -3,39 +3,82 @@
 
 <?= $this->section('content') ?>
 
-<div class="container-fluid">
+<section class="section">
     <div class="row">
 
-        <!-- Area Chart -->
-        <div class="col-xl col-lg">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header bg-success text-white text-start">
-                    <h3 class="m-0 font-weight-bold text-center">Detail <?= $objectData->name; ?> </h3>
+        <!-- Object Detail Information -->
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title text-center">Object Information</h4>
+                    <div class="text-center">
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined">star</span>
+                    </div>
                 </div>
-                <!-- Card Body -->
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Name</td>
+                                        <td><?= $objectData->name; ?></td>
+                                    </tr>
 
-                    <div class="row" style="min-height: 100vh;">
-                        <div class="col-xl-8 col-lg-8">
-                            <p class="text-left">Tourism name : <?= $objectData->name; ?></p>
-                            <p class="text-justify">Description : <br><?= $objectData->description; ?> </p>
-                            <a class="btn btn-outline-success" href="<?= base_url('home') ?>">Explore now !</a>
+                                    <?php if ($objectData->status) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Status</td>
+                                            <td><?= $objectData->status; ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+
+                                    <tr>
+                                        <td class="fw-bold">Ticket Price</td>
+                                        <td>Rp 20.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Contact Person</td>
+                                        <td>08123456789</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col-xl-4 col-lg-4 text-center">
-
-                            <img class="shadow rounded" src="/img/apar/bg-about.JPG" width="100%">
-                            <figcaption style="font-family: italic; font-size:13px; margin-top:5px">Top 50 Indonesian Tourism Village Award 2021 (ADWI)</figcaption>
-
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-bold">Description</p>
+                            <p><?= $objectData->description; ?>
+                            </p>
                         </div>
                     </div>
 
-
                 </div>
             </div>
+
+            <!--Rating and Review Section-->
+
+
+        </div>
+
+        <div class="col-md-6 col-12">
+            <!-- Object Location on Map -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Google Maps</h5>
+                </div>
+
+                <!-- Object Map body -->
+
+            </div>
+
+            <!-- Object Media -->
+
         </div>
     </div>
-
-</div>
+</section>
 
 <?= $this->endSection() ?>
