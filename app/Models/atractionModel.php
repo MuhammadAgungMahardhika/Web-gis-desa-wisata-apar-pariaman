@@ -22,7 +22,11 @@ class atractionModel extends Model
     }
     public function getAtraction($id)
     {
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJSON";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.status,{$this->table}.price,{$this->table}.contact_person,{$this->table}.description,{$this->table}.lat,{$this->table}.lng";
+
         $query = $this->db->table($this->table)
+            ->select("{$columns},{$geoJson}")
             ->where($this->primaryKey, $id)
             ->get();
         return $query;

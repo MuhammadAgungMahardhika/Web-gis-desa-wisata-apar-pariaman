@@ -90,6 +90,10 @@ $routes->group('detail_object', function ($routes) {
     $routes->get('facility/(:segment)', 'DetailObjectController::facility/$1');
 });
 
+// Menu detail object
+$routes->group('review_atraction', function ($routes) {
+    $routes->get('atraction/(:segment)', 'ReviewController::atraction/$1');
+});
 
 
 // Route Admin menu

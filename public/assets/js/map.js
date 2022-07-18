@@ -8,7 +8,6 @@ let userPosition = null
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
         if (datas) {
             loopingAllMarker(datas) //looping all marker
-            showPanelList(datas) // show list panel
         } else {
             showAtractionGallery()
         }
@@ -63,6 +62,7 @@ let userPosition = null
     }
     //loping all marker
     function loopingAllMarker(datas) {
+        showPanelList(datas) // show list panel
         for (let i = 0; i < datas.length; i++) {
             addMarkerToMap(datas[i])
         }
@@ -237,13 +237,11 @@ let userPosition = null
 
     // add Atraction Marker on Map
     function addMarkerToMap(data) {
-
         // add geom to map
         if (data.geoJSON) {
             const geoJSON = JSON.parse(data.geoJSON)
             addPolygonToMap(geoJSON)
         }
-
         let lat = parseFloat(data.lat)
         let lng = parseFloat(data.lng)
         const objectMarker = new google.maps.Marker({
@@ -257,10 +255,13 @@ let userPosition = null
             animation: google.maps.Animation.DROP,
             map: map,
         })
-
-
         objectMarker.addListener('click', () => {
+           if(window.location.href == base_url+'/list_object'){
             openInfoWindow(objectMarker, infoMarkerData(data))
+           }else{
+             openInfoWindow(objectMarker,data.name)
+           }
+           
         })
     }
     //open infowindow

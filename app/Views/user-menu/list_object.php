@@ -5,31 +5,8 @@
         <!--map-->
         <div class="col-md-8 col-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-md-auto">
-                            <h5 class="card-title">Google Maps with Location</h5>
-                        </div>
-                        <div class="col">
-                            <a id="manualLocation" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Current Location" class="btn icon btn-primary mx-1" id="current-position" onclick="currentLocation()">
-                                <span class="material-symbols-outlined">my_location</span>
-                            </a>
-                            <a id="currentLocation" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Set Manual Location" class="btn icon btn-primary mx-1" id="manual-position" onclick="manualLocation()">
-                                <span class="material-symbols-outlined">pin_drop</span>
-                            </a>
-                            <span id="legendButton">
-                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="legend();">
-                                    <span class="material-symbols-outlined">visibility</span>
-                                </a>
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="googlemaps" id="map" onload="initMap();" style="height: 60vh;">
-                    </div>
-                </div>
+                <?= $this->include('layout/map-head'); ?>
+                <?= $this->include('layout/map-body'); ?>
             </div>
         </div>
 
@@ -87,13 +64,9 @@
 </section>
 <script>
     // Global variabel
-    let datas = JSON.parse('<?= json_encode($objectData) ?>');
+    let datas, ajaxUrl
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
-    let ajaxUrl = null
 </script>
-<script src="/assets/js/map.js"></script>
-<!-- Maps JS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&region=ID&language=en&callback=initMap">
 </script>
 <?= $this->endSection() ?>

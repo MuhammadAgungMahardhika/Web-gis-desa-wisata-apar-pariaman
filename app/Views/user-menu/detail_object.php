@@ -2,7 +2,6 @@
 
 
 <?= $this->section('content') ?>
-
 <section class="section">
     <div class="row">
         <!-- Object Detail Information -->
@@ -11,11 +10,9 @@
                 <div class="card-header">
                     <h4 class="card-title text-center">Object Information</h4>
                     <div class="text-center">
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined">star</span>
+                        <?php if (isset($count_like->likes)) : ?>
+                            <p> <i id="count_like" class="fa fa-thumbs-up btn btn-primary"> <?= $count_like->likes ?></i> People like this atraction</p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="card-body">
@@ -28,7 +25,8 @@
                                         <td><?= $objectData->name; ?></td>
                                     </tr>
 
-                                    <?php if ($objectData->status) : ?>
+                                    <?php
+                                    if (isset($objectData->status)) : ?>
                                         <tr>
                                             <td class="fw-bold">Status</td>
                                             <td><?= $objectData->status; ?></td>
@@ -58,8 +56,10 @@
                 </div>
             </div>
 
-            <!--Rating and Review Section-->
-
+            <?php if ($url == 'atraction') : ?>
+                <!--Rating and Review Section-->
+                <?= $this->include('layout/review'); ?>
+            <?php endif; ?>
         </div>
         <div class="col-md-6 col-12">
             <!-- Object Location on Map -->
@@ -69,13 +69,19 @@
                 </div>
 
                 <!-- Object Map body -->
-
+                <?= $this->include('layout/map-body'); ?>
             </div>
-
             <!-- Object Media -->
-
+            <?= $this->include('layout/gallery_video'); ?>
         </div>
     </div>
 </section>
+<script>
+    // Global variabel
+    let datas = [<?= json_encode($objectData) ?>];
+    let latApar = parseFloat(<?= $aparData->lat; ?>)
+    let lngApar = parseFloat(<?= $aparData->lng; ?>)
+    let ajaxUrl = <?= json_encode($url) ?>
+</script>
 
 <?= $this->endSection() ?>

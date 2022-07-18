@@ -22,7 +22,6 @@ class aparModel extends Model
         $query = $this->db->table($this->table)
             ->where($this->primaryKey, $id)
             ->get()->getRow();
-
         return $query;
     }
 }

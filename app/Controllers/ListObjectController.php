@@ -45,12 +45,12 @@ class ListObjectController extends BaseController
             } else {
                 $objectData = $this->modelAtraction->getAtractions();
             }
-
             $data = [
-                'objectData' => $objectData,
+                'objectData' =>  $objectData,
                 'panelList' => 'List atraction',
                 'url' => 'atraction'
             ];
+
             return json_encode($data);
         }
     }
