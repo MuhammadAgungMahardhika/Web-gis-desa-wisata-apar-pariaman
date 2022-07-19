@@ -8,6 +8,7 @@ use CodeIgniter\Model;
 class culinaryPlaceModel extends Model
 {
     protected $table = 'culinary_place';
+    protected $table_gallery = 'culinary_place_gallery';
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getCulinaryPlaces()
@@ -33,6 +34,11 @@ class culinaryPlaceModel extends Model
     public function deleteCulinaryPlace($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    }
+    public function getGallery($id)
+    {
+        $query = $this->db->table($this->table_gallery)->select('url')->where('culinary_place_id', $id)->get();
         return $query;
     }
 }

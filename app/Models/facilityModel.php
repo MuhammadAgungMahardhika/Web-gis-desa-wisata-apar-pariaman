@@ -8,6 +8,7 @@ use CodeIgniter\Model;
 class facilityModel extends Model
 {
     protected $table = 'facility';
+    protected $table_gallery = 'facility_gallery';
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getFacilities()
@@ -32,6 +33,11 @@ class facilityModel extends Model
     public function deleteFacility($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    }
+    public function getGallery($id)
+    {
+        $query = $this->db->table($this->table_gallery)->select('url')->where('facility_id', $id)->get();
         return $query;
     }
 }

@@ -29,6 +29,13 @@
                                     <div class="carousel-item active">
                                         <img src="<?= base_url('assets/images/user-photos'); ?>/default.svg" class="d-block w-100" alt="">
                                     </div>
+                                    <!-- List gallery -->
+                                    <?php foreach ($galleryData as $gallery) : ?>
+                                        <div class="carousel-item ">
+                                            <img src="<?= base_url('assets/images/apar/apar_mangrove_park'); ?>/<?= $gallery->url; ?>" class="d-block w-100" alt="">
+                                        </div>
+                                    <?php endforeach; ?>
+
 
                                 </div>
                                 <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">

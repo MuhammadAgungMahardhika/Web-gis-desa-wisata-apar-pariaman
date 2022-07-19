@@ -9,6 +9,7 @@ class eventModel extends Model
 {
 
     protected $table = 'event';
+    protected $table_gallery = 'event_gallery';
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'schedule', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
 
@@ -34,6 +35,11 @@ class eventModel extends Model
     public function deleteEvent($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    }
+    public function getGallery($id)
+    {
+        $query = $this->db->table($this->table_gallery)->select('url')->where('event_id', $id)->get();
         return $query;
     }
 }

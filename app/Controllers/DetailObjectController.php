@@ -25,12 +25,15 @@ class DetailObjectController extends BaseController
     {
         $count_like = $this->modelReview->getLikes($id);
         $objectData = $this->modelAtraction->getAtraction($id)->getRow();
+        $galleryData = $this->modelAtraction->getGallery($id)->getResult();
+        // dd($gallery);
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'count_like' => $count_like,
                 'objectData' => $objectData,
+                'galleryData'   => $galleryData,
                 'url' =>  'atraction',
                 'aparData' => $this->modelApar->getApar()
             ];
@@ -42,11 +45,14 @@ class DetailObjectController extends BaseController
     public function event($id = null)
     {
         $objectData = $this->modelEvent->getEvent($id)->getRow();
+        $galleryData = $this->modelEvent->getGallery($id)->getResult();
+
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'objectData' => $objectData,
+                'galleryData'   => $galleryData,
                 'url' => 'event',
                 'aparData' => $this->modelApar->getApar()
             ];
@@ -59,11 +65,14 @@ class DetailObjectController extends BaseController
     public function culinary_place($id = null)
     {
         $objectData = $this->modelCulinary->getCulinaryPlace($id)->getRow();
+        $galleryData = $this->modelCulinary->getGallery($id)->getResult();
+
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'objectData' => $objectData,
+                'galleryData'   => $galleryData,
                 'url' => 'culinary_place',
                 'aparData' => $this->modelApar->getApar()
             ];
@@ -76,11 +85,14 @@ class DetailObjectController extends BaseController
     public function worship_place($id = null)
     {
         $objectData = $this->modelWorship->getWorshipPlace($id)->getRow();
+        $galleryData = $this->modelWorship->getGallery($id)->getResult();
+
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'objectData' => $objectData,
+                'galleryData'   => $galleryData,
                 'url' => 'worship_place',
                 'aparData' => $this->modelApar->getApar()
             ];
@@ -93,11 +105,13 @@ class DetailObjectController extends BaseController
     public function souvenir_place($id = null)
     {
         $objectData = $this->modelSouvenir->getSouvenirPlace($id)->getRow();
+        $galleryData = $this->modelSouvenir->getGallery($id)->getResult();
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'objectData' => $objectData,
+                'galleryData'   => $galleryData,
                 'url' => 'souvenir_place',
                 'aparData' => $this->modelApar->getApar()
             ];
@@ -110,11 +124,14 @@ class DetailObjectController extends BaseController
     public function facility($id = null)
     {
         $objectData = $this->modelFacility->getFacility($id)->getRow();
+        $galleryData = $this->modelFacility->getGallery($id)->getResult();
+
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'objectData' => $objectData,
+                'galleryData'   => $galleryData,
                 'url' => 'facility',
                 'aparData' => $this->modelApar->getApar()
             ];

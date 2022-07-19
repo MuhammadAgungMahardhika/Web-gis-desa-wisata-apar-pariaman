@@ -71,7 +71,7 @@
                         <a role="button" href="<?= base_url('manage_culinary_place') ?>">Culinary Place</a>
                     </li>
                     <li class="submenu-item ">
-                        <a role="button" <?= base_url('manage_worship_place') ?>>Worship Place</a>
+                        <a role="button" href="<?= base_url('manage_worship_place') ?>">Worship Place</a>
                     </li>
                     <li class="submenu-item ">
                         <a role="button" href="<?= base_url('manage_facility') ?>">Facility</a>

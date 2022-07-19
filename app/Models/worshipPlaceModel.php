@@ -8,6 +8,7 @@ use CodeIgniter\Model;
 class worshipPlaceModel extends Model
 {
     protected $table = 'worship_place';
+    protected $table_gallery = 'worship_place_gallery';
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getWorshipPlaces()
@@ -33,6 +34,11 @@ class worshipPlaceModel extends Model
     public function deleteWorshipPlace($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    }
+    public function getGallery($id)
+    {
+        $query = $this->db->table($this->table_gallery)->select('url')->where('worship_place_id', $id)->get();
         return $query;
     }
 }

@@ -8,6 +8,8 @@ use CodeIgniter\Model;
 class souvenirPlaceModel extends Model
 {
     protected $table = 'souvenir_place';
+    protected $table_gallery = 'souvenir_place_gallery';
+
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getSouvenirPlaces()
@@ -33,6 +35,11 @@ class souvenirPlaceModel extends Model
     public function deleteSouvenirPlace($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    }
+    public function getGallery($id)
+    {
+        $query = $this->db->table($this->table_gallery)->select('url')->where('souvenir_place_id', $id)->get();
         return $query;
     }
 }
