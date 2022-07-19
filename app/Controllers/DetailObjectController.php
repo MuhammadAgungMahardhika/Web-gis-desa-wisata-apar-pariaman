@@ -12,7 +12,6 @@ class DetailObjectController extends BaseController
     public function __construct()
     {
         $this->modelReview = new \App\Models\reviewModel();
-
         $this->modelApar = new \App\Models\aparModel();
         $this->modelAtraction = new \App\Models\atractionModel();
         $this->modelEvent = new \App\Models\eventModel();

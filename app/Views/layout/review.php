@@ -45,28 +45,43 @@
 </div>
 <script>
     function setLike() {
+        <?php if (logged_in() == false) : ?>
+            return Swal.fire({
+                text: 'Please login first to give a like',
+                icon: 'warning',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp'
+                },
+                confirmButtonText: 'Login',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return window.location.href = '<?= base_url('login'); ?>'
+                }
+            })
+        <?php else : ?>
+            let url = "<?= base_url('review_atraction') ?>" + "/" + '<?= $url; ?>';
 
-        let url = "<?= base_url('review_atraction') ?>" + "/" + '<?= $url; ?>' + "/<?= $objectData->id; ?>";
-        alert(url)
-        // $.ajax({
-        //     url: url,
-        //     method: "get",
-        //     dataType: "json",
-        //     success: function(response) {
-        //         $('#rowObjectArround').css("display", "none")
-        //         $('#panelListTittle').html(response.panelList)
-        //         datas = response.objectData
-        //         ajaxUrl = response.url
-        //         userMarker = null
-        //         initMap()
-        //         if (userPosition != null) {
-        //             addUserManualMarkerToMap(userPosition)
-        //         }
-        //     },
-        //     error: function(xhr, ajaxOptions, thrownError) {
-        //         alert(xhr.status + "\n" +
-        //             xhr.responseText + "\n" + thrownError);
-        //     }
-        // });
+            $.ajax({
+                url: url,
+                method: "post",
+                data: {
+                    'user_id': '<?= user()->id ?>',
+                    'atraction_id': '<?= $objectData->id; ?>',
+                    'comment': '',
+                    'likes': 1
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response == true) {
+                        let newCount = '<?= $count_like->likes + 1 ?>'
+                        $('#count_like').html(newCount)
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" +
+                        xhr.responseText + "\n" + thrownError);
+                }
+            });
+        <?php endif; ?>
     }
 </script>

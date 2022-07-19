@@ -19,10 +19,11 @@ class reviewModel extends Model
         return $query;
     }
 
-    public function addLikes($id)
+    public function addLikes($data)
     {
-        $query = $this->db->table($this->table)->insert([1]);
+        $query = $this->db->table($this->table)->insert($data);
         return $query;
+        // return 'oke';
     }
     public function getComment($id)
     {

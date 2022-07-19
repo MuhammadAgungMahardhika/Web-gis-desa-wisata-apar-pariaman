@@ -12,14 +12,13 @@ class ReviewController extends BaseController
         $this->modelReview = new \App\Models\reviewModel();
     }
     // 3. Manage atraction
-    public function atraction($id)
+    public function atraction()
     {
         //untuk ajax
         if ($this->request->isAJAX()) {
-            if ($id) {
-                $like = $this->modelReview->addLikes($id);
-                return json_encode($like);
-            }
+            $data = $this->request->getPOST();
+            $like = $this->modelReview->addLikes($data);
+            return json_encode($like);
         }
     }
 }

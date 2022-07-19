@@ -32,6 +32,13 @@
                                             <td><?= $objectData->status; ?></td>
                                         </tr>
                                     <?php endif; ?>
+                                    <?php
+                                    if (isset($objectData->schedule)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Schedule</td>
+                                            <td><?= $objectData->schedule; ?></td>
+                                        </tr>
+                                    <?php endif; ?>
 
                                     <tr>
                                         <td class="fw-bold">Ticket Price</td>
