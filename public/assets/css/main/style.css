@@ -1,7 +1,7 @@
  /* Costume css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
  .highligth{
-
   opacity: 0.7;
  }
 
@@ -11,4 +11,42 @@
   padding: 10px;
   margin: 10px;
   border: 3px solid #000;
+}
+
+.bg{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  padding: 30px;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+background-image: linear-gradient(to bottom, rgba(0,0,0,.1),rgba(0,0,0,.6));
+}
+.bg-video{
+  box-sizing: border-box;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  z-index: -1;
+  transform: translate(-50%,-50%);
+}
+
+.bg-content{
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  color: #eaeaea;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+  transform: translate(-40px,0);
+  opacity: 0;
+
+}
+@media (min-width:1025px) {
+  .bg-video{
+     width: 100%;
+     min-height: 100%;
+  }
 }

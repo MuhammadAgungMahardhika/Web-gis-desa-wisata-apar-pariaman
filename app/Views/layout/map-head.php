@@ -11,7 +11,7 @@
                 <span class="material-symbols-outlined">pin_drop</span>
             </a>
             <span id="legendButton">
-                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="legend();">
+                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="legend();">
                     <span class="material-symbols-outlined">visibility</span>
                 </a>
             </span>

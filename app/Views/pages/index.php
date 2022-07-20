@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- My CSS -->
-    <link href="/css/index.css" rel="stylesheet">
+    <link href="/assets/css/main/style.css" rel="stylesheet">
 
     <title><?= $title; ?></title>
 
@@ -18,8 +18,8 @@
 
 <body>
     <section class="bg">
-        <video autoplay muted poster="/img/apar/bg-movie-ss.PNG" loop class="bg-video">
-            <source src="/img/apar/bg-movie.MP4">
+        <video autoplay muted poster="/assets/images/bg-movie-ss.PNG" loop class="bg-video">
+            <source src="/assets/images/apar/Video/bg-movie.mp4">
         </video>
         <div class="bg-content">
             <h1>Welcome To Apar Tourism Village</h1>

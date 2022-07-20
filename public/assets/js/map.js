@@ -204,7 +204,7 @@ let userPosition = null
             url: null, // url
             scaledSize: new google.maps.Size(25, 25), // scaled size
             origin: new google.maps.Point(0, 0), // origin
-            anchor: new google.maps.Point(0, 25) // anchor
+            anchor: new google.maps.Point(0, 0) // anchor
         }
         if (ajaxUrl == 'atraction') {
             icon.url = base_url+"/assets/images/marker-icon/marker-atraction.png"
@@ -217,7 +217,7 @@ let userPosition = null
         } else if (ajaxUrl == 'souvenir_place') {
             icon.url = base_url+"/assets/images/marker-icon/marker_sp.png"
         } else if (ajaxUrl == 'facility') {
-            icon.url = base_url+"/assets/images/marker-icon/marker_facility.jpg"
+            icon.url = base_url+"/assets/images/marker-icon/marker_ev.png"
         }
         return icon
     }
@@ -401,8 +401,7 @@ let userPosition = null
     //add legend to map
     function legend() {
         $('#legendButton').empty()
-        $('#legendButton').append('<button   onclick="hideLegend()" class="btn btn-primary btn-sm mr-1"> <i class="fa fa-eye-slash fa-sm" style="color: white;"> </i> </button >')
-
+        $('#legendButton').append('<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hide Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="hideLegend()"><span class="material-symbols-outlined">visibility_off</span></a>');
 
         let legend = document.createElement('div')
         legend.id = 'legendPanel'
@@ -423,7 +422,7 @@ let userPosition = null
     function hideLegend() {
         $('#legendPanel').remove()
         $('#legendButton').empty()
-        $('#legendButton').append('<button title="Show Legend" id="legend" onclick="legend()" class="btn btn-primary btn-sm mr-1"> <i class="fa fa-eye fa-sm" style="color: white;"> </i> </button >')
+        $('#legendButton').append('<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Legend" class="btn icon btn-primary mx-1" id="legend"  onclick="legend()"><span class="material-symbols-outlined">visibility</span></a>');
     }
     // highlight current and manual location before click the button
     function highlightCurrentManualLocation() {
