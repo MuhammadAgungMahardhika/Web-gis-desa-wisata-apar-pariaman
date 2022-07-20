@@ -11,7 +11,7 @@
         </li>
         <?php if (current_url() == base_url('list_object')) : ?>
             <li class="sidebar-item  has-sub">
-                <a href="#" class='sidebar-link'>
+                <a href="" class='sidebar-link'>
                     <i class="bi bi-stack"></i>
                     <span>Main Atraction</span>
                 </a>
@@ -25,7 +25,7 @@
                 </ul>
             </li>
             <li class="sidebar-item  has-sub">
-                <a href="#" class='sidebar-link'>
+                <a href="" class='sidebar-link'>
                     <i class="bi bi-stack"></i>
                     <span>Support Object</span>
                 </a>
@@ -47,7 +47,7 @@
         <?php endif; ?>
         <?php if (in_groups('admin')) : ?>
             <li class="sidebar-item  has-sub">
-                <a href="#" class='sidebar-link'>
+                <a href="" class='sidebar-link'>
                     <i class="bi bi-stack"></i>
                     <span>Manage menu</span>
                 </a>

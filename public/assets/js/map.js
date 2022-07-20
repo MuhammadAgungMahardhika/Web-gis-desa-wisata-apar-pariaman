@@ -437,4 +437,3 @@ let userPosition = null
             }
         })
     }
-window.initMap = initMap
