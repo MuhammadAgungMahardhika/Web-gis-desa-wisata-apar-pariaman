@@ -9,18 +9,40 @@ class worshipPlaceModel extends Model
 {
     protected $table = 'worship_place';
     protected $table_gallery = 'worship_place_gallery';
+
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getWorshipPlaces()
     {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.category,
+        {$this->table}.open,
+        {$this->table}.close,
+        {$this->table}.building_size,
+        {$this->table}.capacity,
+        {$this->table}.description";
         $query = $this->db->table($this->table)
-            ->select('*')
+            ->select("{$columns},{$coords}")
             ->get()->getResult();
         return $query;
     }
     public function getWorshipPlace($id)
     {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.category,
+        {$this->table}.open,
+        {$this->table}.close,
+        {$this->table}.building_size,
+        {$this->table}.capacity,
+        {$this->table}.description";
+
         $query = $this->db->table($this->table)
+            ->select("{$columns},{$coords}")
             ->where($this->primaryKey, $id)
             ->get();
         return $query;

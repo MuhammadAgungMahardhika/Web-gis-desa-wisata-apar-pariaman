@@ -11,9 +11,7 @@ class souvenirPlaceModel extends Model
     protected $table_gallery = 'souvenir_place_gallery';
     protected $table_detail_product = 'detail_product';
     protected $table_product = 'product';
-
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getSouvenirPlaces()
     {
         $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
