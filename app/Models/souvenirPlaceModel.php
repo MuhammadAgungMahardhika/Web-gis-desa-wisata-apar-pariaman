@@ -9,19 +9,41 @@ class souvenirPlaceModel extends Model
 {
     protected $table = 'souvenir_place';
     protected $table_gallery = 'souvenir_place_gallery';
+    protected $table_detail_product = 'detail_product';
+    protected $table_product = 'product';
 
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getSouvenirPlaces()
     {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.owner,
+        {$this->table}.open,
+        {$this->table}.close,
+        {$this->table}.contact_person,
+        {$this->table}.description";
         $query = $this->db->table($this->table)
-            ->select('*')
+            ->select("{$columns},{$coords}")
             ->get()->getResult();
         return $query;
     }
     public function getSouvenirPlace($id)
     {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.owner,
+        {$this->table}.open,
+        {$this->table}.close,
+        {$this->table}.contact_person,
+        {$this->table}.description";
+
         $query = $this->db->table($this->table)
+            ->select("{$columns},{$coords}")
             ->where($this->primaryKey, $id)
             ->get();
         return $query;
@@ -40,6 +62,14 @@ class souvenirPlaceModel extends Model
     public function getGallery($id)
     {
         $query = $this->db->table($this->table_gallery)->select('url')->where('souvenir_place_id', $id)->get();
+        return $query;
+    }
+
+    public function getProduct($id)
+    {
+        $query = $this->db->table($this->table_product)->select('*')
+            ->join($this->table_detail_product, 'product_id = product.id')
+            ->where('souvenir_place_id', $id)->get();
         return $query;
     }
 }

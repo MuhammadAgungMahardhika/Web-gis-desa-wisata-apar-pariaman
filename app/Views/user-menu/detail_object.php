@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <?= $this->include('/layout/detail_object_information'); ?>
+                    <?= $this->include('/layout/detail_object_body'); ?>
                 </div>
             </div>
 
@@ -43,6 +43,7 @@
 <script>
     // Global variabel
     let datas = [<?= json_encode($objectData) ?>];
+    let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
     let ajaxUrl = <?= json_encode($url) ?>

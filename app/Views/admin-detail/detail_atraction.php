@@ -20,7 +20,7 @@
             </div>
 
             <p> Name of Atraction : <?= $atractionData->name; ?></p>
-            <p> Status: <?= $atractionData->status; ?></p>
+            <p> Employe: <?= $atractionData->employe; ?></p>
             <p> Price : <?= $atractionData->price; ?></p>
             <p> Contact person : <?= $atractionData->contact_person; ?></p>
             <p> Description :<br><?= $atractionData->description; ?></p>

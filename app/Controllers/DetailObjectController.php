@@ -107,12 +107,14 @@ class DetailObjectController extends BaseController
     {
         $objectData = $this->modelSouvenir->getSouvenirPlace($id)->getRow();
         $galleryData = $this->modelSouvenir->getGallery($id)->getResult();
+        $productData =  $this->modelSouvenir->getProduct($id)->getResult();
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'objectData' => $objectData,
                 'galleryData'   => $galleryData,
+                'productData' => $productData,
                 'url' => 'souvenir_place',
                 'aparData' => $this->modelApar->getApar()
             ];

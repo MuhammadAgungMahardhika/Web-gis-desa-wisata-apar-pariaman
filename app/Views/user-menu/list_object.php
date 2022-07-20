@@ -65,6 +65,7 @@
 <script>
     // Global variabel
     let datas, ajaxUrl
+    let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
 </script>

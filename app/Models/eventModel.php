@@ -15,14 +15,36 @@ class eventModel extends Model
 
     public function getEvents()
     {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.date_start,
+        {$this->table}.date_end,
+        {$this->table}.price,
+        {$this->table}.contact_person,
+        {$this->table}.description";
+
         $query = $this->db->table($this->table)
-            ->select('*')
+            ->select("{$columns},{$coords}")
             ->get()->getResult();
+
         return $query;
     }
     public function getEvent($id)
     {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.date_start,
+        {$this->table}.date_end,
+        {$this->table}.price,
+        {$this->table}.contact_person,
+        {$this->table}.description";
+
         $query = $this->db->table($this->table)
+            ->select("{$columns},{$coords}")
             ->where($this->primaryKey, $id)
             ->get();
         return $query;

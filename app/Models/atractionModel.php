@@ -17,20 +17,35 @@ class atractionModel extends Model
 
     public function getAtractions()
     {
-        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJSON";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.status,{$this->table}.price,{$this->table}.contact_person,{$this->table}.description,{$this->table}.lat,{$this->table}.lng";
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.employe,
+        {$this->table}.price,
+        {$this->table}.contact_person,
+        {$this->table}.description";
+
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$geoJson}")
+            ->select("{$columns},{$coords},{$geom_area}")
             ->get()->getResult();
         return $query;
     }
     public function getAtraction($id)
     {
-        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJSON";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.status,{$this->table}.price,{$this->table}.contact_person,{$this->table}.description,{$this->table}.lat,{$this->table}.lng";
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.employe,
+        {$this->table}.price,
+        {$this->table}.contact_person,
+        {$this->table}.description";
 
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$geoJson}")
+            ->select("{$columns},{$coords},{$geom_area}")
             ->where($this->primaryKey, $id)
             ->get();
         return $query;

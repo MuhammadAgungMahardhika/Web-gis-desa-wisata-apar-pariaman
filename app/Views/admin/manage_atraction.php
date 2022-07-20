@@ -21,8 +21,8 @@
                         <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
-                            <th>Atraction</th>
-                            <th>Atraction Status</th>
+                            <th>Name</th>
+                            <th>Price</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -31,7 +31,7 @@
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $atraction->name; ?></td>
-                                <td><?= $atraction->status ?></td>
+                                <td><?= $atraction->price ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Detail atraction" href="<?= base_url('manage_atraction/detail/' . $atraction->id); ?>"><i class="fa fa-eye"></i> </a>
                                     <a class="btn btn-outline-danger btn-sm" title="Delete atraction" data-toggle="modal" data-target="#deleteModal<?= $atraction->id; ?>">

@@ -5,6 +5,7 @@ let userPosition = null
 
     function initMap() {
         showMap() //show map
+        addPolygonToMap(geomApar)
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
         if (datas) {
             loopingAllMarker(datas) //looping all marker

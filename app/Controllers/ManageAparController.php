@@ -21,6 +21,7 @@ class ManageAparController extends BaseController
             'aparData' => $aparData
         ];
 
+
         return view('admin/manage_apar', $data);
     }
     public function edit($id = null)
