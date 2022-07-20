@@ -4,7 +4,6 @@
         <?= $this->include('layout/sidebar_menu'); ?>
     </div>
 </div>
-
 <script>
     function showObject(object, id = null) {
         <?php if (current_url() != base_url('list_object')) : ?>
