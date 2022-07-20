@@ -48,8 +48,5 @@
     </div>
 </body>
 <script src="/assets/js/app.js"></script>
-<script src="/assets/js/map.js"></script>
-<!-- Maps JS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&region=ID&language=en&callback=initMap"></script>
 
 </html>
