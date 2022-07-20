@@ -9,6 +9,9 @@ class culinaryPlaceModel extends Model
 {
     protected $table = 'culinary_place';
     protected $table_gallery = 'culinary_place_gallery';
+    protected $table_detail_menu = 'detail_menu';
+    protected $table_menu = 'menu';
+
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getCulinaryPlaces()
@@ -39,6 +42,13 @@ class culinaryPlaceModel extends Model
     public function getGallery($id)
     {
         $query = $this->db->table($this->table_gallery)->select('url')->where('culinary_place_id', $id)->get();
+        return $query;
+    }
+    public function getMenu($id)
+    {
+        $query = $this->db->table($this->table_menu)->select('*')
+            ->join($this->table_detail_menu, 'menu_id = menu.id')
+            ->where('culinary_place_id', $id)->get();
         return $query;
     }
 }

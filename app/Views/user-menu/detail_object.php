@@ -16,50 +16,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col table-responsive">
-                            <table class="table table-borderless">
-                                <tbody>
-                                    <tr>
-                                        <td class="fw-bold">Name</td>
-                                        <td><?= $objectData->name; ?></td>
-                                    </tr>
-
-                                    <?php
-                                    if (isset($objectData->status)) : ?>
-                                        <tr>
-                                            <td class="fw-bold">Status</td>
-                                            <td><?= $objectData->status; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php
-                                    if (isset($objectData->schedule)) : ?>
-                                        <tr>
-                                            <td class="fw-bold">Schedule</td>
-                                            <td><?= $objectData->schedule; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-
-                                    <tr>
-                                        <td class="fw-bold">Ticket Price</td>
-                                        <td>Rp 20.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Contact Person</td>
-                                        <td>08123456789</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p class="fw-bold">Description</p>
-                            <p><?= $objectData->description; ?>
-                            </p>
-                        </div>
-                    </div>
-
+                    <?= $this->include('/layout/detail_object_information'); ?>
                 </div>
             </div>
 

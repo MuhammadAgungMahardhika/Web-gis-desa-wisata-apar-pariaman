@@ -19,6 +19,16 @@ class CulinaryPlace extends Migration
                 'constraint'     => 255,
                 'null'           => false
             ],
+            'owner'      => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+                'null'           => false
+            ],
+            'contact_person' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 13,
+                'null'           => true
+            ],
             'description'      => [
                 'type'           => 'TEXT',
                 'null'           => true

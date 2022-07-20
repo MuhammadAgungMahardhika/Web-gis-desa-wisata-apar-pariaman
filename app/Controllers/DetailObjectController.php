@@ -66,13 +66,14 @@ class DetailObjectController extends BaseController
     {
         $objectData = $this->modelCulinary->getCulinaryPlace($id)->getRow();
         $galleryData = $this->modelCulinary->getGallery($id)->getResult();
-
+        $menuData =  $this->modelCulinary->getMenu($id)->getResult();
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
                 'objectData' => $objectData,
                 'galleryData'   => $galleryData,
+                'menuData'  => $menuData,
                 'url' => 'culinary_place',
                 'aparData' => $this->modelApar->getApar()
             ];

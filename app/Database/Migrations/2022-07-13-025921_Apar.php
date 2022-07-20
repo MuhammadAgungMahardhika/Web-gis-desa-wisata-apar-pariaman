@@ -21,6 +21,14 @@ class Apar extends Migration
                 'constraint'     => 255,
                 'null'           => false
             ],
+            'open'       => [
+                'type'           => 'TIME',
+                'null'           => true
+            ],
+            'close'       => [
+                'type'           => 'TIME',
+                'null'           => true
+            ],
             'type_of_tourism'      => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 50,
