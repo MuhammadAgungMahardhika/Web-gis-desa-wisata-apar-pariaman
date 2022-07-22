@@ -2,16 +2,34 @@
 let base_url = 'http://localhost:8080'
 let userMarker, directionsRenderer, infoWindow, circle
 let userPosition = null
+let cpData,spData,wpData,fData
 
     function initMap() {
         showMap() //show map
         addPolygonToMap(geomApar)
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
-        if (datas) {
-            loopingAllMarker(datas) //looping all marker
-        } else {
+        
+        if(cpData){
+            loopingAllMarker(cpData)
+        }
+        if(spData){
+            loopingAllMarker(spData)
+        }
+        if(wpData){
+            loopingAllMarker(wpData)
+        }
+        if(fData){
+            loopingAllMarker(fData)
+        }
+
+        
+        if(ajaxUrl == 'index'){
             showAtractionGallery()
         }
+        if (datas) {
+            loopingAllMarker(datas)
+        } 
+       
         highlightCurrentManualLocation() //highligth when button location not clicked
     }
 
@@ -337,7 +355,7 @@ let userPosition = null
     }
 
     //function radius 
-    function radius() {
+    function radius(radius = null) {
         if (circle) {
             circle.setMap(null)
         }
@@ -349,7 +367,7 @@ let userPosition = null
             fillOpacity: 0.35,
             map,
             center: userPosition,
-            radius: 0
+            radius: radius
         });
     }
     //function slidervalue
@@ -360,7 +378,7 @@ let userPosition = null
         let sp = $("#spCheck").prop('checked') == true
         let f = $("#fCheck").prop('checked') == true
         $('#sliderVal').html(distance);
-        circle.setRadius(distance)
+        radius(distance)
         const url = "list_object/search_nearby"
         $.ajax({
             url: base_url + "/" + url + "/" + distance,
@@ -369,11 +387,28 @@ let userPosition = null
                 cp: cp,
                 wp: wp,
                 sp: sp,
-                f: f
+                f: f,
+                radius : distance,
+                lng : userPosition.lng,
+                lat : userPosition.lat
             },
             dataType: "json",
             success: function(response) {
-                alert(response)
+                if(response){
+                    console.log(response)
+                    datas = null
+                    cpData = response.cpData
+                    spData = response.spData
+                    wpData = response.wpData
+                    fData = response.fData
+                }
+                userMarker = null
+                initMap()
+                if (userPosition != null) {
+                    addUserManualMarkerToMap(userPosition) 
+                }
+                radius(distance)
+                
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" +

@@ -44,7 +44,7 @@
                                 </label>
                             </div>
                             <output id="sliderVal"></output>
-                            <input type="range" oninput="sliderChange(this.value)" class="form-range autofocus" min="0" max="500" step="10" id="radiusSlider" value="0">
+                            <input type="range" onchange="sliderChange(this.value)" class="form-range autofocus" min="0" max="100" step="1" id="radiusSlider" value="0">
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <h5 class="card-title text-center" id="panelListTittle">List Object</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table-responsive overflow-auto" id="panelTabel" width="100%">
+                    <table class="table table-border overflow-auto" id="panelTabel" width="100%">
                     </table>
                 </div>
             </div>
@@ -64,7 +64,8 @@
 </section>
 <script>
     // Global variabel
-    let datas, ajaxUrl
+    let datas
+    let ajaxUrl
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)

@@ -28,6 +28,7 @@ class ListObjectController extends BaseController
             'title' => $this->title,
             'panelList' => 'uniqe atraction',
             'config' => config('Auth'),
+            'url' => 'index',
             'objectData' => $objectData,
             'aparData' => $aparData
         ];
@@ -149,26 +150,26 @@ class ListObjectController extends BaseController
         $wp = $_GET['wp'];
         $sp = $_GET['sp'];
         $f =  $_GET['f'];
+        $lat = $_GET['lat'];
+        $lng = $_GET['lng'];
 
-        if ($cp) {
+        if ($cp == 'true') {
+            $objectData = $this->modelCulinary->getRadiusValue($lng, $lat, $distance)->getResult();
+            $data['cpData']  = $objectData;
+            $data['ajaxUrl'] = 'culinary_place';
         }
-
-        if ($wp) {
+        if ($sp == 'true') {
+            $objectData = $this->modelSouvenir->getRadiusValue($lng, $lat, $distance)->getResult();
+            $data['spData']  = $objectData;
         }
-
-        if ($sp) {
+        if ($wp == 'true') {
+            $objectData = $this->modelWorship->getRadiusValue($lng, $lat, $distance)->getResult();
+            $data['wpData']  = $objectData;
         }
-
-        if ($f) {
+        if ($f == 'true') {
+            $objectData = $this->modelFacility->getRadiusValue($lng, $lat, $distance)->getResult();
+            $data['fData']  = $objectData;
         }
-
-        $data = [
-            'cp' => $cp,
-            'wp' => $wp,
-            'sp' => $sp,
-            'f' => $f
-        ];
-
-        return json_encode($cp);
+        return json_encode($data);
     }
 }

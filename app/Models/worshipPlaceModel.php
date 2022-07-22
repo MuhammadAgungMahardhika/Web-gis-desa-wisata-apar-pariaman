@@ -63,4 +63,15 @@ class worshipPlaceModel extends Model
         $query = $this->db->table($this->table_gallery)->select('url')->where('worship_place_id', $id)->get();
         return $query;
     }
+
+    public function getRadiusValue($lng, $lat, $radius)
+    {
+        $query = $this->db->table($this->table)
+            ->select("id, name, ST_Y(ST_CENTROID(geom)) AS lat,
+            ST_X(ST_CENTROID(geom)) AS lng")
+            ->where("st_intersects(st_centroid(worship_place.geom),
+            ST_buffer(ST_GeomFromText(concat('POINT($lng $lat)')),
+            0.0009*$radius))=1")->get();
+        return $query;
+    }
 }
