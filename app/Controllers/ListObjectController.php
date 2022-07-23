@@ -165,7 +165,6 @@ class ListObjectController extends BaseController
     }
     public function search_support_nearby($distance = null)
     {
-
         $cp = $_GET['cp'];
         $wp = $_GET['wp'];
         $sp = $_GET['sp'];
