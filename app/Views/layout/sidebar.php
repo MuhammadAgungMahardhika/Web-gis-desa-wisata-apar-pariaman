@@ -22,8 +22,13 @@
                 success: function(response) {
                     $('#rowObjectArround').css("display", "none")
                     $('#panelListTittle').html(response.panelList)
-                    datas = response.objectData
-                    ajaxUrl = response.url
+                    atData = response.atData
+                    atUrl = response.url
+
+                    evData = response.evData
+                    evUrl = response.url
+
+                    emptyAllMarker()
                     userMarker = null
                     initMap()
                     if (userPosition != null) {

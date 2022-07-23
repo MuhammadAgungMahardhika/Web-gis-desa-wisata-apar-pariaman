@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 
 $routes->get('/', 'Pages::index');
 $routes->get('/index', 'Pages::index');
+$routes->get('/landing_page', 'Pages::landing_page');
 $routes->get('/about', 'Pages::about');
 $routes->get('/admin', 'Admin::users', ['filter' => 'role:admin']);
 
@@ -72,7 +73,8 @@ $routes->group('list_object', function ($routes) {
 
     $routes->get('detail_object/(:segment)', 'ListObjectController::detail_object/$1');
 
-    $routes->get('search_nearby/(:segment)', 'ListObjectController::search_nearby/$1');
+    $routes->get('search_main_nearby/(:segment)', 'ListObjectController::search_main_nearby/$1');
+    $routes->get('search_support_nearby/(:segment)', 'ListObjectController::search_support_nearby/$1');
 });
 
 

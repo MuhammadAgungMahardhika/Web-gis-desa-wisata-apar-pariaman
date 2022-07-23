@@ -28,6 +28,16 @@
     </div>
 </div>
 
+<!-- Description -->
+<div class="row">
+    <div class="col">
+        <p class="fw-bold">Description</p>
+        <p><?= $objectData->description; ?>
+        </p>
+    </div>
+</div>
+
+
 <!-- Product Souvenir -->
 <?php if (isset($productData)) : ?>
     <div class="row">
@@ -59,6 +69,7 @@
         </div>
     </div>
 <?php endif; ?>
+
 <!-- Menu Culinary -->
 <?php if (isset($menuData)) : ?>
     <div class="row">
@@ -90,12 +101,3 @@
         </div>
     </div>
 <?php endif; ?>
-
-<!-- Description -->
-<div class="row">
-    <div class="col">
-        <p class="fw-bold">Description</p>
-        <p><?= $objectData->description; ?>
-        </p>
-    </div>
-</div>

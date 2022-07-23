@@ -13,6 +13,16 @@ class Pages extends BaseController
         ];
         return view('pages/index', $data);
     }
+    // Masuk halaman landing page
+    public function landing_page()
+    {
+        $data = [
+            'title' => 'LandingPage | Tourism Village',
+            'config' => config('Auth')
+        ];
+        return view('pages/landing_page', $data);
+    }
+
 
     // Masuk Halaman about
     public function about()

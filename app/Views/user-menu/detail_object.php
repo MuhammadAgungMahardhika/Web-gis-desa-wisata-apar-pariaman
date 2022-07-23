@@ -20,10 +20,8 @@
                 </div>
             </div>
 
-            <?php if ($url == 'atraction') : ?>
-                <!--Rating and Review Section-->
-                <?= $this->include('layout/review'); ?>
-            <?php endif; ?>
+            <!--Rating and Review Section-->
+            <?= $this->include('layout/review'); ?>
         </div>
         <div class="col-md-6 col-12">
             <!-- Object Location on Map -->
@@ -46,7 +44,7 @@
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
-    let ajaxUrl = <?= json_encode($url) ?>
+    let url = <?= json_encode($url) ?>
 </script>
 <script src="/assets/js/map.js"></script>
 <!-- Maps JS -->

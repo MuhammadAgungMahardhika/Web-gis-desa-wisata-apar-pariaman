@@ -47,7 +47,7 @@ class ListObjectController extends BaseController
                 $objectData = $this->modelAtraction->getAtractions();
             }
             $data = [
-                'objectData' =>  $objectData,
+                'atData' =>  $objectData,
                 'panelList' => 'List atraction',
                 'url' => 'atraction'
             ];
@@ -68,7 +68,7 @@ class ListObjectController extends BaseController
             }
 
             $data = [
-                'objectData' => $objectData,
+                'evData' => $objectData,
                 'panelList' => 'List event',
                 'url' => 'event'
             ];
@@ -144,32 +144,60 @@ class ListObjectController extends BaseController
             return json_encode($data);
         }
     }
-    public function search_nearby($distance = null)
+
+    public function search_main_nearby($distance = null)
     {
+        $main = $_GET['main'];
+        $lat = $_GET['lat'];
+        $lng = $_GET['lng'];
+
+        if ($main == 'atraction') {
+            $objectData = $this->modelAtraction->getRadiusValue($lng, $lat, $distance)->getResult();
+            $data['atData']  = $objectData;
+            $data['atUrl'] = 'atraction';
+        } else if ($main == 'event') {
+            $objectData = $this->modelEvent->getRadiusValue($lng, $lat, $distance)->getResult();
+            $data['evData']  = $objectData;
+            $data['evUrl'] = 'event';
+        }
+
+        return json_encode($data);
+    }
+    public function search_support_nearby($distance = null)
+    {
+
         $cp = $_GET['cp'];
         $wp = $_GET['wp'];
         $sp = $_GET['sp'];
         $f =  $_GET['f'];
+
         $lat = $_GET['lat'];
         $lng = $_GET['lng'];
 
         if ($cp == 'true') {
             $objectData = $this->modelCulinary->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['cpData']  = $objectData;
-            $data['ajaxUrl'] = 'culinary_place';
+            $data['cpUrl'] = 'culinary_place';
         }
         if ($sp == 'true') {
             $objectData = $this->modelSouvenir->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['spData']  = $objectData;
+            $data['spUrl'] = 'souvenir_place';
         }
         if ($wp == 'true') {
             $objectData = $this->modelWorship->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['wpData']  = $objectData;
+            $data['wpUrl'] = 'worship_place';
         }
         if ($f == 'true') {
             $objectData = $this->modelFacility->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['fData']  = $objectData;
+            $data['fUrl'] = 'facility';
         }
-        return json_encode($data);
+        if ($data) {
+            return json_encode($data);
+        } else {
+            return json_encode('salah');
+        }
     }
 }

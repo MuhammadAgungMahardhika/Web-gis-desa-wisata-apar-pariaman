@@ -26,17 +26,15 @@
                                 </ol>
                                 <div class="carousel-inner">
                                     <!-- List gallery -->
-                                    <div class="carousel-item active">
-                                        <img src="<?= base_url('assets/images/user-photos'); ?>/default.svg" class="d-block w-100" alt="">
-                                    </div>
-                                    <!-- List gallery -->
+                                    <?php $no = 0; ?>
                                     <?php foreach ($galleryData as $gallery) : ?>
-                                        <div class="carousel-item ">
+                                        <div class="carousel-item <?php if ($no == 0) {
+                                                                        echo 'active';
+                                                                    } ?>">
                                             <img src="<?= base_url('assets/images/apar/apar_mangrove_park'); ?>/<?= $gallery->url; ?>" class="d-block w-100" alt="">
                                         </div>
+                                        <?php $no++; ?>
                                     <?php endforeach; ?>
-
-
                                 </div>
                                 <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

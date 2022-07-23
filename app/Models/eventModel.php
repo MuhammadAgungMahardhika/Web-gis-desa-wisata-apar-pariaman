@@ -21,6 +21,8 @@ class eventModel extends Model
         {$this->table}.name,
         {$this->table}.date_start,
         {$this->table}.date_end,
+        {$this->table}.time_start,
+        {$this->table}.time_end,
         {$this->table}.price,
         {$this->table}.contact_person,
         {$this->table}.description";
@@ -39,6 +41,8 @@ class eventModel extends Model
         {$this->table}.name,
         {$this->table}.date_start,
         {$this->table}.date_end,
+        {$this->table}.time_start,
+        {$this->table}.time_end,
         {$this->table}.price,
         {$this->table}.contact_person,
         {$this->table}.description";
@@ -62,6 +66,17 @@ class eventModel extends Model
     public function getGallery($id)
     {
         $query = $this->db->table($this->table_gallery)->select('url')->where('event_id', $id)->get();
+        return $query;
+    }
+    public function getRadiusValue($lng, $lat, $radius)
+    {
+        $radiusnew = $radius / 1000;
+        $query = $this->db->table($this->table)
+            ->select("id, name, ST_Y(ST_CENTROID(geom)) AS lat,
+            ST_X(ST_CENTROID(geom)) AS lng")
+            ->where("st_intersects(st_centroid(event.geom),
+            ST_buffer(ST_GeomFromText(concat('POINT($lng $lat)')),
+            0.0009*$radiusnew))=1")->get();
         return $query;
     }
 }

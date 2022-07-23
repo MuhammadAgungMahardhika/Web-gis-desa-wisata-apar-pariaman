@@ -13,35 +13,66 @@
             <li class="sidebar-item  has-sub">
                 <a href="" class='sidebar-link'>
                     <i class="bi bi-stack"></i>
-                    <span>Main Atraction</span>
+                    <span>Atraction</span>
                 </a>
-                <ul class="submenu ">
+                <ul class="submenu">
                     <li class="submenu-item ">
-                        <a role="button" onclick="showObject('atraction')">List atraction</a>
+                        <a class="sidebar-link" onclick="showObject('atraction')"><i class="fa fa-list"></i><span> List atraction</span></a>
                     </li>
-                    <li class="submenu-item ">
-                        <a role="button" onclick="showObject('event')">event</a>
+                    <li class="submenu-item sidebar-item has-sub">
+                        <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <input type="range" onchange="mainNearby(this.value,'atraction')" class="form-range autofocus" min="0" max="2000" step="1" id="radiusSlider" value="0">
+                            </li>
+                        </ul>
                     </li>
+                    <li class="submenu-item sidebar-item has-sub ">
+                        <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search</span> </a>
+                        <ul class="submenu">
+                            <li class="submenu-item ">
+                                <a class="sidebar-link" onclick="showObject('')"><i class="fa fa-list"></i><span> By name</span></a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a class="sidebar-link" onclick="showObject('')"><i class="fa fa-list"></i><span> By rating</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </li>
             <li class="sidebar-item  has-sub">
                 <a href="" class='sidebar-link'>
                     <i class="bi bi-stack"></i>
-                    <span>Support Object</span>
+                    <span>Event</span>
                 </a>
-                <ul class="submenu ">
+                <ul class="submenu">
                     <li class="submenu-item ">
-                        <a role="button" onclick="showObject('culinary_place')">Culinary place</a>
+                        <a class="sidebar-link" onclick="showObject('event')"><i class="fa fa-list"></i><span> List event</span></a>
                     </li>
-                    <li class="submenu-item ">
-                        <a role="button" onclick="showObject('souvenir_place')">Souvenir place</a>
+                    <li class="submenu-item sidebar-item has-sub">
+                        <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <input type="range" onchange="mainNearby(this.value,'event')" class="form-range autofocus" min="0" max="2000" step="100" id="radiusSlider" value="0">
+                            </li>
+                        </ul>
                     </li>
-                    <li class="submenu-item ">
-                        <a role="button" onclick="showObject('worship_place')">Worship place</a>
+                    <li class="submenu-item sidebar-item has-sub ">
+                        <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search</span> </a>
+                        <ul class="submenu">
+                            <li class="submenu-item ">
+                                <a class="sidebar-link" onclick="showObject('')"><i class="fa fa-list"></i><span> By name</span></a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a class="sidebar-link" onclick="showObject('')"><i class="fa fa-star"></i><span> By rating</span></a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a class="sidebar-link" onclick="showObject('')"><i class="fa fa-list"></i><span> By date</span></a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="submenu-item ">
-                        <a role="button" onclick="showObject('facility')">Facility</a>
-                    </li>
+
                 </ul>
             </li>
         <?php endif; ?>
