@@ -152,12 +152,10 @@ class ListObjectController extends BaseController
         $lng = $_GET['lng'];
 
         if ($main == 'atraction') {
-            $objectData = $this->modelAtraction->getRadiusValue($lng, $lat, $distance)->getResult();
-            $data['atData']  = $objectData;
+            $data['atData']  = $this->modelAtraction->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['atUrl'] = 'atraction';
         } else if ($main == 'event') {
-            $objectData = $this->modelEvent->getRadiusValue($lng, $lat, $distance)->getResult();
-            $data['evData']  = $objectData;
+            $data['evData']  = $this->modelEvent->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['evUrl'] = 'event';
         }
 
@@ -174,23 +172,19 @@ class ListObjectController extends BaseController
         $lng = $_GET['lng'];
 
         if ($cp == 'true') {
-            $objectData = $this->modelCulinary->getRadiusValue($lng, $lat, $distance)->getResult();
-            $data['cpData']  = $objectData;
+            $data['cpData']  = $this->modelCulinary->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['cpUrl'] = 'culinary_place';
         }
         if ($sp == 'true') {
-            $objectData = $this->modelSouvenir->getRadiusValue($lng, $lat, $distance)->getResult();
-            $data['spData']  = $objectData;
+            $data['spData']  = $this->modelSouvenir->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['spUrl'] = 'souvenir_place';
         }
         if ($wp == 'true') {
-            $objectData = $this->modelWorship->getRadiusValue($lng, $lat, $distance)->getResult();
-            $data['wpData']  = $objectData;
+            $data['wpData']  = $this->modelWorship->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['wpUrl'] = 'worship_place';
         }
         if ($f == 'true') {
-            $objectData = $this->modelFacility->getRadiusValue($lng, $lat, $distance)->getResult();
-            $data['fData']  = $objectData;
+            $data['fData']  = $this->modelFacility->getRadiusValue($lng, $lat, $distance)->getResult();
             $data['fUrl'] = 'facility';
         }
         if ($data) {

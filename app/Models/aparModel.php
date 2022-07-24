@@ -17,6 +17,7 @@ class aparModel extends Model
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
+        {$this->table}.status,
         {$this->table}.open,
         {$this->table}.close,
         {$this->table}.ticket,

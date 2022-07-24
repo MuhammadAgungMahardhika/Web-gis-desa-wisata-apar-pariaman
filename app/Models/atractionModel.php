@@ -22,6 +22,9 @@ class atractionModel extends Model
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
+        {$this->table}.status,
+        {$this->table}.open,
+        {$this->table}.close,
         {$this->table}.employe,
         {$this->table}.price,
         {$this->table}.contact_person,
@@ -39,6 +42,9 @@ class atractionModel extends Model
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
+        {$this->table}.status,
+        {$this->table}.open,
+        {$this->table}.close,
         {$this->table}.employe,
         {$this->table}.price,
         {$this->table}.contact_person,
@@ -71,12 +77,20 @@ class atractionModel extends Model
     public function getRadiusValue($lng, $lat, $radius)
     {
         $radiusnew = $radius / 1000;
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $jarak = "(
+            6371 * acos (
+              cos ( radians($lat) )
+              * cos( radians( ST_Y(ST_CENTROID(geom)) ) )
+              * cos( radians( ST_X(ST_CENTROID(geom)) ) - radians($lng) )
+              + sin ( radians($lat) )
+              * sin( radians( ST_Y(ST_CENTROID(geom)) ) )
+            )
+          )";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.status";
         $query = $this->db->table($this->table)
-            ->select("id, name, ST_Y(ST_CENTROID(geom)) AS lat,
-            ST_X(ST_CENTROID(geom)) AS lng")
-            ->where("st_intersects(st_centroid(atraction.geom),
-            ST_buffer(ST_GeomFromText(concat('POINT($lng $lat)')),
-            0.0009*$radiusnew))=1")->get();
+            ->select("{$columns},{$jarak} as jarak,{$coords}")
+            ->having(['jarak <=' => $radiusnew])->get();
         return $query;
     }
 }

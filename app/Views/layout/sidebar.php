@@ -22,15 +22,22 @@
                 success: function(response) {
                     $('#rowObjectArround').css("display", "none")
                     $('#panelListTittle').html(response.panelList)
+
+                    emptyAllMarker()
                     atData = response.atData
                     atUrl = response.url
 
                     evData = response.evData
                     evUrl = response.url
 
-                    emptyAllMarker()
                     userMarker = null
                     initMap()
+                    if (atData && atUrl) {
+                        loopingAllMarker(atData, atUrl)
+                    }
+                    if (evData && evUrl) {
+                        loopingAllMarker(evData, evUrl)
+                    }
                     if (userPosition != null) {
                         addUserManualMarkerToMap(userPosition)
                     }

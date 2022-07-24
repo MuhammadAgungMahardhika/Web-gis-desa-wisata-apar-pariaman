@@ -23,18 +23,31 @@
                         <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
-                                <input type="range" onchange="mainNearby(this.value,'atraction')" class="form-range autofocus" min="0" max="2000" step="1" id="radiusSlider" value="0">
+                                <input type="range" onchange="mainNearby(this.value,'atraction')" class="form-range autofocus" min="0" max="2000" step="100" id="radiusSlider" value="0">
                             </li>
                         </ul>
                     </li>
                     <li class="submenu-item sidebar-item has-sub ">
                         <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search</span> </a>
                         <ul class="submenu">
-                            <li class="submenu-item ">
-                                <a class="sidebar-link" onclick="showObject('')"><i class="fa fa-list"></i><span> By name</span></a>
+                            <li class="submenu-item sidebar-item has-sub">
+                                <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
+                                <ul class="submenu">
+                                    <li class="submenu-item">
+                                        <select class="form-select" id="basicSelect">
+                                            <option>Mangrove Edupark</option>
+                                            <option>Konservasi Penyu</option>
+                                        </select>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="submenu-item ">
-                                <a class="sidebar-link" onclick="showObject('')"><i class="fa fa-list"></i><span> By rating</span></a>
+                            <li class="submenu-item sidebar-item has-sub">
+                                <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Rating</span> </a>
+                                <ul class="submenu">
+                                    <li class="submenu-item">
+
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -54,7 +67,7 @@
                         <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
-                                <input type="range" onchange="mainNearby(this.value,'event')" class="form-range autofocus" min="0" max="2000" step="100" id="radiusSlider" value="0">
+                                <input id="inputRange" type="range" onchange="mainNearby(this.value,'event')" class="form-range autofocus" min="0" max="2000" step="100" id="radiusSlider" value="0">
                             </li>
                         </ul>
                     </li>
