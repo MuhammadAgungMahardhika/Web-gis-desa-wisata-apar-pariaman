@@ -23,7 +23,7 @@
                         <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
-                                <input type="range" onchange="mainNearby(this.value,'atraction')" class="form-range autofocus" min="0" max="2000" step="100" id="radiusSlider" value="0">
+                                <input type="range" onchange="mainNearby(this.value,'atraction')" class="form-range autofocus" min="0" max="2000" step="10" id="radiusSlider" value="0">
                             </li>
                         </ul>
                     </li>
@@ -67,7 +67,7 @@
                         <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
-                                <input id="inputRange" type="range" onchange="mainNearby(this.value,'event')" class="form-range autofocus" min="0" max="2000" step="100" id="radiusSlider" value="0">
+                                <input id="inputRange" type="range" onchange="mainNearby(this.value,'event')" class="form-range autofocus" min="0" max="2000" step="10" id="radiusSlider" value="0">
                             </li>
                         </ul>
                     </li>
