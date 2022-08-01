@@ -5,6 +5,7 @@
     </div>
 </div>
 <script>
+    // pencarian seluruh object 
     function showObject(object, id = null) {
         <?php if (current_url() != base_url('list_object')) : ?>
             window.location = object;
@@ -48,6 +49,40 @@
         <?php endif; ?>
     }
 
+    // set nama-nama object ketika by name di tekan
+    function setObjectByName(object) {
+        $.ajax({
+            url: "<?= base_url('list_object') ?>" + "/" + object,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                let listObject = []
+                let url = response.url
+                if (url == 'atraction') {
+                    atData = response.atData
+                    for (let i = 0; i < atData.length; i++) {
+                        let name = atData[i].name
+                        listObject.push(`<option>${name}</option>`)
+                    }
+                    return $('#basicSelect').html(`<option value="">Select ${url}</option>${listObject}`)
+                } else if (url == 'event') {
+                    evData = response.evData
+                    for (let i = 0; i < evData.length; i++) {
+                        let name = evData[i].name
+                        listObject.push(`<option>${name}</option>`)
+                    }
+                    return $('#basicSelect2').html(`<option value="">Select ${url}</option>${listObject}`)
+                }
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+
+    // dapatkan nama object dan tampilkan ke map
     function getAtractionByName(val = null) {
         let name = val
         if (!name) {
@@ -59,7 +94,10 @@
             method: "get",
             dataType: "json",
             success: function(response) {
-                emptyAllMarker()
+                if (userPosition) {
+                    userPosition = null
+                    userMarker = null
+                }
                 atData = response.atData
                 atUrl = response.url
                 initMap()
@@ -85,7 +123,10 @@
             method: "get",
             dataType: "json",
             success: function(response) {
-                emptyAllMarker()
+                if (userPosition) {
+                    userPosition = null
+                    userMarker = null
+                }
                 evData = response.evData
                 evUrl = response.url
                 initMap()

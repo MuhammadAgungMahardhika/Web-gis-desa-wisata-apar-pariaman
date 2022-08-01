@@ -49,8 +49,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row card shadow" id="panel">
+            <div class="row card shadow">
+                <div class="overflow-auto" id="panel" style="max-height:40vh;">
 
+                </div>
             </div>
         </div>
     </div>

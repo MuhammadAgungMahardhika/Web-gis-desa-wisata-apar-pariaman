@@ -28,8 +28,11 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
     }
     // show list panel
     function showPanelList(datas = null,url=null) {
-        if (datas) {
             let listPanel = []
+            if (datas.length==0){
+                console.log('tes')
+                listPanel.push(`<tr colspan="3"><td></td><td class="text-center">No data found!</td><td></td></tr>`)
+            }
             for (let i = 0; i < datas.length; i++) {
                 let data = datas[i]
                 let id = datas[i].id
@@ -46,18 +49,18 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
                 $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">List event</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
             }
             if(url=='culinary_place'){
-                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List culinary place</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
+                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List culinary place</h5></div><div class="card-body"><table class="table table-border overflow-auto shadow" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
             }
             if(url=='souvenir_place'){
-                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List souvenir place</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
+                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List souvenir place</h5></div><div class="card-body"><table class="table table-border overflow-auto shadow" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
             }
             if(url=='worship_place'){
-                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List worship place</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
+                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List worship place</h5></div><div class="card-body"><table class="table table-border overflow-auto shadow" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
             }
             if(url=='facility'){
-                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List facility</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
+                $('#panel').append(`<div class="card-header"><h5 class="card-title text-center">List facility</h5></div><div class="card-body"><table class="table table-border overflow-auto shadow" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
             }     
-        }
+        
     }
     //show atraction gallery when url is in home
     function showAtractionGallery() {
@@ -276,7 +279,7 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
         let lng = parseFloat(data.lng)
         // add geom to map
         if (data.geoJSON) {
-            const geoJSON = JSON.parse(data.geoJSON)
+            let geoJSON = JSON.parse(data.geoJSON)
             addPolygonToMap(geoJSON,'#ffffff')
         }
         const objectMarker = new google.maps.Marker({

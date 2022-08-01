@@ -31,20 +31,16 @@
                         <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item sidebar-item has-sub">
-                                <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
+                                <a onclick="setObjectByName('atraction')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
                                 <ul class="submenu">
                                     <li class="submenu-item">
-                                        <div class="input-group">
+                                        <select onchange="getAtractionByName(this.value)" class="form-select" id="basicSelect">
+                                        </select>
+                                    </li>
+                                    <!-- <div class="input-group">
                                             <a class="bi bi-search" onclick="getAtractionByName($('#atractionName').val())"></a>
                                             <input id="atractionName" type="text" class="form-control" onchange="getAtractionByName(this.value)">
-                                        </div>
-                                    </li>
-
-                                    <!-- <select onchange="getAtractionByName()" class="form-select" id="basicSelect">
-                                        <option>Select Atraction</option>
-                                        <option>Mangrove Edupark</option>
-                                        <option>Konservasi Penyu</option>
-                                   </select> -->
+                                        </div> -->
                             </li>
                         </ul>
                     </li>
@@ -82,14 +78,16 @@
                 <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search</span> </a>
                 <ul class="submenu">
                     <li class="submenu-item sidebar-item has-sub">
-                        <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
+                        <a onclick="setObjectByName('event')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
-                                <div class="input-group">
-                                    <a class="bi bi-search" onclick="getEventByName($('#eventName').val())"></a>
-                                    <input id="eventName" type="text" class="form-control" onchange="getEventByName(this.value)">
-                                </div>
+                                <select onchange="getEventByName(this.value)" class="form-select" id="basicSelect2">
+                                </select>
                             </li>
+                            <!-- <div class="input-group">
+                                            <a class="bi bi-search" onclick="getAtractionByName($('#atractionName').val())"></a>
+                                            <input id="atractionName" type="text" class="form-control" onchange="getAtractionByName(this.value)">
+                                        </div> -->
                     </li>
                 </ul>
             </li>
