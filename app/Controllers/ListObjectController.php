@@ -48,7 +48,6 @@ class ListObjectController extends BaseController
             }
             $data = [
                 'atData' =>  $objectData,
-                'panelList' => 'List atraction',
                 'url' => 'atraction'
             ];
 
@@ -84,7 +83,6 @@ class ListObjectController extends BaseController
 
             $data = [
                 'evData' => $objectData,
-                'panelList' => 'List event',
                 'url' => 'event'
             ];
             return json_encode($data);
@@ -118,7 +116,6 @@ class ListObjectController extends BaseController
             }
             $data = [
                 'objectData' => $objectData,
-                'panelList' => 'List souvenir place',
                 'url' => 'souvenir_place'
             ];
             return json_encode($data);
@@ -135,7 +132,6 @@ class ListObjectController extends BaseController
             }
             $data = [
                 'objectData' => $objectData,
-                'panelList' => 'List culinary place',
                 'url' => 'culinary_place'
             ];
             return json_encode($data);
@@ -152,7 +148,6 @@ class ListObjectController extends BaseController
             }
             $data = [
                 'objectData' => $objectData,
-                'panelList' => 'List worship place',
                 'url' => 'worship_place'
             ];
             return json_encode($data);
@@ -169,7 +164,6 @@ class ListObjectController extends BaseController
             }
             $data = [
                 'objectData' => $objectData,
-                'panelList' => 'List facility',
                 'url' => 'facility'
             ];
             return json_encode($data);

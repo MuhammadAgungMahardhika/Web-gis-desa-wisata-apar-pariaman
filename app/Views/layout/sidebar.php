@@ -73,8 +73,6 @@
                     xhr.responseText + "\n" + thrownError);
             }
         });
-
-
     }
 
     function getEventByName(val = null) {

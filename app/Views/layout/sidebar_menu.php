@@ -34,12 +34,17 @@
                                 <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
                                 <ul class="submenu">
                                     <li class="submenu-item">
-
                                         <div class="input-group">
                                             <a class="bi bi-search" onclick="getAtractionByName($('#atractionName').val())"></a>
                                             <input id="atractionName" type="text" class="form-control" onchange="getAtractionByName(this.value)">
                                         </div>
                                     </li>
+
+                                    <!-- <select onchange="getAtractionByName()" class="form-select" id="basicSelect">
+                                        <option>Select Atraction</option>
+                                        <option>Mangrove Edupark</option>
+                                        <option>Konservasi Penyu</option>
+                                   </select> -->
                             </li>
                         </ul>
                     </li>

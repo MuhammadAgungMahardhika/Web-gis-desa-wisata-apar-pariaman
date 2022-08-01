@@ -477,7 +477,6 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
             dataType: "json",
             success: function(response) {
                 if(response){
-                    console.log(userPosition)
                     initMap()  
                     // addMarkerToMap(data,url)
                     $('#panel').html('')
