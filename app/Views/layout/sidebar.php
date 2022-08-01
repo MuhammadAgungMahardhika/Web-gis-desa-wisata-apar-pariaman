@@ -49,4 +49,58 @@
             });
         <?php endif; ?>
     }
+
+    function getAtractionByName(val = null) {
+        let name = val
+        if (!name) {
+            return
+        }
+        $.ajax({
+            url: "<?= base_url('list_object') ?>" + "/" + "atraction_by_name" + "/" + name,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                emptyAllMarker()
+                atData = response.atData
+                atUrl = response.url
+                initMap()
+                if (atData && atUrl) {
+                    loopingAllMarker(atData, atUrl)
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+
+
+    }
+
+    function getEventByName(val = null) {
+        let name = val
+        if (!name) {
+            return
+        }
+        $.ajax({
+            url: "<?= base_url('list_object') ?>" + "/" + "event_by_name" + "/" + name,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                emptyAllMarker()
+                evData = response.evData
+                evUrl = response.url
+                initMap()
+                if (evData && evUrl) {
+                    loopingAllMarker(evData, evUrl)
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+
+
+    }
 </script>

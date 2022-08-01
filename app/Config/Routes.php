@@ -55,9 +55,12 @@ $routes->group('list_object', function ($routes) {
     $routes->get('/', 'ListObjectController::index');
     $routes->get('atraction', 'ListObjectController::atraction');
     $routes->get('atraction/(:segment)', 'ListObjectController::atraction/$1');
+    $routes->get('atraction_by_name/(:segment)', 'ListObjectController::atraction_by_name/$1');
+
 
     $routes->get('event', 'ListObjectController::event');
     $routes->get('event/(:segment)', 'ListObjectController::event/$1');
+    $routes->get('event_by_name/(:segment)', 'ListObjectController::event_by_name/$1');
 
     $routes->get('souvenir_place', 'ListObjectController::souvenir_place');
     $routes->get('souvenir_place/(:segment)', 'ListObjectController::souvenir_place/$1');

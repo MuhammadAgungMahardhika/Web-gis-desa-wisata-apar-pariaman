@@ -103,8 +103,8 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
             addUserManualMarkerToMap(userPosition)
             if (circle) {
                 circle.setMap(null)
+                //  $('#rowObjectArround').css("display", "none")
             }
-            $('#rowObjectArround').css("display", "none")
             directionsRenderer.setMap(null)
         })
     }
@@ -261,7 +261,7 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
         let infoMarker = null
       
         infoMarker = `<div class="text-center">${name}</div><br>${(() => {if (url == 'atraction') {return`<div class="text-center">${status}</div><br>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" ><a role ="button" title ="Route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="Detail information"> <i class="fa fa-info"></i></a> ${(() => {if (url == 'atraction' || url == 'event') {
-        return `<a onclick = "setNearby(${lat},${lng})" target="_blank" role = "button" class="btn btn-outline-primary" title="Object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
+        return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="Object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
         return infoMarker
     }
 
@@ -348,7 +348,7 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
     // Adds a user manual marker to the map.
     function addUserManualMarkerToMap(location) {
         if (userMarker) {
-            userMarker.setPosition(location);
+            userMarker.setPosition(location)
         } else {
             userMarker = new google.maps.Marker({
                 position: location,
@@ -371,7 +371,6 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
 
     //function radius 
     function radius(radius = null) {
-        
         if (circle) {
             circle.setMap(null)
         }
@@ -388,7 +387,6 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
     }
     function mainNearby(val,object){
         if(userPosition==null){
-          
             return Swal.fire({
                 text: 'Please determine your position first!',
                 icon: 'warning',
@@ -450,7 +448,20 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
         let wp = $("#wpCheck").prop('checked') == true
         let sp = $("#spCheck").prop('checked') == true
         let f =  $("#fCheck").prop('checked') == true
-    
+
+      
+        if(cp == false && wp == false && sp == false && f==false){
+            Swal.fire({
+                text: 'Please check the box first',
+                icon: 'warning',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp'
+                },
+                timer: 1200,
+                confirmButtonText: 'Oke'
+            })
+            return 
+        }
         const url = "list_object/search_support_nearby"
         $.ajax({
             url: base_url + "/" + url + "/" + distance,
@@ -466,10 +477,15 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
             dataType: "json",
             success: function(response) {
                 if(response){
-                    userMarker = null
-                   initMap()
-                   
+                    console.log(userPosition)
+                    initMap()  
+                    // addMarkerToMap(data,url)
                     $('#panel').html('')
+                    if(atData && atUrl){
+                        addMarkerToMap(atData,atUrl)
+                    }else if (evData && atUrl){
+                        addMarkerToMap(evData,evUrl)
+                    }
                     if(response.cpData && response.cpUrl){
                         cpData = response.cpData
                         cpUrl = response.cpUrl
@@ -498,8 +514,6 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
                     }else{
                         fData = null
                     }
-                addUserManualMarkerToMap()
-                  
                     radius(distance)
                     $('#sliderVal').html(distance);
                 }
@@ -511,25 +525,23 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
         });
     }
     //function search nearby
-    function setNearby(lat = null, lng = null) {
+    function setNearby(data ,url) {
+        userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
+        userMarker = null
         $('#panel').html('')
         $('#rowObjectArround').css("display", "block")
-        if (lat != null && lng != null) {
-            userPosition = {
-                lat: lat,
-                lng: lng
+        addUserManualMarkerToMap(null)
+            addMarkerToMap(data,url)
+            if(url =='atraction'){
+                atData = data 
+                atUrl = url
+            }else if(url =='event'){
+                evData = data
+                evUrl = url
             }
-            addUserManualMarkerToMap(null)
             directionsRenderer.setMap(null)
-            radius()
-        } else {
-            directionsRenderer.setMap(null)
-            radius()
-        }
     }
-
     // add mata angin 
-
     function mata_angin(){
         const legendIcon = `${base_url}/assets/images/marker-icon/`
         const centerControlDiv = document.createElement("div");

@@ -53,6 +53,27 @@ class eventModel extends Model
             ->get();
         return $query;
     }
+
+    public function getEventByName($name)
+    {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.date_start,
+        {$this->table}.date_end,
+        {$this->table}.time_start,
+        {$this->table}.time_end,
+        {$this->table}.price,
+        {$this->table}.contact_person,
+        {$this->table}.description";
+
+        $query = $this->db->table($this->table)
+            ->select("{$columns},{$coords}")
+            ->like('name', $name, 'both')
+            ->get();
+        return $query;
+    }
     public function addEvent($data)
     {
         $query = $this->db->table($this->table)->insert($data);

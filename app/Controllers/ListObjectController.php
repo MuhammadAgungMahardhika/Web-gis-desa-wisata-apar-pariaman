@@ -55,6 +55,21 @@ class ListObjectController extends BaseController
             return json_encode($data);
         }
     }
+    public function atraction_by_name($name = null)
+    {
+
+        if ($this->request->isAJAX()) {
+            if ($name) {
+                $objectData = $this->modelAtraction->getAtractionByName($name)->getResult();
+            }
+
+            $data = [
+                'atData' => $objectData,
+                'url' => 'atraction'
+            ];
+            return json_encode($data);
+        }
+    }
 
     // Masuk halaman event page
     public function event($id = null)
@@ -70,6 +85,22 @@ class ListObjectController extends BaseController
             $data = [
                 'evData' => $objectData,
                 'panelList' => 'List event',
+                'url' => 'event'
+            ];
+            return json_encode($data);
+        }
+    }
+
+    public function event_by_name($name = null)
+    {
+
+        if ($this->request->isAJAX()) {
+            if ($name) {
+                $objectData = $this->modelEvent->getEventByName($name)->getResult();
+            }
+
+            $data = [
+                'evData' => $objectData,
                 'url' => 'event'
             ];
             return json_encode($data);
