@@ -397,6 +397,7 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
                 confirmButtonText: 'Oke'
             })
         }
+        $('#rowObjectArround').css("display", "none")
         let distance = parseInt(val)
         const url = "list_object/search_main_nearby"
         $.ajax({
@@ -478,13 +479,16 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
             success: function(response) {
                 if(response){
                     initMap()  
-                    // addMarkerToMap(data,url)
                     $('#panel').html('')
+                    
+                    // Add atraction || event marker
                     if(atData && atUrl){
                         addMarkerToMap(atData,atUrl)
                     }else if (evData && atUrl){
                         addMarkerToMap(evData,evUrl)
                     }
+
+                    // Add support marker
                     if(response.cpData && response.cpUrl){
                         cpData = response.cpData
                         cpUrl = response.cpUrl

@@ -21,8 +21,6 @@
                 dataType: "json",
                 success: function(response) {
                     $('#rowObjectArround').css("display", "none")
-                    $('#panelListTittle').html(response.panelList)
-
                     emptyAllMarker()
                     atData = response.atData
                     atUrl = response.url
@@ -55,6 +53,7 @@
         if (!name) {
             return
         }
+        $('#rowObjectArround').css("display", "none")
         $.ajax({
             url: "<?= base_url('list_object') ?>" + "/" + "atraction_by_name" + "/" + name,
             method: "get",
@@ -80,6 +79,7 @@
         if (!name) {
             return
         }
+        $('#rowObjectArround').css("display", "none")
         $.ajax({
             url: "<?= base_url('list_object') ?>" + "/" + "event_by_name" + "/" + name,
             method: "get",
