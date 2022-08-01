@@ -31,7 +31,7 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
             let listPanel = []
             if (datas.length==0){
                 console.log('tes')
-                listPanel.push(`<tr colspan="3"><td></td><td class="text-center">No data found!</td><td></td></tr>`)
+                listPanel.push(`<tr colspan="3"><td></td><td class="text-center">Object not found !</td><td></td></tr>`)
             }
             for (let i = 0; i < datas.length; i++) {
                 let data = datas[i]
