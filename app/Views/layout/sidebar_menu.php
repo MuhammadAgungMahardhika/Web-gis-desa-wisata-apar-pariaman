@@ -2,9 +2,10 @@
     <?= $this->include('layout/sidebar_detail'); ?>
     <ul class="menu">
         <!-- <li class="sidebar-title">Menu</li> -->
+
         <li class="sidebar-item  ">
             <a href="<?= base_url('list_object') ?>" class='sidebar-link'>
-                <i class="fa fa-home"></i>
+                <i class="bi bi-grid-fill"></i>
                 <span>Home</span>
             </a>
         </li>
@@ -83,18 +84,21 @@
                                 <select onchange="getEventByName(this.value)" class="form-select" id="basicSelect2">
                                 </select>
                             </li>
+                            <!-- <div class="input-group">
+                                            <a class="bi bi-search" onclick="getAtractionByName($('#atractionName').val())"></a>
+                                            <input id="atractionName" type="text" class="form-control" onchange="getAtractionByName(this.value)">
+                                        </div> -->
                     </li>
                 </ul>
             </li>
             <li class="submenu-item sidebar-item has-sub">
                 <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Rating</span> </a>
                 <ul class="submenu">
-                    <li class="submenu-item sidebar-item has-sub">
+                    <li class="submenu-item">
 
                     </li>
                 </ul>
             </li>
-
 
         </ul>
     </li>

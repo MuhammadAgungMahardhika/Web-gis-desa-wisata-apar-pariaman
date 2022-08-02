@@ -26,6 +26,7 @@ class ListObjectController extends BaseController
         $objectData = null;
         $data = [
             'title' => $this->title,
+            'panelList' => 'uniqe atraction',
             'config' => config('Auth'),
             'url' => 'index',
             'objectData' => $objectData,
@@ -35,7 +36,7 @@ class ListObjectController extends BaseController
         return view('user-menu/list_object', $data);
     }
 
-    // list atraction page
+    // Masuk halaman atraction page
     public function atraction($id = null)
     {
         //untuk ajax
@@ -69,7 +70,7 @@ class ListObjectController extends BaseController
         }
     }
 
-    // list event page
+    // Masuk halaman event page
     public function event($id = null)
     {
         //untuk ajax

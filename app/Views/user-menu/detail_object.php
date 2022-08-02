@@ -41,11 +41,11 @@
 <script>
     // Global variabel
     let indexUrl
-    let datas = [<?= json_encode($objectData) ?>];
+    let datas = [<?= json_encode($objectData) ?>]
+    let url = '<?= json_encode($url) ?>'
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
-    let url = <?= json_encode($url) ?>
 </script>
 <script src="/assets/js/map.js"></script>
 <!-- Maps JS -->
