@@ -42,7 +42,7 @@
     // Global variabel
     let indexUrl
     let datas = [<?= json_encode($objectData) ?>]
-    let url = '<?= json_encode($url) ?>'
+    let url = '<?= $url ?>'
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)

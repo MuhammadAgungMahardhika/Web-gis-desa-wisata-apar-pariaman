@@ -28,15 +28,15 @@ class ReviewController extends BaseController
                 // check rating alredy exist or not // if exist update // if not insert
                 if ($check->rating != null) {
                     date_default_timezone_set('Asia/Jakarta');
-                    $data['updated_date'] =  date('H-m-d H:i:s');
-                    $rating = $this->modelReview->updateAtractionRating($data, $user_id, $atraction_id);
-                    if ($rating == true) {
-                        return json_encode($rating);
+                    $data['updated_date'] =  date('Y-m-d H:i:s');
+                    $updateRating = $this->modelReview->updateAtractionRating($data, $user_id, $atraction_id);
+                    if ($updateRating == true) {
+                        return json_encode($updateRating);
                     }
                 } else {
-                    $rating = $this->modelReview->addRating($data);
-                    if ($rating == true) {
-                        return json_encode($rating);
+                    $addRating = $this->modelReview->addRating($data);
+                    if ($addRating == true) {
+                        return json_encode($addRating);
                     }
                 }
             }
