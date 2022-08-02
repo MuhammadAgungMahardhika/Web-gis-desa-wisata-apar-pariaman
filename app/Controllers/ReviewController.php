@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\I18n\Time;
+
 class ReviewController extends BaseController
 {
     protected $modelReview;
@@ -25,11 +27,17 @@ class ReviewController extends BaseController
                 $check = $this->modelReview->check($user_id, $atraction_id)->getRow();
                 // check rating alredy exist or not // if exist update // if not insert
                 if ($check->rating != null) {
-                    $rating = $this->modelReview->updateRating($user_id, $atraction_id, $ratingValue);
-                    return json_encode('Data updated!');
+                    date_default_timezone_set('Asia/Jakarta');
+                    $data['updated_date'] =  date('H-m-d H:i:s');
+                    $rating = $this->modelReview->updateAtractionRating($data, $user_id, $atraction_id);
+                    if ($rating == true) {
+                        return json_encode($rating);
+                    }
                 } else {
                     $rating = $this->modelReview->addRating($data);
-                    return json_encode('berhasil menambah data');
+                    if ($rating == true) {
+                        return json_encode($rating);
+                    }
                 }
             }
         }

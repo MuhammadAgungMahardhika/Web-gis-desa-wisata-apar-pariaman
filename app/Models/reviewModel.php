@@ -10,6 +10,7 @@ class reviewModel extends Model
     protected $table = 'review_atraction';
     protected $primaryKey = 'id';
     protected $atraction_id = 'atraction_id';
+    protected $user_id = 'user_id';
     public function getRating($id)
     {
         $query = $this->db->table($this->table)
@@ -29,10 +30,10 @@ class reviewModel extends Model
         return $query;
     }
 
-    public function updateRating($user_id, $atraction_id, $ratingValue)
+    public function updateAtractionRating($data, $user_id, $atraction_id)
     {
         $query = $this->db->table($this->table)
-            ->update(['rating', $ratingValue]);
+            ->update($data, [$this->user_id => $user_id, $this->atraction_id => $atraction_id]);
         return $query;
     }
 
