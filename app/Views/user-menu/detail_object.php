@@ -1,6 +1,4 @@
 <?= $this->extend('layout/template.php') ?>
-
-
 <?= $this->section('content') ?>
 <section class="section">
     <div class="row">
@@ -10,9 +8,11 @@
                 <div class="card-header">
                     <h4 class="card-title text-center">Object Information</h4>
                     <div class="text-center">
-                        <?php if (isset($count_like->likes)) : ?>
-                            <p> <i id="count_like" class="fa fa-thumbs-up btn btn-primary"> <?= $count_like->likes ?></i> People like this atraction</p>
-                        <?php endif; ?>
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined rating-color">star</span>
+                        <span class="material-symbols-outlined">star</span>
                     </div>
                 </div>
                 <div class="card-body">
@@ -40,6 +40,7 @@
 </section>
 <script>
     // Global variabel
+    let indexUrl
     let datas = [<?= json_encode($objectData) ?>];
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)

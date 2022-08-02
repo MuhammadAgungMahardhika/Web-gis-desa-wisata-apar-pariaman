@@ -36,7 +36,7 @@ class ListObjectController extends BaseController
         return view('user-menu/list_object', $data);
     }
 
-    // Masuk halaman atraction page
+    // list atraction page
     public function atraction($id = null)
     {
         //untuk ajax
@@ -70,7 +70,7 @@ class ListObjectController extends BaseController
         }
     }
 
-    // Masuk halaman event page
+    // list event page
     public function event($id = null)
     {
         //untuk ajax

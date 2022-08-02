@@ -50,8 +50,7 @@
                 </div>
             </div>
             <div class="row card shadow">
-                <div class="overflow-auto" id="panel" style="max-height:40vh;">
-
+                <div class="overflow-auto" id="panel">
                 </div>
             </div>
         </div>
@@ -61,6 +60,7 @@
 <script>
     // Global variabel
     let datas, url
+    let indexUrl = '<?= $url; ?>'
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)

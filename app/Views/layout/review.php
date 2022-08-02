@@ -1,11 +1,17 @@
 <!-- Object Rating and Review -->
 <div class="card">
     <div class="card-header text-center">
-        <h4 class="card-title">Like and Review</h4>
+        <h4 class="card-title">Rating and Review</h4>
         <form class="form form-vertical" onsubmit="checkStar(event);">
             <div class="form-body">
-                <div class="like-containter mb-3">
-                    <i class=" btn btn-outline-primary fa fa-thumbs-up fs-4" id="star-1" onclick="setLike();"></i>
+                <div class="star-containter mb-3">
+                    <i class="fa-solid fa-star fs-4 " id="star-1" onclick="setStar('star-1');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('star-2');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('star-3');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('star-4');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('star-5');"></i>
+                    <input type="hidden" id="star-rating" value="0" name="rating">
+                    <input type="hidden" value="" name="object_id">
                 </div>
                 <div class="col-12 mb-3">
                     <div class="form-floating">
@@ -44,6 +50,37 @@
     </div>
 </div>
 <script>
+    // Set star by user input
+    function setStar(star) {
+        switch (star) {
+            case 'star-1':
+                $("#star-1").addClass('star-checked');
+                $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked');
+                document.getElementById('star-rating').value = '1';
+                break;
+            case 'star-2':
+                $("#star-1,#star-2").addClass('star-checked');
+                $("#star-3,#star-4,#star-5").removeClass('star-checked');
+                document.getElementById('star-rating').value = '2';
+                break;
+            case 'star-3':
+                $("#star-1,#star-2,#star-3").addClass('star-checked');
+                $("#star-4,#star-5").removeClass('star-checked');
+                document.getElementById('star-rating').value = '3';
+                break;
+            case 'star-4':
+                $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked');
+                $("#star-5").removeClass('star-checked');
+                document.getElementById('star-rating').value = '4';
+                break;
+            case 'star-5':
+                $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked');
+                document.getElementById('star-rating').value = '5';
+                break;
+        }
+        console.log(document.getElementById('star-rating').value)
+    }
+
     function setLike() {
         <?php if (logged_in() == false) : ?>
             return Swal.fire({
@@ -60,7 +97,6 @@
             })
         <?php else : ?>
             let url = "<?= base_url('review_atraction') ?>" + "/" + '<?= $url; ?>';
-
             $.ajax({
                 url: url,
                 method: "post",
