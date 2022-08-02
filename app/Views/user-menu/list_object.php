@@ -55,7 +55,6 @@
             </div>
         </div>
     </div>
-
 </section>
 <script>
     // Global variabel
