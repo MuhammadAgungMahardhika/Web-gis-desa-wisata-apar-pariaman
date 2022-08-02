@@ -9,7 +9,7 @@ class aparModel extends Model
 {
     protected $table = 'apar';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'type_of_tourism', 'address', 'contact_person', 'description', 'lat', 'lng', 'geom'];
+    protected $allowedFields = ['name', 'type_of_tourism', 'address', 'contact_person', 'description', 'lat', 'lng', 'geom', 'geom_area'];
     public function getApar()
     {
         $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";

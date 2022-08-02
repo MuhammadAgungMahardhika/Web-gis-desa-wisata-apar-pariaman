@@ -26,7 +26,6 @@ class ListObjectController extends BaseController
         $objectData = null;
         $data = [
             'title' => $this->title,
-            'panelList' => 'uniqe atraction',
             'config' => config('Auth'),
             'url' => 'index',
             'objectData' => $objectData,

@@ -2,10 +2,9 @@
     <?= $this->include('layout/sidebar_detail'); ?>
     <ul class="menu">
         <!-- <li class="sidebar-title">Menu</li> -->
-
         <li class="sidebar-item  ">
             <a href="<?= base_url('list_object') ?>" class='sidebar-link'>
-                <i class="bi bi-grid-fill"></i>
+                <i class="fa fa-home"></i>
                 <span>Home</span>
             </a>
         </li>
