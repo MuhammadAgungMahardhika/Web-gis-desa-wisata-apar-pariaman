@@ -504,7 +504,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         let legend = document.createElement('div')
         legend.id = 'legendPanel'
         let content = []
-        content.push('<h4>Legend</h4>')
+        content.push('<h6 class="text-center">Legend</h6>')
         content.push(`<p><img src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png" width="15"></img> User</p>`)
         content.push(`<p><img src="${legendIcon}marker-atraction.png" width="15"></img> Atraction</p>`)
         content.push(`<p><img src="${legendIcon}marker_ev.png" width="15"></img> Event</p>`)
