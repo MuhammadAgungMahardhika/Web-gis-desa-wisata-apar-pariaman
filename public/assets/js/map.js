@@ -7,6 +7,7 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
 
     function initMap() {
         showMap() 
+        hideLegend()
         addPolygonToMap(geomApar,'#ffffff') //add polygon when map is on initiation
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
         if(datas && url){
@@ -15,7 +16,6 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
         mata_angin() // mata angin compas on map
         highlightCurrentManualLocation() //highligth when button location not clicked
     }
-
     function showMap() {
         map = new google.maps.Map(document.getElementById("map"), {
             // mapId: "8e0a97af9386fef",
@@ -563,7 +563,7 @@ let indexUrl = null, atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUr
         let legend = document.createElement('div')
         legend.id = 'legendPanel'
         let content = []
-        content.push('<h4>Legend</h4>')
+        content.push('<h6 class="text-center text-primary">Legend</h6>')
         content.push(`<p><img src="${legendIcon}marker-atraction.png" width="15"></img> User</p>`)
         content.push(`<p><img src="${legendIcon}marker-atraction.png" width="15"></img> Atraction</p>`)
         content.push(`<p><img src="${legendIcon}marker_ev.png" width="15"></img> Event</p>`)
