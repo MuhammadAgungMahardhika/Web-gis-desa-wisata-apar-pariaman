@@ -23,19 +23,19 @@ class DetailObjectController extends BaseController
 
     public function atraction($id = null)
     {
-        $count_like = $this->modelReview->getLikes($id);
+        // $count_rating = $this->modelReview->getRating($id)->getRow();
         $objectData = $this->modelAtraction->getAtraction($id)->getRow();
         $galleryData = $this->modelAtraction->getGallery($id)->getResult();
-        // dd($gallery);
+        $aparData =  $this->modelApar->getApar();
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
-                'count_like' => $count_like,
+                // 'count_rating' => $count_rating,
                 'objectData' => $objectData,
-                'galleryData'   => $galleryData,
+                'galleryData'  => $galleryData,
                 'url' =>  'atraction',
-                'aparData' => $this->modelApar->getApar()
+                'aparData' => $aparData
             ];
             return view('user-menu/detail_object', $data);
         } else {

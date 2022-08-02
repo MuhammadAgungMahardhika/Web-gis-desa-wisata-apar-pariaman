@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 class ReviewController extends BaseController
 {
-
     protected $modelReview;
     // Constructor
     public function __construct()
@@ -17,8 +16,8 @@ class ReviewController extends BaseController
         //untuk ajax
         if ($this->request->isAJAX()) {
             $data = $this->request->getPOST();
-            $like = $this->modelReview->addLikes($data);
-            return json_encode($like);
+            $rating = $this->modelReview->addRating($data);
+            return json_encode($rating);
         }
     }
 }

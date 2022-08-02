@@ -2,7 +2,7 @@
 <div class="card">
     <div class="card-header text-center">
         <h4 class="card-title">Rating and Review</h4>
-        <form class="form form-vertical" onsubmit="checkStar(event);">
+        <form class="form form-vertical">
             <div class="form-body">
                 <div class="star-containter mb-3">
                     <i class="fa-solid fa-star fs-4 " id="star-1" onclick="setStar('star-1');"></i>
@@ -78,10 +78,12 @@
                 document.getElementById('star-rating').value = '5';
                 break;
         }
-        console.log(document.getElementById('star-rating').value)
+        // let ratingValue = document.getElementById('star-rating').value
+        // setRating(ratingValue)
+        // console.log(ratingValue)
     }
 
-    function setLike() {
+    function setRating(val) {
         <?php if (logged_in() == false) : ?>
             return Swal.fire({
                 text: 'Please login first to give a like',
@@ -96,22 +98,21 @@
                 }
             })
         <?php else : ?>
-            let url = "<?= base_url('review_atraction') ?>" + "/" + '<?= $url; ?>';
+            let url = "<?= base_url('review') ?>" + "/" + '<?= $url; ?>';
             $.ajax({
                 url: url,
                 method: "post",
                 data: {
                     'user_id': '<?= user()->id ?>',
                     'atraction_id': '<?= $objectData->id; ?>',
+                    'event_id': '',
                     'comment': '',
-                    'likes': 1
+                    'rating': val
                 },
                 dataType: "json",
                 success: function(response) {
-                    if (response == true) {
-                        let newCount = '<?= $count_like->likes + 1 ?>'
-                        $('#count_like').html(newCount)
-                    }
+
+                    console.log(response)
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(xhr.status + "\n" +

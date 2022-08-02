@@ -96,7 +96,7 @@ $routes->group('detail_object', function ($routes) {
 });
 
 // Menu detail object
-$routes->group('review_atraction', function ($routes) {
+$routes->group('review', function ($routes) {
     $routes->post('atraction', 'ReviewController::atraction');
 });
 

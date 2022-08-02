@@ -95,14 +95,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="submenu-item sidebar-item has-sub">
-                <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Date</span> </a>
-                <ul class="submenu">
-                    <li class="submenu-item sidebar-item has-sub">
 
-                    </li>
-                </ul>
-            </li>
 
         </ul>
     </li>

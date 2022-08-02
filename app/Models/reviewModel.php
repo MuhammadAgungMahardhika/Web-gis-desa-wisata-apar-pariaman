@@ -10,20 +10,19 @@ class reviewModel extends Model
     protected $table = 'review_atraction';
     protected $primaryKey = 'id';
     protected $atraction_id = 'atraction_id';
-    public function getLikes($id)
+    public function getRating($id)
     {
         $query = $this->db->table($this->table)
-            ->select('sum(likes) as likes')
+            ->select('sum(rating) as rating')
             ->where($this->atraction_id, $id)
-            ->get()->getRow();
+            ->get();
         return $query;
     }
 
-    public function addLikes($data)
+    public function addRating($data)
     {
         $query = $this->db->table($this->table)->insert($data);
         return $query;
-        // return 'oke';
     }
     public function getComment($id)
     {
