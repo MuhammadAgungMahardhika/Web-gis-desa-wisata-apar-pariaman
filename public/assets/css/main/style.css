@@ -42,7 +42,9 @@ background-image: linear-gradient(to bottom, rgba(0,0,0,.1),rgba(0,0,0,.6));
   text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
   transform: translate(-40px,0);
   opacity: 0;
-
+}
+.star-checked{
+ color: gold;
 }
 @media (min-width:1025px) {
   .bg-video{
