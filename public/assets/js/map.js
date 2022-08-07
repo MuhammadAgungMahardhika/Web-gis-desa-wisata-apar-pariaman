@@ -434,6 +434,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
                         atUrl = response.atUrl
                         radius(distance)
                         clearMarker()
+                        clearRoute()
                        return loopingAllMarker(atData,atUrl)
                     }
                     if(response.evData && response.evUrl){
@@ -441,6 +442,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
                         evUrl = response.evUrl
                         radius(distance)
                         clearMarker()
+                        clearRoute()
                         return loopingAllMarker(evData,evUrl)
                     }
                 } 
