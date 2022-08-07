@@ -1,11 +1,10 @@
 
 let base_url = 'http://localhost:8080'
-let userMarker, directionsRenderer, infoWindow, circle , map
-let userPosition = null;
+let userPosition,userMarker,directionsRenderer,infoWindow,circle,map
 let markerArray = []
 let geomArray = []
-let atData = null ,evData = null, cpData = null ,spData= null,wpData= null, fData= null , detailData = null
-let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = null , detailUrl=null
+let atData,evData,cpData,spData,wpData, fData, detailData
+let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
 
     function initMap() {
         showMap() //show map , polygon, legend
@@ -46,7 +45,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
     </div></div>`)
     }
     //show info on map
-    function showInfoOnMap(data=null,url=null) {
+    function showInfoOnMap(data,url) {
         const objectMarker = new google.maps.Marker({
             position: {
                 lat: parseFloat(data.lat),
@@ -61,7 +60,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
         openInfoWindow(objectMarker, infoMarkerData(data,url))
     }
     //loping all marker
-    function loopingAllMarker(datas=null,url=null) {
+    function loopingAllMarker(datas,url) {
         showPanelList(datas,url) // show list panel
         for (let i = 0; i < datas.length; i++) {addMarkerToMap(datas[i],url)} //looping all 
     }
@@ -173,7 +172,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
         let destinationCord = {lat: lat,lng: lng}
 
         let directionsService = new google.maps.DirectionsService();
-        if (userPosition == null) {
+        if (!userPosition) {
             Swal.fire({
                 text: 'Please determine your position first!',
                 icon: 'warning',
@@ -224,7 +223,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
         if (icon == 'facility') {return icon = {url:  base_url+"/assets/images/marker-icon/marker_ev.png"}}
     }
 
-    function infoMarkerData(data,url=null) {
+    function infoMarkerData(data,url) {
         let id = data.id
         let name = data.name
         let status = data.status
@@ -232,14 +231,14 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
         // let dateEnd = data.date_end
         let lat = data.lat
         let lng = data.lng
-        let infoMarker = null
+        let infoMarker
       
         infoMarker = `<div class="text-center mb-1">${name}</div>${(() => {if (url == 'event') {return`<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>`}else{return ''}})()}${(() => {if (url == 'atraction') {return`<div class="text-center mb-1">${status}</div>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" ><a role ="button" title ="Route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="Detail information"> <i class="fa fa-info"></i></a> ${(() => {if (url == 'atraction' || url == 'event'){return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="Object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
         return infoMarker
     }
 
      // show list panel
-     function showPanelList(datas = null,url=null) {
+     function showPanelList(datas,url) {
         $('#panel').css('max-height','40vh')
             let listPanel = []
             // if object is empty
@@ -274,7 +273,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
     }
 
     // add Object Marker on Map
-    function addMarkerToMap(data = null,url=null, anim = google.maps.Animation.DROP) {
+    function addMarkerToMap(data,url=null, anim = google.maps.Animation.DROP) {
         let lat = parseFloat(data.lat)
         let lng = parseFloat(data.lng)
         // add geom to map
@@ -293,7 +292,6 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
             animation: anim,
             map: map,
         })
-
         markerArray.push(objectMarker)
         console.log(markerArray)
         objectMarker.addListener('click', () => {
@@ -304,6 +302,9 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
            }
         })
         
+    }
+    function setCenter(val){
+        map.setCenter(val)
     }
     function clearMarker(){
         for (i in markerArray){
@@ -328,6 +329,8 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
                     };
+                    clearRadius()
+                    clearRoute()
                     addUserMarkerToMap(pos);
                     userPosition = pos
                     map.setCenter(pos);
@@ -365,8 +368,9 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
     function clearUser(){
         if(userMarker){
             userMarker.setMap(null)
+            userMarker = null
         }
-        userMarker = null
+       
     }
     //wide the map and remove the panel list
     function togglePanelList() {
@@ -393,7 +397,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
           return circle.setMap(null)
         }
     }
-    function setMainSliderZero(object){
+    function setMainSliderToZero(object){
         if(object == 'atraction'){
             return $('#atSlider').val("0")
         }else  if (object =='event'){
@@ -401,7 +405,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
         }
     }
     function mainNearby(val,object){
-        if(userPosition==null){
+        if(!userPosition && !userMarker){
            Swal.fire({
                 text: 'Please determine your position first!',
                 icon: 'warning',
@@ -411,7 +415,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
                 timer: 1500,
                 confirmButtonText: 'Oke'
             })
-           return setMainSliderZero(object)
+           return setMainSliderToZero(object)
         }
         hideObjectArroundPanel()
         let distance = parseInt(val)
@@ -449,7 +453,7 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
 
     }
 
-    function setSupportSliderZero(){
+    function setSupportSliderToZero(){
         $('#sliderVal').html("0")
         $('#radiusSlider').val("0")
     }
@@ -461,26 +465,16 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
         let sp = $("#spCheck").prop('checked') == true
         let f =  $("#fCheck").prop('checked') == true
 
-        if(cp == false && wp == false && sp == false && f==false){
-           Swal.fire({
+        if(cp == false && wp == false && sp == false && f==false){ 
+            setSupportSliderToZero()
+            $('#panel').html('')
+            return  Swal.fire({
                 text: 'Please check the box!',
                 icon: 'warning',
                 showClass: {popup: 'animate__animated animate__fadeInUp'},
                 timer: 1200,
                 confirmButtonText: 'Oke'
-            }) 
-            setSupportSliderZero()
-            if(userMarker){
-                clearUser()
-            }
-            initMap()
-            $('#panel').html('')
-              // Add atraction || event marker
-            if(atData && atUrl){
-               return addMarkerToMap(atData,atUrl,null)
-            }else if (evData && evUrl){
-               return addMarkerToMap(evData,evUrl,null)
-            }
+            })
         }
         const url = "list_object/search_support_nearby"
         $.ajax({
@@ -535,11 +529,11 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
     }
     //function search nearby
     function setNearby(data ,url) {
+        userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
         clearUser()
         clearRoute()
         clearMarker()
         clearRadius()
-        userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
         showObjectArroundPanel()
         return loopingAllMarker(data,url)
             

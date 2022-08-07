@@ -100,7 +100,11 @@
                     clearMarker()
                     clearRadius()
                     clearRoute()
-                    return loopingAllMarker(atData, atUrl)
+                    loopingAllMarker(atData, atUrl)
+                    for (i in markerArray) {
+                        setCenter(markerArray[i].getPosition())
+                    }
+                    return
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -127,7 +131,11 @@
                     clearMarker()
                     clearRadius()
                     clearRoute()
-                    return loopingAllMarker(evData, evUrl)
+                    loopingAllMarker(evData, evUrl)
+                    for (i in markerArray) {
+                        setCenter(markerArray[i].getPosition())
+                    }
+                    return
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
