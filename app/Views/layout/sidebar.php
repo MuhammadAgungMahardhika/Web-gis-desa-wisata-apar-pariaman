@@ -22,20 +22,22 @@
                 dataType: "json",
                 success: function(response) {
                     $('#rowObjectArround').css("display", "none")
-                    emptyAllMarker()
                     atData = response.atData
                     atUrl = response.url
 
                     evData = response.evData
                     evUrl = response.url
-
-                    userMarker = null
-                    userPosition = null
-                    initMap()
                     if (atData && atUrl) {
+                        clearMarker()
+                        clearRadius()
+                        clearRoute()
                         loopingAllMarker(atData, atUrl)
                     }
                     if (evData && evUrl) {
+                        clearMarker()
+                        clearMarker()
+                        clearRadius()
+                        clearRoute()
                         loopingAllMarker(evData, evUrl)
                     }
                 },
@@ -92,19 +94,13 @@
             method: "get",
             dataType: "json",
             success: function(response) {
-                if (userPosition) {
-                    userPosition = null
-                    userMarker = null
-                }
                 atData = response.atData
                 atUrl = response.url
-                if (evData && evUrl) {
-                    evData = null
-                    evUrl = null
-                }
-                initMap()
                 if (atData && atUrl) {
-                    loopingAllMarker(atData, atUrl)
+                    clearMarker()
+                    clearRadius()
+                    clearRoute()
+                    return loopingAllMarker(atData, atUrl)
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -125,19 +121,13 @@
             method: "get",
             dataType: "json",
             success: function(response) {
-                if (userPosition) {
-                    userPosition = null
-                    userMarker = null
-                }
                 evData = response.evData
                 evUrl = response.url
-                if (atData && atUrl) {
-                    atData = null
-                    atUrl = null
-                }
-                initMap()
                 if (evData && evUrl) {
-                    loopingAllMarker(evData, evUrl)
+                    clearMarker()
+                    clearRadius()
+                    clearRoute()
+                    return loopingAllMarker(evData, evUrl)
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {

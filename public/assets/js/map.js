@@ -1,9 +1,11 @@
 
 let base_url = 'http://localhost:8080'
-let userMarker, directionsRenderer, infoWindow, circle
+let userMarker, directionsRenderer, infoWindow, circle , map
 let userPosition = null;
+let markerArray = []
+let geomArray = []
 let atData = null ,evData = null, cpData = null ,spData= null,wpData= null, fData= null , detailData = null
-let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = null , detailUrl=null
+let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = null , detailUrl=null
 
     function initMap() {
         showMap() //show map , polygon, legend
@@ -16,7 +18,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
 
     function showMap() {
         map = new google.maps.Map(document.getElementById("map"),{ center: {lat: latApar,lng: lngApar}, zoom: 16,});
-        addPolygonToMap(geomApar,'#ffffff')
+        addAparPolygon(geomApar,'#ffffff')
         hideLegend()
     }
    
@@ -75,16 +77,17 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             timer: 1200,
             confirmButtonText: 'Oke'
         })
+      
         google.maps.event.addListener(map, "click", (event) => {
+            clearRadius()
+            clearRoute()
             userPosition = event.latLng
-            addUserManualMarkerToMap(userPosition)
-            if (circle) {circle.setMap(null)} //remove circle if there
-            directionsRenderer.setMap(null) //remove route
+            addUserMarkerToMap(userPosition)
         })
     }
 
     // add polygon on map
-    function addPolygonToMap(geoJson, color, opacity) {
+    function addMarkerPolygon(geoJson, color, opacity) {
         // Construct the polygon.
         const a = {type: 'Feature',geometry: geoJson}
 
@@ -97,7 +100,30 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             fillOpacity: 0.1,
             clickable: false
         })
+        geomArray.push(geom)
         geom.setMap(map)
+    
+    }
+    function addAparPolygon(geoJson, color, opacity) {
+        // Construct the polygon.
+        const a = {type: 'Feature',geometry: geoJson}
+        const geom = new google.maps.Data()
+        geom.addGeoJson(a)
+        geom.setStyle({
+            fillColor: '#00b300',
+            strokeWeight: 0.5,
+            strokeColor: color,
+            fillOpacity: 0.1,
+            clickable: false
+        })
+        geom.setMap(map)
+    
+    }
+    function clearGeom(){
+        for(i in geomArray){
+            geomArray[i].setMap(null)
+        }
+       geomArray = []
     }
     // move camera
     function moveCamera(z = 17, h = 300, t = 30) {
@@ -184,6 +210,11 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         //Show detail rute at element you want
         // display.setPanel(document.getElementById());
     }
+    function clearRoute(){
+        if(directionsRenderer){
+            return  directionsRenderer.setMap(null)
+        }
+    }
 
     function checkIcon(icon) {
         if (icon == 'atraction') {return icon = { url:  base_url+"/assets/images/marker-icon/marker-atraction.png"}}
@@ -243,8 +274,8 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             }     
     }
 
-    // add Atraction Marker on Map
-    function addMarkerToMap(data = null,url=null) {
+    // add Object Marker on Map
+    function addMarkerToMap(data = null,url=null, anim = google.maps.Animation.DROP) {
         if(data==null){
             objectMarker= null
             objectMarker.setMap(null)
@@ -255,7 +286,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         // add geom to map
         if (data.geoJSON) {
             let geoJSON = JSON.parse(data.geoJSON)
-            addPolygonToMap(geoJSON,'#ffffff')
+            addMarkerPolygon(geoJSON,'#ffffff')
         }
         const objectMarker = new google.maps.Marker({
             position: {
@@ -265,9 +296,12 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             icon: checkIcon(url),
             opacity: 0.8,
             title: "Info Object",
-            animation: google.maps.Animation.DROP,
+            animation: anim,
             map: map,
         })
+
+        markerArray.push(objectMarker)
+        console.log(markerArray)
         objectMarker.addListener('click', () => {
            if(window.location.href == base_url+'/list_object'){
             openInfoWindow(objectMarker, infoMarkerData(data,url))
@@ -275,6 +309,14 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
              openInfoWindow(objectMarker,data.name)
            }
         })
+        
+    }
+    function clearMarker(){
+        for (i in markerArray){
+            markerArray[i].setMap(null);
+        }
+        clearGeom()
+        markerArray = [];
     }
     //open infowindow
     function openInfoWindow(marker, content = "Info Window") {
@@ -292,7 +334,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
                     };
-                    addUserManualMarkerToMap(pos);
+                    addUserMarkerToMap(pos);
                     userPosition = pos
                     map.setCenter(pos);
                 },() =>{handleLocationError(true, currentWindow, map.getCenter());}
@@ -310,7 +352,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         currentWindow.open(map);
     }
     // Adds a user manual marker to the map.
-    function addUserManualMarkerToMap(location) {
+    function addUserMarkerToMap(location) {
         if (userMarker) {
             userMarker.setPosition(location)
         } else {
@@ -325,6 +367,12 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             content = `Your Location <div class="text-center"></div>`
             userMarker.addListener('click',() =>{openInfoWindow(userMarker, content)})
         }
+    }
+    function clearUser(){
+        if(userMarker){
+            userMarker.setMap(null)
+        }
+        userMarker = null
     }
     //wide the map and remove the panel list
     function togglePanelList() {
@@ -345,6 +393,11 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             center: userPosition,
             radius: radius
         });
+    }
+    function clearRadius(){
+        if(circle){
+          return circle.setMap(null)
+        }
     }
     function setMainSliderZero(object){
         if(object == 'atraction'){
@@ -376,23 +429,20 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             dataType: "json",
             success: function(response) {
                 if(response){
-                    userMarker = null
-                    initMap()
-                    if (userPosition != null) {addUserManualMarkerToMap(userPosition)}
-
                     if(response.atData && response.atUrl){
                         atData = response.atData
                         atUrl = response.atUrl
                         radius(distance)
+                        clearMarker()
                        return loopingAllMarker(atData,atUrl)
-                    }else{ atData = null}
-
+                    }
                     if(response.evData && response.evUrl){
                         evData = response.evData
                         evUrl = response.evUrl
                         radius(distance)
+                        clearMarker()
                         return loopingAllMarker(evData,evUrl)
-                    }else{evData = null}
+                    }
                 } 
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -424,14 +474,16 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
                 confirmButtonText: 'Oke'
             }) 
             setSupportSliderZero()
-            userMarker = null
+            if(userMarker){
+                clearUser()
+            }
             initMap()
             $('#panel').html('')
               // Add atraction || event marker
             if(atData && atUrl){
-               return addMarkerToMap(atData,atUrl)
+               return addMarkerToMap(atData,atUrl,null)
             }else if (evData && evUrl){
-               return addMarkerToMap(evData,evUrl)
+               return addMarkerToMap(evData,evUrl,null)
             }
         }
         const url = "list_object/search_support_nearby"
@@ -449,40 +501,32 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             dataType: "json",
             success: function(response) {
                 if(response){
-                    initMap()  
+                    // initMap()  
                     $('#panel').html('')
-
-                    // Add atraction || event marker
-                    if(atData && atUrl){
-                        addMarkerToMap(atData,atUrl)
-                    }else if (evData && evUrl){
-                        addMarkerToMap(evData,evUrl)
-                    }
+                    clearMarker()
+                    clearRadius()
+                    clearRoute()
                     // Add support marker
                     if(response.cpData && response.cpUrl){
                         cpData = response.cpData
                         cpUrl = response.cpUrl
                         loopingAllMarker(cpData,cpUrl)
-                    }else{cpData = null}
-
+                    }
                     if(response.spData && response.spUrl){
                         spData = response.spData
                         spUrl = response.spUrl    
                         loopingAllMarker(spData,spUrl)
-                    }else{spData = null}
-
+                    }
                     if(response.wpData && response.wpUrl){
                         wpData = response.wpData 
                         wpUrl = response.wpUrl
                         loopingAllMarker(wpData,wpUrl)
-                    }else{wpData = null}
-
+                    }
                     if(response.fData && response.fUrl){
                         fData  =  response.fData
                         fUrl = response.fUrl
                         loopingAllMarker(fData,fUrl)
-                    }else{fData = null}
-
+                    }
                     radius(distance)
                     $('#sliderVal').html(distance);
                 }
@@ -496,18 +540,23 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
     //function search nearby
     function setNearby(data ,url) {
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
-        userMarker = null
-        addUserManualMarkerToMap(null)
         showObjectArroundPanel()
-        directionsRenderer.setMap(null)
             if(url =='atraction'){
+                clearUser()
+                clearRoute()
+                // clearMarker()
                 atData = data 
                 atUrl = url
+                loopingAllMarker(atData,atUrl)
             }else if(url =='event'){
+                clearUser()
+                clearRoute()
+                clearMarker()
                 evData = data
                 evUrl = url
+                loopingAllMarker(evData,evUrl)
             }
-        supportNearby("0")
+        // supportNearby("0")
            
     }
     // add mata angin 
