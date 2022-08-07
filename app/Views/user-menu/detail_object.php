@@ -42,34 +42,62 @@
     let indexUrl
     let datas = [<?= json_encode($objectData) ?>]
     let url = '<?= $url ?>'
+    let id = "<?= $objectData->id ?>"
     avgRating()
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
 
     function avgRating() {
-        let countRating = '<?= $count_rating->rating ?>'
-
-        console.log(countRating)
-        if (countRating == 5) {
-            $("#s-1,#s-2,#s-3,#s-4,#s-5").addClass('star-checked');
-        }
-        if (countRating == 4) {
-            $("#s-1,#s-2,#s-3,#s-4").addClass('star-checked');
-            $("#s-5").removeClass('star-checked');
-        }
-        if (countRating == 3) {
-            $("#s-1,#s-2,#s-3").addClass('star-checked');
-            $("#s-4,#s-5").removeClass('star-checked');
-        }
-        if (countRating == 2) {
-            $("#s-1,#s-2").addClass('star-checked');
-            $("#s-3,#s-4,#s-5").removeClass('star-checked');
-        }
-        if (countRating == 1) {
-            $("#s-1").addClass('star-checked');
-            $("#s-2,#s-3,#s-4,#s-5").removeClass('star-checked');
-        }
+        let countRating
+        let userTotal
+        let userRating
+        let avgRating
+        $.ajax({
+            url: "<?= base_url('detail_object'); ?>" + "/" + url + "/" + id,
+            method: "get",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response) {
+                    return console.log(response)
+                    countRating = response.countRating.rating
+                    userTotal = response.userTotal.userTotal
+                    if (response.userRating) {
+                        userRating = response.userRating.userRating
+                    }
+                    avgRating = Math.ceil(countRating / userTotal)
+                    console.log(userTotal)
+                    console.log(countRating)
+                    console.log(userRating)
+                    if (avgRating == 5) {
+                        $("#s-1,#s-2,#s-3,#s-4,#s-5").addClass('star-checked');
+                    }
+                    if (avgRating == 4) {
+                        $("#s-1,#s-2,#s-3,#s-4").addClass('star-checked');
+                        $("#s-5").removeClass('star-checked');
+                    }
+                    if (avgRating == 3) {
+                        $("#s-1,#s-2,#s-3").addClass('star-checked');
+                        $("#s-4,#s-5").removeClass('star-checked');
+                    }
+                    if (avgRating == 2) {
+                        $("#s-1,#s-2").addClass('star-checked');
+                        $("#s-3,#s-4,#s-5").removeClass('star-checked');
+                    }
+                    if (avgRating == 1) {
+                        $("#s-1").addClass('star-checked');
+                        $("#s-2,#s-3,#s-4,#s-5").removeClass('star-checked');
+                    }
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
     }
 </script>
 <script src="/assets/js/map.js"></script>

@@ -116,7 +116,9 @@
                 data: data,
                 dataType: "json",
                 success: function(response) {
-                    console.log(response)
+                    if (response) {
+                        avgRating()
+                    }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(xhr.status + "\n" +

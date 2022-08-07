@@ -23,17 +23,29 @@ class DetailObjectController extends BaseController
 
     public function atraction($id = null)
     {
-        $countRating = $this->modelReview->getRating($id)->getRow();
-        $userTotal = $this->modelReview->getUserTotal($id)->getRow();
         $objectData = $this->modelAtraction->getAtraction($id)->getRow();
         $galleryData = $this->modelAtraction->getGallery($id)->getResult();
         $aparData =  $this->modelApar->getApar();
+
+        //untuk ajax
+        if ($this->request->isAJAX()) {
+            $object_id = $this->request->getGet('id');
+            if ($id) {
+                $countRating = $this->modelReview->getRating($id)->getRow();
+                $userTotal = $this->modelReview->getUserTotal($id)->getRow();
+                $userRating = $this->modelReview->getUserRating($id, $object_id)->getRow();
+            }
+            $data = [
+                'countRating' =>  $countRating,
+                'userTotal' =>  $userTotal,
+                'userRating' => $userRating
+            ];
+            return json_encode($data);
+        }
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
-                'count_rating' => $countRating,
-                'user_total' => $userTotal,
                 'objectData' => $objectData,
                 'galleryData'  => $galleryData,
                 'url' =>  'atraction',

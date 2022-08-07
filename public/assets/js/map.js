@@ -293,7 +293,6 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
             map: map,
         })
         markerArray.push(objectMarker)
-        console.log(markerArray)
         objectMarker.addListener('click', () => {
            if(window.location.href == base_url+'/list_object'){
             openInfoWindow(objectMarker, infoMarkerData(data,url))
@@ -458,7 +457,7 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
         $('#radiusSlider').val("0")
     }
     //function slidervalue
-    function supportNearby(val) {
+    function supportNearby(val=null) {
         let distance = parseFloat(val)
         let cp = $("#cpCheck").prop('checked') == true
         let wp = $("#wpCheck").prop('checked') == true
@@ -491,11 +490,12 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
             dataType: "json",
             success: function(response) {
                 if(response){
-                    // initMap()  
                     $('#panel').html('')
-                    clearMarker()
                     clearRadius()
                     clearRoute()
+                    clearMarker()
+                    // Add main marker
+
                     // Add support marker
                     if(response.cpData && response.cpUrl){
                         cpData = response.cpData
@@ -528,14 +528,15 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
         });
     }
     //function search nearby
-    function setNearby(data ,url) {
+    function setNearby(data,url) {
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
         clearUser()
         clearRoute()
         clearMarker()
         clearRadius()
         showObjectArroundPanel()
-        return loopingAllMarker(data,url)
+        loopingAllMarker([data],url)
+        return supportNearby("0")
             
     }
     // add mata angin 
