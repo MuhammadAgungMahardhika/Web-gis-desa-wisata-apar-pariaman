@@ -62,7 +62,7 @@
             dataType: "json",
             success: function(response) {
                 if (response) {
-                    return console.log(response)
+                    // return console.log(response)
                     countRating = response.countRating.rating
                     userTotal = response.userTotal.userTotal
                     if (response.userRating) {
