@@ -51,13 +51,12 @@
     function avgRating() {
         let countRating
         let userTotal
-        let userRating
         let avgRating
         $.ajax({
             url: "<?= base_url('detail_object'); ?>" + "/" + url + "/" + id,
             method: "get",
             data: {
-                id: id
+                id: <?= user()->id ?>
             },
             dataType: "json",
             success: function(response) {
@@ -65,13 +64,8 @@
                     // return console.log(response)
                     countRating = response.countRating.rating
                     userTotal = response.userTotal.userTotal
-                    if (response.userRating) {
-                        userRating = response.userRating.userRating
-                    }
                     avgRating = Math.ceil(countRating / userTotal)
-                    console.log(userTotal)
-                    console.log(countRating)
-                    console.log(userRating)
+
                     if (avgRating == 5) {
                         $("#s-1,#s-2,#s-3,#s-4,#s-5").addClass('star-checked');
                     }

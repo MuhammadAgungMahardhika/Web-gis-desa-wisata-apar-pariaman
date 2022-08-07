@@ -29,11 +29,11 @@ class DetailObjectController extends BaseController
 
         //untuk ajax
         if ($this->request->isAJAX()) {
-            $object_id = $this->request->getGet('id');
+            $user_id = $this->request->getGet('id');
             if ($id) {
                 $countRating = $this->modelReview->getRating($id)->getRow();
                 $userTotal = $this->modelReview->getUserTotal($id)->getRow();
-                $userRating = $this->modelReview->getUserRating($id, $object_id)->getRow();
+                $userRating = $this->modelReview->getUserRating($user_id, $id)->getRow();
             }
             $data = [
                 'countRating' =>  $countRating,

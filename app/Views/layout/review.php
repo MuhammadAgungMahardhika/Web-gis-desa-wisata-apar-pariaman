@@ -65,6 +65,7 @@
                 }
             })
         <?php else : ?>
+
             switch (star) {
                 case 'star-1':
                     $("#star-1").addClass('star-checked');
