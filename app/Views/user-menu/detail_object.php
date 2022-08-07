@@ -8,11 +8,11 @@
                 <div class="card-header">
                     <h4 class="card-title text-center">Object Information</h4>
                     <div class="text-center">
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined rating-color">star</span>
-                        <span class="material-symbols-outlined">star</span>
+                        <span class="material-symbols-outlined rating-color" id="s-1">star</span>
+                        <span class="material-symbols-outlined rating-color" id="s-2">star</span>
+                        <span class="material-symbols-outlined rating-color" id="s-3">star</span>
+                        <span class="material-symbols-outlined rating-color" id="s-4">star</span>
+                        <span class="material-symbols-outlined rating-color" id="s-5">star</span>
                     </div>
                 </div>
                 <div class="card-body">
@@ -29,7 +29,6 @@
                 <div class="card-header">
                     <h5 class="card-title">Google Maps</h5>
                 </div>
-
                 <!-- Object Map body -->
                 <?= $this->include('layout/map-body'); ?>
             </div>
@@ -43,9 +42,35 @@
     let indexUrl
     let datas = [<?= json_encode($objectData) ?>]
     let url = '<?= $url ?>'
+    avgRating()
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
+
+    function avgRating() {
+        let countRating = '<?= $count_rating->rating ?>'
+
+        console.log(countRating)
+        if (countRating == 5) {
+            $("#s-1,#s-2,#s-3,#s-4,#s-5").addClass('star-checked');
+        }
+        if (countRating == 4) {
+            $("#s-1,#s-2,#s-3,#s-4").addClass('star-checked');
+            $("#s-5").removeClass('star-checked');
+        }
+        if (countRating == 3) {
+            $("#s-1,#s-2,#s-3").addClass('star-checked');
+            $("#s-4,#s-5").removeClass('star-checked');
+        }
+        if (countRating == 2) {
+            $("#s-1,#s-2").addClass('star-checked');
+            $("#s-3,#s-4,#s-5").removeClass('star-checked');
+        }
+        if (countRating == 1) {
+            $("#s-1").addClass('star-checked');
+            $("#s-2,#s-3,#s-4,#s-5").removeClass('star-checked');
+        }
+    }
 </script>
 <script src="/assets/js/map.js"></script>
 <!-- Maps JS -->

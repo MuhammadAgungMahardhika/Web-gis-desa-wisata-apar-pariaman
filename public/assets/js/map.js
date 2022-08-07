@@ -348,7 +348,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
     }
     function mainNearby(val,object){
         if(userPosition==null){
-            return Swal.fire({
+           Swal.fire({
                 text: 'Please determine your position first!',
                 icon: 'warning',
                 showClass: {
@@ -357,6 +357,12 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
                 timer: 1500,
                 confirmButtonText: 'Oke'
             })
+            if(object == 'atraction'){
+                return $('#atSlider').val("0")
+            }else  if (object =='event'){
+                return $('#evSlider').val("0")
+            }
+            
         }
         $('#rowObjectArround').css("display", "none")
         let distance = parseInt(val)
@@ -403,13 +409,14 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         let f =  $("#fCheck").prop('checked') == true
 
         if(cp == false && wp == false && sp == false && f==false){
-            return Swal.fire({
+           Swal.fire({
                 text: 'Please check the box first',
                 icon: 'warning',
                 showClass: {popup: 'animate__animated animate__fadeInUp'},
                 timer: 1200,
                 confirmButtonText: 'Oke'
             }) 
+            return $('#radiusSlider').val("0")
         }
         const url = "list_object/search_support_nearby"
         $.ajax({
@@ -432,7 +439,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
                     // Add atraction || event marker
                     if(atData && atUrl){
                         addMarkerToMap(atData,atUrl)
-                    }else if (evData && atUrl){
+                    }else if (evData && evUrl){
                         addMarkerToMap(evData,evUrl)
                     }
                     // Add support marker
@@ -474,10 +481,10 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
     function setNearby(data ,url) {
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
         userMarker = null
+        addUserManualMarkerToMap(null)
         $('#panel').html('')
         $('#rowObjectArround').css("display", "block")
-        addUserManualMarkerToMap(null)
-            addMarkerToMap(data,url)
+        directionsRenderer.setMap(null)
             if(url =='atraction'){
                 atData = data 
                 atUrl = url
@@ -485,7 +492,8 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
                 evData = data
                 evUrl = url
             }
-            directionsRenderer.setMap(null)
+        supportNearby("0")
+           
     }
     // add mata angin 
     function mata_angin(){

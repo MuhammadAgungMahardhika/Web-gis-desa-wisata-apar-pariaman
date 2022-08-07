@@ -20,6 +20,17 @@ class reviewModel extends Model
         return $query;
     }
 
+    public function getUserRating($user_id, $object_id)
+    {
+        $query = $this->db->table($this->table)
+            ->select('rating')
+            ->where('user_id', $user_id)
+            ->where($this->atraction_id, $object_id)
+            ->get();
+
+        return $query;
+    }
+
     public function check($user_id, $object_id)
     {
         $query = $this->db->table($this->table)

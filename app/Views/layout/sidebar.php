@@ -30,15 +30,13 @@
                     evUrl = response.url
 
                     userMarker = null
+                    userPosition = null
                     initMap()
                     if (atData && atUrl) {
                         loopingAllMarker(atData, atUrl)
                     }
                     if (evData && evUrl) {
                         loopingAllMarker(evData, evUrl)
-                    }
-                    if (userPosition != null) {
-                        addUserManualMarkerToMap(userPosition)
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

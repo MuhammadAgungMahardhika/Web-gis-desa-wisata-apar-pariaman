@@ -11,7 +11,6 @@
                     <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('star-4');"></i>
                     <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('star-5');"></i>
                     <input type="hidden" id="star-rating" value="0" name="rating">
-
                 </div>
                 <div class="col-12 mb-3">
                     <div class="form-floating">
@@ -52,37 +51,6 @@
 <script>
     // Set star by user input
     function setStar(star) {
-        switch (star) {
-            case 'star-1':
-                $("#star-1").addClass('star-checked');
-                $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked');
-                document.getElementById('star-rating').value = '1';
-                break;
-            case 'star-2':
-                $("#star-1,#star-2").addClass('star-checked');
-                $("#star-3,#star-4,#star-5").removeClass('star-checked');
-                document.getElementById('star-rating').value = '2';
-                break;
-            case 'star-3':
-                $("#star-1,#star-2,#star-3").addClass('star-checked');
-                $("#star-4,#star-5").removeClass('star-checked');
-                document.getElementById('star-rating').value = '3';
-                break;
-            case 'star-4':
-                $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked');
-                $("#star-5").removeClass('star-checked');
-                document.getElementById('star-rating').value = '4';
-                break;
-            case 'star-5':
-                $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked');
-                document.getElementById('star-rating').value = '5';
-                break;
-        }
-        let starValue = document.getElementById('star-rating').value
-        setRating(starValue)
-    }
-
-    function setRating(val) {
         <?php if (logged_in() == false) : ?>
             return Swal.fire({
                 text: 'Please login first to give a like',
@@ -97,6 +65,39 @@
                 }
             })
         <?php else : ?>
+            switch (star) {
+                case 'star-1':
+                    $("#star-1").addClass('star-checked');
+                    $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked');
+                    document.getElementById('star-rating').value = '1';
+                    break;
+                case 'star-2':
+                    $("#star-1,#star-2").addClass('star-checked');
+                    $("#star-3,#star-4,#star-5").removeClass('star-checked');
+                    document.getElementById('star-rating').value = '2';
+                    break;
+                case 'star-3':
+                    $("#star-1,#star-2,#star-3").addClass('star-checked');
+                    $("#star-4,#star-5").removeClass('star-checked');
+                    document.getElementById('star-rating').value = '3';
+                    break;
+                case 'star-4':
+                    $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked');
+                    $("#star-5").removeClass('star-checked');
+                    document.getElementById('star-rating').value = '4';
+                    break;
+                case 'star-5':
+                    $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked');
+                    document.getElementById('star-rating').value = '5';
+                    break;
+            }
+            let starValue = document.getElementById('star-rating').value
+            setRating(starValue)
+        <?php endif; ?>
+    }
+
+    function setRating(val) {
+        <?php if (logged_in() == true) : ?>
             let urlNow = '<?= $url ?>'
             let url = "<?= base_url('review') ?>" + "/" + urlNow;
             let data = {

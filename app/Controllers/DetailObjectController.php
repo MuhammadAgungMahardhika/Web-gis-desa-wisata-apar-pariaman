@@ -23,7 +23,8 @@ class DetailObjectController extends BaseController
 
     public function atraction($id = null)
     {
-        $count_rating = $this->modelReview->getRating($id)->getRow();
+        $countRating = $this->modelReview->getRating($id)->getRow();
+        $userTotal = $this->modelReview->getUserTotal($id)->getRow();
         $objectData = $this->modelAtraction->getAtraction($id)->getRow();
         $galleryData = $this->modelAtraction->getGallery($id)->getResult();
         $aparData =  $this->modelApar->getApar();
@@ -31,7 +32,8 @@ class DetailObjectController extends BaseController
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
-                'count_rating' => $count_rating,
+                'count_rating' => $countRating,
+                'user_total' => $userTotal,
                 'objectData' => $objectData,
                 'galleryData'  => $galleryData,
                 'url' =>  'atraction',
