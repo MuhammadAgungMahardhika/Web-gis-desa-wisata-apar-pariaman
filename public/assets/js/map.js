@@ -19,7 +19,6 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
     function showMap() {
         map = new google.maps.Map(document.getElementById("map"),{ center: {lat: latApar,lng: lngApar}, zoom: 16,});
         addAparPolygon(geomApar,'#ffffff')
-        hideLegend()
     }
    
     //show atraction gallery when url is in home
@@ -276,11 +275,6 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
 
     // add Object Marker on Map
     function addMarkerToMap(data = null,url=null, anim = google.maps.Animation.DROP) {
-        if(data==null){
-            objectMarker= null
-            objectMarker.setMap(null)
-            return
-        }
         let lat = parseFloat(data.lat)
         let lng = parseFloat(data.lng)
         // add geom to map
@@ -541,25 +535,14 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
     }
     //function search nearby
     function setNearby(data ,url) {
+        clearUser()
+        clearRoute()
+        clearMarker()
+        clearRadius()
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
         showObjectArroundPanel()
-            if(url =='atraction'){
-                clearUser()
-                clearRoute()
-                // clearMarker()
-                atData = data 
-                atUrl = url
-                loopingAllMarker(atData,atUrl)
-            }else if(url =='event'){
-                clearUser()
-                clearRoute()
-                clearMarker()
-                evData = data
-                evUrl = url
-                loopingAllMarker(evData,evUrl)
-            }
-        // supportNearby("0")
-           
+        return loopingAllMarker(data,url)
+            
     }
     // add mata angin 
     function mata_angin(){
@@ -607,13 +590,6 @@ let atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = n
                 }, 400)
             }
         })
-    }
-
-    function emptyAllMarker(){
-        cpData = null
-        spData = null
-        wpData = null
-        fData = null
     }
    function showObjectArroundPanel(){
     $('#panel').html('')
