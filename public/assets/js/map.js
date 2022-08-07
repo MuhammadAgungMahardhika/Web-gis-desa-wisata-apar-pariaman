@@ -346,6 +346,13 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
             radius: radius
         });
     }
+    function setMainSliderZero(object){
+        if(object == 'atraction'){
+            return $('#atSlider').val("0")
+        }else  if (object =='event'){
+            return $('#evSlider').val("0")
+        }
+    }
     function mainNearby(val,object){
         if(userPosition==null){
            Swal.fire({
@@ -357,14 +364,9 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
                 timer: 1500,
                 confirmButtonText: 'Oke'
             })
-            if(object == 'atraction'){
-                return $('#atSlider').val("0")
-            }else  if (object =='event'){
-                return $('#evSlider').val("0")
-            }
-            
+           return setMainSliderZero(object)
         }
-        $('#rowObjectArround').css("display", "none")
+        hideObjectArroundPanel()
         let distance = parseInt(val)
         const url = "list_object/search_main_nearby"
         $.ajax({
@@ -400,6 +402,11 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         });
 
     }
+
+    function setSupportSliderZero(){
+        $('#sliderVal').html("0")
+        $('#radiusSlider').val("0")
+    }
     //function slidervalue
     function supportNearby(val) {
         let distance = parseFloat(val)
@@ -410,13 +417,22 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
 
         if(cp == false && wp == false && sp == false && f==false){
            Swal.fire({
-                text: 'Please check the box first',
+                text: 'Please check the box!',
                 icon: 'warning',
                 showClass: {popup: 'animate__animated animate__fadeInUp'},
                 timer: 1200,
                 confirmButtonText: 'Oke'
             }) 
-            return $('#radiusSlider').val("0")
+            setSupportSliderZero()
+            userMarker = null
+            initMap()
+            $('#panel').html('')
+              // Add atraction || event marker
+            if(atData && atUrl){
+               return addMarkerToMap(atData,atUrl)
+            }else if (evData && evUrl){
+               return addMarkerToMap(evData,evUrl)
+            }
         }
         const url = "list_object/search_support_nearby"
         $.ajax({
@@ -435,7 +451,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
                 if(response){
                     initMap()  
                     $('#panel').html('')
-                    
+
                     // Add atraction || event marker
                     if(atData && atUrl){
                         addMarkerToMap(atData,atUrl)
@@ -482,8 +498,7 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
         userMarker = null
         addUserManualMarkerToMap(null)
-        $('#panel').html('')
-        $('#rowObjectArround').css("display", "block")
+        showObjectArroundPanel()
         directionsRenderer.setMap(null)
             if(url =='atraction'){
                 atData = data 
@@ -549,3 +564,15 @@ let  atUrl = null, evUrl = null, cpUrl = null, spUrl = null,wpUrl = null,fUrl = 
         wpData = null
         fData = null
     }
+   function showObjectArroundPanel(){
+    $('#panel').html('')
+    $('#rowObjectArround').css("display", "block")
+    $("#cpCheck").prop("checked", false)
+    $("#wpCheck").prop("checked", false)
+    $("#spCheck").prop("checked", false)
+    $("#fCheck").prop("checked", false)
+    $("#sliderVal").val("0")
+   }
+   function hideObjectArroundPanel(){
+    $('#rowObjectArround').css("display", "none")
+   }

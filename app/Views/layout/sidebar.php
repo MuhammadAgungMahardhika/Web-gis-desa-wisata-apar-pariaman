@@ -98,6 +98,10 @@
                 }
                 atData = response.atData
                 atUrl = response.url
+                if (evData && evUrl) {
+                    evData = null
+                    evUrl = null
+                }
                 initMap()
                 if (atData && atUrl) {
                     loopingAllMarker(atData, atUrl)
@@ -127,6 +131,10 @@
                 }
                 evData = response.evData
                 evUrl = response.url
+                if (atData && atUrl) {
+                    atData = null
+                    atUrl = null
+                }
                 initMap()
                 if (evData && evUrl) {
                     loopingAllMarker(evData, evUrl)
