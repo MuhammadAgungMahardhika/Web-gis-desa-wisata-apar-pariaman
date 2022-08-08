@@ -5,11 +5,11 @@
         <form class="form form-vertical" onsubmit="checkStar(event);">
             <div class="form-body">
                 <div class="star-containter mb-3">
-                    <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('star-1');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('star-2');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('star-3');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('star-4');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('star-5');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('1');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('2');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('3');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('4');"></i>
+                    <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('5');"></i>
                     <input type="hidden" id="star-rating" value="0" name="rating">
                 </div>
                 <div class="col-12 mb-3">
@@ -65,29 +65,28 @@
                 }
             })
         <?php else : ?>
-
             switch (star) {
-                case 'star-1':
+                case '1':
                     $("#star-1").addClass('star-checked');
                     $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked');
                     document.getElementById('star-rating').value = '1';
                     break;
-                case 'star-2':
+                case '2':
                     $("#star-1,#star-2").addClass('star-checked');
                     $("#star-3,#star-4,#star-5").removeClass('star-checked');
                     document.getElementById('star-rating').value = '2';
                     break;
-                case 'star-3':
+                case '3':
                     $("#star-1,#star-2,#star-3").addClass('star-checked');
                     $("#star-4,#star-5").removeClass('star-checked');
                     document.getElementById('star-rating').value = '3';
                     break;
-                case 'star-4':
+                case '4':
                     $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked');
                     $("#star-5").removeClass('star-checked');
                     document.getElementById('star-rating').value = '4';
                     break;
-                case 'star-5':
+                case '5':
                     $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked');
                     document.getElementById('star-rating').value = '5';
                     break;
@@ -118,7 +117,7 @@
                 dataType: "json",
                 success: function(response) {
                     if (response) {
-                        avgRating()
+                        currentObjectRating()
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

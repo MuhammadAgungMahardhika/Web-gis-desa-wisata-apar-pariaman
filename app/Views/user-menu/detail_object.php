@@ -43,28 +43,21 @@
     let datas = [<?= json_encode($objectData) ?>]
     let url = '<?= $url ?>'
     let id = "<?= $objectData->id ?>"
-    avgRating()
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
+    currentUserRating()
 
-    function avgRating() {
-        let countRating
-        let userTotal
-        let avgRating
+    function currentObjectRating() {
         $.ajax({
             url: "<?= base_url('detail_object'); ?>" + "/" + url + "/" + id,
             method: "get",
-            data: {
-                id: <?= user()->id ?>
-            },
             dataType: "json",
             success: function(response) {
                 if (response) {
-                    // return console.log(response)
-                    countRating = response.countRating.rating
-                    userTotal = response.userTotal.userTotal
-                    avgRating = Math.ceil(countRating / userTotal)
+                    let countRating = response.countRating.rating
+                    let userTotal = response.userTotal.userTotal
+                    let avgRating = Math.ceil(countRating / userTotal)
 
                     if (avgRating == 5) {
                         $("#s-1,#s-2,#s-3,#s-4,#s-5").addClass('star-checked');
@@ -92,6 +85,33 @@
                     xhr.responseText + "\n" + thrownError);
             }
         });
+    }
+
+    function currentUserRating() {
+        <?php if (logged_in() == false) : ?>
+            return console.log('No user detected')
+        <?php else : ?>
+
+            $.ajax({
+                url: "<?= base_url('detail_object'); ?>" + "/" + url + "/" + id,
+                method: "get",
+                data: {
+                    user_id: '<?= user()->id ?>'
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response) {
+                        let userRating = response.userRating.rating
+                        return setStar(userRating)
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" +
+                        xhr.responseText + "\n" + thrownError);
+                }
+            });
+        <?php endif; ?>
+
     }
 </script>
 <script src="/assets/js/map.js"></script>
