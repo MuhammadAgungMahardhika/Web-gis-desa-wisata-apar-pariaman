@@ -5,19 +5,44 @@ let markerArray = []
 let geomArray = []
 let atData,evData,cpData,spData,wpData, fData, detailData
 let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
-
+let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibility: "off" }]}]
     function initMap() {
         showMap() //show map , polygon, legend
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
         if(datas && url){loopingAllMarker(datas,url)}// detail object
         mata_angin() // mata angin compas on map
+        addButtonDarkMap()
         highlightCurrentManualLocation() //highligth when button location not clicked
         if(indexUrl =='index'){showUpcoming()} //showing upcoming 
     }
 
     function showMap() {
-        map = new google.maps.Map(document.getElementById("map"),{ center: {lat: latApar,lng: lngApar}, zoom: 16,});
+        map = new google.maps.Map(document.getElementById("map"),{ center: {lat: latApar,lng: lngApar}, zoom: 16,clickableIcons: false,styles: mapStyles });
         addAparPolygon(geomApar,'#ffffff')
+        addAparLabel()
+    }
+    function showDarkMap(){
+        let darkMap = [
+        {elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+        {elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+        {elementType: "labels.text.fill", stylers: [{ color: "#746855" }] }, 
+        {featureType: "road",elementType: "geometry",stylers: [{ color: "#38414e" }],},
+        {featureType: "road",elementType: "geometry.stroke",stylers: [{ color: "#212a37" }],},
+        {featureType: "road",elementType: "labels.text.fill",stylers: [{ color: "#9ca5b3" }],},
+        {featureType: "road.highway",elementType: "geometry",stylers: [{ color: "#746855" }],},
+        {featureType: "road.highway",elementType: "geometry.stroke",stylers: [{ color: "#1f2835" }],},
+        {featureType: "road.highway",elementType: "labels.text.fill",stylers: [{ color: "#f3d19c" }],},
+        {featureType: "poi",elementType: "labels",stylers: [{ visibility: "off" }]}]
+        map.setOptions({ styles: darkMap });
+        buttonDarkMode.innerHTML =`<a id="dayMap" title="day mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDayMap()"><i class="fa fa-sun-o"></i></a>`
+    }
+    function showDayMap(){
+        map.setOptions({ styles: mapStyles });
+        buttonDarkMode.innerHTML =`<a id="darkMap" title="dark mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
+    }
+
+    function addAparLabel(){
+        
     }
    
     //show atraction gallery when url is in home
@@ -56,6 +81,7 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
             title: "Info Marker",
             map: map,
         })
+        markerArray.push(objectMarker)
         objectMarker.addListener('click', () => {openInfoWindow(objectMarker, infoMarkerData(data,url))}) //open infowindow when click
         openInfoWindow(objectMarker, infoMarkerData(data,url))
     }
@@ -77,6 +103,7 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
         })
       
         google.maps.event.addListener(map, "click", (event) => {
+            clearSlider()
             clearRadius()
             clearRoute()
             userPosition = event.latLng
@@ -318,6 +345,11 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
         infoWindow = new google.maps.InfoWindow({content: content})
         infoWindow.open({anchor: marker,map,shouldFocus: false,})
     }
+    function clearInfoWindow(){
+        if(infoWindow){
+            infoWindow.close()
+        }
+    }
     //CurrentLocation on Map
     function currentLocation() {
         // Try HTML5 geolocation.
@@ -379,7 +411,6 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
     //function radius 
     function radius(radius = null) {
         if (circle) {circle.setMap(null)}
-
         circle = new google.maps.Circle({
             strokeColor: "#FF0000",
             strokeOpacity: 0.8,
@@ -395,6 +426,14 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
         if(circle){
           return circle.setMap(null)
         }
+    }
+    function clearSlider(){
+        $('#atSlider').val("0")
+        $('#evSlider').val("0")
+        $('#radiusSlider').val("0")
+        $('#sliderVal').html("0"+ " m")
+        $('#atSliderVal').html("0"+" m")
+        $('#evSliderVal').html("0"+" m")
     }
     function setMainSliderToZero(object){
         if(object == 'atraction'){
@@ -429,6 +468,7 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
                     if(response.atData && response.atUrl){
                         atData = response.atData
                         atUrl = response.atUrl
+                        $('#atSliderVal').html(distance+" m")
                         radius(distance)
                         clearMarker()
                         clearRoute()
@@ -437,6 +477,7 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
                     if(response.evData && response.evUrl){
                         evData = response.evData
                         evUrl = response.evUrl
+                        $('#evSliderVal').html(distance+" m")
                         radius(distance)
                         clearMarker()
                         clearRoute()
@@ -453,7 +494,7 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
     }
 
     function setSupportSliderToZero(){
-        $('#sliderVal').html("0")
+        $('#sliderVal').html("0"+ " m")
         $('#radiusSlider').val("0")
     }
     //function slidervalue
@@ -518,7 +559,7 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
                         loopingAllMarker(fData,fUrl)
                     }
                     radius(distance)
-                    $('#sliderVal').html(distance);
+                    $('#sliderVal').html(distance+ " m");
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -545,6 +586,13 @@ let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
         const centerControlDiv = document.createElement("div");
         centerControlDiv.innerHTML =`<div class="mb-4"><img src="${legendIcon}mata_angin.png" width="120"></img><div>`
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
+    }
+    // add button dark map
+    function addButtonDarkMap(){
+        let buttonDarkMode = document.createElement("div");
+        buttonDarkMode.id = 'buttonDarkMode'
+        buttonDarkMode.innerHTML =`<a id="darkMap" title="dark mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(buttonDarkMode);
     }
     //add legend to map
     function legend() {

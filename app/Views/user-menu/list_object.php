@@ -44,7 +44,7 @@
                                 </label>
                             </div>
                             <output id="sliderVal"></output>
-                            <input id="radiusSlider" type="range" onchange="supportNearby(this.value)" class="form-range autofocus" min="0" max="2000" step="1" value="0">
+                            <input id="radiusSlider" type="range" onchange="supportNearby(this.value)" class="form-range autofocus" min="0" max="2000" step="10" value="0">
                         </div>
                     </div>
                 </div>

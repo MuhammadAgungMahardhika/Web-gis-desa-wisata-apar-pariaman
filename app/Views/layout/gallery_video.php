@@ -31,7 +31,7 @@
                                         <div class="carousel-item <?php if ($no == 0) {
                                                                         echo 'active';
                                                                     } ?>">
-                                            <img src="<?= base_url('assets/images/apar/apar_mangrove_park'); ?>/<?= $gallery->url; ?>" class="d-block w-100" alt="">
+                                            <img src="<?= base_url('assets/images/apar'); ?>/<?= $gallery->url; ?>" class="d-block w-100" alt="">
                                         </div>
                                         <?php $no++; ?>
                                     <?php endforeach; ?>

@@ -46,6 +46,7 @@
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
+    currentObjectRating()
     currentUserRating()
 
     function currentObjectRating() {
@@ -102,6 +103,9 @@
                 success: function(response) {
                     if (response) {
                         let userRating = response.userRating.rating
+                        let updatedDate = response.userRating.updated_date
+                        console.log(updatedDate)
+                        $('#rateText').html('Last updated at: ' + updatedDate)
                         return setStar(userRating)
                     }
                 },

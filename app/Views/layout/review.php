@@ -2,28 +2,32 @@
 <div class="card">
     <div class="card-header text-center">
         <h4 class="card-title">Rating and Review</h4>
-        <form class="form form-vertical" onsubmit="checkStar(event);">
-            <div class="form-body">
-                <div class="star-containter mb-3">
-                    <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('1');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('2');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('3');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('4');"></i>
-                    <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('5');"></i>
-                    <input type="hidden" id="star-rating" value="0" name="rating">
-                </div>
-                <div class="col-12 mb-3">
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;" name="comment"></textarea>
-                        <label for="floatingTextarea">Leave a comment here</label>
+        <?php if (logged_in() == true) : ?>
+            <form class="form form-vertical" onsubmit="checkStar(event);">
+                <div class="form-body">
+                    <div class="star-containter mb-3">
+                        <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('1');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('2');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('3');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('4');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('5');"></i>
+                        <p class="card-text" id="rateText"></p>
+                        <input type="hidden" id="star-rating" value="0" name="rating">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;" name="comment"></textarea>
+                            <label for="floatingTextarea">Leave a comment here</label>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end mb-3">
+                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                     </div>
                 </div>
-                <div class="col-12 d-flex justify-content-end mb-3">
-                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                </div>
-            </div>
-        </form>
-        <p class="card-text">Please login as User to give Rating and review</p>
+            </form>
+        <?php else : ?>
+            <p class="card-text">Please login as User to give Rating and review</p>
+        <?php endif; ?>
     </div>
     <div class="card-body">
         <div class="table-responsive">

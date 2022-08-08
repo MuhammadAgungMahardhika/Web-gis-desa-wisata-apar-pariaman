@@ -32,7 +32,7 @@ class reviewModel extends Model
     public function getUserRating($user_id, $object_id)
     {
         $query = $this->db->table($this->table)
-            ->select('rating')
+            ->select('rating,updated_date')
             ->where('user_id', $user_id)
             ->where($this->atraction_id, $object_id)
             ->get();
