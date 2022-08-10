@@ -26,7 +26,7 @@
                 </div>
             </form>
         <?php else : ?>
-            <p class="card-text">Please login as User to give Rating and review</p>
+            <p class="card-text">Please login as user to give your rating and reviews</p>
         <?php endif; ?>
     </div>
     <div class="card-body">

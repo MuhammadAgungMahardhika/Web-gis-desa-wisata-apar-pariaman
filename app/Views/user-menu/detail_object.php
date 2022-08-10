@@ -14,6 +14,7 @@
                         <span class="material-symbols-outlined rating-color" id="s-4">star</span>
                         <span class="material-symbols-outlined rating-color" id="s-5">star</span>
                     </div>
+                    <p id="userTotal" class="text-center text-sm"></p>
                 </div>
                 <div class="card-body">
                     <?= $this->include('/layout/detail_object_body'); ?>
@@ -60,6 +61,7 @@
                     let userTotal = response.userTotal.userTotal
                     let avgRating = Math.ceil(countRating / userTotal)
 
+                    $('#userTotal').html(userTotal + ' people rate this ' + url)
                     if (avgRating == 5) {
                         $("#s-1,#s-2,#s-3,#s-4,#s-5").addClass('star-checked');
                     }
@@ -104,7 +106,6 @@
                     if (response) {
                         let userRating = response.userRating.rating
                         let updatedDate = response.userRating.updated_date
-                        console.log(updatedDate)
                         $('#rateText').html('Last updated at: ' + updatedDate)
                         return setStar(userRating)
                     }

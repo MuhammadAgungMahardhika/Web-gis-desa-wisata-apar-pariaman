@@ -11,49 +11,49 @@ class reviewModel extends Model
     protected $primaryKey = 'id';
     protected $atraction_id = 'atraction_id';
     protected $user_id = 'user_id';
-    public function getRating($id)
+    public function getRating($id, $object)
     {
         $query = $this->db->table($this->table)
             ->select('sum(rating) as rating')
-            ->where($this->atraction_id, $id)
+            ->where($object, $id)
             ->get();
         return $query;
     }
 
-    public function getUserTotal($id)
+    public function getUserTotal($id, $object)
     {
         $query = $this->db->table($this->table)
             ->select('COUNT(user_id) as userTotal')
-            ->where($this->atraction_id, $id)
+            ->where($object, $id)
             ->get();
         return $query;
     }
 
-    public function getUserRating($user_id, $object_id)
+    public function getUserRating($user_id, $object, $object_id)
     {
         $query = $this->db->table($this->table)
             ->select('rating,updated_date')
             ->where('user_id', $user_id)
-            ->where($this->atraction_id, $object_id)
+            ->where($object, $object_id)
             ->get();
         return $query;
     }
 
 
-    public function check($user_id, $object_id)
+    public function check($user_id, $object, $object_id)
     {
         $query = $this->db->table($this->table)
             ->select('sum(rating) as rating')
             ->where('user_id', $user_id)
-            ->where($this->atraction_id, $object_id)
+            ->where($object, $object_id)
             ->get();
         return $query;
     }
 
-    public function updateAtractionRating($data, $user_id, $atraction_id)
+    public function updateAtractionRating($data, $user_id, $object, $object_id)
     {
         $query = $this->db->table($this->table)
-            ->update($data, [$this->user_id => $user_id, $this->atraction_id => $atraction_id]);
+            ->update($data, [$this->user_id => $user_id, $object => $object_id]);
         return $query;
     }
 
@@ -62,7 +62,12 @@ class reviewModel extends Model
         $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
-    public function getComment($id)
+    public function getComment($object, $object_id)
     {
+        // $query = $this->db->table($this->table)
+        //     ->select('comment')
+        //     ->where($object, $id)
+        //     ->get();
+        // return $query;
     }
 }

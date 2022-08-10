@@ -31,9 +31,9 @@ class DetailObjectController extends BaseController
         if ($this->request->isAJAX()) {
             $user_id = $this->request->getGet('user_id');
             if ($id) {
-                $countRating = $this->modelReview->getRating($id)->getRow();
-                $userTotal = $this->modelReview->getUserTotal($id)->getRow();
-                $userRating = $this->modelReview->getUserRating($user_id, $id)->getRow();
+                $countRating = $this->modelReview->getRating($id, 'atraction_id')->getRow();
+                $userTotal = $this->modelReview->getUserTotal($id, 'atraction_id')->getRow();
+                $userRating = $this->modelReview->getUserRating($user_id, 'atraction_id', $id)->getRow();
             }
             $data = [
                 'countRating' =>  $countRating,
@@ -60,7 +60,23 @@ class DetailObjectController extends BaseController
     {
         $objectData = $this->modelEvent->getEvent($id)->getRow();
         $galleryData = $this->modelEvent->getGallery($id)->getResult();
+        $aparData =  $this->modelApar->getApar();
 
+        //untuk ajax
+        if ($this->request->isAJAX()) {
+            $user_id = $this->request->getGet('user_id');
+            if ($id) {
+                $countRating = $this->modelReview->getRating($id, 'event_id')->getRow();
+                $userTotal = $this->modelReview->getUserTotal($id, 'event_id')->getRow();
+                $userRating = $this->modelReview->getUserRating($user_id, 'event_id', $id)->getRow();
+            }
+            $data = [
+                'countRating' =>  $countRating,
+                'userTotal' =>  $userTotal,
+                'userRating' => $userRating
+            ];
+            return json_encode($data);
+        }
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
@@ -68,7 +84,7 @@ class DetailObjectController extends BaseController
                 'objectData' => $objectData,
                 'galleryData'   => $galleryData,
                 'url' => 'event',
-                'aparData' => $this->modelApar->getApar()
+                'aparData' => $aparData
             ];
 
             return view('user-menu/detail_object', $data);
