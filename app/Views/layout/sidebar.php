@@ -113,6 +113,37 @@
             }
         });
     }
+    // dapatkan rating object dan tampilkan ke map
+    function getAtractionByRate(val = null) {
+        let rate = val
+        if (!rate) {
+            return
+        }
+        $('#rowObjectArround').css("display", "none")
+        $.ajax({
+            url: "<?= base_url('list_object') ?>" + "/" + "atraction_by_rate" + "/" + rate,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                atData = response.atData
+                atUrl = response.url
+                if (atData && atUrl) {
+                    clearMarker()
+                    clearRadius()
+                    clearRoute()
+                    loopingAllMarker(atData, atUrl)
+                    for (i in markerArray) {
+                        setCenter(markerArray[i].getPosition())
+                    }
+                    return setStar(rate)
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
 
     function getEventByName(val = null) {
         let name = val

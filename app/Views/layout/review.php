@@ -6,11 +6,11 @@
             <form class="form form-vertical" onsubmit="checkStar(event);">
                 <div class="form-body">
                     <div class="star-containter mb-3">
-                        <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('1');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('2');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('3');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('4');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('5');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('1','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('2','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('3','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('4','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('5','<?= $url ?>');"></i>
                         <p class="card-text" id="rateText"></p>
                         <input type="hidden" id="star-rating" value="0" name="rating">
                     </div>
@@ -53,60 +53,12 @@
     </div>
 </div>
 <script>
-    // Set star by user input
-    function setStar(star) {
-        <?php if (logged_in() == false) : ?>
-            return Swal.fire({
-                text: 'Please login first to give a like',
-                icon: 'warning',
-                showClass: {
-                    popup: 'animate__animated animate__fadeInUp'
-                },
-                confirmButtonText: 'Login',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    return window.location.href = '<?= base_url('login'); ?>'
-                }
-            })
-        <?php else : ?>
-            switch (star) {
-                case '1':
-                    $("#star-1").addClass('star-checked');
-                    $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked');
-                    document.getElementById('star-rating').value = '1';
-                    break;
-                case '2':
-                    $("#star-1,#star-2").addClass('star-checked');
-                    $("#star-3,#star-4,#star-5").removeClass('star-checked');
-                    document.getElementById('star-rating').value = '2';
-                    break;
-                case '3':
-                    $("#star-1,#star-2,#star-3").addClass('star-checked');
-                    $("#star-4,#star-5").removeClass('star-checked');
-                    document.getElementById('star-rating').value = '3';
-                    break;
-                case '4':
-                    $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked');
-                    $("#star-5").removeClass('star-checked');
-                    document.getElementById('star-rating').value = '4';
-                    break;
-                case '5':
-                    $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked');
-                    document.getElementById('star-rating').value = '5';
-                    break;
-            }
-            let starValue = document.getElementById('star-rating').value
-            setRating(starValue)
-        <?php endif; ?>
-    }
-
     function setRating(val) {
         <?php if (logged_in() == true) : ?>
             let urlNow = '<?= $url ?>'
             let url = "<?= base_url('review') ?>" + "/" + urlNow;
             let data = {
                 'user_id': '<?= user()->id ?>',
-                'comment': '',
                 'rating': val
             }
             if (urlNow == 'atraction') {

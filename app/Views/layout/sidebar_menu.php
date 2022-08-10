@@ -45,7 +45,14 @@
                         <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Rating</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
-
+                                <div class="star-containter mb-3">
+                                    <i class="fa-solid fa-star fs-6" id="star-1" onclick="getAtractionByRate('1');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-2" onclick="getAtractionByRate('2');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-3" onclick="getAtractionByRate('3');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-4" onclick="getAtractionByRate('4');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-5" onclick="getAtractionByRate('5');"></i>
+                                    <input type="hidden" id="star-rating" value="0" name="rating">
+                                </div>
                             </li>
                         </ul>
                     </li>

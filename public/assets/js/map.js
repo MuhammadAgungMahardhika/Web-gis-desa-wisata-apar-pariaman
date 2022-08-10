@@ -624,3 +624,36 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
    function hideObjectArroundPanel(){
     $('#rowObjectArround').css("display", "none")
    }
+   // Set star by user input
+   function setStar(star) {
+    switch (star) {
+        case '1':
+            $("#star-1").addClass('star-checked');
+            $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked');
+            document.getElementById('star-rating').value = '1';
+            break;
+        case '2':
+            $("#star-1,#star-2").addClass('star-checked');
+            $("#star-3,#star-4,#star-5").removeClass('star-checked');
+            document.getElementById('star-rating').value = '2';
+            break;
+        case '3':
+            $("#star-1,#star-2,#star-3").addClass('star-checked');
+            $("#star-4,#star-5").removeClass('star-checked');
+            document.getElementById('star-rating').value = '3';
+            break;
+        case '4':
+            $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked');
+            $("#star-5").removeClass('star-checked');
+            document.getElementById('star-rating').value = '4';
+            break;
+        case '5':
+            $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked');
+            document.getElementById('star-rating').value = '5';
+            break;
+    }
+    let starValue = document.getElementById('star-rating').value
+    setRating(starValue)
+    }
+    
+

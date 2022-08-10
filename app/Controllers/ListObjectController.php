@@ -70,6 +70,22 @@ class ListObjectController extends BaseController
         }
     }
 
+    public function atraction_by_rate($rate = null)
+    {
+
+        if ($this->request->isAJAX()) {
+            if ($rate) {
+                $objectData = $this->modelAtraction->getAtractionByRate($rate)->getResult();
+            }
+
+            $data = [
+                'atData' => $objectData,
+                'url' => 'atraction'
+            ];
+            return json_encode($data);
+        }
+    }
+
     // Masuk halaman event page
     public function event($id = null)
     {
