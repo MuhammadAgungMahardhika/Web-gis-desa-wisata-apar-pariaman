@@ -111,8 +111,8 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         })
     }
 
-    // add polygon on map
-    function addMarkerPolygon(geoJson, color, opacity) {
+    // add geom on map
+    function addMarkerGeom(geoJson, color, opacity) {
         // Construct the polygon.
         const a = {type: 'Feature',geometry: geoJson}
 
@@ -129,6 +129,13 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         geom.setMap(map)
     
     }
+    // clear geom on map
+    function clearGeom(){
+        for(i in geomArray){
+            geomArray[i].setMap(null)
+        }
+       geomArray = []
+    }
     function addAparPolygon(geoJson, color, opacity) {
         // Construct the polygon.
         const a = {type: 'Feature',geometry: geoJson}
@@ -144,12 +151,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         geom.setMap(map)
     
     }
-    function clearGeom(){
-        for(i in geomArray){
-            geomArray[i].setMap(null)
-        }
-       geomArray = []
-    }
+   
     // move camera
     function moveCamera(z = 17, h = 300, t = 30) {
         map.moveCamera({
@@ -158,7 +160,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             tilt: t
         })
     }
-    //callroute
+    // add callroute
     function calcRoute(lat, lng) {
         let destinationCord = {lat: lat,lng: lng}
 
@@ -199,6 +201,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         //Show detail rute at element you want
         // display.setPanel(document.getElementById());
     }
+    // clear route
     function clearRoute(){
         if(directionsRenderer){
             return  directionsRenderer.setMap(null)
@@ -277,7 +280,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             if(url =='souvenir_place'){color = '#ED90C4'}
             if(url == 'worship_place'){color = '#42CB6F'}
             if(url == 'facility'){color = '#8EFFCD'}
-            addMarkerPolygon(geoJSON,color)
+            addMarkerGeom(geoJSON,color)
         }
         const objectMarker = new google.maps.Marker({
             position: {
@@ -300,9 +303,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         })
         
     }
-    function setCenter(val){
-        map.setCenter(val)
-    }
+    // clear object marker on map
     function clearMarker(){
         for (i in markerArray){
             markerArray[i].setMap(null);
@@ -310,12 +311,18 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         clearGeom()
         markerArray = [];
     }
+    // set center on map
+    function setCenter(val){
+        map.setCenter(val)
+    }
+   
     //open infowindow
     function openInfoWindow(marker, content = "Info Window") {
         if (infoWindow != null) { infoWindow.close()}
         infoWindow = new google.maps.InfoWindow({content: content})
         infoWindow.open({anchor: marker,map,shouldFocus: false,})
     }
+     //close infowindow
     function clearInfoWindow(){
         if(infoWindow){
             infoWindow.close()
@@ -350,7 +357,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         )
         currentWindow.open(map);
     }
-    // Adds a user manual marker to the map.
+    // Add user marker
     function addUserMarkerToMap(location) {
         if (userMarker) {
             userMarker.setPosition(location)
@@ -367,6 +374,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             userMarker.addListener('click',() =>{openInfoWindow(userMarker, content)})
         }
     }
+    // delete user marker
     function clearUser(){
         if(userMarker){
             userMarker.setMap(null)
