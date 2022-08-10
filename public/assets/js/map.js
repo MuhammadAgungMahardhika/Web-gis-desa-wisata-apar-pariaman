@@ -9,9 +9,9 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     function initMap() {
         showMap() //show map , polygon, legend
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
-        if(datas && url){loopingAllMarker(datas,url)}// detail object
+        if(datas && url){loopingAllMarker(datas,url)} // detail object
         mata_angin() // mata angin compas on map
-        addButtonDarkMap()
+        addButtonDarkMap() // button dark map on map
         highlightCurrentManualLocation() //highligth when button location not clicked
         if(indexUrl =='index'){showUpcoming()} //showing upcoming 
     }
@@ -40,7 +40,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         map.setOptions({ styles: mapStyles });
         buttonDarkMode.innerHTML =`<a id="darkMap" title="dark mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
     }
-
     function addAparLabel(){
         
     }
@@ -570,7 +569,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     function addButtonDarkMap(){
         let buttonDarkMode = document.createElement("div");
         buttonDarkMode.id = 'buttonDarkMode'
-        buttonDarkMode.innerHTML =`<a id="darkMap" title="dark mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
+        buttonDarkMode.innerHTML =`<a id="darkMap" title="dark mode" role="button" class="btn btn-light shadow-sm" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(buttonDarkMode);
     }
     //add legend to map
