@@ -14,6 +14,7 @@ class facilityModel extends Model
     public function getFacilities()
     {
         $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
@@ -23,13 +24,14 @@ class facilityModel extends Model
         {$this->table}.contact_person,
         {$this->table}.description";
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords}")
+            ->select("{$columns},{$coords},{$geom_area}")
             ->get()->getResult();
         return $query;
     }
     public function getFacility($id)
     {
         $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
@@ -40,7 +42,7 @@ class facilityModel extends Model
         {$this->table}.description";
 
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords}")
+            ->select("{$columns},{$coords},{$geom_area}")
             ->where($this->primaryKey, $id)
             ->get();
         return $query;
@@ -64,6 +66,7 @@ class facilityModel extends Model
     {
         $radiusnew = $radius / 1000;
         $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
         $jarak = "(
             6371 * acos (
               cos ( radians($lat) )
@@ -75,7 +78,7 @@ class facilityModel extends Model
           )";
         $columns = "{$this->table}.id,{$this->table}.name";
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$jarak} as jarak,{$coords}")
+            ->select("{$columns},{$jarak} as jarak,{$coords},{$geom_area}")
             ->having(['jarak <=' => $radiusnew])->get();
         return $query;
     }

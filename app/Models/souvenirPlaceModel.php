@@ -75,6 +75,7 @@ class souvenirPlaceModel extends Model
     {
         $radiusnew = $radius / 1000;
         $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
         $jarak = "(
             6371 * acos (
               cos ( radians($lat) )
@@ -86,7 +87,7 @@ class souvenirPlaceModel extends Model
           )";
         $columns = "{$this->table}.id,{$this->table}.name";
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$jarak} as jarak,{$coords}")
+            ->select("{$columns},{$jarak} as jarak,{$coords},{$geom_area}")
             ->having(['jarak <=' => $radiusnew])->get();
         return $query;
     }

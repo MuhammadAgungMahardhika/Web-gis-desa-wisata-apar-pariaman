@@ -119,10 +119,10 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         const geom = new google.maps.Data()
         geom.addGeoJson(a)
         geom.setStyle({
-            fillColor: '#00b300',
-            strokeWeight: 0.5,
-            strokeColor: color,
-            fillOpacity: 0.1,
+            fillColor: color,
+            strokeWeight: 0.3,
+            strokeColor: '#00b300',
+            fillOpacity: 0.3,
             clickable: false
         })
         geomArray.push(geom)
@@ -157,42 +157,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             heading: h,
             tilt: t
         })
-    }
-    // Tilt and rotate camera
-    function tiltAndRotateCamera() {
-        const buttons = [
-            ["<", "rotate", 20, google.maps.ControlPosition.LEFT_CENTER],
-            [">", "rotate", -20, google.maps.ControlPosition.RIGHT_CENTER],
-            ["V", "tilt", 20, google.maps.ControlPosition.TOP_CENTER],
-            ["^", "tilt", -20, google.maps.ControlPosition.BOTTOM_CENTER],
-        ]
-        buttons.forEach(([text, mode, amount, position]) => {
-            const controlDiv = document.createElement("div")
-            const controlUI = document.createElement("button")
-            controlUI.classList.add("ui-button");
-            controlUI.innerText = `
-            $ {
-                text
-            }
-            `;
-            controlUI.addEventListener("click", () => {
-                adjustMap(mode, amount);
-            });
-            controlDiv.appendChild(controlUI);
-            map.controls[position].push(controlDiv);
-        })
-        const adjustMap = function(mode, amount) {
-            switch (mode) {
-                case "tilt":
-                    map.setTilt(map.getTilt() + amount);
-                    break;
-                case "rotate":
-                    map.setHeading(map.getHeading() + amount);
-                    break;
-                default:
-                    break;
-            }
-        }
     }
     //callroute
     function calcRoute(lat, lng) {
@@ -306,7 +270,14 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         // add geom to map
         if (data.geoJSON) {
             let geoJSON = JSON.parse(data.geoJSON)
-            addMarkerPolygon(geoJSON,'#ffffff')
+            let color 
+            if(url=='atraction'){color = '#C45A55'}
+            if(url=='event'){color = '#8EFFCD'}
+            if(url=='culinary_place'){color = '#FA786D'}
+            if(url =='souvenir_place'){color = '#ED90C4'}
+            if(url == 'worship_place'){color = '#42CB6F'}
+            if(url == 'facility'){color = '#8EFFCD'}
+            addMarkerPolygon(geoJSON,color)
         }
         const objectMarker = new google.maps.Marker({
             position: {
