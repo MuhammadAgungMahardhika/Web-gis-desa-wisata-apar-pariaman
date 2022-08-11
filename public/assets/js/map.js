@@ -437,20 +437,20 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     function clearSlider(){
         $('#atSlider').val("0")
         $('#evSlider').val("0")
-        $('#radiusSlider').val("0")
-        $('#sliderVal').html("0"+ " m")
         $('#atSliderVal').html("0"+" m")
         $('#evSliderVal').html("0"+" m")
+        $('#radiusSlider').val("0")
+        $('#sliderVal').html("0"+ " m")
+      
     }
-    function setMainSliderToZero(object){
-        if(object == 'atraction'){
-            return $('#atSlider').val("0")
-        }else  if (object =='event'){
-            return $('#evSlider').val("0")
-        }
+    function setMainSliderToZero(){
+            $('#atSliderVal').html("0"+" m")
+            $('#atSlider').val("0")
+            $('#evSliderVal').html("0"+" m")
+            $('#evSlider').val("0")
     }
     function mainNearby(val,object){
-        if(!userPosition && !userMarker){
+        if(!userMarker){
            Swal.fire({
                 text: 'Please determine your position first!',
                 icon: 'warning',
@@ -460,7 +460,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 timer: 1500,
                 confirmButtonText: 'Oke'
             })
-           return setMainSliderToZero(object)
+           return setMainSliderToZero()
         }
         hideObjectArroundPanel()
         let distance = parseInt(val)
@@ -511,17 +511,19 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         let wp = $("#wpCheck").prop('checked') == true
         let sp = $("#spCheck").prop('checked') == true
         let f =  $("#fCheck").prop('checked') == true
-
+        $('#panel').html('')
+        clearRadius()
+        clearRoute()
+        clearMarker('pass')
         if(cp == false && wp == false && sp == false && f==false){ 
-            setSupportSliderToZero()
-            $('#panel').html('')
-            return  Swal.fire({
+           Swal.fire({
                 text: 'Please check the box!',
                 icon: 'warning',
                 showClass: {popup: 'animate__animated animate__fadeInUp'},
                 timer: 1200,
                 confirmButtonText: 'Oke'
             })
+            return  setSupportSliderToZero()
         }
         const url = "list_object/search_support_nearby"
         $.ajax({
@@ -538,12 +540,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             dataType: "json",
             success: function(response) {
                 if(response){
-                    $('#panel').html('')
-                    clearRadius()
-                    clearRoute()
-                    clearMarker('pass')
-                    // Add main marker
-
                     // Add support marker
                     if(response.cpData && response.cpUrl){
                         cpData = response.cpData
@@ -578,6 +574,8 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     //function search nearby
     function setNearby(data,url) {
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
+        setSupportSliderToZero()
+        setMainSliderToZero()
         clearUser()
         clearRoute()
         clearMarker()
