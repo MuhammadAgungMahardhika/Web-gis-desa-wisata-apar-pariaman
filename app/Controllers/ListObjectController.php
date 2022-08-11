@@ -36,154 +36,121 @@ class ListObjectController extends BaseController
         return view('user-menu/list_object', $data);
     }
 
-    // Masuk halaman atraction page
     public function atraction($id = null)
     {
-        //untuk ajax
-        if ($this->request->isAJAX()) {
-            if ($id) {
-                $objectData = $this->modelAtraction->getAtraction($id)->getResult();
-            } else {
-                $objectData = $this->modelAtraction->getAtractions();
-            }
-            $data = [
-                'atData' =>  $objectData,
-                'url' => 'atraction'
-            ];
-
-            return json_encode($data);
+        if ($id) {
+            $objectData = $this->modelAtraction->getAtraction($id)->getResult();
+        } else {
+            $objectData = $this->modelAtraction->getAtractions();
         }
+        $data = [
+            'atData' =>  $objectData,
+            'url' => 'atraction'
+        ];
+
+        return json_encode($data);
     }
     public function atraction_by_name($name = null)
     {
-
-        if ($this->request->isAJAX()) {
-            if ($name) {
-                $objectData = $this->modelAtraction->getAtractionByName($name)->getResult();
-            }
-
-            $data = [
-                'atData' => $objectData,
-                'url' => 'atraction'
-            ];
-            return json_encode($data);
+        if ($name) {
+            $objectData = $this->modelAtraction->getAtractionByName($name)->getResult();
         }
+        $data = [
+            'atData' => $objectData,
+            'url' => 'atraction'
+        ];
+        return json_encode($data);
     }
 
     public function atraction_by_rate($rate = null)
     {
-
-        if ($this->request->isAJAX()) {
-            if ($rate) {
-                $objectData = $this->modelAtraction->getAtractionByRate($rate)->getResult();
-            }
-
-            $data = [
-                'atData' => $objectData,
-                'url' => 'atraction'
-            ];
-            return json_encode($data);
+        if ($rate) {
+            $objectData = $this->modelAtraction->getAtractionByRate($rate)->getResult();
         }
+        $data = [
+            'atData' => $objectData,
+            'url' => 'atraction'
+        ];
+        return json_encode($data);
     }
 
-    // Masuk halaman event page
     public function event($id = null)
     {
-        //untuk ajax
-        if ($this->request->isAJAX()) {
-            if ($id) {
-                $objectData = $this->modelEvent->getEvent($id)->getResult();
-            } else {
-                $objectData = $this->modelEvent->getEvents();
-            }
-
-            $data = [
-                'evData' => $objectData,
-                'url' => 'event'
-            ];
-            return json_encode($data);
+        if ($id) {
+            $objectData = $this->modelEvent->getEvent($id)->getResult();
+        } else {
+            $objectData = $this->modelEvent->getEvents();
         }
+        $data = [
+            'evData' => $objectData,
+            'url' => 'event'
+        ];
+        return json_encode($data);
     }
 
     public function event_by_name($name = null)
     {
-
-        if ($this->request->isAJAX()) {
-            if ($name) {
-                $objectData = $this->modelEvent->getEventByName($name)->getResult();
-            }
-
-            $data = [
-                'evData' => $objectData,
-                'url' => 'event'
-            ];
-            return json_encode($data);
+        if ($name) {
+            $objectData = $this->modelEvent->getEventByName($name)->getResult();
         }
+        $data = [
+            'evData' => $objectData,
+            'url' => 'event'
+        ];
+        return json_encode($data);
     }
 
     public function souvenir_place($id = null)
     {
-        //untuk ajax
-        if ($this->request->isAJAX()) {
-            if ($id) {
-                $objectData = $this->modelSouvenir->getSouvenirPlace($id)->getResult();
-            } else {
-                $objectData = $this->modelSouvenir->getSouvenirPlaces();
-            }
-            $data = [
-                'objectData' => $objectData,
-                'url' => 'souvenir_place'
-            ];
-            return json_encode($data);
+        if ($id) {
+            $objectData = $this->modelSouvenir->getSouvenirPlace($id)->getResult();
+        } else {
+            $objectData = $this->modelSouvenir->getSouvenirPlaces();
         }
+        $data = [
+            'objectData' => $objectData,
+            'url' => 'souvenir_place'
+        ];
+        return json_encode($data);
     }
     public function culinary_place($id = null)
     {
-        //Untuk ajax
-        if ($this->request->isAJAX()) {
-            if ($id) {
-                $objectData = $this->modelCulinary->getCulinaryPlace($id)->getResult();
-            } else {
-                $objectData = $this->modelCulinary->getCulinaryPlaces();
-            }
-            $data = [
-                'objectData' => $objectData,
-                'url' => 'culinary_place'
-            ];
-            return json_encode($data);
+        if ($id) {
+            $objectData = $this->modelCulinary->getCulinaryPlace($id)->getResult();
+        } else {
+            $objectData = $this->modelCulinary->getCulinaryPlaces();
         }
+        $data = [
+            'objectData' => $objectData,
+            'url' => 'culinary_place'
+        ];
+        return json_encode($data);
     }
     public function worship_place($id = null)
     {
-        //Untuk ajax
-        if ($this->request->isAJAX()) {
-            if ($id) {
-                $objectData = $this->modelWorship->getWorshipPlace($id)->getResult();
-            } else {
-                $objectData = $this->modelWorship->getWorshipPlaces();
-            }
-            $data = [
-                'objectData' => $objectData,
-                'url' => 'worship_place'
-            ];
-            return json_encode($data);
+        if ($id) {
+            $objectData = $this->modelWorship->getWorshipPlace($id)->getResult();
+        } else {
+            $objectData = $this->modelWorship->getWorshipPlaces();
         }
+        $data = [
+            'objectData' => $objectData,
+            'url' => 'worship_place'
+        ];
+        return json_encode($data);
     }
     public function facility($id = null)
     {
-        //untuk ajax
-        if ($this->request->isAJAX()) {
-            if ($id) {
-                $objectData = $this->modelFacility->getFacility($id)->getResult();
-            } else {
-                $objectData = $this->modelFacility->getFacilities();
-            }
-            $data = [
-                'objectData' => $objectData,
-                'url' => 'facility'
-            ];
-            return json_encode($data);
+        if ($id) {
+            $objectData = $this->modelFacility->getFacility($id)->getResult();
+        } else {
+            $objectData = $this->modelFacility->getFacilities();
         }
+        $data = [
+            'objectData' => $objectData,
+            'url' => 'facility'
+        ];
+        return json_encode($data);
     }
 
     public function search_main_nearby($distance = null)
