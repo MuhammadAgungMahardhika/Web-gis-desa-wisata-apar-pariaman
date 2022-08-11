@@ -2,7 +2,9 @@
 let base_url = 'http://localhost:8080'
 let userPosition,userMarker,directionsRenderer,infoWindow,circle,map
 let markerArray = []
+let markerNearby
 let geomArray = []
+let geomNearby
 let atData,evData,cpData,spData,wpData, fData, detailData
 let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
 let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibility: "off" }]}]
@@ -111,7 +113,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
 
     // add geom on map
-    function addMarkerGeom(geoJson, color, opacity) {
+    function addMarkerGeom(geoJson, color,pass = null) {
         // Construct the polygon.
         const a = {type: 'Feature',geometry: geoJson}
 
@@ -124,16 +126,25 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             fillOpacity: 0.3,
             clickable: false
         })
-        geomArray.push(geom)
+      
+        if(!pass){
+            geomArray.push(geom)
+        }else{
+            geomNearby = geom
+        }
+        
         geom.setMap(map)
     
     }
     // clear geom on map
-    function clearGeom(){
-        for(i in geomArray){
-            geomArray[i].setMap(null)
+    function clearGeom(pass=null){
+        if(!pass){
+            for(i in geomArray){
+                geomArray[i].setMap(null)
+            }
+           geomArray = []
         }
-       geomArray = []
+        
     }
     function addAparPolygon(geoJson, color, opacity) {
         // Construct the polygon.
@@ -266,21 +277,10 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
 
     // add Object Marker on Map
-    function addMarkerToMap(data,url=null, anim = google.maps.Animation.DROP) {
+    function addMarkerToMap(data,url=null,pass=null) {
         let lat = parseFloat(data.lat)
         let lng = parseFloat(data.lng)
-        // add geom to map
-        if (data.geoJSON) {
-            let geoJSON = JSON.parse(data.geoJSON)
-            let color 
-            if(url=='atraction'){color = '#C45A55'}
-            if(url=='event'){color = '#8EFFCD'}
-            if(url=='culinary_place'){color = '#FA786D'}
-            if(url =='souvenir_place'){color = '#ED90C4'}
-            if(url == 'worship_place'){color = '#42CB6F'}
-            if(url == 'facility'){color = '#8EFFCD'}
-            addMarkerGeom(geoJSON,color)
-        }
+        let geoJSON,color
         const objectMarker = new google.maps.Marker({
             position: {
                 lat: lat,
@@ -289,10 +289,28 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             icon: checkIcon(url),
             opacity: 0.8,
             title: "Info Object",
-            animation: anim,
+            animation: google.maps.Animation.DROP,
             map: map,
         })
-        markerArray.push(objectMarker)
+        // add geom to map
+        if (data.geoJSON) {
+            geoJSON = JSON.parse(data.geoJSON)
+            if(url=='atraction'){color = '#C45A55'}
+            if(url=='event'){color = '#8EFFCD'}
+            if(url=='culinary_place'){color = '#FA786D'}
+            if(url =='souvenir_place'){color = '#ED90C4'}
+            if(url == 'worship_place'){color = '#42CB6F'}
+            if(url == 'facility'){color = '#8EFFCD'}
+        }
+       
+        if(!pass){
+            markerArray.push(objectMarker)
+            addMarkerGeom(geoJSON,color)
+        }else{
+            markerNearby = objectMarker
+            addMarkerGeom(geoJSON,color,'pass')
+        }
+        
         objectMarker.addListener('click', () => {
            if(window.location.href == base_url+'/list_object'){
             openInfoWindow(objectMarker, infoMarkerData(data,url))
@@ -303,12 +321,23 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         
     }
     // clear object marker on map
-    function clearMarker(){
-        for (i in markerArray){
-            markerArray[i].setMap(null);
+    function clearMarker(pass=null){
+            for (i in markerArray){markerArray[i].setMap(null);}
+            clearGeom()
+            markerArray = [];
+            if(!pass){
+                clearMarkerNearby()
+            }        
+    }
+    function clearMarkerNearby(){
+        if(markerNearby){
+            markerNearby.setMap(null)
+            markerNearby = null 
         }
-        clearGeom()
-        markerArray = [];
+        if(geomNearby){
+            geomNearby.setMap(null)
+            geomNearby = null
+        }
     }
     // set center on map
     function setCenter(val){
@@ -512,7 +541,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                     $('#panel').html('')
                     clearRadius()
                     clearRoute()
-                    clearMarker()
+                    clearMarker('pass')
                     // Add main marker
 
                     // Add support marker
@@ -554,7 +583,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         clearMarker()
         clearRadius()
         showObjectArroundPanel()
-        loopingAllMarker([data],url)
+        addMarkerToMap(data,url,'pass')
         return supportNearby("0")
             
     }

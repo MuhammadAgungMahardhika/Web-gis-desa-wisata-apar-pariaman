@@ -94,8 +94,9 @@ class atractionModel extends Model
         {$this->table}.description";
 
         $query = $this->db->table($this->table)
+            ->distinct()
             ->select("{$columns},{$coords},{$geom_area}")
-            ->join('review_atraction', '')
+            ->join('review_atraction', 'review_atraction.atraction_id = atraction.id')
             ->where('rating', $rate)
             ->get();
         return $query;
