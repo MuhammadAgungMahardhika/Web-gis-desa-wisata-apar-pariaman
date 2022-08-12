@@ -679,8 +679,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             document.getElementById('star-rating').value = '5';
             break;
     }
-    let starValue = document.getElementById('star-rating').value
-    setRating(starValue)
     }
     
 

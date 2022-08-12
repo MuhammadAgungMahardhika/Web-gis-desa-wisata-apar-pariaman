@@ -6,11 +6,11 @@
             <form class="form form-vertical" onsubmit="checkStar(event);">
                 <div class="form-body">
                     <div class="star-containter mb-3">
-                        <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('1','<?= $url ?>');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('2','<?= $url ?>');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('3','<?= $url ?>');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('4','<?= $url ?>');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('5','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-1" onclick="setRating('1');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-2" onclick="setRating('2');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-3" onclick="setRating('3');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-4" onclick="setRating('4');"></i>
+                        <i class="fa-solid fa-star fs-4" id="star-5" onclick="setRating('5');"></i>
                         <p class="card-text" id="rateText"></p>
                         <input type="hidden" id="star-rating" value="0" name="rating">
                     </div>
@@ -74,6 +74,7 @@
                 success: function(response) {
                     if (response) {
                         currentObjectRating()
+                        setStar(val)
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
