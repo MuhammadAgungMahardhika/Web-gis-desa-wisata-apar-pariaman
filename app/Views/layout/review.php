@@ -6,11 +6,11 @@
             <form class="form form-vertical" onsubmit="checkStar(event);">
                 <div class="form-body">
                     <div class="star-containter mb-3">
-                        <i class="fa-solid fa-star fs-4" id="star-1" onclick="setRating('1');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-2" onclick="setRating('2');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-3" onclick="setRating('3');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-4" onclick="setRating('4');"></i>
-                        <i class="fa-solid fa-star fs-4" id="star-5" onclick="setRating('5');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-1" onclick="setRating('1');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-2" onclick="setRating('2');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-3" onclick="setRating('3');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-4" onclick="setRating('4');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-5" onclick="setRating('5');"></i>
                         <p class="card-text" id="rateText"></p>
                     </div>
                     <div class="col-12 mb-3">
