@@ -94,7 +94,6 @@
         <?php if (logged_in() == false) : ?>
             return console.log('No user detected')
         <?php else : ?>
-
             $.ajax({
                 url: "<?= base_url('detail_object'); ?>" + "/" + url + "/" + id,
                 method: "get",
