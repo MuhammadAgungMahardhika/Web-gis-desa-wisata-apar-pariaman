@@ -497,7 +497,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                     xhr.responseText + "\n" + thrownError);
             }
         });
-
     }
 
     function setSupportSliderToZero(){
@@ -664,6 +663,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             method: "get",
             dataType: "json",
             success: function(response) {
+                setCenter({lat: latApar,lng: lngApar})
                 $('#rowObjectArround').css("display", "none")
                 atData = response.atData
                 atUrl = response.url
@@ -740,6 +740,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             method: "get",
             dataType: "json",
             success: function(response) {
+                setCenter({lat: latApar,lng: lngApar})
                 clearMarker()
                 clearRadius()
                 clearRoute()
@@ -751,9 +752,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                     evData = response.evData
                     evUrl = response.url
                     loopingAllMarker(evData, evUrl)
-                }
-                for (i in markerArray) {
-                setCenter(markerArray[i].getPosition())
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -776,6 +774,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             method: "get",
             dataType: "json",
             success: function(response) {
+                setCenter({lat: latApar,lng: lngApar})
                 clearMarker()
                 clearRadius()
                 clearRoute()
@@ -789,9 +788,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                     evUrl = response.url
                     loopingAllMarker(evData, evUrl)
                     setStar2(val)
-                }
-                for (i in markerArray) {
-                        setCenter(markerArray[i].getPosition())
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
