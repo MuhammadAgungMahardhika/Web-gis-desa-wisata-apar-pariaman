@@ -36,6 +36,10 @@
 </head>
 
 <body>
+    <div class="loader-wrapper">
+        <img src="<?= base_url('/assets/images/pesona_apar.png'); ?>" class="loader">
+    </div>
+
     <div id="app">
         <?= $this->include('layout/sidebar'); ?>
         <!-- Main Content -->
