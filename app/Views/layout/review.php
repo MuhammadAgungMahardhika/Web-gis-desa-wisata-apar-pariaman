@@ -12,7 +12,6 @@
                         <i class="fa-solid fa-star fs-4" id="star-4" onclick="setRating('4');"></i>
                         <i class="fa-solid fa-star fs-4" id="star-5" onclick="setRating('5');"></i>
                         <p class="card-text" id="rateText"></p>
-                        <input type="hidden" id="star-rating" value="0" name="rating">
                     </div>
                     <div class="col-12 mb-3">
                         <div class="form-floating">

@@ -651,33 +651,201 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
    function hideObjectArroundPanel(){
     $('#rowObjectArround').css("display", "none")
    }
+    // show object on map
+    function showObject(object, id = null) {
+        let url
+        if (id != null) {
+            url = base_url + "/" +"list_object"+ "/"+ object + "/" + id
+        } else {
+            url = base_url + "/" +"list_object"+ "/"+ object
+        }
+        $.ajax({
+            url: url,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                $('#rowObjectArround').css("display", "none")
+                atData = response.atData
+                atUrl = response.url
+
+                evData = response.evData
+                evUrl = response.url
+                if (atData && atUrl) {
+                    clearMarker()
+                    clearRadius()
+                    clearRoute()
+                    loopingAllMarker(atData, atUrl)
+                }
+                if (evData && evUrl) {
+                    clearMarker()
+                    clearMarker()
+                    clearRadius()
+                    clearRoute()
+                    loopingAllMarker(evData, evUrl)
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+    // set object name with ajax when sidemenu by name is clicked
+    function setObjectByName(object) {
+        $.ajax({
+            url: base_url +"/"+"list_object"+"/"+object,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                let listObject = []
+                let url = response.url
+                if (url == 'atraction') {
+                    atData = response.atData
+                    for (let i = 0; i < atData.length; i++) {
+                        let name = atData[i].name
+                        listObject.push(`<option>${name}</option>`)
+                    }
+                    return $('#basicSelect').html(`<option value="">Select ${url}</option>${listObject}`)
+                } else if (url == 'event') {
+                    evData = response.evData
+                    for (let i = 0; i < evData.length; i++) {
+                        let name = evData[i].name
+                        listObject.push(`<option>${name}</option>`)
+                    }
+                    return $('#basicSelect2').html(`<option value="">Select ${url}</option>${listObject}`)
+                }
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+      // Show atraction on map when name is match
+     function getObjectByName(val = null,url) {
+        let name = val
+        if (!name) {
+            return
+        }
+        let urlNow
+        if(url=='atraction'){
+            urlNow = "atraction_by_name"
+        }else if(url=='event'){
+            urlNow = "event_by_name"
+        }
+        $('#rowObjectArround').css("display", "none")
+        $.ajax({
+            url: base_url + "/" + "list_object"+ "/"+ urlNow + "/" + name,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                clearMarker()
+                clearRadius()
+                clearRoute()
+                if(url =='atraction'){
+                    atData = response.atData
+                    atUrl = response.url
+                    loopingAllMarker(atData, atUrl)
+                }else if(url=='event'){
+                    evData = response.evData
+                    evUrl = response.url
+                    loopingAllMarker(evData, evUrl)
+                }
+                for (i in markerArray) {
+                setCenter(markerArray[i].getPosition())
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+     // Show atraction on map when rate is match
+      function getObjectByRate(val,url) {
+        let urlNow
+        $('#rowObjectArround').css("display", "none")
+        if(url=='atraction'){
+            urlNow = "atraction_by_rate"
+        }else if(url =='event'){
+            urlNow ="event_by_rate"
+        }
+        $.ajax({
+            url: base_url + "/" + "list_object"+ "/"+ urlNow + "/" + val,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                clearMarker()
+                clearRadius()
+                clearRoute()
+                if(url == 'atraction'){
+                    atData = response.atData
+                    atUrl = response.url
+                    loopingAllMarker(atData, atUrl)
+                    setStar(val)
+                }else if (url =='event'){
+                    evData = response.evData
+                    evUrl = response.url
+                    loopingAllMarker(evData, evUrl)
+                    setStar2(val)
+                }
+                for (i in markerArray) {
+                        setCenter(markerArray[i].getPosition())
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
    // Set star by user input
    function setStar(star) {
     switch (star) {
         case '1':
-            $("#star-1").addClass('star-checked');
-            $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked');
-            document.getElementById('star-rating').value = '1';
-            break;
+            $("#star-1").addClass('star-checked')
+            $("#star-2,#star-3,#star-4,#star-5").removeClass('star-checked')
+            break
         case '2':
-            $("#star-1,#star-2").addClass('star-checked');
-            $("#star-3,#star-4,#star-5").removeClass('star-checked');
-            document.getElementById('star-rating').value = '2';
-            break;
+            $("#star-1,#star-2").addClass('star-checked')
+            $("#star-3,#star-4,#star-5").removeClass('star-checked')
+            break
         case '3':
-            $("#star-1,#star-2,#star-3").addClass('star-checked');
-            $("#star-4,#star-5").removeClass('star-checked');
-            document.getElementById('star-rating').value = '3';
-            break;
+            $("#star-1,#star-2,#star-3").addClass('star-checked')
+            $("#star-4,#star-5").removeClass('star-checked')
+            break
         case '4':
-            $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked');
-            $("#star-5").removeClass('star-checked');
-            document.getElementById('star-rating').value = '4';
-            break;
+            $("#star-1,#star-2,#star-3,#star-4").addClass('star-checked')
+            $("#star-5").removeClass('star-checked')
+            break
         case '5':
-            $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked');
-            document.getElementById('star-rating').value = '5';
-            break;
+            $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass('star-checked')
+            break
+    }
+    }
+     // Set star by user input
+   function setStar2(star) {
+    switch (star) {
+        case '1':
+            $("#sstar-1").addClass('star-checked')
+            $("#sstar-2,#sstar-3,#sstar-4,#sstar-5").removeClass('star-checked')
+            break
+        case '2':
+            $("#sstar-1,#sstar-2").addClass('star-checked')
+            $("#sstar-3,#sstar-4,#sstar-5").removeClass('star-checked')
+            break
+        case '3':
+            $("#sstar-1,#sstar-2,#sstar-3").addClass('star-checked')
+            $("#sstar-4,#sstar-5").removeClass('star-checked')
+            break
+        case '4':
+            $("#sstar-1,#sstar-2,#sstar-3,#sstar-4").addClass('star-checked')
+            $("#sstar-5").removeClass('star-checked')
+            break
+        case '5':
+            $("#sstar-1,#sstar-2,#sstar-3,#sstar-4,#sstar-5").addClass('star-checked')
+            break
     }
     }
     

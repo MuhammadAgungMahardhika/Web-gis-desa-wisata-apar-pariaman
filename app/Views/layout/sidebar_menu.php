@@ -35,7 +35,7 @@
                                 <a onclick="setObjectByName('atraction')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
                                 <ul class="submenu">
                                     <li class="submenu-item">
-                                        <select onchange="getAtractionByName(this.value)" class="form-select" id="basicSelect">
+                                        <select onchange="getObjectByName(this.value,'atraction')" class="form-select" id="basicSelect">
                                         </select>
                                     </li>
                             </li>
@@ -46,12 +46,11 @@
                         <ul class="submenu">
                             <li class="submenu-item">
                                 <div class="star-containter mb-3">
-                                    <i class="fa-solid fa-star fs-6" id="star-1" onclick="getAtractionByRate('1');"></i>
-                                    <i class="fa-solid fa-star fs-6" id="star-2" onclick="getAtractionByRate('2');"></i>
-                                    <i class="fa-solid fa-star fs-6" id="star-3" onclick="getAtractionByRate('3');"></i>
-                                    <i class="fa-solid fa-star fs-6" id="star-4" onclick="getAtractionByRate('4');"></i>
-                                    <i class="fa-solid fa-star fs-6" id="star-5" onclick="getAtractionByRate('5');"></i>
-                                    <input type="hidden" id="star-rating" value="0" name="rating">
+                                    <i class="fa-solid fa-star fs-6" id="star-1" onclick="getObjectByRate('1','atraction');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-2" onclick="getObjectByRate('2','atraction');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-3" onclick="getObjectByRate('3','atraction');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-4" onclick="getObjectByRate('4','atraction');"></i>
+                                    <i class="fa-solid fa-star fs-6" id="star-5" onclick="getObjectByRate('5','atraction');"></i>
                                 </div>
                             </li>
                         </ul>
@@ -86,7 +85,7 @@
                         <a onclick="setObjectByName('event')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
-                                <select onchange="getEventByName(this.value)" class="form-select" id="basicSelect2">
+                                <select onchange="getObjectByName(this.value,'event')" class="form-select" id="basicSelect2">
                                 </select>
                             </li>
                     </li>
@@ -96,7 +95,13 @@
                 <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Rating</span> </a>
                 <ul class="submenu">
                     <li class="submenu-item">
-
+                        <div class="star-containter mb-3">
+                            <i class="fa-solid fa-star fs-6" id="sstar-1" onclick="getObjectByRate('1','event');"></i>
+                            <i class="fa-solid fa-star fs-6" id="sstar-2" onclick="getObjectByRate('2','event');"></i>
+                            <i class="fa-solid fa-star fs-6" id="sstar-3" onclick="getObjectByRate('3','event');"></i>
+                            <i class="fa-solid fa-star fs-6" id="sstar-4" onclick="getObjectByRate('4','event');"></i>
+                            <i class="fa-solid fa-star fs-6" id="sstar-5" onclick="getObjectByRate('5','event');"></i>
+                        </div>
                     </li>
                 </ul>
             </li>

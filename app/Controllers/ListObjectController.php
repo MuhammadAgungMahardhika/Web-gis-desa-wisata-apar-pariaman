@@ -99,6 +99,18 @@ class ListObjectController extends BaseController
         ];
         return json_encode($data);
     }
+    public function event_by_rate($rate = null)
+    {
+        if ($rate) {
+            $objectData = $this->modelEvent->getEventByRate($rate)->getResult();
+        }
+        $data = [
+            'evData' => $objectData,
+            'url' => 'event'
+        ];
+        return json_encode($data);
+    }
+
 
     public function souvenir_place($id = null)
     {
