@@ -102,7 +102,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    if (response) {
+                    if (response.userRating) {
                         let userRating = response.userRating.rating
                         let updatedDate = response.userRating.updated_date
                         $('#rateText').html('Last updated at: ' + updatedDate)

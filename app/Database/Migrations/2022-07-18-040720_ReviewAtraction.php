@@ -31,7 +31,7 @@ class ReviewAtraction extends Migration
                 'type'           => 'TEXT',
                 'null'           => true
             ],
-            'likes'           => [
+            'rating'           => [
                 'type'           => 'INT',
                 'null'           => false
             ],

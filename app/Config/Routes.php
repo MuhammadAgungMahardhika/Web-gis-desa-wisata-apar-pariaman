@@ -99,8 +99,10 @@ $routes->group('detail_object', function ($routes) {
 
 // Menu detail object
 $routes->group('review', function ($routes) {
-    $routes->post('atraction', 'ReviewController::atraction');
-    $routes->post('event', 'ReviewController::event');
+    $routes->post('atraction', 'RatingReviewController::rating_atraction');
+    $routes->post('comment_atraction', 'RatingReviewController::comment_atraction');
+    $routes->post('event', 'RatingReviewController::rating_event');
+    $routes->post('comment_event', 'RatingReviewController::comment_event');
 });
 
 

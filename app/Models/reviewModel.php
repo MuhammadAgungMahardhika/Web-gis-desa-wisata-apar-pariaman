@@ -7,10 +7,20 @@ use CodeIgniter\Model;
 
 class reviewModel extends Model
 {
-    protected $table = 'review_atraction';
+    protected $table = 'rating';
     protected $primaryKey = 'id';
     protected $atraction_id = 'atraction_id';
     protected $user_id = 'user_id';
+
+    public function getRatingId($user_id, $object, $object_id)
+    {
+        $query = $this->db->table($this->table)
+            ->select('rating.id as rating')
+            ->where('user_id', $user_id)
+            ->where($object, $object_id)
+            ->get();
+        return $query;
+    }
     public function getRating($id, $object)
     {
         $query = $this->db->table($this->table)

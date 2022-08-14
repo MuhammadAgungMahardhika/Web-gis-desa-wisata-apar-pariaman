@@ -3,7 +3,7 @@
     <div class="card-header text-center">
         <h4 class="card-title">Rating and Review</h4>
         <?php if (logged_in() == true) : ?>
-            <form class="form form-vertical" onsubmit="checkStar(event);">
+            <form class="form form-vertical" id="formReview" method="POST" onsubmit="addComment('<?= $url ?>')">
                 <div class="form-body">
                     <div class="star-containter mb-3">
                         <i class="fa-solid fa-star fs-5" id="star-1" onclick="setRating('1');"></i>
@@ -20,6 +20,8 @@
                         </div>
                     </div>
                     <div class="col-12 d-flex justify-content-end mb-3">
+                        <input type="hidden" name="user_id" value="<?= user()->id ?>">
+                        <input type="hidden" name="object_id" value="<?= $objectData->id ?>">
                         <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                     </div>
                 </div>
