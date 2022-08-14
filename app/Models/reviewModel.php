@@ -7,77 +7,31 @@ use CodeIgniter\Model;
 
 class reviewModel extends Model
 {
-    protected $table = 'rating';
+    protected $table = 'comment';
     protected $primaryKey = 'id';
-    protected $atraction_id = 'atraction_id';
-    protected $user_id = 'user_id';
 
-    public function getRatingId($user_id, $object, $object_id)
+    public function getObjectComment($id, $object)
     {
         $query = $this->db->table($this->table)
-            ->select('rating.id as rating')
-            ->where('user_id', $user_id)
-            ->where($object, $object_id)
-            ->get();
-        return $query;
-    }
-    public function getRating($id, $object)
-    {
-        $query = $this->db->table($this->table)
-            ->select('sum(rating) as rating')
+            ->select('comment')
+            ->join('rating', 'rating.id = comment.rating_id')
             ->where($object, $id)
             ->get();
         return $query;
     }
-
-    public function getUserTotal($id, $object)
+    public function getUserComment($user_id, $object, $object_id)
     {
         $query = $this->db->table($this->table)
-            ->select('COUNT(user_id) as userTotal')
-            ->where($object, $id)
+            ->select('comment')
+            ->join('rating', 'rating.id = comment.rating_id')
+            ->where('rating.user_id', $user_id)
+            ->where('rating.' + $object, $object_id)
             ->get();
         return $query;
     }
-
-    public function getUserRating($user_id, $object, $object_id)
+    public function addComment($rating_id, $comment)
     {
-        $query = $this->db->table($this->table)
-            ->select('rating,updated_date')
-            ->where('user_id', $user_id)
-            ->where($object, $object_id)
-            ->get();
+        $query = $this->db->table($this->table)->insert(['comment.rating_id' => $rating_id, 'comment.comment' => $comment]);
         return $query;
-    }
-
-
-    public function check($user_id, $object, $object_id)
-    {
-        $query = $this->db->table($this->table)
-            ->select('sum(rating) as rating')
-            ->where('user_id', $user_id)
-            ->where($object, $object_id)
-            ->get();
-        return $query;
-    }
-
-    public function updateAtractionRating($data, $user_id, $object, $object_id)
-    {
-        $query = $this->db->table($this->table)
-            ->update($data, [$this->user_id => $user_id, $object => $object_id]);
-        return $query;
-    }
-
-    public function addRating($data)
-    {
-        $query = $this->db->table($this->table)->insert($data);
-        return $query;
-    }
-    public function getComment($object, $object_id)
-    {
-        // $query = $this->db->table($this->table)
-        //     ->select('comment')
-        //     ->where($object, $id)
-        //     ->get();
-        // return $query;
     }
 }

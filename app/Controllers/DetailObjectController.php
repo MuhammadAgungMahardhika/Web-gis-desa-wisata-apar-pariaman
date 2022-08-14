@@ -11,7 +11,7 @@ class DetailObjectController extends BaseController
     protected $title =  'List Object | Tourism Village';
     public function __construct()
     {
-        $this->modelReview = new \App\Models\reviewModel();
+        $this->modelReview = new \App\Models\ratingModel();
         $this->modelApar = new \App\Models\aparModel();
         $this->modelAtraction = new \App\Models\atractionModel();
         $this->modelEvent = new \App\Models\eventModel();

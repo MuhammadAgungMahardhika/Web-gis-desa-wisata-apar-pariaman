@@ -10,8 +10,8 @@ class RatingReviewController extends BaseController
     protected $modelComment;
     public function __construct()
     {
-        $this->modelReview = new \App\Models\reviewModel();
-        $this->modelComment = new \App\Models\commentModel();
+        $this->modelReview = new \App\Models\ratingModel();
+        $this->modelComment = new \App\Models\reviewModel();
     }
     public function rating_atraction()
     {
