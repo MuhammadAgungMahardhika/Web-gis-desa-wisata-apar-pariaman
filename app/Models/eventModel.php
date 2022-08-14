@@ -92,7 +92,7 @@ class eventModel extends Model
         $query = $this->db->table($this->table)
             ->distinct()
             ->select("{$columns},{$coords},{$geom_area}")
-            ->join('review_atraction', 'review_atraction.event_id = event.id')
+            ->join('rating', 'rating.event_id = event.id')
             ->where('rating', $rate)
             ->get();
         return $query;
