@@ -3,7 +3,7 @@
     <div class="card-header text-center">
         <h4 class="card-title">Rating and Review</h4>
         <?php if (logged_in() == true) : ?>
-            <form class="form form-vertical" id="formReview" method="POST" onsubmit="addComment('<?= $url ?>')">
+            <form class="form form-vertical" id="formReview" method="POST">
                 <div class="form-body">
                     <div class="star-containter mb-3">
                         <i class="fa-solid fa-star fs-5" id="star-1" onclick="setRating('1');"></i>
@@ -33,14 +33,7 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover mb-0" id="reviews">
-                <tbody>
-                    <tr>
-                        <td>
-                            <p class="mb-0">Nama Akun</p>
-                            <p class="fw-light">2022-07-12</p>
-                            <p class="fw-bold">Rerum sed consectetur.</p>
-                        </td>
-                    </tr>
+                <tbody id="commentBody">
                     <tr>
                         <td>
                             <p class="mb-0">Nama Akun 2</p>
@@ -54,6 +47,22 @@
     </div>
 </div>
 <script>
+    $("#formReview").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: base_url + "/" + "review" + "/" + "comment_" + url,
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(response) {
+
+                document.getElementById("formReview").reset();
+                console.log(response)
+                $('#commentBody').prepend(`<tr><td><p class="mb-0">haha</p><p class="fw-light">2022-07-12</p><p class="fw-bold">Rerum sed consectetur.</p></td></tr>`);
+            }
+        });
+    });
+
     function setRating(val) {
         <?php if (logged_in() == true) : ?>
             let urlNow = '<?= $url ?>'

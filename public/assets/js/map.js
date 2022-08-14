@@ -847,19 +847,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
 
     function addComment(url){
         return alert(base_url + "/" + "review" + "/" + "comment_"+ url)
-        $("#formReview").submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: base_url + "/" + "review" + "/" + "comment_"+ url,
-                method: "POST",
-                data: $(this).serialize(),  
-                dataType: "json",           
-                success: function(response) {               
-                document.getElementById("formReview").reset();
-                // $('#status').html(response);              
-                }
-            });
-        });
+       
     }
     
 

@@ -40,7 +40,7 @@ class RatingReviewController extends BaseController
     public function comment_atraction()
     {
         $user_id = $this->request->getPOST('user_id');
-        $atraction_id = $this->request->getPOST('atraction_id');
+        $atraction_id = $this->request->getPOST('object_id');
         $comment = $this->request->getPOST('comment');
 
         $rating_id = $this->modelReview->getRatingId($user_id, 'atraction_id', $atraction_id)->getRow();
@@ -85,7 +85,7 @@ class RatingReviewController extends BaseController
     public function comment_event()
     {
         $user_id = $this->request->getPOST('user_id');
-        $event_id = $this->request->getPOST('event_id');
+        $event_id = $this->request->getPOST('object_id');
         $comment = $this->request->getPOST('comment');
 
         $rating_id = $this->modelReview->getRatingId($user_id, 'event_id', $event_id)->getRow();
