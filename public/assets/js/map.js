@@ -408,7 +408,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             userMarker.setMap(null)
             userMarker = null
         }
-       
     }
     //wide the map and remove the panel list
     function togglePanelList() {
@@ -570,7 +569,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             }
         });
     }
-    //function search nearby
     function setNearby(data,url) {
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
         setSupportSliderToZero()
@@ -650,7 +648,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
    function hideObjectArroundPanel(){
     $('#rowObjectArround').css("display", "none")
    }
-    // show object on map
+    // search fitur, show list object on map
     function showObject(object, id = null) {
         let url
         if (id != null) {
@@ -722,7 +720,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             }
         });
     }
-      // Show atraction on map when name is match
+      // search fitur, Show object on map by name
      function getObjectByName(val = null,url) {
         let name = val
         if (!name) {
@@ -760,7 +758,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             }
         });
     }
-     // Show atraction on map when rate is match
+     // search fitur, show object on map by rate
       function getObjectByRate(val,url) {
         let urlNow
         $('#rowObjectArround').css("display", "none")
@@ -845,9 +843,39 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
     }
 
-    function addComment(url){
-        return alert(base_url + "/" + "review" + "/" + "comment_"+ url)
-       
+    function setRating(user_id, object_id, val, url) {
+        let urlN = base_url+ "/"+"review" + "/" + url;
+        let data = {'user_id': user_id,'rating': val}
+        if (url == 'atraction') {data.atraction_id = object_id} 
+        else if (url == 'event') {data.event_id = object_id}
+        $.ajax({
+            url: urlN,
+            method: "post",
+            data: data,
+            dataType: "json",
+            success: function(response) {
+                if (response) {
+                    let text
+                    currentObjectRating()
+                    setStar(val)
+                    if (val <= 3) {text = 'Thanks for rated , We will imporove it!'} 
+                    else {text = 'Thanks for rated, Hope you enjoy it!'}
+                    return Swal.fire({
+                        text: text,
+                        icon: 'success',
+                        showClass: {popup: 'animate__animated animate__fadeInUp'},
+                        timer: 5000,
+                        confirmButtonText: 'Oke'
+                    })
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
     }
+    
+
     
 

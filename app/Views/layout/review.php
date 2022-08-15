@@ -6,11 +6,11 @@
             <form class="form form-vertical" id="formReview" method="POST">
                 <div class="form-body">
                     <div class="star-containter mb-3">
-                        <i class="fa-solid fa-star fs-5" id="star-1" onclick="setRating('1');"></i>
-                        <i class="fa-solid fa-star fs-5" id="star-2" onclick="setRating('2');"></i>
-                        <i class="fa-solid fa-star fs-5" id="star-3" onclick="setRating('3');"></i>
-                        <i class="fa-solid fa-star fs-5" id="star-4" onclick="setRating('4');"></i>
-                        <i class="fa-solid fa-star fs-5" id="star-5" onclick="setRating('5');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-1" onclick="setRating('<?= user()->id ?>','<?= $objectData->id; ?>','1','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-2" onclick="setRating('<?= user()->id ?>','<?= $objectData->id; ?>','2','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-3" onclick="setRating('<?= user()->id ?>','<?= $objectData->id; ?>','3','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-4" onclick="setRating('<?= user()->id ?>','<?= $objectData->id; ?>','4','<?= $url ?>');"></i>
+                        <i class="fa-solid fa-star fs-5" id="star-5" onclick="setRating('<?= user()->id ?>','<?= $objectData->id; ?>','5','<?= $url ?>');"></i>
                         <p class="card-text" id="rateText"></p>
                     </div>
                     <div class="col-12 mb-3">
@@ -54,6 +54,7 @@
             success: function(response) {
                 if (response) {
                     for (i in response) {
+                        console.log(response)
                         $('#commentBody').prepend(`<tr><td><p class="mb-0">${response[i].name}</p><p class="fw-light">${response[i].date}</p><p class="fw-bold">${response[i].comment}</p></td></tr>`);
                     }
                 }
@@ -73,51 +74,4 @@
             }
         });
     });
-
-    function setRating(val) {
-        <?php if (logged_in() == true) : ?>
-            let url = "<?= base_url('review') ?>" + "/" + urlNow;
-            let data = {
-                'user_id': '<?= user()->id ?>',
-                'rating': val
-            }
-            if (urlNow == 'atraction') {
-                data.atraction_id = '<?= $objectData->id; ?>'
-            } else if (urlNow == 'event') {
-                data.event_id = '<?= $objectData->id; ?>'
-            }
-            $.ajax({
-                url: url,
-                method: "post",
-                data: data,
-                dataType: "json",
-                success: function(response) {
-                    if (response) {
-                        let text
-                        currentObjectRating()
-                        setStar(val)
-                        if (val <= 3) {
-                            text = 'Thanks for rated , We will imporove it!'
-                        } else {
-                            text = 'Thanks for rated, Hope you enjoy it!'
-                        }
-                        return Swal.fire({
-                            text: text,
-                            icon: 'success',
-                            showClass: {
-                                popup: 'animate__animated animate__fadeInUp'
-                            },
-                            timer: 5000,
-                            confirmButtonText: 'Oke'
-                        })
-
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" +
-                        xhr.responseText + "\n" + thrownError);
-                }
-            });
-        <?php endif; ?>
-    }
 </script>
