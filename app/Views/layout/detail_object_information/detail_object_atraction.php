@@ -8,7 +8,7 @@
 </tr>
 <tr>
     <td class="fw-bold">Ticket Price</td>
-    <td><?= $objectData->price; ?></td>
+    <td><?= $objectData->price; ?> IDR</td>
 </tr>
 
 <tr>

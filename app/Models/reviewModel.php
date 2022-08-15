@@ -10,12 +10,14 @@ class reviewModel extends Model
     protected $table = 'comment';
     protected $primaryKey = 'id';
 
-    public function getObjectComment($id, $object)
+    public function getObjectComment($object, $object_id)
     {
         $query = $this->db->table($this->table)
-            ->select('comment')
+            ->select('comment.comment,users.username as name , comment.created_at as date')
             ->join('rating', 'rating.id = comment.rating_id')
-            ->where($object, $id)
+            ->join('users', 'users.id = rating.user_id')
+            ->where($object, $object_id)
+            ->orderBy('comment.created_at', 'ASC')
             ->get();
         return $query;
     }

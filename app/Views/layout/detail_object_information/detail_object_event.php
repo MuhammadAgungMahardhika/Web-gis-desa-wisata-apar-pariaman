@@ -13,11 +13,11 @@
 </tr>
 <tr>
     <td class="fw-bold">Time</td>
-    <td>From : <?= $objectData->time_start; ?> Until : <?= $objectData->time_end; ?></td>
+    <td><?= $objectData->time_start; ?>-<?= $objectData->time_end; ?> WIB</td>
 </tr>
 <tr>
     <td class="fw-bold">Price</td>
-    <td><?= $objectData->price; ?></td>
+    <td><?= $objectData->price; ?> IDR</td>
 </tr>
 
 <tr>

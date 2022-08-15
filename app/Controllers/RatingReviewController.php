@@ -58,6 +58,13 @@ class RatingReviewController extends BaseController
             }
         }
     }
+    public function get_atraction_comment()
+    {
+        $object_id = $this->request->getVar('object_id');
+        $comment = $this->modelComment->getObjectComment('atraction_id', $object_id)->getResult();
+        return json_encode($comment);
+    }
+
     public function rating_event()
     {
         $data = $this->request->getPOST();
@@ -102,5 +109,11 @@ class RatingReviewController extends BaseController
                 return json_encode($addComment);
             }
         }
+    }
+    public function get_event_comment()
+    {
+        $object_id = $this->request->getVar('object_id');
+        $comment = $this->modelComment->getObjectComment('event_id', $object_id)->getResult();
+        return json_encode($comment);
     }
 }

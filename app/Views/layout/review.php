@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;" name="comment"></textarea>
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;" name="comment" required></textarea>
                             <label for="floatingTextarea">Leave a comment here</label>
                         </div>
                     </div>
@@ -27,45 +27,55 @@
                 </div>
             </form>
         <?php else : ?>
-            <p class="card-text">Please login as user to give your rating and reviews</p>
+            <p class="card-text">Please login as user to give your rating or reviews</p>
         <?php endif; ?>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover mb-0" id="reviews">
                 <tbody id="commentBody">
-                    <tr>
-                        <td>
-                            <p class="mb-0">Nama Akun 2</p>
-                            <p class="fw-light">2022-07-12</p>
-                            <p class="fw-bold">Rerum sed consectetur.</p>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 <script>
+    let urlNow = '<?= $url ?>'
+    getObjectComment()
+
+    function getObjectComment() {
+        $.ajax({
+            url: "<?= base_url() ?>" + "/" + "review" + "/" + "get_" + urlNow + "_comment",
+            method: "GET",
+            data: {
+                'object_id': '<?= $objectData->id ?>'
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response) {
+                    for (i in response) {
+                        $('#commentBody').prepend(`<tr><td><p class="mb-0">${response[i].name}</p><p class="fw-light">${response[i].date}</p><p class="fw-bold">${response[i].comment}</p></td></tr>`);
+                    }
+                }
+            }
+        });
+    }
     $("#formReview").submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: base_url + "/" + "review" + "/" + "comment_" + url,
+            url: "<?= base_url() ?>" + "/" + "review" + "/" + "comment_" + urlNow,
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(response) {
-
                 document.getElementById("formReview").reset();
-                console.log(response)
-                $('#commentBody').prepend(`<tr><td><p class="mb-0">haha</p><p class="fw-light">2022-07-12</p><p class="fw-bold">Rerum sed consectetur.</p></td></tr>`);
+                getObjectComment()
             }
         });
     });
 
     function setRating(val) {
         <?php if (logged_in() == true) : ?>
-            let urlNow = '<?= $url ?>'
             let url = "<?= base_url('review') ?>" + "/" + urlNow;
             let data = {
                 'user_id': '<?= user()->id ?>',
@@ -83,8 +93,24 @@
                 dataType: "json",
                 success: function(response) {
                     if (response) {
+                        let text
                         currentObjectRating()
                         setStar(val)
+                        if (val <= 3) {
+                            text = 'Thanks for rated , We will imporove it!'
+                        } else {
+                            text = 'Thanks for rated, Hope you enjoy it!'
+                        }
+                        return Swal.fire({
+                            text: text,
+                            icon: 'success',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInUp'
+                            },
+                            timer: 5000,
+                            confirmButtonText: 'Oke'
+                        })
+
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

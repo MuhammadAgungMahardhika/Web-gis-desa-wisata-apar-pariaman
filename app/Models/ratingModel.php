@@ -35,6 +35,7 @@ class ratingModel extends Model
         $query = $this->db->table($this->table)
             ->select('COUNT(user_id) as userTotal')
             ->where($object, $id)
+            ->where('rating!=', 'null')
             ->get();
         return $query;
     }

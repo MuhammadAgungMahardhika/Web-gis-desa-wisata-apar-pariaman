@@ -101,8 +101,10 @@ $routes->group('detail_object', function ($routes) {
 $routes->group('review', function ($routes) {
     $routes->post('atraction', 'RatingReviewController::rating_atraction');
     $routes->post('comment_atraction', 'RatingReviewController::comment_atraction');
+    $routes->get('get_atraction_comment', 'RatingReviewController::get_atraction_comment');
     $routes->post('event', 'RatingReviewController::rating_event');
     $routes->post('comment_event', 'RatingReviewController::comment_event');
+    $routes->get('get_event_comment', 'RatingReviewController::get_event_comment');
 });
 
 
