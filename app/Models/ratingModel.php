@@ -53,7 +53,7 @@ class ratingModel extends Model
     public function check($user_id, $object, $object_id)
     {
         $query = $this->db->table($this->table)
-            ->select('sum(rating) as rating')
+            ->select('rating.id')
             ->where('user_id', $user_id)
             ->where($object, $object_id)
             ->get();
@@ -71,13 +71,5 @@ class ratingModel extends Model
     {
         $query = $this->db->table($this->table)->insert($data);
         return $query;
-    }
-    public function getComment($object, $object_id)
-    {
-        // $query = $this->db->table($this->table)
-        //     ->select('comment')
-        //     ->where($object, $id)
-        //     ->get();
-        // return $query;
     }
 }

@@ -22,7 +22,7 @@ class RatingReviewController extends BaseController
         if ($user_id && $atraction_id) {
             $check = $this->modelReview->check($user_id, 'atraction_id', $atraction_id)->getRow();
             // check rating alredy exist or not // if exist update // if not insert
-            if ($check->rating != null) {
+            if ($check) {
                 date_default_timezone_set('Asia/Jakarta');
                 $data['updated_date'] =  date('Y-m-d H:i:s');
                 $updateRating = $this->modelReview->updateAtractionRating($data, $user_id, 'atraction_id', $atraction_id);
@@ -67,7 +67,7 @@ class RatingReviewController extends BaseController
         if ($user_id && $event_id) {
             $check = $this->modelReview->check($user_id, 'event_id', $event_id)->getRow();
             // check rating alredy exist or not // if exist update // if not insert
-            if ($check->rating != null) {
+            if ($check) {
                 date_default_timezone_set('Asia/Jakarta');
                 $data['updated_date'] =  date('Y-m-d H:i:s');
                 $updateRating = $this->modelReview->updateAtractionRating($data, $user_id, 'event_id', $event_id);
