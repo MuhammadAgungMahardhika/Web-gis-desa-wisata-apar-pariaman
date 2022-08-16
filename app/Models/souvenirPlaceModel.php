@@ -85,7 +85,14 @@ class souvenirPlaceModel extends Model
               * sin( radians( ST_Y(ST_CENTROID(geom)) ) )
             )
           )";
-        $columns = "{$this->table}.id,{$this->table}.name";
+        $columns = "
+          {$this->table}.id,
+          {$this->table}.name,
+          {$this->table}.owner,
+          {$this->table}.open,
+          {$this->table}.close,
+          {$this->table}.contact_person,
+          {$this->table}.description";
         $query = $this->db->table($this->table)
             ->select("{$columns},{$jarak} as jarak,{$coords},{$geom_area}")
             ->having(['jarak <=' => $radiusnew])->get();

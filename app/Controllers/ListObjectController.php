@@ -116,52 +116,72 @@ class ListObjectController extends BaseController
     {
         if ($id) {
             $objectData = $this->modelSouvenir->getSouvenirPlace($id)->getResult();
+            $galleryData = $this->modelSouvenir->getGallery($id)->getResult();
+            $productData =  $this->modelSouvenir->getProduct($id)->getResult();
+            $data['objectData'] = $objectData;
+            $data['url'] = 'souvenir_place';
+            $data['galleryData'] = $galleryData;
+            $data['productData'] = $productData;
         } else {
             $objectData = $this->modelSouvenir->getSouvenirPlaces();
+            $data = [
+                'objectData' => $objectData,
+                'url' => 'souvenir_place'
+            ];
         }
-        $data = [
-            'objectData' => $objectData,
-            'url' => 'souvenir_place'
-        ];
         return json_encode($data);
     }
     public function culinary_place($id = null)
     {
         if ($id) {
             $objectData = $this->modelCulinary->getCulinaryPlace($id)->getResult();
+            $galleryData = $this->modelCulinary->getGallery($id)->getResult();
+            $menuData =  $this->modelCulinary->getMenu($id)->getResult();
+            $data['objectData'] = $objectData;
+            $data['url'] = 'culinary_place';
+            $data['galleryData'] = $galleryData;
+            $data['menuData'] = $menuData;
         } else {
             $objectData = $this->modelCulinary->getCulinaryPlaces();
+            $data = [
+                'objectData' => $objectData,
+                'url' => 'culinary_place'
+            ];
         }
-        $data = [
-            'objectData' => $objectData,
-            'url' => 'culinary_place'
-        ];
         return json_encode($data);
     }
     public function worship_place($id = null)
     {
         if ($id) {
             $objectData = $this->modelWorship->getWorshipPlace($id)->getResult();
+            $galleryData = $this->modelWorship->getGallery($id)->getResult();
+            $data['objectData'] = $objectData;
+            $data['url'] = 'worship_place';
+            $data['galleryData'] = $galleryData;
         } else {
             $objectData = $this->modelWorship->getWorshipPlaces();
+            $data = [
+                'objectData' => $objectData,
+                'url' => 'worship_place'
+            ];
         }
-        $data = [
-            'objectData' => $objectData,
-            'url' => 'worship_place'
-        ];
         return json_encode($data);
     }
     public function facility($id = null)
     {
         if ($id) {
             $objectData = $this->modelFacility->getFacility($id)->getResult();
+            $galleryData = $this->modelFacility->getGallery($id)->getResult();
+            $data['objectData'] = $objectData;
+            $data['url'] = 'facility';
+            $data['galleryData'] = $galleryData;
         } else {
             $objectData = $this->modelFacility->getFacilities();
+            $data = [
+                'objectData' => $objectData,
+                'url' => 'facility'
+            ];
         }
-        $data = [
-            'objectData' => $objectData,
-            'url' => 'facility'
-        ];
         return json_encode($data);
     }
 

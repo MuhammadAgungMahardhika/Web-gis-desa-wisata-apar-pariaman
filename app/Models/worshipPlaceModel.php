@@ -78,7 +78,15 @@ class worshipPlaceModel extends Model
               * sin( radians( ST_Y(ST_CENTROID(geom)) ) )
             )
           )";
-        $columns = "{$this->table}.id,{$this->table}.name";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table}.category,
+        {$this->table}.open,
+        {$this->table}.close,
+        {$this->table}.building_size,
+        {$this->table}.capacity,
+        {$this->table}.description";
         $query = $this->db->table($this->table)
             ->select("{$columns},{$jarak} as jarak,{$coords},{$geom_area}")
             ->having(['jarak <=' => $radiusnew])->get();

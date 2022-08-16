@@ -55,6 +55,61 @@
                 </div>
             </div>
         </div>
+        <!--Basic Modal -->
+        <div class="modal fade text-left" id="supportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="supportTitle"></h5>
+                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="supportData">
+                        </div>
+                        <div id="supportGallery">
+                            <div class="card-header">
+                                <h5 class="card-title text-center">photo gallery</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="carouselSupport" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+                                        <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class=""></li>
+                                        <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class=""></li>
+                                    </ol>
+                                    <div class="carousel-inner" id="carouselSupportInner">
+                                        <!-- <div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>
+                                        <div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>
+                                        <div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div> -->
+                                    </div>
+                                    <a class=" carousel-control-prev" href="#carouselSupport" role="button" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselSupport" role="button" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Close</span>
+                        </button>
+                        <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Accept</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </section>

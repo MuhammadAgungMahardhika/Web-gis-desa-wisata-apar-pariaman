@@ -86,6 +86,36 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         objectMarker.addListener('click', () => {openInfoWindow(objectMarker, infoMarkerData(data,url))}) //open infowindow when click
         openInfoWindow(objectMarker, infoMarkerData(data,url))
     }
+
+    function showSupportModal(data,url){
+        let id = data.id
+        $.ajax({
+            url: base_url + "/" + "list_object" + "/" + url + "/" + id,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                let data = response.objectData[0]
+                let gallery = response.galleryData
+                let menu = response.menuData
+                $('#supportTitle').html(data.name)
+                $('#supportData').html(
+                `<tr><td class="fw-bold">Owner </td><td> ${data.owner}</td></tr>
+                <tr><td class="fw-bold">Open</td><td> ${data.open}</td></tr>
+                <tr><td class="fw-bold">Close</td><td> ${data.close}</td></tr>
+                <tr><td class="fw-bold">Contact person</td><td> ${data.contact_person}</td></tr>
+                <tr><td class="fw-bold">Description</td></tr>
+                <tr><td> ${data.description}</td></tr>`)
+                $('#carouselSupportInner').html(`<div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>`)
+                for(i in gallery){
+                    $('#carouselSupportInner').append(`<div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>`)
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
     //loping all marker
     function loopingAllMarker(datas,url) {
         showPanelList(datas,url) // show list panel
@@ -254,7 +284,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 let name = datas[i].name
                 let lat = datas[i].lat
                 let lng = datas[i].lng
-                listPanel.push(`<tr><td>${i+1}</td><td>${name} </td><td class="text-center"><button title="Info on map" onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button title="Route" onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button></td></tr>`)
+                listPanel.push(`<tr><td>${i+1}</td><td>${name} </td><td class="text-center"><button title="Info on map" onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button title="Route" onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button>${(() => {if (url != 'atraction' && url != 'event') {return` <button title="Route" onclick="showSupportModal(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#supportModal"><i class="fa fa-marker fa-xs"></i></button>`}else{return ''}})()}</td></tr>`)
             }
             if(url=='atraction'){
                 $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">List atraction</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
