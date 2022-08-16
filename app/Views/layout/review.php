@@ -53,8 +53,8 @@
             dataType: "json",
             success: function(response) {
                 if (response) {
+                    $('#commentBody').html('')
                     for (i in response) {
-                        console.log(response)
                         $('#commentBody').prepend(`<tr><td><p class="mb-0">${response[i].name}</p><p class="fw-light">${response[i].date}</p><p class="fw-bold">${response[i].comment}</p></td></tr>`);
                     }
                 }
