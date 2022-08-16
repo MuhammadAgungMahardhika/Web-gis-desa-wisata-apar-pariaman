@@ -99,12 +99,14 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 let menu = response.menuData
                 $('#supportTitle').html(data.name)
                 $('#supportData').html(
-                `<tr><td class="fw-bold">Owner </td><td> ${data.owner}</td></tr>
-                <tr><td class="fw-bold">Open</td><td> ${data.open}</td></tr>
-                <tr><td class="fw-bold">Close</td><td> ${data.close}</td></tr>
-                <tr><td class="fw-bold">Contact person</td><td> ${data.contact_person}</td></tr>
-                <tr><td class="fw-bold">Description</td></tr>
-                <tr><td> ${data.description}</td></tr>`)
+                `${(() => {if (data.owner){return`<tr><td class="fw-bold">owner </td><td>: ${data.owner}</td></tr>`}else{return ''}})()}
+                ${(() => {if (data.emloye) {return`<tr><td class="fw-bold">employe</td><td>: ${data.employe}</td></tr>`}else{return ''}})()}
+                <tr><td class="fw-bold">open</td><td>: ${data.open}</td></tr>
+                <tr><td class="fw-bold">close</td><td>: ${data.close}</td></tr>
+                ${(() => {if (data.contact_person) {return`<tr><td class="fw-bold">contact</td><td>: ${data.contact_person}</td></tr>`}else{return ''}})()}
+                ${(() => {if (data.building_size) {return`<tr><td class="fw-bold">building size</td><td>: ${data.building_size}</td></tr>`}else{return ''}})()}
+                ${(() => {if (data.capacity) {return`<tr><td class="fw-bold">capacity</td><td>: ${data.capacity}</td></tr>`}else{return ''}})()}
+                <tr><td class="fw-bold">description</td><td>: ${data.description}</td></tr>`)
                 $('#carouselSupportInner').html(`<div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>`)
                 for(i in gallery){
                     $('#carouselSupportInner').append(`<div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>`)

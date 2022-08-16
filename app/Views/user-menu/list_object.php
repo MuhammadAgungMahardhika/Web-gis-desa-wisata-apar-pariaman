@@ -68,12 +68,14 @@
                     <div class="modal-body">
                         <div id="supportData">
                         </div>
-                        <div id="supportGallery">
-                            <div class="card-header">
-                                <h5 class="card-title text-center">photo gallery</h5>
+                        <div id="supportGallery" class="my-2">
+                            <div>
+                                <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#carouselSupport" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    show photo gallery
+                                </a>
                             </div>
-                            <div class="card-body">
-                                <div id="carouselSupport" class="carousel slide" data-ride="carousel">
+                            <div class="card-body m-0">
+                                <div id="carouselSupport" class="collapse carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
                                         <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class=""></li>
@@ -93,7 +95,12 @@
                                         <span class="visually-hidden">Next</span>
                                     </a>
                                 </div>
+
                             </div>
+
+
+
+
                         </div>
                     </div>
                     <div class="modal-footer">
