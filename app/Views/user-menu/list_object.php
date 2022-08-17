@@ -68,17 +68,14 @@
                         <div id="supportData">
                         </div>
                         <div id="supportGallery" class="my-2">
-                            <div>
-                                <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#carouselSupport" role="button" aria-expanded="false" aria-controls="carouselSupport">
-                                    show photo gallery
-                                </a>
+                            <div class="text-center">
+                                <h6 class="card-title" aria-expanded="false" aria-controls="carouselSupport">
+                                    PHOTOS
+                                </h6>
                             </div>
                             <div class="card-body m-0">
-                                <div id="carouselSupport" class="collapse carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-                                        <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class=""></li>
-                                        <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class=""></li>
+                                <div id="carouselSupport" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators" id="carouselSupportIndicator">
                                     </ol>
                                     <div class="carousel-inner" id="carouselSupportInner">
 

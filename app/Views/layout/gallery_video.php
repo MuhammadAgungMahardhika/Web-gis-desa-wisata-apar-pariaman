@@ -19,18 +19,18 @@
                         </div>
                         <div class="modal-body">
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <?php $no = 0; ?>
                                 <ol class="carousel-indicators">
-                                    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-                                    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class=""></li>
-                                    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class=""></li>
+                                    <?php foreach ($galleryData as $gallery) : ?>
+                                        <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= esc($no); ?>" class="<?php if ($no == 0) echo 'active'; ?>"></li>
+                                        <?php $no++; ?>
+                                    <?php endforeach; ?>
                                 </ol>
                                 <div class="carousel-inner">
                                     <!-- List gallery -->
                                     <?php $no = 0; ?>
                                     <?php foreach ($galleryData as $gallery) : ?>
-                                        <div class="carousel-item <?php if ($no == 0) {
-                                                                        echo 'active';
-                                                                    } ?>">
+                                        <div class="carousel-item <?php if ($no == 0) echo 'active'; ?>">
                                             <img src="<?= base_url('assets/images/apar'); ?>/<?= $gallery->url; ?>" class="d-block w-100" alt="">
                                         </div>
                                         <?php $no++; ?>

@@ -114,9 +114,11 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 ${(() => {if (data.description) {return`<tr><td class="fw-bold">description</td><td>: ${data.description}</td></tr>`}else{return ''}})()}
                 `)
                 if(gallery.length != 0){
+                    $('#carouselSupportIndicator').html('')
                     $('#carouselSupportInner').html('')
                     for(i in gallery){
-                        $('#carouselSupportInner').append(`<div class="carousel-item ${(() => {if (no==0){return`active`}else{return ''}})()}"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
+                        $('#carouselSupportIndicator').append(`<li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${no}" class="${(() => {if (no==0){return`active`}else{return ''}})()}"></li>`)
+                        $('#carouselSupportInner').append(`<div class="carousel-item ${(()=>{if(no==0){return`active`}else{return ''}})()}"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
                         no++
                     }
                 }
