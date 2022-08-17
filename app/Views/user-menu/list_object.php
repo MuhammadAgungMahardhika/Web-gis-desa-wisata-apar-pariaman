@@ -69,7 +69,7 @@
                         </div>
                         <div id="supportGallery" class="my-2">
                             <div>
-                                <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#carouselSupport" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#carouselSupport" role="button" aria-expanded="false" aria-controls="carouselSupport">
                                     show photo gallery
                                 </a>
                             </div>

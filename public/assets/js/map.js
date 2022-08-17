@@ -94,6 +94,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             method: "get",
             dataType: "json",
             success: function(response) {
+                let no = 0
                 let data = response.objectData[0]
                 let gallery = response.galleryData
                 let menu = response.menuData
@@ -113,14 +114,15 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 ${(() => {if (data.description) {return`<tr><td class="fw-bold">description</td><td>: ${data.description}</td></tr>`}else{return ''}})()}
                 `)
                 if(gallery.length != 0){
-                    $('#carouselSupportInner').html(`<div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
+                    $('#carouselSupportInner').html('')
                     for(i in gallery){
-                        $('#carouselSupportInner').append(`<div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
+                        $('#carouselSupportInner').append(`<div class="carousel-item ${(() => {if (no==0){return`active`}else{return ''}})()}"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
+                        no++
                     }
                 }
-                // else{
-                //     $('#carouselSupportInner').html(`<div class="carousel-item text-center active">no photo found!</div>`)
-                // }
+                else{
+                    $('#carouselSupportInner').html(`<div class="carousel-item text-center active">no photo found!</div>`)
+                }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" +
