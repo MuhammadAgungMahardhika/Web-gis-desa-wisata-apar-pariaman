@@ -51,7 +51,6 @@
             </div>
             <div class="row card shadow">
                 <div class="overflow-auto" id="panel">
-
                 </div>
             </div>
         </div>
@@ -82,11 +81,9 @@
                                         <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class=""></li>
                                     </ol>
                                     <div class="carousel-inner" id="carouselSupportInner">
-                                        <!-- <div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>
-                                        <div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>
-                                        <div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div> -->
+
                                     </div>
-                                    <a class=" carousel-control-prev" href="#carouselSupport" role="button" data-bs-slide="prev">
+                                    <a class="carousel-control-prev" href="#carouselSupport" role="button" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Previous</span>
                                     </a>
@@ -95,22 +92,13 @@
                                         <span class="visually-hidden">Next</span>
                                     </a>
                                 </div>
-
                             </div>
-
-
-
-
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
                         <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
                             <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Accept</span>
+                            <span class="d-none d-sm-block">Close</span>
                         </button>
                     </div>
                 </div>

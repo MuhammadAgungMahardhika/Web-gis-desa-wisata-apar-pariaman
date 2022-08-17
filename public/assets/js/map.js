@@ -79,7 +79,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             },
             icon: checkIcon(url),
             opacity: 0.8,
-            title: "Info Marker",
+            title: "info marker",
             map: map,
         })
         markerArray.push(objectMarker)
@@ -97,20 +97,30 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 let data = response.objectData[0]
                 let gallery = response.galleryData
                 let menu = response.menuData
+                let product = response.productData
+                console.log(data)
+                console.log(gallery)
                 $('#supportTitle').html(data.name)
-                $('#supportData').html(
-                `${(() => {if (data.owner){return`<tr><td class="fw-bold">owner </td><td>: ${data.owner}</td></tr>`}else{return ''}})()}
+                $('#supportData').html
+                (`
+                ${(() => {if (data.owner){return`<tr><td class="fw-bold">owner </td><td>: ${data.owner}</td></tr>`}else{return ''}})()}
                 ${(() => {if (data.emloye) {return`<tr><td class="fw-bold">employe</td><td>: ${data.employe}</td></tr>`}else{return ''}})()}
-                <tr><td class="fw-bold">open</td><td>: ${data.open}</td></tr>
-                <tr><td class="fw-bold">close</td><td>: ${data.close}</td></tr>
+                ${(() => {if (data.open) {return`<tr><td class="fw-bold">open</td><td>: ${data.open}</td></tr>`}else{return ''}})()}
+                ${(() => {if (data.close) {return`<tr><td class="fw-bold">close</td><td>: ${data.close}</td></tr>`}else{return ''}})()}
                 ${(() => {if (data.contact_person) {return`<tr><td class="fw-bold">contact</td><td>: ${data.contact_person}</td></tr>`}else{return ''}})()}
                 ${(() => {if (data.building_size) {return`<tr><td class="fw-bold">building size</td><td>: ${data.building_size}</td></tr>`}else{return ''}})()}
                 ${(() => {if (data.capacity) {return`<tr><td class="fw-bold">capacity</td><td>: ${data.capacity}</td></tr>`}else{return ''}})()}
-                <tr><td class="fw-bold">description</td><td>: ${data.description}</td></tr>`)
-                $('#carouselSupportInner').html(`<div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>`)
-                for(i in gallery){
-                    $('#carouselSupportInner').append(`<div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>`)
+                ${(() => {if (data.description) {return`<tr><td class="fw-bold">description</td><td>: ${data.description}</td></tr>`}else{return ''}})()}
+                `)
+                if(gallery.length != 0){
+                    $('#carouselSupportInner').html(`<div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
+                    for(i in gallery){
+                        $('#carouselSupportInner').append(`<div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
+                    }
                 }
+                // else{
+                //     $('#carouselSupportInner').html(`<div class="carousel-item text-center active">no photo found!</div>`)
+                // }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" +
@@ -269,7 +279,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         let lng = data.lng
         let infoMarker
       
-        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => {if (url == 'event') {return`<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>`}else{return ''}})()}${(() => {if (url == 'atraction') {return`<div class="text-center mb-1">${status}</div>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" ><a role ="button" title ="Route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="Detail information"> <i class="fa fa-info"></i></a> ${(() => {if (url == 'atraction' || url == 'event'){return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="Object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
+        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => {if (url == 'event') {return`<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>`}else{return ''}})()}${(() => {if (url == 'atraction') {return`<div class="text-center mb-1">${status}</div>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" ><a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a> ${(() => {if (url == 'atraction' || url == 'event'){return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
         return infoMarker
     }
 
@@ -286,7 +296,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 let name = datas[i].name
                 let lat = datas[i].lat
                 let lng = datas[i].lng
-                listPanel.push(`<tr><td>${i+1}</td><td>${name} </td><td class="text-center"><button title="Info on map" onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button title="Route" onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button>${(() => {if (url != 'atraction' && url != 'event') {return` <button title="Route" onclick="showSupportModal(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#supportModal"><i class="fa fa-marker fa-xs"></i></button>`}else{return ''}})()}</td></tr>`)
+                listPanel.push(`<tr><td>${i+1}</td><td>${name} </td><td class="text-center"><button title="info on map" onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button title="route" onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button>${(() => {if (url != 'atraction' && url != 'event') {return` <button title="open object detail" onclick="showSupportModal(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#supportModal"><i class="fa fa-marker fa-xs"></i></button>`}else{return ''}})()}</td></tr>`)
             }
             if(url=='atraction'){
                 $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">List atraction</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
@@ -320,7 +330,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             },
             icon: checkIcon(url),
             opacity: 0.8,
-            title: "Info Object",
+            title: "info object",
             animation: google.maps.Animation.DROP,
             map: map,
         })
@@ -425,7 +435,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             userMarker = new google.maps.Marker({
                 position: location,
                 opacity: 0.8,
-                title: "Your Location",
+                title: "your location",
                 animation: google.maps.Animation.DROP,
                 draggable: false,
                 map: map,
@@ -653,7 +663,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     function hideLegend() {
         $('#legendPanel').remove()
         $('#legendButton').empty()
-        $('#legendButton').append('<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Legend" class="btn icon btn-primary mx-1" id="legend"  onclick="legend()"><span class="material-symbols-outlined">visibility</span></a>');
+        $('#legendButton').append('<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="show legend" class="btn icon btn-primary mx-1" id="legend"  onclick="legend()"><span class="material-symbols-outlined">visibility</span></a>');
     }
     // highlight current and manual location before click the button
     function highlightCurrentManualLocation() {
