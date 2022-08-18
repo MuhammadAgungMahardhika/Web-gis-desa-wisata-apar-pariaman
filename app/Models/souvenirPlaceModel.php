@@ -63,13 +63,13 @@ class souvenirPlaceModel extends Model
         return $query;
     }
 
-    public function getProduct($id)
-    {
-        $query = $this->db->table($this->table_product)->select('*')
-            ->join($this->table_detail_product, 'product_id = product.id')
-            ->where('souvenir_place_id', $id)->get();
-        return $query;
-    }
+    // public function getProduct($id)
+    // {
+    //     $query = $this->db->table($this->table_product)->select('*')
+    //         ->join($this->table_detail_product, 'product_id = product.id')
+    //         ->where('souvenir_place_id', $id)->get();
+    //     return $query;
+    // }
 
     public function getRadiusValue($lng, $lat, $radius)
     {

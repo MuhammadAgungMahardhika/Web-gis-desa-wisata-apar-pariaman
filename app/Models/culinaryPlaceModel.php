@@ -64,13 +64,13 @@ class culinaryPlaceModel extends Model
         $query = $this->db->table($this->table_gallery)->select('url')->where('culinary_place_id', $id)->get();
         return $query;
     }
-    public function getMenu($id)
-    {
-        $query = $this->db->table($this->table_menu)->select('*')
-            ->join($this->table_detail_menu, 'menu_id = menu.id')
-            ->where('culinary_place_id', $id)->get();
-        return $query;
-    }
+    // public function getMenu($id)
+    // {
+    //     $query = $this->db->table($this->table_menu)->select('*')
+    //         ->join($this->table_detail_menu, 'menu_id = menu.id')
+    //         ->where('culinary_place_id', $id)->get();
+    //     return $query;
+    // }
 
     public function getRadiusValue($lng, $lat, $radius)
     {

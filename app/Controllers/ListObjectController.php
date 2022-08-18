@@ -117,11 +117,11 @@ class ListObjectController extends BaseController
         if ($id) {
             $objectData = $this->modelSouvenir->getSouvenirPlace($id)->getResult();
             $galleryData = $this->modelSouvenir->getGallery($id)->getResult();
-            $productData =  $this->modelSouvenir->getProduct($id)->getResult();
+            // $productData =  $this->modelSouvenir->getProduct($id)->getResult();
             $data['objectData'] = $objectData;
             $data['url'] = 'souvenir_place';
             $data['galleryData'] = $galleryData;
-            $data['productData'] = $productData;
+            // $data['productData'] = $productData;
         } else {
             $objectData = $this->modelSouvenir->getSouvenirPlaces();
             $data = [
@@ -136,11 +136,11 @@ class ListObjectController extends BaseController
         if ($id) {
             $objectData = $this->modelCulinary->getCulinaryPlace($id)->getResult();
             $galleryData = $this->modelCulinary->getGallery($id)->getResult();
-            $menuData =  $this->modelCulinary->getMenu($id)->getResult();
+            // $menuData =  $this->modelCulinary->getMenu($id)->getResult();
             $data['objectData'] = $objectData;
             $data['url'] = 'culinary_place';
             $data['galleryData'] = $galleryData;
-            $data['menuData'] = $menuData;
+            // $data['menuData'] = $menuData;
         } else {
             $objectData = $this->modelCulinary->getCulinaryPlaces();
             $data = [

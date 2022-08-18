@@ -97,15 +97,15 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 let no = 0
                 let data = response.objectData[0]
                 let gallery = response.galleryData
-                let menu = response.menuData
-                let product = response.productData
-                console.log(data)
-                console.log(gallery)
+                // let menu = response.menuData
+                // let product = response.productData
+              
                 $('#supportTitle').html(data.name)
                 $('#supportData').html
                 (`
                 ${(() => {if (data.owner){return`<tr><td class="fw-bold">owner </td><td>: ${data.owner}</td></tr>`}else{return ''}})()}
                 ${(() => {if (data.emloye) {return`<tr><td class="fw-bold">employe</td><td>: ${data.employe}</td></tr>`}else{return ''}})()}
+                ${(() => {if (data.area_size) {return`<tr><td class="fw-bold">area size</td><td>: ${data.area_size} m<sup>2</sup></td></tr>`}else{return ''}})()}
                 ${(() => {if (data.open) {return`<tr><td class="fw-bold">open</td><td>: ${data.open}</td></tr>`}else{return ''}})()}
                 ${(() => {if (data.close) {return`<tr><td class="fw-bold">close</td><td>: ${data.close}</td></tr>`}else{return ''}})()}
                 ${(() => {if (data.contact_person) {return`<tr><td class="fw-bold">contact</td><td>: ${data.contact_person}</td></tr>`}else{return ''}})()}
@@ -283,7 +283,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         let lng = data.lng
         let infoMarker
       
-        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => {if (url == 'event') {return`<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>`}else{return ''}})()}${(() => {if (url == 'atraction') {return`<div class="text-center mb-1">${status}</div>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" ><a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a> ${(() => {if (url == 'atraction' || url == 'event'){return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
+        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => {if (url == 'event') {return`<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>`}else{return ''}})()}${(() => {if (url == 'atraction') {return`<div class="text-center mb-1">${status}</div>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" >${(() => {if (url == 'event' || url =='atraction') {return`<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>`}else{return ''}})()} ${(() => {if (url == 'atraction' || url == 'event'){return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
         return infoMarker
     }
 
