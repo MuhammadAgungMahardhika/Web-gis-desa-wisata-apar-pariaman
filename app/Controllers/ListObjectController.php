@@ -73,6 +73,17 @@ class ListObjectController extends BaseController
         ];
         return json_encode($data);
     }
+    public function atraction_by_category($category = null)
+    {
+        if ($category) {
+            $objectData = $this->modelAtraction->getAtractionByCategory($category)->getResult();
+        }
+        $data = [
+            'atData' => $objectData,
+            'url' => 'atraction'
+        ];
+        return json_encode($data);
+    }
 
     public function event($id = null)
     {

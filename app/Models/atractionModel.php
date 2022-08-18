@@ -8,12 +8,13 @@ use CodeIgniter\Model;
 class atractionModel extends Model
 {
     protected $table = 'atraction';
+    protected $table_category = 'category_atraction';
     protected $table_gallery = 'atraction_gallery';
 
     protected $primaryKey = 'atraction.id';
     protected $pk_gallery = 'atraction_gallery.id';
 
-    protected $allowedFields = ['name', 'status', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
+    protected $allowedFields = ['name', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
 
     public function getAtractions()
     {
@@ -22,7 +23,7 @@ class atractionModel extends Model
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
-        {$this->table}.status,
+        {$this->table_category}.category,
         {$this->table}.open,
         {$this->table}.close,
         {$this->table}.employe,
@@ -32,6 +33,7 @@ class atractionModel extends Model
 
         $query = $this->db->table($this->table)
             ->select("{$columns},{$coords},{$geom_area}")
+            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->get()->getResult();
         return $query;
     }
@@ -42,7 +44,7 @@ class atractionModel extends Model
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
-        {$this->table}.status,
+        {$this->table_category}.category,
         {$this->table}.open,
         {$this->table}.close,
         {$this->table}.employe,
@@ -52,6 +54,7 @@ class atractionModel extends Model
 
         $query = $this->db->table($this->table)
             ->select("{$columns},{$coords},{$geom_area}")
+            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->where($this->primaryKey, $id)
             ->get();
         return $query;
@@ -64,7 +67,7 @@ class atractionModel extends Model
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
-        {$this->table}.status,
+        {$this->table_category}.category,
         {$this->table}.open,
         {$this->table}.close,
         {$this->table}.employe,
@@ -74,6 +77,7 @@ class atractionModel extends Model
 
         $query = $this->db->table($this->table)
             ->select("{$columns},{$coords},{$geom_area}")
+            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->like('name', $name, 'both')
             ->get();
         return $query;
@@ -85,7 +89,7 @@ class atractionModel extends Model
         $columns = "
         {$this->table}.id,
         {$this->table}.name,
-        {$this->table}.status,
+        {$this->table_category}.category,
         {$this->table}.open,
         {$this->table}.close,
         {$this->table}.employe,
@@ -95,9 +99,32 @@ class atractionModel extends Model
 
         $query = $this->db->table($this->table)
             ->select("{$columns},{$coords},{$geom_area},ceil(avg(rating.rating)) as avg_rating")
+            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->join('rating', 'rating.atraction_id = atraction.id')
             ->groupBy('atraction.id')
             ->having("avg_rating = $rate")
+            ->get();
+        return $query;
+    }
+    public function getAtractionByCategory($category)
+    {
+        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
+        $columns = "
+        {$this->table}.id,
+        {$this->table}.name,
+        {$this->table_category}.category,
+        {$this->table}.open,
+        {$this->table}.close,
+        {$this->table}.employe,
+        {$this->table}.price,
+        {$this->table}.contact_person,
+        {$this->table}.description";
+
+        $query = $this->db->table($this->table)
+            ->select("{$columns},{$coords},{$geom_area}")
+            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
+            ->where('category_atraction.category=', $category)
             ->get();
         return $query;
     }
@@ -133,9 +160,10 @@ class atractionModel extends Model
               * sin( radians( ST_Y(ST_CENTROID(geom)) ) )
             )
           )";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.status";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table_category}.category";
         $query = $this->db->table($this->table)
             ->select("{$columns},{$jarak} as jarak,{$coords},{$geom_area}")
+            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->having(['jarak <=' => $radiusnew])->get();
         return $query;
     }

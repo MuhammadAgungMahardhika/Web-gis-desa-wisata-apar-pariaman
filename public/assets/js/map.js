@@ -257,14 +257,14 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     function infoMarkerData(data,url) {
         let id = data.id
         let name = data.name
-        let status = data.status
+        let category = data.category
         let dateStart = data.date_start
         // let dateEnd = data.date_end
         let lat = data.lat
         let lng = data.lng
         let infoMarker
       
-        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => {if (url == 'event') {return`<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>`}else{return ''}})()}${(() => {if (url == 'atraction') {return`<div class="text-center mb-1">${status}</div>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" >${(() => {if (url == 'event' || url =='atraction') {return`<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>`}else{return ''}})()} ${(() => {if (url == 'atraction' || url == 'event'){return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
+        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => {if (url == 'event') {return`<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>`}else{return ''}})()}${(() => {if (url == 'atraction') {return`<div class="text-center mb-1">${category}</div>`}else{return ''}})()}<div class="col-md text-center" id="infoWindowDiv" >${(() => {if (url == 'event' || url =='atraction') {return`<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>`}else{return ''}})()} ${(() => {if (url == 'atraction' || url == 'event'){return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >`}else{return ''}})()} </div>`
         return infoMarker
     }
 
@@ -880,6 +880,57 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         });
     }
     
+     // set object category with ajax when sidemenu by category is clicked
+    //  function setObjectByCategory() {
+    //     $.ajax({
+    //         url: base_url +"/"+"list_object"+"/"+ "atraction",
+    //         method: "get",
+    //         dataType: "json",
+    //         success: function(response) {
+    //             let listObject = []
+
+    //                 atData = response.atData
+    //                 console.log(atData)
+    //                 for (let i = 0; i < atData.length; i++) {
+    //                     let category = atData[i].category
+    //                     listObject.push(`<option>${category}</option>`)
+    //                 }
+    //                 return $('#categorySelect').html(`<option value="">Select category </option>${listObject}`)
+                
+
+    //         },
+    //         error: function(xhr, ajaxOptions, thrownError) {
+    //             alert(xhr.status + "\n" +
+    //                 xhr.responseText + "\n" + thrownError);
+    //         }
+    //     });
+    // }
+      // search fitur, Show object on map by name
+      function getObjectByCategory(val = null) {
+        let category = val
+        if (!category) {return}
+
+        $('#rowObjectArround').css("display", "none")
+        $.ajax({
+            url: base_url + "/" + "list_object"+ "/"+ "atraction_by_category" + "/" + category,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                setCenter({lat: latApar,lng: lngApar})
+                clearMarker()
+                clearRadius()
+                clearRoute()
+                atData = response.atData
+                atUrl = response.url
+                loopingAllMarker(atData, atUrl)
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
 
     
 

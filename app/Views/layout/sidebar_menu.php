@@ -29,10 +29,10 @@
                         </ul>
                     </li>
                     <li class="submenu-item sidebar-item has-sub ">
-                        <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search</span> </a>
+                        <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search by</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item sidebar-item has-sub">
-                                <a onclick="setObjectByName('atraction')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
+                                <a onclick="setObjectByName('atraction')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span>Name</span> </a>
                                 <ul class="submenu">
                                     <li class="submenu-item">
                                         <select onchange="getObjectByName(this.value,'atraction')" class="form-select" id="basicSelect">
@@ -42,7 +42,19 @@
                         </ul>
                     </li>
                     <li class="submenu-item sidebar-item has-sub">
-                        <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Rating</span> </a>
+                        <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span>Category</span> </a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <select onchange="getObjectByCategory(this.value)" class="form-select" id="categorySelect">
+                                    <option value="">Select category </option>
+                                    <option value="uniqe">uniqe</option>
+                                    <option value="ordinary">ordinary</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="submenu-item sidebar-item has-sub">
+                        <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span>Rating</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
                                 <div class="star-containter mb-3">
@@ -79,10 +91,10 @@
                 </ul>
             </li>
             <li class="submenu-item sidebar-item has-sub ">
-                <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search</span> </a>
+                <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search by</span> </a>
                 <ul class="submenu">
                     <li class="submenu-item sidebar-item has-sub">
-                        <a onclick="setObjectByName('event')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Name</span> </a>
+                        <a onclick="setObjectByName('event')" href="" class="sidebar-link"><i class="fa fa-compass"></i><span>Name</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
                                 <select onchange="getObjectByName(this.value,'event')" class="form-select" id="basicSelect2">
@@ -92,7 +104,7 @@
                 </ul>
             </li>
             <li class="submenu-item sidebar-item has-sub">
-                <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> By Rating</span> </a>
+                <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span>Rating</span> </a>
                 <ul class="submenu">
                     <li class="submenu-item">
                         <div class="star-containter mb-3">
