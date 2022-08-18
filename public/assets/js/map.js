@@ -73,10 +73,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     //show info on map
     function showInfoOnMap(data,url) {
         const objectMarker = new google.maps.Marker({
-            position: {
-                lat: parseFloat(data.lat),
-                lng: parseFloat(data.lng)
-            },
+            position: {lat: parseFloat(data.lat),lng: parseFloat(data.lng)},
             icon: checkIcon(url),
             opacity: 0.8,
             title: "info marker",
@@ -135,16 +132,14 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     //loping all marker
     function loopingAllMarker(datas,url) {
         showPanelList(datas,url) // show list panel
-        for (let i = 0; i < datas.length; i++) {addMarkerToMap(datas[i],url)} //looping all 
+        for (let i = 0; i < datas.length; i++) {addMarkerToMap(datas[i],url)} 
     }
     //user manual marker
     function manualLocation() {
         Swal.fire({
             text: 'Select your position on map',
             icon: 'success',
-            showClass: {
-                popup: 'animate__animated animate__fadeInUp'
-            },
+            showClass: {popup: 'animate__animated animate__fadeInUp'},
             timer: 1200,
             confirmButtonText: 'Oke'
         })
@@ -162,7 +157,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     function addMarkerGeom(geoJson, color,pass = null) {
         // Construct the polygon.
         const a = {type: 'Feature',geometry: geoJson}
-
         const geom = new google.maps.Data()
         geom.addGeoJson(a)
         geom.setStyle({
@@ -172,13 +166,8 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             fillOpacity: 0.3,
             clickable: false
         })
-      
-        if(!pass){
-            geomArray.push(geom)
-        }else{
-            geomNearby = geom
-        }
-        
+        if(!pass){geomArray.push(geom)}
+        else{geomNearby = geom}
         geom.setMap(map)
     
     }
@@ -192,8 +181,8 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         }
         
     }
+     // Construct the polygon.
     function addAparPolygon(geoJson, color, opacity) {
-        // Construct the polygon.
         const a = {type: 'Feature',geometry: geoJson}
         const geom = new google.maps.Data()
         geom.addGeoJson(a)
@@ -205,21 +194,15 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             clickable: false
         })
         geom.setMap(map)
-    
     }
    
     // move camera
-    function moveCamera(z = 17, h = 300, t = 30) {
-        map.moveCamera({
-            zoom: z,
-            heading: h,
-            tilt: t
-        })
+    function moveCamera(z = 16) {
+        map.moveCamera({ zoom: z})
     }
     // add callroute
     function calcRoute(lat, lng) {
         let destinationCord = {lat: lat,lng: lng}
-
         let directionsService = new google.maps.DirectionsService();
         if (!userPosition) {
             Swal.fire({
@@ -244,7 +227,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
 
         directionsService.route(request, function(response, status) {
             if (status == 'OK') {
-                directionsRenderer.setMap(map);
+                directionsRenderer.setMap(map)
                 directionsRenderer.setDirections(response)
             } else {
                 return Swal.fire({
@@ -259,11 +242,9 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
     // clear route
     function clearRoute(){
-        if(directionsRenderer){
-            return  directionsRenderer.setMap(null)
-        }
+        if(directionsRenderer){ return  directionsRenderer.setMap(null)}
     }
-
+    //check object marker icon
     function checkIcon(icon) {
         if (icon == 'atraction') {return icon = { url:  base_url+"/assets/images/marker-icon/marker-atraction.png"}}
         if (icon == 'event') {return icon = {url: base_url+"/assets/images/marker-icon/marker_ev.png"}} 
@@ -292,7 +273,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         $('#panel').css('max-height','40vh')
             let listPanel = []
             // if object is empty
-            if (datas.length==0){listPanel.push(`<tr colspan="3"><td></td><td class="text-center">Object not found !</td><td></td></tr>`)}
+            if (datas.length==0){listPanel.push(`<tr colspan="3"><td></td><td class="text-center">object not found!</td><td></td></tr>`)}
 
             for (let i = 0; i < datas.length; i++) {
                 let data = datas[i]
@@ -328,10 +309,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         let lng = parseFloat(data.lng)
         let geoJSON,color
         const objectMarker = new google.maps.Marker({
-            position: {
-                lat: lat,
-                lng: lng
-            },
+            position: {lat: lat,lng: lng},
             icon: checkIcon(url),
             opacity: 0.8,
             title: "info object",
@@ -369,11 +347,9 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     // clear object marker on map
     function clearMarker(pass=null){
             for (i in markerArray){markerArray[i].setMap(null);}
+            markerArray = []
             clearGeom()
-            markerArray = [];
-            if(!pass){
-                clearMarkerNearby()
-            }        
+            if(!pass){clearMarkerNearby()}        
     }
     function clearMarkerNearby(){
         if(markerNearby){
@@ -388,6 +364,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     // set center on map
     function setCenter(val){
         map.setCenter(val)
+        moveCamera()
     }
    
     //open infowindow
@@ -398,9 +375,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
      //close infowindow
     function clearInfoWindow(){
-        if(infoWindow){
-            infoWindow.close()
-        }
+        if(infoWindow){infoWindow.close()}
     }
     //CurrentLocation on Map
     function currentLocation() {
@@ -408,10 +383,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition
             ((position) => {
-                    const pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
+                    const pos = {lat: position.coords.latitude,lng: position.coords.longitude};
                     clearRadius()
                     clearRoute()
                     addUserMarkerToMap(pos);
@@ -455,11 +427,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             userMarker = null
         }
     }
-    //wide the map and remove the panel list
-    function togglePanelList() {
-        $('#list').toggle()
-    }
-
     //function radius 
     function radius(radius = null) {
         if (circle) {circle.setMap(null)}
@@ -475,9 +442,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         });
     }
     function clearRadius(){
-        if(circle){
-          return circle.setMap(null)
-        }
+        if(circle){ return circle.setMap(null)}
     }
     function clearSlider(){
         $('#atSlider').val("0")
@@ -697,11 +662,9 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     // search fitur, show list object on map
     function showObject(object, id = null) {
         let url
-        if (id != null) {
-            url = base_url + "/" +"list_object"+ "/"+ object + "/" + id
-        } else {
-            url = base_url + "/" +"list_object"+ "/"+ object
-        }
+        if (id != null) {url = base_url + "/" +"list_object"+ "/"+ object + "/" + id} 
+        else {url = base_url + "/" +"list_object"+ "/"+ object}
+
         $.ajax({
             url: url,
             method: "get",
@@ -769,15 +732,12 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
       // search fitur, Show object on map by name
      function getObjectByName(val = null,url) {
         let name = val
-        if (!name) {
-            return
-        }
+        if (!name) {return}
+
         let urlNow
-        if(url=='atraction'){
-            urlNow = "atraction_by_name"
-        }else if(url=='event'){
-            urlNow = "event_by_name"
-        }
+        if(url=='atraction'){urlNow = "atraction_by_name"}
+        else if(url=='event'){urlNow = "event_by_name"}
+
         $('#rowObjectArround').css("display", "none")
         $.ajax({
             url: base_url + "/" + "list_object"+ "/"+ urlNow + "/" + name,
@@ -808,11 +768,9 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
       function getObjectByRate(val,url) {
         let urlNow
         $('#rowObjectArround').css("display", "none")
-        if(url=='atraction'){
-            urlNow = "atraction_by_rate"
-        }else if(url =='event'){
-            urlNow ="event_by_rate"
-        }
+        if(url=='atraction'){urlNow = "atraction_by_rate"}
+        else if(url =='event'){urlNow ="event_by_rate"}
+        
         $.ajax({
             url: base_url + "/" + "list_object"+ "/"+ urlNow + "/" + val,
             method: "get",
