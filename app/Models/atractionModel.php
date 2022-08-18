@@ -93,15 +93,10 @@ class atractionModel extends Model
         {$this->table}.contact_person,
         {$this->table}.description";
 
-        // $avg_rating = 
-        // $this->db->table($this->table)
-        // ->select("ceil(avg(rating.rating)) as avg_rating")
-
         $query = $this->db->table($this->table)
-            ->distinct()
             ->select("{$columns},{$coords},{$geom_area},ceil(avg(rating.rating)) as avg_rating")
             ->join('rating', 'rating.atraction_id = atraction.id')
-            ->where('rating', $rate)
+            ->groupBy('atraction.id')
             ->having("avg_rating = $rate")
             ->get();
         return $query;

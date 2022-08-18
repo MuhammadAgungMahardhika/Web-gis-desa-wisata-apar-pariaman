@@ -90,10 +90,10 @@ class eventModel extends Model
         {$this->table}.description";
 
         $query = $this->db->table($this->table)
-            ->distinct()
-            ->select("{$columns},{$coords},{$geom_area}")
+            ->select("{$columns},{$coords},{$geom_area},ceil(avg(rating.rating)) as avg_rating")
             ->join('rating', 'rating.event_id = event.id')
-            ->where('rating', $rate)
+            ->groupBy('event.id')
+            ->having("avg_rating = $rate")
             ->get();
         return $query;
     }

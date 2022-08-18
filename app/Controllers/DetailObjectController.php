@@ -7,11 +7,11 @@ use App\Models\atractionModel;
 class DetailObjectController extends BaseController
 {
 
-    protected $modelReview, $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
+    protected $modelRating, $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
     protected $title =  'List Object | Tourism Village';
     public function __construct()
     {
-        $this->modelReview = new \App\Models\ratingModel();
+        $this->modelRating = new \App\Models\ratingModel();
         $this->modelApar = new \App\Models\aparModel();
         $this->modelAtraction = new \App\Models\atractionModel();
         $this->modelEvent = new \App\Models\eventModel();
@@ -31,9 +31,9 @@ class DetailObjectController extends BaseController
         if ($this->request->isAJAX()) {
             $user_id = $this->request->getGet('user_id');
             if ($id) {
-                $countRating = $this->modelReview->getRating($id, 'atraction_id')->getRow();
-                $userTotal = $this->modelReview->getUserTotal($id, 'atraction_id')->getRow();
-                $userRating = $this->modelReview->getUserRating($user_id, 'atraction_id', $id)->getRow();
+                $countRating = $this->modelRating->getRating($id, 'atraction_id')->getRow();
+                $userTotal = $this->modelRating->getUserTotal($id, 'atraction_id')->getRow();
+                $userRating = $this->modelRating->getUserRating($user_id, 'atraction_id', $id)->getRow();
             }
             $data = [
                 'countRating' =>  $countRating,
@@ -66,9 +66,9 @@ class DetailObjectController extends BaseController
         if ($this->request->isAJAX()) {
             $user_id = $this->request->getGet('user_id');
             if ($id) {
-                $countRating = $this->modelReview->getRating($id, 'event_id')->getRow();
-                $userTotal = $this->modelReview->getUserTotal($id, 'event_id')->getRow();
-                $userRating = $this->modelReview->getUserRating($user_id, 'event_id', $id)->getRow();
+                $countRating = $this->modelRating->getRating($id, 'event_id')->getRow();
+                $userTotal = $this->modelRating->getUserTotal($id, 'event_id')->getRow();
+                $userRating = $this->modelRating->getUserRating($user_id, 'event_id', $id)->getRow();
             }
             $data = [
                 'countRating' =>  $countRating,
