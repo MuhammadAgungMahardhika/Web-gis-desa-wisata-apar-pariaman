@@ -880,31 +880,27 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         });
     }
     
-     // set object category with ajax when sidemenu by category is clicked
-    //  function setObjectByCategory() {
-    //     $.ajax({
-    //         url: base_url +"/"+"list_object"+"/"+ "atraction",
-    //         method: "get",
-    //         dataType: "json",
-    //         success: function(response) {
-    //             let listObject = []
-
-    //                 atData = response.atData
-    //                 console.log(atData)
-    //                 for (let i = 0; i < atData.length; i++) {
-    //                     let category = atData[i].category
-    //                     listObject.push(`<option>${category}</option>`)
-    //                 }
-    //                 return $('#categorySelect').html(`<option value="">Select category </option>${listObject}`)
-                
-
-    //         },
-    //         error: function(xhr, ajaxOptions, thrownError) {
-    //             alert(xhr.status + "\n" +
-    //                 xhr.responseText + "\n" + thrownError);
-    //         }
-    //     });
-    // }
+    //  set object category with ajax when sidemenu by category is clicked
+     function setObjectByCategory() {
+        $.ajax({
+            url: base_url +"/"+"list_object"+"/"+ "atraction_by_category",
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                let listObject = []
+                atData = response.atData
+                for (i in atData) {
+                let category = atData[i].category
+                listObject.push(`<option>${category}</option>`)
+                }
+                return $('#categorySelect').html(`<option value="">Select category </option>${listObject}`)
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
       // search fitur, Show object on map by name
       function getObjectByCategory(val = null) {
         let category = val

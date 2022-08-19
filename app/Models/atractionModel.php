@@ -140,6 +140,11 @@ class atractionModel extends Model
         return $query;
     }
 
+    public function getCategory()
+    {
+        $query = $this->db->table($this->table_category)->select('category')->get();
+        return $query;
+    }
     public function getGallery($id)
     {
         $query = $this->db->table($this->table_gallery)->select('url')->where('atraction_id', $id)->get();

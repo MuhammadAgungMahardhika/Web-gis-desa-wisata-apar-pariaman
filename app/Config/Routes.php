@@ -58,6 +58,7 @@ $routes->group('list_object', function ($routes) {
     $routes->get('atraction_by_name/(:segment)', 'ListObjectController::atraction_by_name/$1');
     $routes->get('atraction_by_rate/(:segment)', 'ListObjectController::atraction_by_rate/$1');
     $routes->get('atraction_by_category/(:segment)', 'ListObjectController::atraction_by_category/$1');
+    $routes->get('atraction_by_category', 'ListObjectController::atraction_by_category');
 
 
     $routes->get('event', 'ListObjectController::event');

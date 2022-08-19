@@ -77,6 +77,8 @@ class ListObjectController extends BaseController
     {
         if ($category) {
             $objectData = $this->modelAtraction->getAtractionByCategory($category)->getResult();
+        } else {
+            $objectData = $this->modelAtraction->getCategory()->getResult();
         }
         $data = [
             'atData' => $objectData,

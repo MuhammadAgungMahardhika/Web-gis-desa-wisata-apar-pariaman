@@ -42,13 +42,13 @@
                         </ul>
                     </li>
                     <li class="submenu-item sidebar-item has-sub">
-                        <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span>Category</span> </a>
+                        <a onclick="setObjectByCategory()" href="" class="sidebar-link"><i class="fa fa-compass"></i><span>Category</span> </a>
                         <ul class="submenu">
                             <li class="submenu-item">
                                 <select onchange="getObjectByCategory(this.value)" class="form-select" id="categorySelect">
-                                    <option value="">Select category </option>
+                                    <!-- <option value="">Select category </option>
                                     <option value="uniqe">uniqe</option>
-                                    <option value="ordinary">ordinary</option>
+                                    <option value="ordinary">ordinary</option> -->
                                 </select>
                             </li>
                         </ul>
