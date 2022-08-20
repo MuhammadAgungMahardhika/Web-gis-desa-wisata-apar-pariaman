@@ -582,6 +582,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
     function setNearby(data,url) {
         userPosition = { lat: parseFloat(data.lat),lng: parseFloat(data.lng)}
+        setCenter({ lat: latApar,lng: lngApar})
         setSupportSliderToZero()
         setMainSliderToZero()
         clearUser()
