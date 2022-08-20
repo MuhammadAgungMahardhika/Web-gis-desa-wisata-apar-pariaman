@@ -432,10 +432,10 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         if (circle) {circle.setMap(null)}
         circle = new google.maps.Circle({
             strokeColor: "#FF0000",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
+            strokeOpacity: 0.4,
+            strokeWeight: 1.5,
             fillColor: "#FF0000",
-            fillOpacity: 0.35,
+            fillOpacity: 0.15,
             map : map,
             center: userPosition,
             radius: radius

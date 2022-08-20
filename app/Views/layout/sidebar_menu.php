@@ -5,7 +5,7 @@
 
         <li class="sidebar-item  ">
             <a href="<?= base_url('list_object') ?>" class='sidebar-link'>
-                <i class="bi bi-grid-fill"></i>
+                <i class="fa fa-home"></i>
                 <span>Home</span>
             </a>
         </li>
@@ -46,9 +46,6 @@
                         <ul class="submenu">
                             <li class="submenu-item">
                                 <select onchange="getObjectByCategory(this.value)" class="form-select" id="categorySelect">
-                                    <!-- <option value="">Select category </option>
-                                    <option value="uniqe">uniqe</option>
-                                    <option value="ordinary">ordinary</option> -->
                                 </select>
                             </li>
                         </ul>
