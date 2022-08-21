@@ -31,7 +31,7 @@
                                     <?php $no = 0; ?>
                                     <?php foreach ($galleryData as $gallery) : ?>
                                         <div class="carousel-item <?php if ($no == 0) echo 'active'; ?>">
-                                            <img src="<?= base_url('assets/images/apar'); ?>/<?= $gallery->url; ?>" class="d-block w-100" alt="">
+                                            <img src="<?= base_url('media/photos/'); ?>/<?= $gallery->url; ?>" class="d-block w-100">
                                         </div>
                                         <?php $no++; ?>
                                     <?php endforeach; ?>

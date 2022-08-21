@@ -96,7 +96,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 let gallery = response.galleryData
                 // let menu = response.menuData
                 // let product = response.productData
-              
                 $('#supportTitle').html(data.name)
                 $('#supportData').html
                 (`
@@ -115,7 +114,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                     $('#carouselSupportInner').html('')
                     for(i in gallery){
                         $('#carouselSupportIndicator').append(`<li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${no}" class="${(() => {if (no==0){return`active`}else{return ''}})()}"></li>`)
-                        $('#carouselSupportInner').append(`<div class="carousel-item ${(()=>{if(no==0){return`active`}else{return ''}})()}"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" style="cursor: pointer;"></div>`)
+                        $('#carouselSupportInner').append(`<div class="carousel-item ${(()=>{if(no==0){return`active`}else{return ''}})()}"><img class="d-block w-100" src="${base_url}/media/photos/${gallery[i].url}" style="cursor: pointer;"></div>`)
                         no++
                     }
                 }
