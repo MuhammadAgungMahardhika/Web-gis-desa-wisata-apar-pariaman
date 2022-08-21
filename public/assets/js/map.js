@@ -822,6 +822,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             break
     }
     }
+   
      // Set star by user input
    function setStar2(star) {
     switch (star) {
@@ -845,6 +846,9 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             $("#sstar-1,#sstar-2,#sstar-3,#sstar-4,#sstar-5").addClass('star-checked')
             break
     }
+    }
+    function removeAllStar(){
+        return   $("#sstar-1,#sstar-2,#sstar-3,#sstar-4,#sstar-5,#star-1,#star-2,#star-3,#star-4,#star-5").removeClass('star-checked')
     }
 
     function setRating(user_id, object_id, val, url) {
@@ -926,6 +930,33 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                     xhr.responseText + "\n" + thrownError);
             }
         });
+    }
+      // search fitur, Show event on map by date
+      function getObjectByDate() {
+        $('#rowObjectArround').css("display", "none")
+        let date_1 = $('#date_1').val()
+        let date_2 = $('#date_2').val()
+
+        if(date_1 && date_2){
+         $.ajax({
+            url: base_url + "/" + "list_object"+ "/"+ "event_by_date" + "/" + date_1 + "/" + date_2,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                setCenter({lat: latApar,lng: lngApar})
+                clearMarker()
+                clearRadius()
+                clearRoute()
+                evData = response.evData
+                evUrl = response.url
+                loopingAllMarker(evData, evUrl)
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+        }
     }
 
     

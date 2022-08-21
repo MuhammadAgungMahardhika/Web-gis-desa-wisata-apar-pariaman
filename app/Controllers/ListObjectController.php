@@ -112,6 +112,18 @@ class ListObjectController extends BaseController
         ];
         return json_encode($data);
     }
+    public function event_by_date($date_1 = null, $date_2 = null)
+    {
+
+        if ($date_1 && $date_2) {
+            $objectData = $this->modelEvent->getEventByDate($date_1, $date_2)->getResult();
+        }
+        $data = [
+            'evData' => $objectData,
+            'url' => 'event'
+        ];
+        return json_encode($data);
+    }
     public function event_by_rate($rate = null)
     {
         if ($rate) {

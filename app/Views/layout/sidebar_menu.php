@@ -50,7 +50,7 @@
                                 </ul>
                             </li>
                             <li class="submenu-item sidebar-item has-sub">
-                                <a href="" class="sidebar-link"><span>Rating</span> </a>
+                                <a onclick="removeAllStar()" href="" class="sidebar-link"><span>Rating</span> </a>
                                 <ul class="submenu">
                                     <li class="submenu-item">
                                         <div class="star-containter mb-3">
@@ -98,9 +98,21 @@
                                     </li>
                                 </ul>
                             </li>
-
                             <li class="submenu-item sidebar-item has-sub">
-                                <a href="" class="sidebar-link"><span>Rating</span> </a>
+                                <a href="" class="sidebar-link"><span>Date</span> </a>
+                                <ul class="submenu">
+                                    <li class="submenu-item">
+                                        <div class="input-group input-daterange">
+                                            <div class="input-group-addon">from</div>
+                                            <input id="date_1" type="date" onchange="getObjectByDate()" class="date">
+                                            <div class="input-group-addon">to</div>
+                                            <input id="date_2" type="date" onchange="getObjectByDate()" class="date">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="submenu-item sidebar-item has-sub">
+                                <a onclick="removeAllStar()" href="" class="sidebar-link"><span>Rating</span> </a>
                                 <ul class="submenu">
                                     <li class="submenu-item">
                                         <div class="star-containter mb-3">
