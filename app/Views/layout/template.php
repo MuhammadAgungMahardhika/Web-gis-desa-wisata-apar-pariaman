@@ -7,13 +7,13 @@
     <title><?= $title ?></title>
 
     <!-- template CSS -->
-    <link rel="stylesheet" href="/assets/css/main/app.css">
-    <link rel="stylesheet" href="/assets/css/main/app-dark.css">
-    <link rel="shortcut icon" href="/assets/images/logo/favicon.svg" type="image/x-icon">
-    <link rel="shortcut icon" href="/assets/images/logo/favicon.png" type="image/png">
+    <link rel="stylesheet" href="<?= base_url('/assets/css/main/app.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('/assets/css/main/app-dark.css') ?>">
+    <link rel="shortcut icon" href="<?= base_url('/assets/images/logo/favicon.svg') ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url('/assets/images/logo/favicon.png') ?>" type="image/png">
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="/assets/css/main/style.css">
+    <link rel="stylesheet" href="<?= base_url('/assets/css/main/style.css') ?>">
 
     <!-- Third Party Icon -->
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
@@ -50,6 +50,6 @@
         </div>
     </div>
 </body>
-<script src="/assets/js/app.js"></script>
+<script src="<?= base_url('/assets/js/app.js') ?>"></script>
 
 </html>
