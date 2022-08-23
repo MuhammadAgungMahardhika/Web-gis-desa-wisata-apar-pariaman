@@ -1,4 +1,4 @@
-<div class="card-body">
-    <div class="googlemaps" id="map" onload="initMap();" style="height: 60vh;">
-    </div>
+<!-- <div class="card-body"> -->
+<div class="googlemaps" id="map" onload="initMap();" style="min-height: 60vh;">
 </div>
+<!-- </div> -->

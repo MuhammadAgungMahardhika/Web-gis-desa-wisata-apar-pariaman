@@ -1,5 +1,6 @@
 
-let base_url = 'http://localhost:8080'
+// let base_url = 'http://localhost:8080' //untuk php spark serve
+let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition,userMarker,directionsRenderer,infoWindow,circle,map
 let markerArray = []
 let markerNearby
@@ -333,9 +334,8 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             markerNearby = objectMarker
             addMarkerGeom(geoJSON,color,'pass')
         }
-        
         objectMarker.addListener('click', () => {
-           if(window.location.href == base_url+'/list_object'){
+           if(window.location.pathname.split('/').pop() == 'list_object'){
             openInfoWindow(objectMarker, infoMarkerData(data,url))
            }else{
              openInfoWindow(objectMarker,data.name)
