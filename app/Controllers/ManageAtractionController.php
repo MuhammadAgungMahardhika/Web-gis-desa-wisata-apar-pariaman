@@ -27,6 +27,8 @@ class ManageAtractionController extends BaseController
     public function detail($id = null)
     {
         $objectData = $this->model->getAtraction($id)->getRow();
+        $galleryData = $this->model->getGallery($id)->getResult();
+        $video = $this->model->getVideos($id)->getResult();
         $aparData = $this->modelApar->getApar();
         if (is_object($objectData)) {
             $data = [
@@ -34,6 +36,8 @@ class ManageAtractionController extends BaseController
                 'config' => config('Auth'),
                 'url' => 'atraction',
                 'objectData' => $objectData,
+                'galleryData' => $galleryData,
+                'video' => $video,
                 'aparData' => $aparData,
                 'validation' => $this->validation
             ];
