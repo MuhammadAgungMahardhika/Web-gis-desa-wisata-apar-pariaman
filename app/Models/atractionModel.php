@@ -14,7 +14,7 @@ class atractionModel extends Model
     protected $primaryKey = 'atraction.id';
     protected $pk_gallery = 'atraction_gallery.id';
 
-    protected $allowedFields = ['name', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
+    protected $allowedFields = ['name', 'employe', 'open', 'close', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
 
     public function getAtractions()
     {
@@ -131,6 +131,11 @@ class atractionModel extends Model
     public function addAtraction($data)
     {
         $query = $this->db->table($this->table)->insert($data);
+        return $query;
+    }
+    public function updateAtraction($data, $id)
+    {
+        $query = $this->db->table($this->table)->where('atraction.id', $id)->update($data);
         return $query;
     }
 

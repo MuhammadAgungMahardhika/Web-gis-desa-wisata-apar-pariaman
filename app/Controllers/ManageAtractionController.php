@@ -4,34 +4,37 @@ namespace App\Controllers;
 
 class ManageAtractionController extends BaseController
 {
-    protected $model, $validation;
+    protected $model, $modelApar, $validation;
     protected $title = 'Manage-Atractions | Tourism Village';
     public function __construct()
     {
         $this->validation = \Config\Services::validation();
         $this->model = new \App\Models\atractionModel();
+        $this->modelApar = new \App\Models\aparModel();
     }
 
     public function index()
     {
-        $atractionData = $this->model->getAtractions();
+        $objectData = $this->model->getAtractions();
 
         $data = [
             'title' => $this->title,
-            'atractionData' => $atractionData
+            'objectData' => $objectData
         ];
 
         return view('admin/manage_atraction', $data);
     }
     public function detail($id = null)
     {
-        $atractionData = $this->model->getAtraction($id)->getRow();
-
-        if (is_object($atractionData)) {
+        $objectData = $this->model->getAtraction($id)->getRow();
+        $aparData = $this->modelApar->getApar();
+        if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
-                'atractionData' => $atractionData,
+                'url' => 'atraction',
+                'objectData' => $objectData,
+                'aparData' => $aparData,
                 'validation' => $this->validation
             ];
             return view('admin-detail/detail_atraction', $data);
@@ -42,12 +45,15 @@ class ManageAtractionController extends BaseController
 
     public function edit($id = null)
     {
-        $atractionData = $this->model->getAtraction($id)->getRow();
-        if (is_object($atractionData)) {
+        $objectData = $this->model->getAtraction($id)->getRow();
+        $aparData = $this->modelApar->getApar();
+        if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
-                'atractionData' => $atractionData,
+                'url' => 'atraction',
+                'objectData' => $objectData,
+                'aparData' => $aparData,
                 'validation' =>  $this->validation
             ];
             return view('admin-edit/edit_atraction', $data);
@@ -61,21 +67,18 @@ class ManageAtractionController extends BaseController
         //validation data
         $validateRules = $this->validate([
             'name' => 'required|max_length[100]',
-            'status' => 'required|max_length[31]',
+            'open' => 'max_length[50]',
+            'close' => 'max_length[50]',
+            'employe' => 'max_length[50]',
             'price' => 'max_length[50]',
             'contact_person' => 'max_length[14]',
-            'description' => 'max_length[255]',
-            'lat' => 'required|max_length[20]',
-            'lng' => 'required|max_length[20]'
+            'description' => 'max_length[255]'
         ]);
 
         $updateRequest = $this->request->getPost();
         if ($validateRules) {
-            try {
-                $this->model->update($id, $updateRequest);
-            } catch (\Exception $e) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound($e);
-            } finally {
+            $update =  $this->model->updateAtraction($updateRequest, $id);
+            if ($update) {
                 session()->setFlashdata('success', 'Success! Atraction updated.');
                 return redirect()->to(site_url('manage_atraction/edit/' . $id));
             }

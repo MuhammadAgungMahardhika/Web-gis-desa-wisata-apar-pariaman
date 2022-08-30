@@ -5,7 +5,7 @@
               <p>2021 &copy; Muhammad Agung Mahardhika</p>
           </div>
           <div class="float-end">
-              <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="https://saugi.me">Saugi</a></p>
+              <p>keep in touch <span class="text-primary"><i class="fa fa-envelope"></i></span><a href="mailto:m.agungmahardika12@gmail.com"> m.agungmahardika12@gmail.com</a></p>
           </div>
       </div>
   </footer>

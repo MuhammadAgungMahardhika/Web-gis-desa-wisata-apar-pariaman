@@ -597,6 +597,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     function mata_angin(){
         const legendIcon = `${base_url}/assets/images/marker-icon/`
         const centerControlDiv = document.createElement("div");
+        centerControlDiv.style.margin = "-30px";
         centerControlDiv.innerHTML =`<div class="mb-4"><img src="${legendIcon}mata_angin.png" width="120"></img><div>`
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
     }

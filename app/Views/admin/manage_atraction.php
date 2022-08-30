@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($atractionData as $atraction) : ?>
+                        <?php foreach ($objectData as $atraction) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $atraction->name; ?></td>

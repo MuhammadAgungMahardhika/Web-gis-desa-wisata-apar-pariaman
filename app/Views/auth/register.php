@@ -9,7 +9,9 @@
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-5 d-none d-lg-block text-center">
+                    <i class="iconify text-primary" data-icon="fontisto:holiday-village" data-width="300" data-height="300"></i>
+                </div>
                 <div class="col-lg-7">
                     <div class="p-5">
                         <div class="text-center">
@@ -18,7 +20,7 @@
                         <?= view('Myth\Auth\Views\_message_block') ?>
 
                         <!-- Form Register -->
-                        <form action="<?= route_to('register') ?>" class="user" method="post">
+                        <form action="<?= base_url('register') ?>" class="user" method="post">
                             <?= csrf_field() ?>
 
                             <!-- Email -->
@@ -53,7 +55,7 @@
                         </div> -->
                         <div class="text-center">
 
-                            <a href="<?= route_to('login') ?>" class="small">
+                            <a href="<?= base_url('login') ?>" class="small">
                                 <?= lang('Auth.alreadyRegistered') ?> <?= lang('Auth.signIn') ?>
                             </a>
                         </div>
