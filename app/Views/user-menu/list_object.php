@@ -105,6 +105,8 @@
     </div>
 
 </section>
+<?= $this->endSection() ?>
+<?= $this->section('script') ?>
 <script>
     // Global variabel
     let datas, url

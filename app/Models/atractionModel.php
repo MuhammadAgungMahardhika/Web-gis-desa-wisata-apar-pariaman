@@ -10,9 +10,11 @@ class atractionModel extends Model
     protected $table = 'atraction';
     protected $table_category = 'category_atraction';
     protected $table_gallery = 'atraction_gallery';
+    protected $table_video = 'atraction_video';
 
     protected $primaryKey = 'atraction.id';
     protected $pk_gallery = 'atraction_gallery.id';
+    protected $pk_video = 'atraction_gallery.id';
 
     protected $allowedFields = ['name', 'employe', 'open', 'close', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
 
@@ -153,6 +155,12 @@ class atractionModel extends Model
     public function getGallery($id)
     {
         $query = $this->db->table($this->table_gallery)->select('url')->where('atraction_id', $id)->get();
+        return $query;
+    }
+
+    public function getVideos($id)
+    {
+        $query = $this->db->table($this->table_video)->select('url')->where('atraction_id', $id)->get();
         return $query;
     }
 

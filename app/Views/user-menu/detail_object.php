@@ -38,6 +38,8 @@
         </div>
     </div>
 </section>
+<?= $this->endSection() ?>
+<?= $this->section('script') ?>
 <script>
     // Global variabel
     let indexUrl
@@ -49,6 +51,7 @@
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
     currentObjectRating()
     currentUserRating()
+    getObjectComment()
 
     function currentObjectRating() {
         $.ajax({
@@ -117,9 +120,40 @@
         <?php endif; ?>
 
     }
+
+    function getObjectComment() {
+        $.ajax({
+            url: "<?= base_url() ?>" + "/" + "review" + "/" + "get_" + url + "_comment",
+            method: "GET",
+            data: {
+                'object_id': '<?= $objectData->id ?>'
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response) {
+                    $('#commentBody').html('')
+                    for (i in response) {
+                        $('#commentBody').prepend(`<tr><td><p class="mb-0">${response[i].name}</p><p class="fw-light">${response[i].date}</p><p class="fw-bold">${response[i].comment}</p></td></tr>`);
+                    }
+                }
+            }
+        });
+    }
+    $("#formReview").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "<?= base_url() ?>" + "/" + "review" + "/" + "comment_" + url,
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(response) {
+                document.getElementById("formReview").reset();
+                getObjectComment()
+            }
+        });
+    });
 </script>
 <script src="<?= base_url('/assets/js/map.js') ?>"></script>
 <!-- Maps JS -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&region=ID&language=en&callback=initMap"></script>
-
 <?= $this->endSection() ?>

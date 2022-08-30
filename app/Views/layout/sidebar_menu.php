@@ -1,8 +1,6 @@
 <div class="sidebar-menu">
     <?= $this->include('layout/sidebar_detail'); ?>
     <ul class="menu">
-        <!-- <li class="sidebar-title">Menu</li> -->
-
         <li class="sidebar-item  ">
             <a href="<?= base_url('list_object') ?>" class='sidebar-link'>
                 <i class="fa fa-home"></i>

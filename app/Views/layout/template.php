@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-
+    <?= $this->renderSection('head'); ?>
 </head>
 
 <body>
@@ -50,6 +50,7 @@
         </div>
     </div>
 </body>
+<?= $this->renderSection('script'); ?>
 <script src="<?= base_url('/assets/js/app.js') ?>"></script>
 
 </html>

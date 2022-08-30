@@ -39,39 +39,3 @@
         </div>
     </div>
 </div>
-<script>
-    let urlNow = '<?= $url ?>'
-    getObjectComment()
-
-    function getObjectComment() {
-        $.ajax({
-            url: "<?= base_url() ?>" + "/" + "review" + "/" + "get_" + urlNow + "_comment",
-            method: "GET",
-            data: {
-                'object_id': '<?= $objectData->id ?>'
-            },
-            dataType: "json",
-            success: function(response) {
-                if (response) {
-                    $('#commentBody').html('')
-                    for (i in response) {
-                        $('#commentBody').prepend(`<tr><td><p class="mb-0">${response[i].name}</p><p class="fw-light">${response[i].date}</p><p class="fw-bold">${response[i].comment}</p></td></tr>`);
-                    }
-                }
-            }
-        });
-    }
-    $("#formReview").submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: "<?= base_url() ?>" + "/" + "review" + "/" + "comment_" + urlNow,
-            method: "POST",
-            data: $(this).serialize(),
-            dataType: "json",
-            success: function(response) {
-                document.getElementById("formReview").reset();
-                getObjectComment()
-            }
-        });
-    });
-</script>
