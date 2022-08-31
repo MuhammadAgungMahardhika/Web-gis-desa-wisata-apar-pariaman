@@ -38,6 +38,12 @@ $routes->get('/landing_page', 'Pages::landing_page');
 $routes->get('/about', 'Pages::about');
 $routes->get('/admin', 'Admin::users', ['filter' => 'role:admin']);
 
+// upload file 
+$routes->group('upload', function ($routes) {
+    $routes->get('photo', 'UploadController::photo', ['filter' => 'role:admin']);
+    $routes->get('video', 'UploadController::video', ['filter' => 'role:admin']);
+});
+
 // Routes untuk authentikasi
 $routes->get('/login', 'AuthController::login');
 $routes->get('/register', 'AuthController::register');

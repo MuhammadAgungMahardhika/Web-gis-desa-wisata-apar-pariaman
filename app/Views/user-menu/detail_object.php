@@ -42,7 +42,6 @@
 <?= $this->section('script') ?>
 <script>
     // Global variabel
-    let indexUrl
     let datas = [<?= json_encode($objectData) ?>]
     let url = '<?= $url ?>'
     let id = "<?= $objectData->id ?>"
@@ -155,5 +154,5 @@
 </script>
 <script src="<?= base_url('/assets/js/map.js') ?>"></script>
 <!-- Maps JS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&region=ID&language=en&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&callback=initMap"></script>
 <?= $this->endSection() ?>

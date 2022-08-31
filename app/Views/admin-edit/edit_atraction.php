@@ -24,10 +24,42 @@
                     <div class="row">
                         <form class="form form-vertical" action="<?= base_url('manage_atraction/save_update/' . $objectData->id); ?>" method="post">
                             <div class="form-body">
+                                <table class="table table-border">
+                                    <thead>
+                                        <th>Data spasial</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>GeoJSON</td>
+                                            <td><input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly" required value='<?= $objectData->geoJSON; ?>'></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Latitude</td>
+                                            <td><input type="text" class="form-control" id="latitude" name="latitude" value="<?= $objectData->lat; ?>" autocomplete="off" readonly="readonly" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Longitude</td>
+                                            <td><input type="text" class="form-control" id="longitude" name="longitude" value="<?= $objectData->lng; ?>" autocomplete="off" readonly="readonly" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search" class="btn icon btn-outline-primary" onclick="rollBackMap('<?= $url ?>','<?= $objectData->lat ?>','<?= $objectData->lng ?>','<?= json_encode($objectData->geoJSON) ?>');">
+                                                    <i class="fa-solid fa-undo"></i>
+                                                </a>
+                                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear" class="btn icon btn-outline-danger" id="clear-drawing">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+
                                 <div class="form-group row">
                                     <label for="name" class=" col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>">
+                                        <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>" required>
                                     </div>
                                 </div>
                                 <!-- <div class="form-group row">
@@ -102,7 +134,11 @@
             <!-- Object Location on Map -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Google Maps</h5>
+                    <div class="row align-items-center">
+                        <div class="col-12 mb-3">
+                            <h5 class="card-title">Google Maps</h5>
+                        </div>
+                    </div>
                 </div>
                 <!-- Object Map body -->
                 <?= $this->include('layout/map-body'); ?>
@@ -121,12 +157,16 @@
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <script src="<?= base_url('assets/js/extensions/form-element-select.js'); ?>"></script>
 <script>
-    let indexUrl
+    $(document).ready(function() {
+        initDrawingManager(url)
+    });
+
     let datas = [<?= json_encode($objectData) ?>]
     let url = '<?= $url ?>'
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
+
 
     FilePond.registerPlugin(
         FilePondPluginFileValidateType,
@@ -156,7 +196,7 @@
         );
     <?php endif; ?>
     pond.setOptions({
-        server: '/upload/photo'
+        server: "<?= base_url('/uploadController/photo') ?>"
     });
 
     <?php if ($video != null) : ?>
@@ -166,10 +206,10 @@
 
     <?php endif; ?>
     vidPond.setOptions({
-        server: '/upload/video'
+        server: "<?= base_url('/uploadController/video') ?>"
     });
 </script>
 <script src="<?= base_url('/assets/js/map.js') ?>"></script>
 <!-- Maps JS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&region=ID&language=en&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&callback=initMap&libraries=drawing"></script>
 <?= $this->endSection() ?>

@@ -1,6 +1,6 @@
 
-// let base_url = 'http://localhost:8080' //untuk php spark serve
-let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
+let base_url = 'http://localhost:8080' //untuk php spark serve
+// let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition,userMarker,directionsRenderer,infoWindow,circle,map
 let markerArray = []
 let markerNearby
@@ -8,7 +8,9 @@ let geomArray = []
 let geomNearby
 let atData,evData,cpData,spData,wpData, fData, detailData
 let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
+let selectedShape,selectedMarker,drawingManager,dataLayer
 let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibility: "off" }]}]
+
     function initMap() {
         showMap() //show map , polygon, legend
         directionsRenderer = new google.maps.DirectionsRenderer(); //render route
@@ -16,9 +18,8 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         mata_angin() // mata angin compas on map
         addButtonDarkMap() // button dark map on map
         highlightCurrentManualLocation() //highligth when button location not clicked
-        if(indexUrl =='index'){showUpcoming()} //showing upcoming 
+       showUpcoming()//showing upcoming 
     }
-
     function showMap() {
         map = new google.maps.Map(document.getElementById("map"),{ center: {lat: latApar,lng: lngApar}, zoom: 16,clickableIcons: false,styles: mapStyles });
         addAparPolygon(geomApar,'#ffffff')
@@ -686,7 +687,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                 }
                 if (evData && evUrl) {
                     clearMarker()
-                    clearMarker()
                     clearRadius()
                     clearRoute()
                     loopingAllMarker(evData, evUrl)
@@ -958,6 +958,100 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             }
         });
         }
+    }
+    
+//---------------------------------------------admin drawing manager------------------------------------------------
+    // Set map to coordinate put by user
+    function rollBackMap(url,lat,lng,geoJSON) {
+        // return alert(geoJSON)
+        document.getElementById('latitude').value = lat
+        document.getElementById('longitude').value = lng
+        // document.getElementById('geo-json').value = geojson
+    }
+    // Remove selected shape on maps
+    function deleteSelectedShape() {
+        if(selectedMarker){
+            document.getElementById('latitude').value = ''
+            document.getElementById('longitude').value = ''
+            selectedMarker.setMap(null)
+            selectedMarker = null
+        } 
+        if (selectedShape) {
+            document.getElementById('geo-json').value = ''
+            selectedShape.setMap(null);
+            selectedShape = null
+        }
+    }
+
+    // Initialize drawing manager on maps
+    function initDrawingManager(url = null) {
+        drawingManager = new google.maps.drawing.DrawingManager()
+        let color
+        if(url=='atraction'){color = '#C45A55'}
+        if(url=='event'){color = '#8EFFCD'}
+        if(url=='culinary_place'){color='#FA786D'}
+        if(url=='souvenir_place'){color='#ED90C4'}
+        if(url=='worship_place'){color='#42CB6F'}
+        if(url=='facility'){color='#8EFFCD'}
+        const drawingManagerOpts = {
+            // drawingMode: google.maps.drawing.OverlayType.MARKER,
+            drawingControl: true,
+            drawingControlOptions: {
+                position: google.maps.ControlPosition.TOP_CENTER,
+                drawingModes: [google.maps.drawing.OverlayType.MARKER,google.maps.drawing.OverlayType.POLYGON]
+              },
+            markerOptions: {icon: checkIcon(url)},
+            polygonOptions: {
+                fillColor: color,
+                strokeWeight: 2,
+                strokeColor: color,
+                editable: true,
+            },
+            map: map
+        };
+        drawingManager.setOptions(drawingManagerOpts);
+        if (url) {
+            google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+                switch (event.type) {
+                    case google.maps.drawing.OverlayType.MARKER:
+                      drawingMarker = event
+                      setMarker(event.overlay,url)
+                      break
+                    case google.maps.drawing.OverlayType.POLYGON:
+                      setPolygon(event.overlay);
+                      break
+                  }
+            });
+        } 
+        google.maps.event.addDomListener(document.getElementById('clear-drawing'), 'click', deleteSelectedShape)
+    }
+
+
+    function setMarker(shape,url=null){    
+        let lat = shape.getPosition().lat().toFixed(8) 
+        let lng = shape.getPosition().lng().toFixed(8) 
+        //clear marker
+        for (i in markerArray){markerArray[i].setMap(null);}
+        if(selectedMarker){
+            selectedMarker.setMap(null)
+            selectedMarker = null
+        }
+        selectedMarker = shape
+        setCenter({lat:latApar,lng:lngApar})
+        document.getElementById('latitude').value = lat
+        document.getElementById('longitude').value = lng
+    }
+
+    function setPolygon(shape){
+        clearGeom()
+        if(selectedShape){
+            selectedShape.setMap(null)
+            selectedShape = null
+        }
+        selectedShape = shape;
+        dataLayer = new google.maps.Data();
+        dataLayer.add(new google.maps.Data.Feature({geometry: new google.maps.Data.Polygon([selectedShape.getPath().getArray()])}))
+        dataLayer.toGeoJson(function (object) {document.getElementById('geo-json').value = JSON.stringify(object.features[0].geometry)})
     }
 
     

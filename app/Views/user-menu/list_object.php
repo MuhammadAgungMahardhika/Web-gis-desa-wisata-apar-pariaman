@@ -109,13 +109,12 @@
 <?= $this->section('script') ?>
 <script>
     // Global variabel
-    let datas, url
-    let indexUrl = '<?= $url; ?>'
+    let datas
     let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
     let latApar = parseFloat(<?= $aparData->lat; ?>)
     let lngApar = parseFloat(<?= $aparData->lng; ?>)
 </script>
 <script src="<?= base_url('/assets/js/map.js') ?>"></script>
 <!-- Maps JS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&region=ID&language=en&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&callback=initMap"></script>
 <?= $this->endSection() ?>

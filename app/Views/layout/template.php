@@ -50,7 +50,10 @@
         </div>
     </div>
 </body>
-<?= $this->renderSection('script'); ?>
+
+<!-- Template JS -->
 <script src="<?= base_url('/assets/js/app.js') ?>"></script>
+<!-- Custom JS -->
+<?= $this->renderSection('script') ?>
 
 </html>

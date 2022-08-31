@@ -135,10 +135,18 @@ class atractionModel extends Model
         $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
-    public function updateAtraction($data, $id)
+    public function updateAtraction($id, $data, $lng, $lat, $geojson)
     {
-        $query = $this->db->table($this->table)->where('atraction.id', $id)->update($data);
-        return $query;
+        $point = 'POINT(100.10888610 -0.60117699)';
+        $query = $this->db->table($this->table)
+            ->where('atraction.id', $id)
+            ->update($data);
+        $update = $this->db->table($this->table)
+            ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
+            ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
+            ->where('atraction.id', $id)
+            ->update();
+        return $query && $update;
     }
 
     public function deleteAtraction($id)

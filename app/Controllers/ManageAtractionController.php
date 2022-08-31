@@ -85,9 +85,20 @@ class ManageAtractionController extends BaseController
             'description' => 'max_length[255]'
         ]);
 
-        $updateRequest = $this->request->getPost();
+        $updateRequest = [
+            'name' => $this->request->getPost('name'),
+            'open' => $this->request->getPost('open'),
+            'close' => $this->request->getPost('close'),
+            'employe' => $this->request->getPost('employe'),
+            'price' => $this->request->getPost('price'),
+            'contact_person' => $this->request->getPost('contact_person'),
+            'description' => $this->request->getPost('description')
+        ];
+        $geojson = $this->request->getPost('geojson');
+        $lat = $this->request->getPost('latitude');
+        $lng = $this->request->getPost('longitude');
         if ($validateRules) {
-            $update =  $this->model->updateAtraction($updateRequest, $id);
+            $update =  $this->model->updateAtraction($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
             if ($update) {
                 session()->setFlashdata('success', 'Success! Atraction updated.');
                 return redirect()->to(site_url('manage_atraction/edit/' . $id));
