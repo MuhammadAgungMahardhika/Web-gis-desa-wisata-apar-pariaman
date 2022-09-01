@@ -26,7 +26,7 @@
                             <div class="form-body">
                                 <table class="table table-border">
                                     <thead>
-                                        <th>Data spasial</th>
+                                        <th>Data spasial </th>
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -43,12 +43,13 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search" class="btn icon btn-outline-primary" onclick="rollBackMap('<?= $url ?>','<?= $objectData->lat ?>','<?= $objectData->lng ?>','<?= json_encode($objectData->geoJSON) ?>');">
+                                                <small>*Edit data spasial on map</small>
+                                                <!-- <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search" class="btn icon btn-outline-primary" onclick="rollBackMap('<?= $url ?>','<?= $objectData->lat ?>','<?= $objectData->lng ?>','<?= json_encode($objectData->geoJSON) ?>');">
                                                     <i class="fa-solid fa-undo"></i>
-                                                </a>
-                                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear" class="btn icon btn-outline-danger" id="clear-drawing">
+                                                </a> -->
+                                                <!-- <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear" class="btn icon btn-outline-danger" id="clear-drawing">
                                                     <i class="fa-solid fa-trash-can"></i>
-                                                </a>
+                                                </a> -->
                                             </td>
                                         </tr>
                                     </tbody>
@@ -185,19 +186,18 @@
         imageResizeTargetHeight: 720,
         imageResizeUpscale: false,
         credits: false,
-    });
+    })
     const vidPond = FilePond.create(video, {
         credits: false,
     })
-
     <?php if (count($galleryData) > 0) : ?>
         pond.addFiles(
             <?php foreach ($galleryData as $gallery) : ?> "<?= base_url('media/photos/'); ?>/<?= $gallery->url; ?>", <?php endforeach; ?>
         );
     <?php endif; ?>
     pond.setOptions({
-        server: "<?= base_url('/uploadController/photo') ?>"
-    });
+        server: "<?= base_url('upload/photo') ?>"
+    })
 
     <?php if ($video != null) : ?>
         <?php for ($i = 0; $i <= count($video) - 1; $i++) : ?>
@@ -206,8 +206,8 @@
 
     <?php endif; ?>
     vidPond.setOptions({
-        server: "<?= base_url('/uploadController/video') ?>"
-    });
+        server: "<?= base_url('upload/video') ?>"
+    })
 </script>
 <script src="<?= base_url('/assets/js/map.js') ?>"></script>
 <!-- Maps JS -->

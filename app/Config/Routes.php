@@ -40,8 +40,12 @@ $routes->get('/admin', 'Admin::users', ['filter' => 'role:admin']);
 
 // upload file 
 $routes->group('upload', function ($routes) {
-    $routes->get('photo', 'UploadController::photo', ['filter' => 'role:admin']);
-    $routes->get('video', 'UploadController::video', ['filter' => 'role:admin']);
+    $routes->post('photo', 'UploadController::photo', ['filter' => 'role:admin']);
+    $routes->post('avatar', 'UploadController::avatar', ['filter' => 'role:admin']);
+    $routes->post('video', 'UploadController::video', ['filter' => 'role:admin']);
+    $routes->delete('photo', 'UploadController::remove', ['filter' => 'role:admin']);
+    $routes->delete('avatar', 'UploadController::remove', ['filter' => 'role:admin']);
+    $routes->delete('video', 'UploadController::remove', ['filter' => 'role:admin']);
 });
 
 // Routes untuk authentikasi

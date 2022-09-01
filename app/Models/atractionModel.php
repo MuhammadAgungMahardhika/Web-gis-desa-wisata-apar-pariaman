@@ -4,6 +4,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\I18n\Time;
 
 class atractionModel extends Model
 {
@@ -160,12 +161,53 @@ class atractionModel extends Model
         $query = $this->db->table($this->table_category)->select('category')->get();
         return $query;
     }
+
+
+    // ----------------------------------------------Gallery APi ----------------------------------
+    public function get_new_id_api()
+    {
+        $lastId = $this->db->table($this->table_gallery)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
+        $count = (int)substr($lastId['id'], 3);
+        $id = sprintf('IMG%04d', $count + 1);
+        return $id;
+    }
     public function getGallery($id)
     {
         $query = $this->db->table($this->table_gallery)->select('url')->where('atraction_id', $id)->get();
         return $query;
     }
-
+    public function addGallery($id = null, $data = null)
+    {
+        $query = false;
+        foreach ($data as $gallery) {
+            $new_id = $this->get_new_id_api();
+            $content = [
+                'id' => $new_id,
+                'atraction_id' => $id,
+                'url' => $gallery,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now(),
+            ];
+            $query = $this->db->table($this->table_gallery)->insert($content);
+        }
+        return $query;
+    }
+    public function updateGallery($id = null, $data = null)
+    {
+        $queryDel = $this->deleteGallery($id);
+        foreach ($data as $key => $value) {
+            if (empty($value)) {
+                unset($data[$key]);
+            }
+        }
+        $queryIns = $this->addGallery($id, $data);
+        return $queryDel && $queryIns;
+    }
+    public function deleteGallery($id = null)
+    {
+        return $this->db->table($this->table_gallery)->delete(['atraction_id' => $id]);
+    }
+    // -------------------------------------------------Video Api-------------------------------------------
     public function getVideos($id)
     {
         $query = $this->db->table($this->table_video)->select('url')->where('atraction_id', $id)->get();

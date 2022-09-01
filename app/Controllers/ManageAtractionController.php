@@ -2,10 +2,15 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Files\File;
+use CodeIgniter\RESTful\ResourcePresenter;
+
 class ManageAtractionController extends BaseController
 {
     protected $model, $modelApar, $validation;
     protected $title = 'Manage-Atractions | Tourism Village';
+    protected $helpers = ['auth', 'url', 'filesystem'];
+
     public function __construct()
     {
         $this->validation = \Config\Services::validation();
@@ -74,7 +79,7 @@ class ManageAtractionController extends BaseController
 
     public function save_update($id = null)
     {
-        //validation data
+        //---------------validation data
         $validateRules = $this->validate([
             'name' => 'required|max_length[100]',
             'open' => 'max_length[50]',
@@ -85,6 +90,8 @@ class ManageAtractionController extends BaseController
             'description' => 'max_length[255]'
         ]);
 
+        // ---------------------Data request
+        $request = $this->request->getPost();
         $updateRequest = [
             'name' => $this->request->getPost('name'),
             'open' => $this->request->getPost('open'),
@@ -94,13 +101,51 @@ class ManageAtractionController extends BaseController
             'contact_person' => $this->request->getPost('contact_person'),
             'description' => $this->request->getPost('description')
         ];
+
+        // ----------------Gallery-----------------
+        if (isset($request['gallery'])) {
+            $folders = $request['gallery'];
+            $gallery = array();
+            foreach ($folders as $folder) {
+                $filepath = WRITEPATH . 'uploads/' . $folder;
+                $filenames = get_filenames($filepath);
+                $fileImg = new File($filepath . '/' . $filenames[0]);
+                $fileImg->move(FCPATH . 'media/photos');
+                delete_files($filepath);
+                rmdir($filepath);
+                $gallery[] = $fileImg->getFilename();
+            }
+            $this->model->updateGallery($id, $gallery);
+        } else {
+            $this->model->deleteGallery($id);
+        }
+
+        // ------------------Video----------------------
+        // if (isset($request['video'])) {
+        //     $folder = $request['video'];
+        //     $filepath = WRITEPATH . 'uploads/' . $folder;
+        //     $filenames = get_filenames($filepath);
+        //     $vidFile = new File($filepath . '/' . $filenames[0]);
+        //     $vidFile->move(FCPATH . 'media/videos');
+        //     delete_files($filepath);
+        //     rmdir($filepath);
+        //     $requestData['video_url'] = $vidFile->getFilename();
+        // } else {
+        //     $requestData['video_url'] = null;
+        // }
+
+        $video = $this->request->getPost('video');
         $geojson = $this->request->getPost('geojson');
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
         if ($validateRules) {
             $update =  $this->model->updateAtraction($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
+
             if ($update) {
                 session()->setFlashdata('success', 'Success! Atraction updated.');
+                return redirect()->to(site_url('manage_atraction/edit/' . $id));
+            } else {
+                session()->setFlashdata('failed', 'Failed! Failed to update atraction.');
                 return redirect()->to(site_url('manage_atraction/edit/' . $id));
             }
         } else {

@@ -1023,9 +1023,8 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                   }
             });
         } 
-        google.maps.event.addDomListener(document.getElementById('clear-drawing'), 'click', deleteSelectedShape)
+        // google.maps.event.addDomListener(document.getElementById('clear-drawing'), 'click', deleteSelectedShape)
     }
-
 
     function setMarker(shape,url=null){    
         let lat = shape.getPosition().lat().toFixed(8) 
