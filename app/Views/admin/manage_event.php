@@ -30,7 +30,7 @@
 
                     </thead>
                     <tbody>
-                        <?php foreach ($eventData as $event) : ?>
+                        <?php foreach ($objectData as $event) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $event->name; ?></td>

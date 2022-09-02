@@ -79,7 +79,7 @@
                         <div class="row">
                             <h5 class="card-title text-center">Video</h5>
                             <div class="ratio ratio-16x9">
-                                <video src="https://www.youtube.com/watch?v=KQa3xRUvAZI" class="embed-responsive-item" id="video" controls>Sorry, your browser doesn't support embedded videos</video>
+                                <video src="<?= base_url('media/videos/'); ?>/<?= $objectData->video_url; ?>" class="embed-responsive-item" id="video" controls>Sorry, your browser doesn't support embedded videos</video>
                             </div>
                         </div>
                     </div>

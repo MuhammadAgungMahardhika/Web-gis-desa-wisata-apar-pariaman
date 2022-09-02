@@ -17,23 +17,19 @@ class ManageAtractionController extends BaseController
         $this->model = new \App\Models\atractionModel();
         $this->modelApar = new \App\Models\aparModel();
     }
-
     public function index()
     {
         $objectData = $this->model->getAtractions();
-
         $data = [
             'title' => $this->title,
             'objectData' => $objectData
         ];
-
         return view('admin/manage_atraction', $data);
     }
     public function detail($id = null)
     {
         $objectData = $this->model->getAtraction($id)->getRow();
         $galleryData = $this->model->getGallery($id)->getResult();
-        $video = $this->model->getVideos($id)->getResult();
         $aparData = $this->modelApar->getApar();
         if (is_object($objectData)) {
             $data = [
@@ -42,9 +38,7 @@ class ManageAtractionController extends BaseController
                 'url' => 'atraction',
                 'objectData' => $objectData,
                 'galleryData' => $galleryData,
-                'video' => $video,
-                'aparData' => $aparData,
-                'validation' => $this->validation
+                'aparData' => $aparData
             ];
             return view('admin-detail/detail_atraction', $data);
         } else {
@@ -56,10 +50,7 @@ class ManageAtractionController extends BaseController
     {
         $objectData = $this->model->getAtraction($id)->getRow();
         $galleryData = $this->model->getGallery($id)->getResult();
-        $video = $this->model->getVideos($id)->getResult();
         $aparData = $this->modelApar->getApar();
-
-        // return json_encode(count($gallery));
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
@@ -67,7 +58,6 @@ class ManageAtractionController extends BaseController
                 'url' => 'atraction',
                 'objectData' => $objectData,
                 'galleryData' => $galleryData,
-                'video' => $video,
                 'aparData' => $aparData,
                 'validation' =>  $this->validation
             ];
@@ -101,9 +91,18 @@ class ManageAtractionController extends BaseController
             'contact_person' => $this->request->getPost('contact_person'),
             'description' => $this->request->getPost('description')
         ];
+        $geojson = $this->request->getPost('geojson');
+        $lat = $this->request->getPost('latitude');
+        $lng = $this->request->getPost('longitude');
 
-        // ----------------Gallery-----------------
-        if (isset($request['gallery'])) {
+        // ----------------Gallery-----------------------------------------
+        // check if gallery have empty string then make it become empty array
+        foreach ($request['gallery'] as $key => $value) {
+            if (!strlen($value)) {
+                unset($request['gallery'][$key]);
+            }
+        }
+        if ($request['gallery']) {
             $folders = $request['gallery'];
             $gallery = array();
             foreach ($folders as $folder) {
@@ -119,28 +118,22 @@ class ManageAtractionController extends BaseController
         } else {
             $this->model->deleteGallery($id);
         }
-
         // ------------------Video----------------------
-        // if (isset($request['video'])) {
-        //     $folder = $request['video'];
-        //     $filepath = WRITEPATH . 'uploads/' . $folder;
-        //     $filenames = get_filenames($filepath);
-        //     $vidFile = new File($filepath . '/' . $filenames[0]);
-        //     $vidFile->move(FCPATH . 'media/videos');
-        //     delete_files($filepath);
-        //     rmdir($filepath);
-        //     $requestData['video_url'] = $vidFile->getFilename();
-        // } else {
-        //     $requestData['video_url'] = null;
-        // }
-
-        $video = $this->request->getPost('video');
-        $geojson = $this->request->getPost('geojson');
-        $lat = $this->request->getPost('latitude');
-        $lng = $this->request->getPost('longitude');
+        if ($request['video']) {
+            $folder = $request['video'];
+            $filepath = WRITEPATH . 'uploads/' . $folder;
+            $filenames = get_filenames($filepath);
+            $vidFile = new File($filepath . '/' . $filenames[0]);
+            $vidFile->move(FCPATH . 'media/videos');
+            delete_files($filepath);
+            rmdir($filepath);
+            $updateRequest['video_url'] = $vidFile->getFilename();
+        } else {
+            $updateRequest['video_url'] = null;
+        }
+        // ----------------------------------UPDATE DATA--------------------------
         if ($validateRules) {
             $update =  $this->model->updateAtraction($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
-
             if ($update) {
                 session()->setFlashdata('success', 'Success! Atraction updated.');
                 return redirect()->to(site_url('manage_atraction/edit/' . $id));
@@ -159,7 +152,6 @@ class ManageAtractionController extends BaseController
         $data = [
             'title' => $this->title,
         ];
-
         return view('admin-insert/insert_atraction', $data);
     }
     public function save_insert()

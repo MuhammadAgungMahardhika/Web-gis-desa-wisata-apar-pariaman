@@ -1036,7 +1036,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             selectedMarker = null
         }
         selectedMarker = shape
-        setCenter({lat:latApar,lng:lngApar})
+        // setCenter({lat:latApar,lng:lngApar})
         document.getElementById('latitude').value = lat
         document.getElementById('longitude').value = lng
     }

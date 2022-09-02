@@ -198,12 +198,8 @@
     pond.setOptions({
         server: "<?= base_url('upload/photo') ?>"
     })
-
-    <?php if ($video != null) : ?>
-        <?php for ($i = 0; $i <= count($video) - 1; $i++) : ?>
-            vidPond.addFile(`<?= base_url('media/videos/' . $video[$i]->url); ?>`)
-        <?php endfor; ?>
-
+    <?php if ($objectData->video_url) : ?>
+        vidPond.addFile(`<?= base_url('media/videos/' . $objectData->video_url); ?>`)
     <?php endif; ?>
     vidPond.setOptions({
         server: "<?= base_url('upload/video') ?>"

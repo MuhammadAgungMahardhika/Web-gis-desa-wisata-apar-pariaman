@@ -2,24 +2,29 @@
 
 namespace App\Controllers;
 
-use App\Models\eventModel;
+use CodeIgniter\Files\File;
+use CodeIgniter\RESTful\ResourcePresenter;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ManageEventController extends BaseController
 {
-    protected $model, $validation;
+    protected $model, $modelApar, $validation;
     protected $title = 'Manage-Event | Tourism Village';
+    protected $helpers = ['auth', 'url', 'filesystem'];
     public function __construct()
     {
         $this->validation = \Config\Services::validation();
         $this->model = new \App\Models\eventModel();
+        $this->modelApar = new \App\Models\aparModel();
     }
 
     public function index()
     {
-        $eventData = $this->model->getEvents();
+        $objectData = $this->model->getEvents();
         $data = [
             'title' => $this->title,
-            'eventData' => $eventData
+            'objectData' => $objectData
         ];
 
         return view('admin/manage_event', $data);
@@ -27,13 +32,17 @@ class ManageEventController extends BaseController
 
     public function detail($id = null)
     {
-        $eventData = $this->model->getEvent($id)->getRow();
-        if (is_object($eventData)) {
-
+        $objectData = $this->model->getEvent($id)->getRow();
+        $galleryData = $this->model->getGallery($id)->getResult();
+        $aparData = $this->modelApar->getApar();
+        if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
-                'eventData' => $eventData
+                'aparData' => $aparData,
+                'url' => 'event',
+                'objectData' => $objectData,
+                'galleryData' => $galleryData
             ];
             return view('admin-detail/detail_event', $data);
         } else {
@@ -43,13 +52,18 @@ class ManageEventController extends BaseController
 
     public function edit($id = null)
     {
-        $eventData = $this->model->getEvent($id)->getRow();
+        $objectData = $this->model->getEvent($id)->getRow();
+        $galleryData = $this->model->getGallery($id)->getResult();
+        $aparData = $this->modelApar->getApar();
 
-        if (is_object($eventData)) {
+        if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
                 'config' => config('Auth'),
-                'eventData' => $eventData
+                'aparData' => $aparData,
+                'galleryData' => $galleryData,
+                'url' => 'event',
+                'objectData' => $objectData
             ];
             return view('admin-edit/edit_event', $data);
         } else {
@@ -59,31 +73,78 @@ class ManageEventController extends BaseController
     public function save_update($id = null)
     {
 
-        //validation data
+        //--------------------validation data
         $validateRules = $this->validate([
             'name' => 'required|max_length[50]',
-            'schedule' => 'required|max_length[31]',
             'price' => 'max_length[50]',
             'contact_person' => 'max_length[14]',
-            'description' => 'max_length[255]',
-            'lat' => 'required|max_length[20]',
-            'lng' => 'required|max_length[20]'
+            'description' => 'max_length[255]'
         ]);
+        // ---------------------Data request------------------------------
+        $request = $this->request->getPost();
+        $updateRequest = [
+            'name' => $this->request->getPost('name'),
+            'date_start' => $this->request->getPost('date_start'),
+            'date_end' => $this->request->getPost('date_end'),
+            'time_start' => $this->request->getPost('time_start'),
+            'time_end' => $this->request->getPost('time_end'),
+            'price' => $this->request->getPost('price'),
+            'contact_person' => $this->request->getPost('contact_person'),
+            'description' => $this->request->getPost('description')
+        ];
+        $geojson = $this->request->getPost('geojson');
+        $lat = $this->request->getPost('latitude');
+        $lng = $this->request->getPost('longitude');
 
-        $updateRequest = $this->request->getPost();
-
+        // ----------------Gallery-----------------
+        // check if gallery have empty string then make it become empty array
+        foreach ($request['gallery'] as $key => $value) {
+            if (!strlen($value)) {
+                unset($request['gallery'][$key]);
+            }
+        }
+        if ($request['gallery']) {
+            $folders = $request['gallery'];
+            $gallery = array();
+            foreach ($folders as $folder) {
+                $filepath = WRITEPATH . 'uploads/' . $folder;
+                $filenames = get_filenames($filepath);
+                $fileImg = new File($filepath . '/' . $filenames[0]);
+                $fileImg->move(FCPATH . 'media/photos');
+                delete_files($filepath);
+                rmdir($filepath);
+                $gallery[] = $fileImg->getFilename();
+            }
+            $this->model->updateGallery($id, $gallery);
+        } else {
+            $this->model->deleteGallery($id);
+        }
+        // ------------------Video----------------------
+        if ($request['video']) {
+            $folder = $request['video'];
+            $filepath = WRITEPATH . 'uploads/' . $folder;
+            $filenames = get_filenames($filepath);
+            $vidFile = new File($filepath . '/' . $filenames[0]);
+            $vidFile->move(FCPATH . 'media/videos');
+            delete_files($filepath);
+            rmdir($filepath);
+            $updateRequest['video_url'] = $vidFile->getFilename();
+        } else {
+            $updateRequest['video_url'] = null;
+        }
+        // ----------------------------------UPDATE DATA--------------------------
         if ($validateRules) {
-            try {
-                $this->model->update($id, $updateRequest);
-            } catch (\Exception $e) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound($e);
-            } finally {
+            $update = $this->model->updateEvent($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
+            if ($update) {
                 session()->setFlashdata('success', 'Success! Event updated.');
+                return redirect()->to(site_url('manage_event/edit/' . $id));
+            } else {
+                session()->setFlashdata('failed', 'Failed! Failed to update event.');
                 return redirect()->to(site_url('manage_event/edit/' . $id));
             }
         } else {
             $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed to update atraction.');
+            session()->setFlashdata('failed', 'Failed! Failed to update event.');
             return redirect()->to(site_url('manage_event/edit/' . $id));
         }
     }
@@ -96,19 +157,22 @@ class ManageEventController extends BaseController
         ];
         return view('admin-insert/insert_event', $data);
     }
-    public function save_insert()
+    public function save_insert($id)
     {
         //validation data
         $validateRules = $this->validate([
             'id' => 'is_unique[event.id]|required|max_length[10]',
             'name' => 'required|max_length[50]',
-            'schedule' => 'required|max_length[100]',
+            'date_start' => 'required',
+            'date_end' => 'required',
             'price' => 'max_length[50]',
             'contact_person' => 'max_length[14]',
             'description' => 'max_length[255]',
             'lat' => 'required|max_length[20]',
             'lng' => 'required|max_length[20]'
         ]);
+
+
 
         if ($validateRules) {
             try {

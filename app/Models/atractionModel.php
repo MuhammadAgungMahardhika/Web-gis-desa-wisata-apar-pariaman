@@ -16,47 +16,33 @@ class atractionModel extends Model
     protected $primaryKey = 'atraction.id';
     protected $pk_gallery = 'atraction_gallery.id';
     protected $pk_video = 'atraction_gallery.id';
-
     protected $allowedFields = ['name', 'employe', 'open', 'close', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
+    protected $columns = '
+    atraction.id,
+    atraction.name,
+    category,
+    atraction.open,
+    atraction.close,
+    atraction.employe,
+    atraction.price,
+    atraction.contact_person,
+    atraction.description,
+    atraction.video_url';
+    protected $coords = "ST_Y(ST_Centroid(atraction.geom)) AS lat ,ST_X(ST_Centroid(atraction.geom)) AS lng ";
+    protected $geom_area = "ST_AsGeoJSON(atraction.geom_area) AS geoJSON";
 
     public function getAtractions()
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
-        $columns = "
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table_category}.category,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.employe,
-        {$this->table}.price,
-        {$this->table}.contact_person,
-        {$this->table}.description";
-
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords},{$geom_area}")
+            ->select("{$this->columns},{$this->coords},{$this->geom_area}")
             ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->get()->getResult();
         return $query;
     }
     public function getAtraction($id)
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
-        $columns = "
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table_category}.category,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.employe,
-        {$this->table}.price,
-        {$this->table}.contact_person,
-        {$this->table}.description";
-
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords},{$geom_area}")
+            ->select("{$this->columns},{$this->coords},{$this->geom_area}")
             ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->where($this->primaryKey, $id)
             ->get();
@@ -65,21 +51,8 @@ class atractionModel extends Model
 
     public function getAtractionByName($name)
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
-        $columns = "
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table_category}.category,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.employe,
-        {$this->table}.price,
-        {$this->table}.contact_person,
-        {$this->table}.description";
-
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords},{$geom_area}")
+            ->select("{$this->columns},{$this->coords},{$this->geom_area}")
             ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->like('name', $name, 'both')
             ->get();
@@ -87,21 +60,8 @@ class atractionModel extends Model
     }
     public function getAtractionByRate($rate)
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
-        $columns = "
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table_category}.category,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.employe,
-        {$this->table}.price,
-        {$this->table}.contact_person,
-        {$this->table}.description";
-
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords},{$geom_area},ceil(avg(rating.rating)) as avg_rating")
+            ->select("{$this->columns},{$this->coords},{$this->geom_area},ceil(avg(rating.rating)) as avg_rating")
             ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->join('rating', 'rating.atraction_id = atraction.id')
             ->groupBy('atraction.id')
@@ -111,26 +71,37 @@ class atractionModel extends Model
     }
     public function getAtractionByCategory($category)
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
-        $columns = "
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table_category}.category,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.employe,
-        {$this->table}.price,
-        {$this->table}.contact_person,
-        {$this->table}.description";
-
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords},{$geom_area}")
+            ->select("{$this->columns},{$this->coords},{$this->geom_area}")
             ->join('category_atraction', 'category_atraction.id = atraction.category_id')
             ->where('category_atraction.category=', $category)
             ->get();
         return $query;
     }
+    public function getRadiusValue($lng, $lat, $radius)
+    {
+        $radiusnew = $radius / 1000;
+        $jarak = "(
+            6371 * acos (
+              cos ( radians($lat) )
+              * cos( radians( ST_Y(ST_CENTROID(geom)) ) )
+              * cos( radians( ST_X(ST_CENTROID(geom)) ) - radians($lng) )
+              + sin ( radians($lat) )
+              * sin( radians( ST_Y(ST_CENTROID(geom)) ) )
+            )
+          )";
+        $query = $this->db->table($this->table)
+            ->select("{$this->columns},{$this->coords},{$this->geom_area},{$jarak} as jarak")
+            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
+            ->having(['jarak <=' => $radiusnew])->get();
+        return $query;
+    }
+    public function getCategory()
+    {
+        $query = $this->db->table($this->table_category)->select('category')->get();
+        return $query;
+    }
+    // --------------------------------------Admin-------------------------------------------
     public function addAtraction($data)
     {
         $query = $this->db->table($this->table)->insert($data);
@@ -138,7 +109,6 @@ class atractionModel extends Model
     }
     public function updateAtraction($id, $data, $lng, $lat, $geojson)
     {
-        $point = 'POINT(100.10888610 -0.60117699)';
         $query = $this->db->table($this->table)
             ->where('atraction.id', $id)
             ->update($data);
@@ -155,14 +125,6 @@ class atractionModel extends Model
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
-
-    public function getCategory()
-    {
-        $query = $this->db->table($this->table_category)->select('category')->get();
-        return $query;
-    }
-
-
     // ----------------------------------------------Gallery APi ----------------------------------
     public function get_new_id_api()
     {
@@ -208,31 +170,8 @@ class atractionModel extends Model
         return $this->db->table($this->table_gallery)->delete(['atraction_id' => $id]);
     }
     // -------------------------------------------------Video Api-------------------------------------------
-    public function getVideos($id)
+    public function deleteVideo($id = null)
     {
-        $query = $this->db->table($this->table_video)->select('url')->where('atraction_id', $id)->get();
-        return $query;
-    }
-
-    public function getRadiusValue($lng, $lat, $radius)
-    {
-        $radiusnew = $radius / 1000;
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
-        $jarak = "(
-            6371 * acos (
-              cos ( radians($lat) )
-              * cos( radians( ST_Y(ST_CENTROID(geom)) ) )
-              * cos( radians( ST_X(ST_CENTROID(geom)) ) - radians($lng) )
-              + sin ( radians($lat) )
-              * sin( radians( ST_Y(ST_CENTROID(geom)) ) )
-            )
-          )";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table_category}.category";
-        $query = $this->db->table($this->table)
-            ->select("{$columns},{$jarak} as jarak,{$coords},{$geom_area}")
-            ->join('category_atraction', 'category_atraction.id = atraction.category_id')
-            ->having(['jarak <=' => $radiusnew])->get();
-        return $query;
+        return $this->db->table($this->table_video)->delete(['atraction_id' => $id]);
     }
 }
