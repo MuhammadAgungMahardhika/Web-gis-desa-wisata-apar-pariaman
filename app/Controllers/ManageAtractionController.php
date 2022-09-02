@@ -49,8 +49,10 @@ class ManageAtractionController extends BaseController
     public function edit($id = null)
     {
         $objectData = $this->model->getAtraction($id)->getRow();
+        $categoryData = $this->model->getCategory()->getResult();
         $galleryData = $this->model->getGallery($id)->getResult();
         $aparData = $this->modelApar->getApar();
+
         if (is_object($objectData)) {
             $data = [
                 'title' => $this->title,
@@ -58,6 +60,7 @@ class ManageAtractionController extends BaseController
                 'url' => 'atraction',
                 'objectData' => $objectData,
                 'galleryData' => $galleryData,
+                'categoryData' => $categoryData,
                 'aparData' => $aparData,
                 'validation' =>  $this->validation
             ];
@@ -84,6 +87,7 @@ class ManageAtractionController extends BaseController
         $request = $this->request->getPost();
         $updateRequest = [
             'name' => $this->request->getPost('name'),
+            'category_id' => $this->request->getPost('category'),
             'open' => $this->request->getPost('open'),
             'close' => $this->request->getPost('close'),
             'employe' => $this->request->getPost('employe'),
@@ -92,6 +96,9 @@ class ManageAtractionController extends BaseController
             'description' => $this->request->getPost('description')
         ];
         $geojson = $this->request->getPost('geojson');
+        if (!$geojson) {
+            $geojson = 'null';
+        }
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 

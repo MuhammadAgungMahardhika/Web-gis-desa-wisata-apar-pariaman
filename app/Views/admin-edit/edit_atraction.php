@@ -24,51 +24,63 @@
                     <div class="row">
                         <form class="form form-vertical" action="<?= base_url('manage_atraction/save_update/' . $objectData->id); ?>" method="post">
                             <div class="form-body">
+                                <!-- Form data spasial -->
                                 <table class="table table-border">
                                     <thead>
                                         <th>Data spasial </th>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>GeoJSON</td>
+                                            <td>Geom area</td>
                                             <td><input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly" required value='<?= $objectData->geoJSON; ?>'></td>
+                                            <td>
+                                                <a onclick="clearGeomArea()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear geom area" class="btn icon btn-outline-primary" id="clear-drawing"> <i class="fa fa-trash"></i></a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Latitude</td>
-                                            <td><input type="text" class="form-control" id="latitude" name="latitude" value="<?= $objectData->lat; ?>" autocomplete="off" readonly="readonly" required></td>
+                                            <td colspan="2"><input type="text" class="form-control" id="latitude" name="latitude" value="<?= $objectData->lat; ?>" autocomplete="off" readonly="readonly" required></td>
                                         </tr>
                                         <tr>
                                             <td>Longitude</td>
-                                            <td><input type="text" class="form-control" id="longitude" name="longitude" value="<?= $objectData->lng; ?>" autocomplete="off" readonly="readonly" required></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <small>*Edit data spasial on map</small>
-                                                <!-- <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search" class="btn icon btn-outline-primary" onclick="rollBackMap('<?= $url ?>','<?= $objectData->lat ?>','<?= $objectData->lng ?>','<?= json_encode($objectData->geoJSON) ?>');">
-                                                    <i class="fa-solid fa-undo"></i>
-                                                </a> -->
-                                                <!-- <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear" class="btn icon btn-outline-danger" id="clear-drawing">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </a> -->
-                                            </td>
+                                            <td colspan="2"><input type="text" class="form-control" id="longitude" name="longitude" value="<?= $objectData->lng; ?>" autocomplete="off" readonly="readonly" required></td>
                                         </tr>
                                     </tbody>
                                 </table>
-
-
-
                                 <div class="form-group row">
-                                    <label for="name" class=" col-sm-2 col-form-label">Name</label>
+                                    <small>*Edit data spasial on map</small>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                                <!-- Form data nonspasial -->
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>" required>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group row">
-                                <label for="status" class="col-sm-2 col-form-label">Category</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="category" value="1">
+                                <div class="form-group row">
+                                    <label for="category" class="col-sm-2 col-form-label">Category</label>
+                                    <div class="col-sm-10">
+                                        <select class=" form-select" id="category" name="category">
+                                            <?php $no = 0; ?>
+                                            <?php foreach ($categoryData as $category) : ?>
+                                                <?php if ($objectData->category) : ?>
+                                                    <?php if ($objectData->category_id == $category->id) : ?>
+                                                        <option value="<?= $objectData->category_id; ?>" selected><?= esc($objectData->category); ?></option>
+                                                    <?php else : ?>
+                                                        <option value="<?= $category->id; ?>"><?= esc($category->category); ?></option>
+                                                    <?php endif; ?>
+                                                <?php else : ?>
+                                                    <option value="<?= $category->id; ?>"><?= esc($category->category); ?></option>
+                                                <?php endif; ?>
+                                                <?php $no++; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+
                                 </div>
-                            </div> -->
                                 <div class="form-group row">
                                     <label for="status" class="col-sm-2 col-form-label">Open</label>
                                     <div class="col-sm-10">

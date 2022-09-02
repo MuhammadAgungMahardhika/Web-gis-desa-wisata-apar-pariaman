@@ -92,7 +92,11 @@ class ManageEventController extends BaseController
             'contact_person' => $this->request->getPost('contact_person'),
             'description' => $this->request->getPost('description')
         ];
+
         $geojson = $this->request->getPost('geojson');
+        if (!$geojson) {
+            $geojson = 'null';
+        }
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 

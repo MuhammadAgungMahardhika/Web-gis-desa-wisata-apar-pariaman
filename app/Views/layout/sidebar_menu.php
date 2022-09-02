@@ -14,9 +14,11 @@
                     <span>Atraction</span>
                 </a>
                 <ul class="submenu">
+                    <!-- List Atraction -->
                     <li class="submenu-item ">
                         <a class="sidebar-link" onclick="showObject('atraction')"><i class="fa fa-list"></i><span> List atraction</span></a>
                     </li>
+                    <!-- Atraction by user arround -->
                     <li class="submenu-item sidebar-item has-sub">
                         <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
                         <ul class="submenu">
@@ -29,6 +31,7 @@
                     <li class="submenu-item sidebar-item has-sub ">
                         <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search by</span> </a>
                         <ul class="submenu">
+                            <!-- Atraction by name -->
                             <li class="submenu-item sidebar-item has-sub">
                                 <a onclick="setObjectByName('atraction')" href="" class="sidebar-link"><span>Name</span> </a>
                                 <ul class="submenu">
@@ -38,6 +41,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            <!-- Atraction by category -->
                             <li class="submenu-item sidebar-item has-sub">
                                 <a onclick="setObjectByCategory()" href="" class="sidebar-link"><span>Category</span> </a>
                                 <ul class="submenu">
@@ -47,6 +51,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            <!-- Atraction by rating -->
                             <li class="submenu-item sidebar-item has-sub">
                                 <a onclick="removeAllStar()" href="" class="sidebar-link"><span>Rating</span> </a>
                                 <ul class="submenu">
@@ -72,9 +77,11 @@
                     <span>Event</span>
                 </a>
                 <ul class="submenu">
+                    <!-- List event -->
                     <li class="submenu-item ">
                         <a class="sidebar-link" onclick="showObject('event')"><i class="fa fa-list"></i><span> List event</span></a>
                     </li>
+                    <!-- Event by user arround -->
                     <li class="submenu-item sidebar-item has-sub">
                         <a href="" class="sidebar-link"><i class="fa fa-compass"></i><span> Arround you</span> </a>
                         <ul class="submenu">
@@ -87,6 +94,7 @@
                     <li class="submenu-item sidebar-item has-sub ">
                         <a href="" class="sidebar-link"><i class="fa fa-search"></i><span> Search by</span> </a>
                         <ul class="submenu">
+                            <!-- Event by name -->
                             <li class="submenu-item sidebar-item has-sub">
                                 <a onclick="setObjectByName('event')" href="" class="sidebar-link"><span>Name</span> </a>
                                 <ul class="submenu">
@@ -96,6 +104,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            <!-- Event by date -->
                             <li class="submenu-item sidebar-item has-sub">
                                 <a href="" class="sidebar-link"><span>Date</span> </a>
                                 <ul class="submenu">
@@ -109,6 +118,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            <!-- Event by rating -->
                             <li class="submenu-item sidebar-item has-sub">
                                 <a onclick="removeAllStar()" href="" class="sidebar-link"><span>Rating</span> </a>
                                 <ul class="submenu">

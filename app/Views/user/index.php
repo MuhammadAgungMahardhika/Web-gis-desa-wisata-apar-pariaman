@@ -12,7 +12,7 @@
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-4 text-center">
-                        <img src="/assets/images/user-photos/<?= user()->user_image; ?>" class="img-fluid rounded-circle py-4" width="250">
+                        <img src="<?= base_url('/assets/images/user-photos/') . "/" . user()->user_image; ?>" class="img-fluid rounded-circle py-4" width="250" />
                     </div>
                     <div class="col-md-8">
                         <?= $validation->listErrors('list'); ?>

@@ -20,7 +20,8 @@ class atractionModel extends Model
     protected $columns = '
     atraction.id,
     atraction.name,
-    category,
+    category_id,
+    category_atraction.category,
     atraction.open,
     atraction.close,
     atraction.employe,
@@ -98,7 +99,7 @@ class atractionModel extends Model
     }
     public function getCategory()
     {
-        $query = $this->db->table($this->table_category)->select('category')->get();
+        $query = $this->db->table($this->table_category)->select('id,category')->get();
         return $query;
     }
     // --------------------------------------Admin-------------------------------------------
@@ -107,7 +108,7 @@ class atractionModel extends Model
         $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
-    public function updateAtraction($id, $data, $lng, $lat, $geojson)
+    public function updateAtraction($id, $data, $lng, $lat, $geojson = null)
     {
         $query = $this->db->table($this->table)
             ->where('atraction.id', $id)

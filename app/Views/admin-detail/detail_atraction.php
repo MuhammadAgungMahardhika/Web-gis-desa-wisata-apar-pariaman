@@ -59,6 +59,11 @@
                                 <div class="carousel-inner">
                                     <!-- List gallery -->
                                     <?php $no = 0; ?>
+                                    <?php if (!$galleryData) : ?>
+                                        <?= '<div class="text-center">
+                                        <button class="col-sm-4 btn btn-outline-primary text-center">Gallery is empty!</button>
+                                        </div>' ?>
+                                    <?php endif; ?>
                                     <?php foreach ($galleryData as $gallery) : ?>
                                         <div class="carousel-item <?php if ($no == 0) echo 'active'; ?>">
                                             <img src="<?= base_url('media/photos/'); ?>/<?= $gallery->url; ?>" class="d-block w-100">
@@ -78,9 +83,17 @@
                         </div>
                         <div class="row">
                             <h5 class="card-title text-center">Video</h5>
-                            <div class="ratio ratio-16x9">
-                                <video src="<?= base_url('media/videos/'); ?>/<?= $objectData->video_url; ?>" class="embed-responsive-item" id="video" controls>Sorry, your browser doesn't support embedded videos</video>
-                            </div>
+                            <?php if (!$objectData->video_url) : ?>
+                                <?= '
+                                <div class="text-center">
+                                <button class="col-sm-4 btn btn-outline-primary text-center">Video is empty!</button>
+                                </div>
+                               ' ?>
+                            <?php else : ?>
+                                <div class="ratio ratio-16x9">
+                                    <video src="<?= base_url('media/videos/'); ?>/<?= $objectData->video_url; ?>" class="embed-responsive-item" id="video" controls>Sorry, your browser doesn't support embedded videos</video>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

@@ -969,18 +969,12 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
         // document.getElementById('geo-json').value = geojson
     }
     // Remove selected shape on maps
-    function deleteSelectedShape() {
-        if(selectedMarker){
-            document.getElementById('latitude').value = ''
-            document.getElementById('longitude').value = ''
-            selectedMarker.setMap(null)
-            selectedMarker = null
-        } 
+    function clearGeomArea(){
+        document.getElementById('geo-json').value = ''
         if (selectedShape) {
-            document.getElementById('geo-json').value = ''
-            selectedShape.setMap(null);
+            selectedShape.setMap(null)
             selectedShape = null
-        }
+        }else{ clearGeom()}
     }
 
     // Initialize drawing manager on maps
@@ -1023,7 +1017,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
                   }
             });
         } 
-        // google.maps.event.addDomListener(document.getElementById('clear-drawing'), 'click', deleteSelectedShape)
+        
     }
 
     function setMarker(shape,url=null){    

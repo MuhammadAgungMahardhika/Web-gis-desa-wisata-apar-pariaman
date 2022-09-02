@@ -21,9 +21,9 @@
                                         <div class="d-flex align-items-center">
                                             <div class="avatar avatar-lg me-0">
                                                 <?php if (in_groups('admin') || in_groups('user')) : ?>
-                                                    <img src="<?= base_url('/assets/images/user-photos/default.svg') ?>" />
+                                                    <img src="<?= base_url('/assets/images/user-photos/') . "/" . user()->user_image; ?>" />
                                                 <?php else : ?>
-                                                    <img src=" <?= base_url('/assets/images/user-photos/default.svg') ?>" />
+                                                    <img src=" <?= base_url('assets/images/user-photos/default.svg') ?>" />
                                                 <?php endif; ?>
                                             </div>
                                         </div>
