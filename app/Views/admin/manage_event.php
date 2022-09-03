@@ -23,6 +23,7 @@
                         ?>
                         <tr>
                             <th>No</th>
+                            <th>Event id</th>
                             <th>Name event</th>
                             <th class="text-center">Action</th>
 
@@ -33,11 +34,11 @@
                         <?php foreach ($objectData as $event) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
+                                <td><?= $event->id; ?></td>
                                 <td><?= $event->name; ?></td>
-
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Detail event" href="<?= base_url('manage_event/detail/' . $event->id); ?>"><i class="fa fa-eye"></i> </a>
-                                    <a class="btn btn-outline-danger btn-sm" title="Delete Event" data-toggle="modal" data-target="#deleteModal<?= $event->id; ?>">
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete Event" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $event->id; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

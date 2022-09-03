@@ -12,8 +12,6 @@ class atractionModel extends Model
     protected $table_category = 'category_atraction';
     protected $table_gallery = 'atraction_gallery';
     protected $table_video = 'atraction_video';
-
-    protected $primaryKey = 'atraction.id';
     protected $pk_gallery = 'atraction_gallery.id';
     protected $pk_video = 'atraction_gallery.id';
     protected $allowedFields = ['name', 'employe', 'open', 'close', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
@@ -45,7 +43,7 @@ class atractionModel extends Model
         $query = $this->db->table($this->table)
             ->select("{$this->columns},{$this->coords},{$this->geom_area}")
             ->join('category_atraction', 'category_atraction.id = atraction.category_id')
-            ->where($this->primaryKey, $id)
+            ->where('atraction.id', $id)
             ->get();
         return $query;
     }
@@ -103,10 +101,17 @@ class atractionModel extends Model
         return $query;
     }
     // --------------------------------------Admin-------------------------------------------
-    public function addAtraction($data)
+    public function addAtraction($id, $data, $lng, $lat, $geojson = null)
     {
         $query = $this->db->table($this->table)->insert($data);
-        return $query;
+        if ($query) {
+            $spasial = $this->db->table($this->table)
+                ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
+                ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
+                ->where('atraction.id', $id)
+                ->update();
+        }
+        return $query && $spasial;
     }
     public function updateAtraction($id, $data, $lng, $lat, $geojson = null)
     {

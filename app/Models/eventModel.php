@@ -11,7 +11,6 @@ class eventModel extends Model
     protected $table = 'event';
     protected $table_gallery = 'event_gallery';
     protected $table_video = 'event_video';
-    protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'schedule', 'price', 'contact_person', 'description', 'lat', 'lng', 'geom'];
     protected $columns = '
     event.id,
@@ -38,11 +37,10 @@ class eventModel extends Model
     {
         $query = $this->db->table($this->table)
             ->select("{$this->columns},{$this->coords},{$this->geom_area}")
-            ->where($this->primaryKey, $id)
+            ->where('event.id', $id)
             ->get();
         return $query;
     }
-
     public function getEventByName($name)
     {
         $query = $this->db->table($this->table)
@@ -90,10 +88,18 @@ class eventModel extends Model
             ->having(['jarak <=' => $radiusnew])->get();
         return $query;
     }
-    public function addEvent($data)
+    // ----------------------------------------------Admin--------------------------------------
+    public function addEvent($id, $data, $lng, $lat, $geojson = null)
     {
         $query = $this->db->table($this->table)->insert($data);
-        return $query;
+        if ($query) {
+            $spasial = $this->db->table($this->table)
+                ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
+                ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
+                ->where('event.id', $id)
+                ->update();
+        }
+        return $query && $spasial;
     }
     public function updateEvent($id, $data, $lng, $lat, $geojson = null)
     {

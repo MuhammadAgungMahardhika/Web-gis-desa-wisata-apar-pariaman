@@ -15,6 +15,7 @@
                         <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
+                            <th>Atraction id</th>
                             <th>Name</th>
                             <th>Price</th>
                             <th class="text-center">Action</th>
@@ -24,11 +25,12 @@
                         <?php foreach ($objectData as $atraction) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
+                                <td><?= $atraction->id; ?></td>
                                 <td><?= $atraction->name; ?></td>
                                 <td><?= $atraction->price ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Detail atraction" href="<?= base_url('manage_atraction/detail/' . $atraction->id); ?>"><i class="fa fa-eye"></i> </a>
-                                    <a class="btn btn-outline-danger btn-sm" title="Delete atraction" data-toggle="modal" data-target="#deleteModal<?= $atraction->id; ?>">
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete atraction" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $atraction->id; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

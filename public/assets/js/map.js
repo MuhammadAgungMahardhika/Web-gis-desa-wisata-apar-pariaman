@@ -5,6 +5,7 @@ let userPosition,userMarker,directionsRenderer,infoWindow,circle,map
 let markerArray = []
 let markerNearby
 let geomArray = []
+let geomAparArray = []
 let geomNearby
 let atData,evData,cpData,spData,wpData, fData, detailData
 let atUrl,evUrl,cpUrl,spUrl,wpUrl,fUrl,detailUrl
@@ -155,7 +156,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
 
     // add geom on map
-    function addMarkerGeom(geoJson, color,pass = null) {
+    function addMarkerGeom(geoJson,color=null,pass = null) {
         // Construct the polygon.
         const a = {type: 'Feature',geometry: geoJson}
         const geom = new google.maps.Data()
@@ -175,12 +176,18 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     // clear geom on map
     function clearGeom(pass=null){
         if(!pass){
-            for(i in geomArray){
-                geomArray[i].setMap(null)
-            }
+            for(i in geomArray){geomArray[i].setMap(null)}
            geomArray = []
         }
-        
+    }
+     // clear apar geom on map
+     function clearAparGeom(pass=null){
+        if(geomAparArray){
+            for(i in geomAparArray){
+            geomAparArray[i].setMap(null)
+            geomAparArray = null
+            }
+        }
     }
      // Construct the polygon.
     function addAparPolygon(geoJson, color, opacity) {
@@ -194,6 +201,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             fillOpacity: 0.1,
             clickable: false
         })
+        geomAparArray.push(geom)
         geom.setMap(map)
     }
    
@@ -247,6 +255,7 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
     //check object marker icon
     function checkIcon(icon) {
+        if (icon == 'apar') {return icon = { url:  base_url+"/assets/images/marker-icon/focus.png"}}
         if (icon == 'atraction') {return icon = { url:  base_url+"/assets/images/marker-icon/marker-atraction.png"}}
         if (icon == 'event') {return icon = {url: base_url+"/assets/images/marker-icon/marker_ev.png"}} 
         if (icon == 'culinary_place') {return icon = {url:  base_url+"/assets/images/marker-icon/marker_cp.png"}}
@@ -327,7 +336,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             if(url == 'worship_place'){color = '#42CB6F'}
             if(url == 'facility'){color = '#8EFFCD'}
         }
-       
         if(!pass){
             markerArray.push(objectMarker)
             addMarkerGeom(geoJSON,color)
@@ -910,7 +918,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
       function getObjectByCategory(val = null) {
         let category = val
         if (!category) {return}
-
         $('#rowObjectArround').css("display", "none")
         $.ajax({
             url: base_url + "/" + "list_object"+ "/"+ "atraction_by_category" + "/" + category,
@@ -961,13 +968,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
     }
     
 //---------------------------------------------admin drawing manager------------------------------------------------
-    // Set map to coordinate put by user
-    function rollBackMap(url,lat,lng,geoJSON) {
-        // return alert(geoJSON)
-        document.getElementById('latitude').value = lat
-        document.getElementById('longitude').value = lng
-        // document.getElementById('geo-json').value = geojson
-    }
     // Remove selected shape on maps
     function clearGeomArea(){
         document.getElementById('geo-json').value = ''
@@ -1030,7 +1030,6 @@ let mapStyles = [{featureType: "poi",elementType: "labels",stylers: [{ visibilit
             selectedMarker = null
         }
         selectedMarker = shape
-        // setCenter({lat:latApar,lng:lngApar})
         document.getElementById('latitude').value = lat
         document.getElementById('longitude').value = lng
     }

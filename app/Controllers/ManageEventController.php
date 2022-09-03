@@ -72,7 +72,6 @@ class ManageEventController extends BaseController
     }
     public function save_update($id = null)
     {
-
         //--------------------validation data
         $validateRules = $this->validate([
             'name' => 'required|max_length[50]',
@@ -92,7 +91,6 @@ class ManageEventController extends BaseController
             'contact_person' => $this->request->getPost('contact_person'),
             'description' => $this->request->getPost('description')
         ];
-
         $geojson = $this->request->getPost('geojson');
         if (!$geojson) {
             $geojson = 'null';
@@ -100,46 +98,48 @@ class ManageEventController extends BaseController
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 
-        // ----------------Gallery-----------------
-        // check if gallery have empty string then make it become empty array
-        foreach ($request['gallery'] as $key => $value) {
-            if (!strlen($value)) {
-                unset($request['gallery'][$key]);
-            }
-        }
-        if ($request['gallery']) {
-            $folders = $request['gallery'];
-            $gallery = array();
-            foreach ($folders as $folder) {
+        if ($validateRules) {
+            // -----------------------------------Video------------------------------
+            if ($request['video']) {
+                $folder = $request['video'];
                 $filepath = WRITEPATH . 'uploads/' . $folder;
                 $filenames = get_filenames($filepath);
-                $fileImg = new File($filepath . '/' . $filenames[0]);
-                $fileImg->move(FCPATH . 'media/photos');
+                $vidFile = new File($filepath . '/' . $filenames[0]);
+                $vidFile->move(FCPATH . 'media/videos');
                 delete_files($filepath);
                 rmdir($filepath);
-                $gallery[] = $fileImg->getFilename();
+                $updateRequest['video_url'] = $vidFile->getFilename();
+            } else {
+                $updateRequest['video_url'] = null;
             }
-            $this->model->updateGallery($id, $gallery);
-        } else {
-            $this->model->deleteGallery($id);
-        }
-        // ------------------Video----------------------
-        if ($request['video']) {
-            $folder = $request['video'];
-            $filepath = WRITEPATH . 'uploads/' . $folder;
-            $filenames = get_filenames($filepath);
-            $vidFile = new File($filepath . '/' . $filenames[0]);
-            $vidFile->move(FCPATH . 'media/videos');
-            delete_files($filepath);
-            rmdir($filepath);
-            $updateRequest['video_url'] = $vidFile->getFilename();
-        } else {
-            $updateRequest['video_url'] = null;
-        }
-        // ----------------------------------UPDATE DATA--------------------------
-        if ($validateRules) {
+            // ----------------------------------UPDATE DATA--------------------------
             $update = $this->model->updateEvent($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
             if ($update) {
+                // --------------------------------Gallery------------------------------
+                // check if gallery have empty string then make it become empty array
+                foreach ($request['gallery'] as $key => $value) {
+                    if (!strlen($value)) {
+                        unset($request['gallery'][$key]);
+                    }
+                }
+                if ($request['gallery']) {
+                    $folders = $request['gallery'];
+                    $gallery = array();
+                    foreach ($folders as $folder) {
+                        $filepath = WRITEPATH . 'uploads/' . $folder;
+                        $filenames = get_filenames($filepath);
+                        $fileImg = new File($filepath . '/' . $filenames[0]);
+                        $fileImg->move(FCPATH . 'media/photos');
+                        delete_files($filepath);
+                        rmdir($filepath);
+                        $gallery[] = $fileImg->getFilename();
+                    }
+                    $updateGallery = $this->model->updateGallery($id, $gallery);
+                } else {
+                    $updateGallery = $this->model->deleteGallery($id);
+                }
+            }
+            if ($update && $updateGallery) {
                 session()->setFlashdata('success', 'Success! Event updated.');
                 return redirect()->to(site_url('manage_event/edit/' . $id));
             } else {
@@ -148,20 +148,22 @@ class ManageEventController extends BaseController
             }
         } else {
             $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed to update event.');
+            session()->setFlashdata('failed', 'Failed! Failed' . json_encode($listErrors));
             return redirect()->to(site_url('manage_event/edit/' . $id));
         }
     }
 
     public function insert()
     {
-
+        $aparData = $this->modelApar->getApar();
         $data = [
             'title' => $this->title,
+            'url' => 'event',
+            'aparData' => $aparData
         ];
         return view('admin-insert/insert_event', $data);
     }
-    public function save_insert($id)
+    public function save_insert()
     {
         //validation data
         $validateRules = $this->validate([
@@ -171,22 +173,76 @@ class ManageEventController extends BaseController
             'date_end' => 'required',
             'price' => 'max_length[50]',
             'contact_person' => 'max_length[14]',
-            'description' => 'max_length[255]',
-            'lat' => 'required|max_length[20]',
-            'lng' => 'required|max_length[20]'
+            'description' => 'max_length[255]'
         ]);
+        // ---------------------Data request------------------------------------
+        $request = $this->request->getPost();
+        $id = $this->request->getPost('id');
+        $insertRequest = [
+            'id' => $id,
+            'name' => $this->request->getPost('name'),
+            'date_start' => $this->request->getPost('date_start'),
+            'date_end' => $this->request->getPost('date_end'),
+            'time_start' => $this->request->getPost('time_start'),
+            'time_end' => $this->request->getPost('time_end'),
+            'price' => $this->request->getPost('price'),
+            'contact_person' => $this->request->getPost('contact_person'),
+            'description' => $this->request->getPost('description')
+        ];
+        $geojson = $this->request->getPost('geojson');
+        if (!$geojson) {
+            $geojson = 'null';
+        }
 
-
-
+        $lat = $this->request->getPost('latitude');
+        $lng = $this->request->getPost('longitude');
         if ($validateRules) {
-            try {
-                $insertRequest = $this->request->getPOST();
-                $this->model->addEvent($insertRequest);
-            } catch (\Exception $e) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound($e);
-            } finally {
+            // ------------------Video----------------------
+            if ($request['video']) {
+                $folder = $request['video'];
+                $filepath = WRITEPATH . 'uploads/' . $folder;
+                $filenames = get_filenames($filepath);
+                $vidFile = new File($filepath . '/' . $filenames[0]);
+                $vidFile->move(FCPATH . 'media/videos');
+                delete_files($filepath);
+                rmdir($filepath);
+                $insertRequest['video_url'] = $vidFile->getFilename();
+            } else {
+                $insertRequest['video_url'] = null;
+            }
+
+            $insert =  $this->model->addEvent($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
+            if ($insert) {
+                // ----------------Gallery-----------------------------------------
+                // check if gallery have empty string then make it become empty array
+                foreach ($request['gallery'] as $key => $value) {
+                    if (!strlen($value)) {
+                        unset($request['gallery'][$key]);
+                    }
+                }
+                if ($request['gallery']) {
+                    $folders = $request['gallery'];
+                    $gallery = array();
+                    foreach ($folders as $folder) {
+                        $filepath = WRITEPATH . 'uploads/' . $folder;
+                        $filenames = get_filenames($filepath);
+                        $fileImg = new File($filepath . '/' . $filenames[0]);
+                        $fileImg->move(FCPATH . 'media/photos');
+                        delete_files($filepath);
+                        rmdir($filepath);
+                        $gallery[] = $fileImg->getFilename();
+                    }
+                    $insertGallery =  $this->model->addGallery($id, $gallery);
+                } else {
+                    $insertGallery = true;
+                }
+            }
+            if ($insert && $insertGallery) {
                 session()->setFlashdata('success', 'Success! Data Added.');
                 return redirect()->to(site_url('manage_event'));
+            } else {
+                session()->setFlashdata('failed', 'Failed! Failed to add data.');
+                return redirect()->to(site_url('manage_event/insert'));
             }
         } else {
             $listErrors = $this->validation->listErrors();
@@ -196,13 +252,12 @@ class ManageEventController extends BaseController
     }
     public function delete($id)
     {
-
-        try {
-            $this->model->deleteEvent($id);
-        } catch (\Exception $e) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound($e);
-        } finally {
+        $delete =  $this->model->deleteEvent($id);
+        if ($delete) {
             session()->setFlashdata('success', 'Success! Event Deleted.');
+            return redirect()->to(site_url('manage_event'));
+        } else {
+            session()->setFlashdata('failed', 'Failed to delete event.');
             return redirect()->to(site_url('manage_event'));
         }
     }
