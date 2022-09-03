@@ -17,11 +17,13 @@ class ManageAparController extends BaseController
 
     public function index()
     {
-        $aparData = $this->model->getApar();
-
+        $objectData = $this->model->getApar();
+        $galleryData = $this->model->getGallery('A01')->getResult();
         $data = [
             'title' => $this->title,
-            'aparData' => $aparData
+            'url' => 'apar',
+            'objectData' => $objectData,
+            'galleryData' => $galleryData
         ];
 
 

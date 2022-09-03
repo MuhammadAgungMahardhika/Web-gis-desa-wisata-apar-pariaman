@@ -3,15 +3,11 @@
 namespace App\Controllers;
 
 use CodeIgniter\Files\File;
-use CodeIgniter\RESTful\ResourcePresenter;
-
-use function PHPUnit\Framework\isEmpty;
 
 class ManageEventController extends BaseController
 {
-    protected $model, $modelApar, $validation;
+    protected $model, $modelApar, $validation, $helpers = ['auth', 'url', 'filesystem'];
     protected $title = 'Manage-Event | Tourism Village';
-    protected $helpers = ['auth', 'url', 'filesystem'];
     public function __construct()
     {
         $this->validation = \Config\Services::validation();

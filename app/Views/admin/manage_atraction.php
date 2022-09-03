@@ -5,7 +5,7 @@
     <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary text-center">Manage Atraction</h6>
+            <h5 class="m-0 font-weight-bold text-primary text-center">Manage Atraction</h5>
             <a href="<?= base_url('manage_atraction/insert') ?> " title="Add atraction" role="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</a>
         </div>
         <div class="card-body">
@@ -15,9 +15,8 @@
                         <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
-                            <th>Atraction id</th>
+                            <th>Id</th>
                             <th>Name</th>
-                            <th>Price</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -27,7 +26,6 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $atraction->id; ?></td>
                                 <td><?= $atraction->name; ?></td>
-                                <td><?= $atraction->price ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Detail atraction" href="<?= base_url('manage_atraction/detail/' . $atraction->id); ?>"><i class="fa fa-eye"></i> </a>
                                     <a class="btn btn-outline-danger btn-sm" title="Delete atraction" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $atraction->id; ?>">

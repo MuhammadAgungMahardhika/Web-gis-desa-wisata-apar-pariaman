@@ -11,7 +11,7 @@
     <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary text-center">Manage Event</h6>
+            <h5 class="m-0 font-weight-bold text-primary text-center">Manage Event</h5>
             <a href="<?= base_url('manage_event/insert') ?> " title="Add event" role="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</a>
         </div>
         <div class="card-body">
@@ -23,8 +23,8 @@
                         ?>
                         <tr>
                             <th>No</th>
-                            <th>Event id</th>
-                            <th>Name event</th>
+                            <th>Id</th>
+                            <th>Name</th>
                             <th class="text-center">Action</th>
 
                         </tr>

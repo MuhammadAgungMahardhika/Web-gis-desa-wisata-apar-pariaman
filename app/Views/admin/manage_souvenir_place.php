@@ -11,34 +11,30 @@
     <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary text-center">Manage Souvenir Place</h6>
+            <h5 class="m-0 font-weight-bold text-primary text-center">Manage Souvenir Place</h5>
             <a href="<?= base_url('manage_souvenir_place/insert') ?> " title="Add souvenir place" role="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <?php $no = 1;
-
-                        ?>
+                        <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
+                            <th>Id</th>
                             <th>Sovenir Place Name</th>
-
                             <th class="text-center">Action</th>
-
                         </tr>
-
                     </thead>
                     <tbody>
                         <?php foreach ($souvenirPlaceData as $souvenirPlace) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
+                                <td><?= $souvenirPlace->id; ?></td>
                                 <td><?= $souvenirPlace->name; ?></td>
-
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_souvenir_place/detail/' . $souvenirPlace->id); ?>"><i class="fa fa-eye"></i> </a>
-                                    <a class="btn btn-outline-danger btn-sm" title="Delete Souvenir Place" data-toggle="modal" data-target="#deleteModal<?= $souvenirPlace->id; ?>">
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete Souvenir Place" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $souvenirPlace->id; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

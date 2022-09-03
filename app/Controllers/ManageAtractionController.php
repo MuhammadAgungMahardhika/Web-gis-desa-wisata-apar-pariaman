@@ -6,10 +6,8 @@ use CodeIgniter\Files\File;
 
 class ManageAtractionController extends BaseController
 {
-    protected $model, $modelApar, $validation;
+    protected $model, $modelApar, $validation, $helpers = ['auth', 'url', 'filesystem'];
     protected $title = 'Manage-Atractions | Tourism Village';
-    protected $helpers = ['auth', 'url', 'filesystem'];
-
     public function __construct()
     {
         $this->validation = \Config\Services::validation();

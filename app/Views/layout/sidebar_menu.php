@@ -149,7 +149,7 @@
                         <a role="button" href="<?= base_url('manage_users') ?>">Users</a>
                     </li>
                     <li class="submenu-item ">
-                        <a role="button" href="<?= base_url('manage_apar') ?>">Apar Info</a>
+                        <a role="button" href="<?= base_url('manage_apar') ?>">Tourism Village</a>
                     </li>
                     <li class="submenu-item ">
                         <a role="button" href="<?= base_url('manage_atraction') ?>">Atraction</a>
