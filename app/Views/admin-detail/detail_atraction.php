@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <table class="table table-borderless">
+                            <table class="table table-border">
                                 <tbody>
                                     <tr>
                                         <td class="fw-bold">Category</td>

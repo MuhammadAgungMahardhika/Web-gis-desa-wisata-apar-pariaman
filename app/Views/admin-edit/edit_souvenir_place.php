@@ -32,14 +32,17 @@
                                         <tr>
                                             <td>GeoJSON</td>
                                             <td><input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly" value='<?= $objectData->geoJSON; ?>' required></td>
+                                            <td>
+                                                <a onclick="clearGeomArea()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear geom area" class="btn icon btn-outline-primary" id="clear-drawing"> <i class="fa fa-trash"></i></a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Latitude</td>
-                                            <td><input type="text" class="form-control" id="latitude" name="latitude" value="<?= $objectData->lat; ?>" autocomplete="off" readonly="readonly" required></td>
+                                            <td colspan="2"><input type="text" class="form-control" id="latitude" name="latitude" value="<?= $objectData->lat; ?>" autocomplete="off" readonly="readonly" required></td>
                                         </tr>
                                         <tr>
                                             <td>Longitude</td>
-                                            <td><input type="text" class="form-control" id="longitude" name="longitude" value="<?= $objectData->lng; ?>" autocomplete="off" readonly="readonly" required></td>
+                                            <td colspan="2"><input type="text" class="form-control" id="longitude" name="longitude" value="<?= $objectData->lng; ?>" autocomplete="off" readonly="readonly" required></td>
                                         </tr>
                                         <tr>
                                             <td>

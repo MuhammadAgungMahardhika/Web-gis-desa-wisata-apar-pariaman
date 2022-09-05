@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="<?= base_url('manage_apar'); ?>" role="button" class="btn btn-primary justify-item-center" title="edit apar info"><i class="fa fa-arrow-left"></i></a>
-                    <h4 class="card-title text-center"><?= $aparData->name; ?></h4>
+                    <h4 class="card-title text-center">Edit Tourism Village</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
