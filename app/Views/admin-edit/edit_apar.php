@@ -33,9 +33,6 @@
                                         <tr>
                                             <td>Village geom</td>
                                             <td colspan="2"><input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly" required value='<?= $aparData->geoJSON; ?>'></td>
-                                            <td>
-                                                <a onclick="clearGeomArea()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear geom area" class="btn icon btn-outline-primary" id="clear-drawing"> <i class="fa fa-trash"></i></a>
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Center</td>

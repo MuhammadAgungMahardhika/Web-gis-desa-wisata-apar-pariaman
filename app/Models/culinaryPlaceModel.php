@@ -4,79 +4,35 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\I18n\Time;
+
 
 class culinaryPlaceModel extends Model
 {
     protected $table = 'culinary_place';
     protected $table_gallery = 'culinary_place_gallery';
-    protected $table_detail_menu = 'detail_menu';
-    protected $table_menu = 'menu';
+    protected $columns = 'id,name,owner,open,close,contact_person,description';
+    protected $coords = 'ST_Y(ST_Centroid(culinary_place.geom)) AS lat ,ST_X(ST_Centroid(culinary_place.geom)) AS lng ';
+    protected $geom_area = "ST_AsGeoJSON(culinary_place.geom_area) AS geoJSON";
 
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'description', 'lat', 'lng', 'geom'];
     public function getCulinaryPlaces()
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $columns = "
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table}.owner,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.contact_person,
-        {$this->table}.description";
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords}")
+            ->select("{$this->columns},{$this->coords},{$this->geom_area}")
             ->get()->getResult();
         return $query;
     }
     public function getCulinaryPlace($id)
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $columns = "
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table}.owner,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.contact_person,
-        {$this->table}.description";
-
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$coords}")
-            ->where($this->primaryKey, $id)
+            ->select("{$this->columns},{$this->coords},{$this->geom_area}")
+            ->where('culinary_place.id', $id)
             ->get();
         return $query;
     }
-    public function addCulinaryPlace($data)
-    {
-        $query = $this->db->table($this->table)->insert($data);
-        return $query;
-    }
-
-    public function deleteCulinaryPlace($id)
-    {
-        $query = $this->db->table($this->table)->delete(array('id' => $id));
-        return $query;
-    }
-    public function getGallery($id)
-    {
-        $query = $this->db->table($this->table_gallery)->select('url')->where('culinary_place_id', $id)->get();
-        return $query;
-    }
-    // public function getMenu($id)
-    // {
-    //     $query = $this->db->table($this->table_menu)->select('*')
-    //         ->join($this->table_detail_menu, 'menu_id = menu.id')
-    //         ->where('culinary_place_id', $id)->get();
-    //     return $query;
-    // }
-
     public function getRadiusValue($lng, $lat, $radius)
     {
         $radiusnew = $radius / 1000;
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
-        $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
         $jarak = "(
             6371 * acos (
               cos ( radians($lat) )
@@ -86,17 +42,84 @@ class culinaryPlaceModel extends Model
               * sin( radians( ST_Y(ST_CENTROID(geom)) ) )
             )
           )";
-        $columns = "  
-        {$this->table}.id,
-        {$this->table}.name,
-        {$this->table}.owner,
-        {$this->table}.open,
-        {$this->table}.close,
-        {$this->table}.contact_person,
-        {$this->table}.description";
         $query = $this->db->table($this->table)
-            ->select("{$columns},{$jarak} as jarak,{$coords},{$geom_area}")
+            ->select("{$this->columns},{$this->coords},{$this->geom_area},{$jarak} as jarak")
             ->having(['jarak <=' => $radiusnew])->get();
         return $query;
+    }
+    // ----------------------------------------------Admin--------------------------------------
+    public function addCulinaryPlace($id, $data, $lng, $lat, $geojson = null)
+    {
+        $query = $this->db->table($this->table)->insert($data);
+        if ($query) {
+            $spasial = $this->db->table($this->table)
+                ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
+                ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
+                ->where('culinary_place.id', $id)
+                ->update();
+        }
+        return $query && $spasial;
+    }
+    public function updateCp($id, $data, $lng, $lat, $geojson = null)
+    {
+        $query = $this->db->table($this->table)
+            ->where('culinary_place.id', $id)
+            ->update($data);
+        $update = $this->db->table($this->table)
+            ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
+            ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
+            ->where('culinary_place.id', $id)
+            ->update();
+        return $query && $update;
+    }
+
+    public function deleteCulinaryPlace($id)
+    {
+        $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    }
+    // ---------------------------------Gallery APi------------------------
+    public function get_new_id_api()
+    {
+        $lastId = $this->db->table($this->table_gallery)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
+        $count = (int)substr($lastId['id'], 3);
+        $id = sprintf('IMG%04d', $count + 1);
+        return $id;
+    }
+    public function getGallery($id)
+    {
+        $query = $this->db->table($this->table_gallery)->select('url')->where('culinary_place_id', $id)->get();
+        return $query;
+    }
+    public function addGallery($id = null, $data = null)
+    {
+        $query = false;
+        foreach ($data as $gallery) {
+            $new_id = $this->get_new_id_api();
+            $content = [
+                'id' => $new_id,
+                'culinary_place_id' => $id,
+                'url' => $gallery,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now(),
+            ];
+            $query = $this->db->table($this->table_gallery)->insert($content);
+        }
+        return $query;
+    }
+    public function updateGallery($id = null, $data = null)
+    {
+        $queryDel = $this->deleteGallery($id);
+        foreach ($data as $key => $value) {
+            if (empty($value)) {
+                unset($data[$key]);
+            }
+        }
+        $queryIns = $this->addGallery($id, $data);
+        return $queryDel && $queryIns;
+    }
+    public function deleteGallery($id = null)
+    {
+        return $this->db->table($this->table_gallery)->delete(['culinary_place_id' => $id]);
     }
 }

@@ -33,19 +33,15 @@ class ManageAparController extends BaseController
     {
         $aparData = $this->model->editApar($id);
         $galleryData = $this->model->getGallery($id)->getResult();
-        if (is_object($aparData)) {
-            $data = [
-                'title' => $this->title,
-                'config' => config('Auth'),
-                'url' => 'apar',
-                'aparData' => $aparData,
-                'galleryData' => $galleryData,
-                'validation' =>  $this->validation
-            ];
-            return view('admin-edit/edit_apar', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        $data = [
+            'title' => $this->title,
+            'config' => config('Auth'),
+            'url' => 'apar',
+            'aparData' => $aparData,
+            'galleryData' => $galleryData,
+            'validation' =>  $this->validation
+        ];
+        return view('admin-edit/edit_apar', $data);
     }
 
     public function save_update($id = null)

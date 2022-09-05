@@ -28,19 +28,15 @@ class ManageAtractionController extends BaseController
         $objectData = $this->model->getAtraction($id)->getRow();
         $galleryData = $this->model->getGallery($id)->getResult();
         $aparData = $this->modelApar->getApar();
-        if (is_object($objectData)) {
-            $data = [
-                'title' => $this->title,
-                'config' => config('Auth'),
-                'url' => 'atraction',
-                'objectData' => $objectData,
-                'galleryData' => $galleryData,
-                'aparData' => $aparData
-            ];
-            return view('admin-detail/detail_atraction', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        $data = [
+            'title' => $this->title,
+            'config' => config('Auth'),
+            'url' => 'atraction',
+            'objectData' => $objectData,
+            'galleryData' => $galleryData,
+            'aparData' => $aparData
+        ];
+        return view('admin-detail/detail_atraction', $data);
     }
 
     public function edit($id = null)
@@ -49,22 +45,17 @@ class ManageAtractionController extends BaseController
         $categoryData = $this->model->getCategory()->getResult();
         $galleryData = $this->model->getGallery($id)->getResult();
         $aparData = $this->modelApar->getApar();
-
-        if (is_object($objectData)) {
-            $data = [
-                'title' => $this->title,
-                'config' => config('Auth'),
-                'url' => 'atraction',
-                'objectData' => $objectData,
-                'galleryData' => $galleryData,
-                'categoryData' => $categoryData,
-                'aparData' => $aparData,
-                'validation' =>  $this->validation
-            ];
-            return view('admin-edit/edit_atraction', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        $data = [
+            'title' => $this->title,
+            'config' => config('Auth'),
+            'url' => 'atraction',
+            'objectData' => $objectData,
+            'galleryData' => $galleryData,
+            'categoryData' => $categoryData,
+            'aparData' => $aparData,
+            'validation' =>  $this->validation
+        ];
+        return view('admin-edit/edit_atraction', $data);
     }
 
     public function save_update($id = null)

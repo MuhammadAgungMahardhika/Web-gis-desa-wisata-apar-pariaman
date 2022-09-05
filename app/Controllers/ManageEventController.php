@@ -31,19 +31,15 @@ class ManageEventController extends BaseController
         $objectData = $this->model->getEvent($id)->getRow();
         $galleryData = $this->model->getGallery($id)->getResult();
         $aparData = $this->modelApar->getApar();
-        if (is_object($objectData)) {
-            $data = [
-                'title' => $this->title,
-                'config' => config('Auth'),
-                'aparData' => $aparData,
-                'url' => 'event',
-                'objectData' => $objectData,
-                'galleryData' => $galleryData
-            ];
-            return view('admin-detail/detail_event', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        $data = [
+            'title' => $this->title,
+            'config' => config('Auth'),
+            'aparData' => $aparData,
+            'url' => 'event',
+            'objectData' => $objectData,
+            'galleryData' => $galleryData
+        ];
+        return view('admin-detail/detail_event', $data);
     }
 
     public function edit($id = null)
@@ -51,20 +47,15 @@ class ManageEventController extends BaseController
         $objectData = $this->model->getEvent($id)->getRow();
         $galleryData = $this->model->getGallery($id)->getResult();
         $aparData = $this->modelApar->getApar();
-
-        if (is_object($objectData)) {
-            $data = [
-                'title' => $this->title,
-                'config' => config('Auth'),
-                'aparData' => $aparData,
-                'galleryData' => $galleryData,
-                'url' => 'event',
-                'objectData' => $objectData
-            ];
-            return view('admin-edit/edit_event', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        $data = [
+            'title' => $this->title,
+            'config' => config('Auth'),
+            'aparData' => $aparData,
+            'galleryData' => $galleryData,
+            'url' => 'event',
+            'objectData' => $objectData
+        ];
+        return view('admin-edit/edit_event', $data);
     }
     public function save_update($id = null)
     {

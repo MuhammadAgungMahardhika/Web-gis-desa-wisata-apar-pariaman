@@ -32,19 +32,15 @@ class ManageSouvenirPlaceController extends BaseController
         $objectData = $this->model->getSouvenirPlace($id)->getRow();
         $galleryData = $this->model->getGallery($id)->getResult();
         $aparData = $this->modelApar->getApar();
-        if (is_object($objectData)) {
-            $data = [
-                'title' => 'Manage-Souvenir-PLace | Tourism Villag',
-                'config' => config('Auth'),
-                'url' => 'souvenir_place',
-                'objectData' => $objectData,
-                'galleryData' => $galleryData,
-                'aparData' => $aparData
-            ];
-            return view('admin-detail/detail_souvenir_place', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        $data = [
+            'title' => 'Manage-Souvenir-PLace | Tourism Villag',
+            'config' => config('Auth'),
+            'url' => 'souvenir_place',
+            'objectData' => $objectData,
+            'galleryData' => $galleryData,
+            'aparData' => $aparData
+        ];
+        return view('admin-detail/detail_souvenir_place', $data);
     }
 
     public function edit($id = null)
@@ -52,19 +48,15 @@ class ManageSouvenirPlaceController extends BaseController
         $objectData = $this->model->getSouvenirPlace($id)->getRow();
         $galleryData = $this->model->getGallery($id)->getResult();
         $aparData = $this->modelApar->getApar();
-        if (is_object($objectData)) {
-            $data = [
-                'title' => $this->title,
-                'config' => config('Auth'),
-                'aparData' => $aparData,
-                'galleryData' => $galleryData,
-                'url' => 'souvenir_place',
-                'objectData' => $objectData
-            ];
-            return view('admin-edit/edit_souvenir_place', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        $data = [
+            'title' => $this->title,
+            'config' => config('Auth'),
+            'aparData' => $aparData,
+            'galleryData' => $galleryData,
+            'url' => 'souvenir_place',
+            'objectData' => $objectData
+        ];
+        return view('admin-edit/edit_souvenir_place', $data);
     }
 
     public function save_update($id = null)
