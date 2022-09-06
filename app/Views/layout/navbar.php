@@ -32,7 +32,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <?php if (in_groups('admin') || in_groups('user')) : ?>
-                                    <a class="dropdown-item" href="<?= base_url('/user') ?>">
+                                    <a class="dropdown-item" href="<?= base_url('user/profile') ?>">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>

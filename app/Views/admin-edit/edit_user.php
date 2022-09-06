@@ -15,7 +15,7 @@
                 </div>
                 <div class="row g-0">
                     <div class="col-md-2 text-center p-3">
-                        <img src="/img/<?= $user->user_image; ?>" class="img-fluid rounded-circle" width="250">
+                        <img src="<?= base_url('/assets/images/user-photos/') . "/" . $user->user_image; ?>" class="img-fluid rounded-circle py-4" width="250" />
                         <figcaption class="h5"><?= $user->role; ?></figcaption>
 
                     </div>

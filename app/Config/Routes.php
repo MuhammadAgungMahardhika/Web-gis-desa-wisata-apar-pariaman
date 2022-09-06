@@ -40,12 +40,12 @@ $routes->get('/admin', 'Admin::users', ['filter' => 'role:admin']);
 
 // upload file 
 $routes->group('upload', function ($routes) {
-    $routes->post('photo', 'UploadController::photo', ['filter' => 'role:admin']);
-    $routes->post('avatar', 'UploadController::avatar', ['filter' => 'role:admin']);
-    $routes->post('video', 'UploadController::video', ['filter' => 'role:admin']);
-    $routes->delete('photo', 'UploadController::remove', ['filter' => 'role:admin']);
-    $routes->delete('avatar', 'UploadController::remove', ['filter' => 'role:admin']);
-    $routes->delete('video', 'UploadController::remove', ['filter' => 'role:admin']);
+    $routes->post('photo', 'UploadController::photo', ['filter' => 'role:user,admin']);
+    $routes->post('avatar', 'UploadController::avatar', ['filter' => 'role:user,admin']);
+    $routes->post('video', 'UploadController::video', ['filter' => 'role:user,admin']);
+    $routes->delete('photo', 'UploadController::remove', ['filter' => 'role:user,admin']);
+    $routes->delete('avatar', 'UploadController::remove', ['filter' => 'role:user,admin']);
+    $routes->delete('video', 'UploadController::remove', ['filter' => 'role:user,admin']);
 });
 
 // Routes untuk authentikasi
@@ -55,8 +55,11 @@ $routes->get('/register', 'AuthController::register');
 // Route user menu
 // Route untuk manage user profile
 $routes->group('user', function ($routes) {
-    $routes->get('index', 'User::index', ['filter' => 'role:user,admin']);
+    $routes->get('profile', 'User::profile', ['filter' => 'role:user,admin']);
+    $routes->get('edit_profile', 'User::edit_profile', ['filter' => 'role:user,admin']);
     $routes->get('save_update/(:segment)', 'User::save_update/$1', ['filter' => 'role:user,admin']);
+    $routes->get('change_password', 'User::change_password', ['filter' => 'role:user,admin']);
+    $routes->get('save_password/(:segment)', 'User::save_password/$1', ['filter' => 'role:user,admin']);
 });
 
 // Menu list Object

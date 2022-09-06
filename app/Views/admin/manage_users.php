@@ -55,7 +55,7 @@
 
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Edit user" href="<?= base_url('manage_users/detail/' . $user->userid); ?>"><i class="fa fa-eye"></i> </a>
-                                    <a class="btn btn-outline-danger btn-sm" title="Delete User" data-toggle="modal" data-target="#deleteModal<?= $user->userid; ?>">
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete User" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $user->userid; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

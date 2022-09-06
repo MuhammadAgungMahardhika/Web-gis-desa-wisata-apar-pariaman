@@ -15,7 +15,6 @@ class ManageSouvenirPlaceController extends BaseController
         $this->model = new \App\Models\souvenirPlaceModel();
         $this->modelApar = new \App\Models\aparModel();
     }
-
     public function index()
     {
         $souvenirPlaceData = $this->model->getSouvenirPlaces();

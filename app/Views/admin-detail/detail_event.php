@@ -7,35 +7,43 @@
             <div class="row">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('manage_event/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit apar info"><i class="fa fa-edit"></i></a>
+                        <div class="text-end">
+                            <a href="<?= base_url('manage_event/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit"><i class="fa fa-edit"></i></a>
+                        </div>
                         <h4 class="card-title text-center"><?= $objectData->name; ?></h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <table class="table table-border">
-                                <tbody>
-                                    <tr>
-                                        <td class="fw-bold">Date </td>
-                                        <td><?= $objectData->date_start; ?> - <?= $objectData->date_end; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Time</td>
-                                        <td><?= $objectData->time_start; ?> - <?= $objectData->time_end; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Ticket Price</td>
-                                        <td><?= $objectData->price; ?> IDR</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Contact Person</td>
-                                        <td><?= $objectData->contact_person; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Description</td>
-                                        <td><?= $objectData->description; ?></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="form-group row">
+                                <label for="date" class="col-sm-4 col-form-label">Date</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->date_start; ?> - <?= $objectData->date_end; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="time" class="col-sm-4 col-form-label">Time</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->time_start; ?> - <?= $objectData->time_end; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="price" class="col-sm-4 col-form-label">Price</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->price; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="contact_person" class="col-sm-4 col-form-label">Contact person</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->contact_person; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-4 col-form-label">Description</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->description; ?></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="row my-2">
                             <h4 class="card-title text-center">Gallery</h4>

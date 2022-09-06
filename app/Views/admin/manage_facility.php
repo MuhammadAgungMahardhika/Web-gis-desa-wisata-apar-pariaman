@@ -18,27 +18,23 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <?php $no = 1;
-
-                        ?>
+                        <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
+                            <th>Id</th>
                             <th>Facility Name</th>
-
                             <th class="text-center">Action</th>
-
                         </tr>
-
                     </thead>
                     <tbody>
                         <?php foreach ($facilityData as $facility) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
+                                <td><?= $facility->id; ?></td>
                                 <td><?= $facility->name; ?></td>
-
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_facility/detail/' . $facility->id); ?>"><i class="fa fa-eye"></i> </a>
-                                    <a class="btn btn-outline-danger btn-sm" title="Delete Facility" data-toggle="modal" data-target="#deleteModal<?= $facility->id; ?>">
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete Facility" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $facility->id; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

@@ -12,17 +12,17 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary text-center">Detail User</h6>
-            <a href="<?= base_url('manage_users') ?>" title="Back to list " class="small btn btn-success btn-sm text-right"><i class="fa fa-arrow-left"></i> Back</a>
+            <a href="<?= base_url('manage_users') ?>" title="Back to list " class="small btn btn-primary btn-sm text-right"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
         <div class="card-body">
             <div class="row">
 
                 <div class="text-end">
-                    <a class="btn btn-outline-warning btn-sm" title="Edit user" href="<?= base_url('manage_users/edit/' . $user->userid); ?>"><i class="fa fa-edit"></i> </a>
+                    <a class="btn btn-outline-primary btn-sm" title="Edit user" href="<?= base_url('manage_users/edit/' . $user->userid); ?>"><i class="fa fa-edit"></i> </a>
                 </div>
 
                 <div class="col-md-4 text-center p-4">
-                    <img src="/img/<?= $user->user_image; ?>" class="img-fluid rounded-circle" width="250">
+                    <img src="<?= base_url('/assets/images/user-photos/') . "/" . $user->user_image; ?>" class="img-fluid rounded-circle py-4" width="250" />
                     <figcaption class="h5"><?= $user->role; ?></figcaption>
 
                 </div>

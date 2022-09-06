@@ -6,8 +6,6 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-
     <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -18,30 +16,25 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <?php $no = 1;
-
-                        ?>
+                        <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
+                            <th>Id</th>
                             <th>Worship Place Name</th>
-
                             <th class="text-center">Action</th>
-
                         </tr>
-
                     </thead>
                     <tbody>
                         <?php foreach ($worshipPlaceData as $worshipPlace) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
+                                <td><?= $worshipPlace->id; ?></td>
                                 <td><?= $worshipPlace->name; ?></td>
-
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_worship_place/detail/' . $worshipPlace->id); ?>"><i class="fa fa-eye"></i> </a>
-                                    <a class="btn btn-outline-danger btn-sm" title="Delete Worship Place" data-toggle="modal" data-target="#deleteModal<?= $worshipPlace->id; ?>">
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete Worship Place" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $worshipPlace->id; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
-
                                     <!-- Delete Modal-->
                                     <div class="modal fade" id="deleteModal<?= $worshipPlace->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">

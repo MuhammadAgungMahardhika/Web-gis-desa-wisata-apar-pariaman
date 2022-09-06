@@ -12,13 +12,12 @@ class UploadController extends BaseController
 {
     protected $helpers = ['filesystem'];
     use ResponseTrait;
-
     public function avatar()
     {
         $folder = uniqid() . '-' . date('YmdHis');
         $img = $this->request->getFile('avatar');
         $originalName = $img->getName();
-        if (!$img->hasMoved() && $originalName != 'default.jpg') {
+        if (!$img->hasMoved() && $originalName != 'default.svg') {
             $file = $img->getRandomName();
             mkdir(WRITEPATH . 'uploads/' . $folder);
             $filepath = WRITEPATH . 'uploads/' . $img->store($folder, $file);
@@ -26,11 +25,10 @@ class UploadController extends BaseController
         }
         return $this->response->setHeader('Content-Type', 'text/plain')->setStatusCode(200)->setBody($originalName);
     }
-
     public function remove()
     {
         $folder = $this->request->getBody();
-        if ($folder != 'default.jpg') {
+        if ($folder != 'default.svg') {
             $filepath = WRITEPATH . 'uploads/' . $folder;
             delete_files($filepath);
             rmdir($filepath);
@@ -38,7 +36,6 @@ class UploadController extends BaseController
         }
         return $this->response->setHeader('Content-Type', 'text/plain')->setStatusCode(200)->setBody($folder);
     }
-
     public function photo()
     {
         $folder = uniqid() . '-' . date('YmdHis');

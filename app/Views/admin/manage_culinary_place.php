@@ -38,7 +38,7 @@
                                 <td><?= $culinaryPlace->name; ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_culinary_place/detail/' . $culinaryPlace->id); ?>"><i class="fa fa-eye"></i> </a>
-                                    <a class="btn btn-outline-danger btn-sm" title="Delete Culinary Place" data-toggle="modal" data-target="#deleteModal<?= $culinaryPlace->id; ?>">
+                                    <a class="btn btn-outline-danger btn-sm" title="Delete Culinary Place" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $culinaryPlace->id; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

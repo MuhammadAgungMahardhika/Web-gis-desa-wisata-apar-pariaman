@@ -7,36 +7,43 @@
             <div class="row">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('manage_souvenir_place/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit apar info"><i class="fa fa-edit"></i></a>
+                        <div class="text-end">
+                            <a href="<?= base_url('manage_souvenir_place/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit"><i class="fa fa-edit"></i></a>
+                        </div>
                         <h4 class="card-title text-center"><?= $objectData->name; ?></h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <table class="table table-border">
-                                <tbody>
-                                    <tr>
-                                        <td class="fw-bold">Owner </td>
-                                        <td><?= $objectData->owner; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Open</td>
-                                        <td><?= $objectData->open; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Close</td>
-                                        <td><?= $objectData->close; ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="fw-bold">Contact Person</td>
-                                        <td><?= $objectData->contact_person; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Description</td>
-                                        <td><?= $objectData->description; ?></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="form-group row">
+                                <label for="owner" class="col-sm-4 col-form-label">Owner</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->owner; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="open" class="col-sm-4 col-form-label">Open</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->open; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="close" class="col-sm-4 col-form-label">Close</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->close; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="contact_person" class="col-sm-4 col-form-label">Contact person</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->contact_person; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-4 col-form-label">Description</label>
+                                <div class="col-sm-8">
+                                    <span class="form-control"><?= $objectData->description; ?></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="row my-2">
                             <h4 class="card-title text-center">Gallery</h4>

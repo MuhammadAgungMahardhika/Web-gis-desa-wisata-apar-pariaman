@@ -16,7 +16,6 @@ class ManageUsersController extends BaseController
     public function index()
     {
         $usersData = $this->model->getUsers();
-
         $data = [
             'title' => $this->title,
             'config' => config('Auth'),
@@ -53,7 +52,6 @@ class ManageUsersController extends BaseController
             'config' => config('Auth'),
             'user' => $userData
         ];
-
         if (empty($userData)) {
             return redirect()->to('/manage_users');
         }
@@ -63,7 +61,6 @@ class ManageUsersController extends BaseController
     //Save Update User
     public function save_update($id = null)
     {
-
         //validation data
         $validateRules = $this->validate([
             'email' => 'required|valid_email',
@@ -74,17 +71,17 @@ class ManageUsersController extends BaseController
         ]);
         $updateRequest = $this->request->getPost();
         if ($validateRules) {
-            try {
-                $this->model->update($id, $updateRequest);
-            } catch (\Exception $e) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound($e);
-            } finally {
+            $update =  $this->model->update($id, $updateRequest);
+            if ($update) {
                 session()->setFlashdata('success', 'Success! User updated.');
+                return redirect()->to(site_url('manage_users/edit/' . $id));
+            } else {
+                session()->setFlashdata('failed', 'Failed! Failed to update user.');
                 return redirect()->to(site_url('manage_users/edit/' . $id));
             }
         } else {
             $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed to update user.');
+            session()->setFlashdata('failed', 'Failed! Failed' . json_encode($listErrors));
             return redirect()->to(site_url('manage_users/edit/' . $id));
         }
     }
@@ -92,26 +89,23 @@ class ManageUsersController extends BaseController
     //Insert new user by admin
     public function insert()
     {
-
         $data = [
             'title' => $this->title,
             'config' => config('Auth')
         ];
-
         return view('admin-insert/insert_user', $data);
     }
 
     //Save insert controller in vendor\myth\auth\Controllers\AuthController.php\attemptRegister2()
-
-
     public function delete($id)
     {
-        try {
-            $this->model->deleteUser($id);
-        } catch (\Exception $e) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound($e);
-        } finally {
+
+        $delete =  $this->model->deleteUser($id);
+        if ($delete) {
             session()->setFlashdata('success', 'Success! User Deleted.');
+            return redirect()->to(site_url('manage_users'));
+        } else {
+            session()->setFlashdata('failed', 'Failed! Failed' . json_encode($delete));
             return redirect()->to(site_url('manage_users'));
         }
     }
