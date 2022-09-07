@@ -67,8 +67,7 @@ class ManageAtractionController extends BaseController
             'close' => 'max_length[50]',
             'employe' => 'max_length[50]',
             'price' => 'max_length[50]',
-            'contact_person' => 'max_length[14]',
-            'description' => 'max_length[255]'
+            'contact_person' => 'max_length[14]'
         ]);
 
         // ---------------------Data request-----------------------------
