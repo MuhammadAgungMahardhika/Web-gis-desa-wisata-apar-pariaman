@@ -497,6 +497,7 @@ function mainNearby(val, object) {
                     radius(distance)
                     clearMarker()
                     clearRoute()
+                    activeMenu('atraction')
                     return loopingAllMarker(atData, atUrl)
                 }
                 if (response.evData && response.evUrl) {
@@ -506,6 +507,7 @@ function mainNearby(val, object) {
                     radius(distance)
                     clearMarker()
                     clearRoute()
+                    activeMenu('event')
                     return loopingAllMarker(evData, evUrl)
                 }
             }
@@ -692,12 +694,14 @@ function showObject(object, id = null) {
                 clearMarker()
                 clearRadius()
                 clearRoute()
+                activeMenu('atraction')
                 loopingAllMarker(atData, atUrl)
             }
             if (evData && evUrl) {
                 clearMarker()
                 clearRadius()
                 clearRoute()
+                activeMenu('event')
                 loopingAllMarker(evData, evUrl)
             }
         },
@@ -761,10 +765,12 @@ function getObjectByName(val = null, url) {
             if (url == 'atraction') {
                 atData = response.atData
                 atUrl = response.url
+                activeMenu('atraction')
                 loopingAllMarker(atData, atUrl)
             } else if (url == 'event') {
                 evData = response.evData
                 evUrl = response.url
+                activeMenu('event')
                 loopingAllMarker(evData, evUrl)
             }
         },
@@ -795,11 +801,13 @@ function getObjectByRate(val, url) {
                 atUrl = response.url
                 loopingAllMarker(atData, atUrl)
                 setStar(val)
+                activeMenu('atraction')
             } else if (url == 'event') {
                 evData = response.evData
                 evUrl = response.url
                 loopingAllMarker(evData, evUrl)
                 setStar2(val)
+                activeMenu('event')
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -929,6 +937,7 @@ function getObjectByCategory(val = null) {
             clearMarker()
             clearRadius()
             clearRoute()
+            activeMenu('atraction')
             atData = response.atData
             atUrl = response.url
             loopingAllMarker(atData, atUrl)
@@ -956,6 +965,7 @@ function getObjectByDate() {
                 clearMarker()
                 clearRadius()
                 clearRoute()
+                activeMenu('event')
                 evData = response.evData
                 evUrl = response.url
                 loopingAllMarker(evData, evUrl)
@@ -965,6 +975,21 @@ function getObjectByDate() {
                     xhr.responseText + "\n" + thrownError);
             }
         });
+    }
+}
+function activeMenu(url) {
+    $('#indexMenu').removeClass('active');
+    $('#atractionMenu').removeClass('active');
+    $('#eventMenu').removeClass('active');
+    $('#adminMenu').removeClass('active');
+    if (url == 'index') {
+        $('#indexMenu').addClass('active');
+    }else if (url == 'atraction') {
+        $('#atractionMenu').addClass('active');
+    } else if (url == 'event') {
+        $('#eventMenu').addClass('active');
+    } else if (url == 'admin') {
+        $('#adminMenu').addClass('active');
     }
 }
 
