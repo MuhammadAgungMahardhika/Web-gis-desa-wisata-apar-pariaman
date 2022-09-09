@@ -273,7 +273,11 @@ function infoMarkerData(data, url) {
     let lng = data.lng
     let infoMarker
 
-    infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>` } else { return '' } })()} ${(() => { if (url == 'atraction' || url == 'event') { return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >` } else { return '' } })()} </div>`
+    if(window.location.pathname.split('/').pop() == 'mobile'){
+        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a>` } else { return '' } })()}</div>`
+    }else{
+        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>` } else { return '' } })()} ${(() => { if (url == 'atraction' || url == 'event') { return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >` } else { return '' } })()} </div>`
+    }
     return infoMarker
 }
 
@@ -345,7 +349,9 @@ function addMarkerToMap(data, url = null, pass = null) {
     objectMarker.addListener('click', () => {
         if (window.location.pathname.split('/').pop() == 'list_object') {
             openInfoWindow(objectMarker, infoMarkerData(data, url))
-        } else {
+        } else if(window.location.pathname.split('/').pop() == 'mobile') {
+            openInfoWindow(objectMarker, infoMarkerData(data, url))
+        } else{
             openInfoWindow(objectMarker, data.name)
         }
     })
