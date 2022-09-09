@@ -230,6 +230,41 @@ $routes->group('manage_facility', function ($routes) {
 });
 
 
+// Mobile route
+$routes->group('mobile', function ($routes) {
+    $routes->get('index', 'MobileController::index');
+    $routes->get('/', 'MobileController::index');
+    $routes->get('atraction', 'MobileController::atraction');
+    $routes->get('atraction/(:segment)', 'MobileController::atraction/$1');
+    $routes->get('atraction_by_name/(:segment)', 'MobileController::atraction_by_name/$1');
+    $routes->get('atraction_by_rate/(:segment)', 'MobileController::atraction_by_rate/$1');
+    $routes->get('atraction_by_category/(:segment)', 'MobileController::atraction_by_category/$1');
+    $routes->get('atraction_by_category', 'MobileController::atraction_by_category');
+
+
+    $routes->get('event', 'MobileController::event');
+    $routes->get('event/(:segment)', 'MobileController::event/$1');
+    $routes->get('event_by_name/(:segment)', 'MobileController::event_by_name/$1');
+    $routes->get('event_by_date/(:segment)/(:segment)', 'MobileController::event_by_date/$1/$2');
+    $routes->get('event_by_rate/(:segment)', 'MobileController::event_by_rate/$1');
+
+    $routes->get('souvenir_place', 'MobileController::souvenir_place');
+    $routes->get('souvenir_place/(:segment)', 'MobileController::souvenir_place/$1');
+
+    $routes->get('culinary_place', 'MobileController::culinary_place');
+    $routes->get('culinary_place/(:segment)', 'MobileController::culinary_place/$1');
+
+    $routes->get('worship_place', 'MobileController::worship_place');
+    $routes->get('worship_place/(:segment)', 'MobileController::worship_place/$1');
+
+    $routes->get('facility', 'MobileController::facility');
+    $routes->get('facility/(:segment)', 'MobileController::facility/$1');
+
+    $routes->get('detail_object/(:segment)', 'MobileController::detail_object/$1');
+
+    $routes->get('search_main_nearby/(:segment)', 'MobileController::search_main_nearby/$1');
+    $routes->get('search_support_nearby/(:segment)', 'MobileController::search_support_nearby/$1');
+});
 
 
 

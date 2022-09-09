@@ -611,8 +611,8 @@ function mata_angin() {
     const legendIcon = `${base_url}/assets/images/marker-icon/`
     const centerControlDiv = document.createElement("div");
     centerControlDiv.style.marginLeft = "10px";
-    centerControlDiv.style.marginBottom = "-15px";
-    centerControlDiv.innerHTML = `<div class="mb-4"><img src="${legendIcon}mata_angin.png" width="35"></img><div>`
+    centerControlDiv.style.marginBottom = "-10px";
+    centerControlDiv.innerHTML = `<div class="mb-4"><img src="${legendIcon}mata_angin.png" width="25"></img><div>`
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 }
 // add button dark map
