@@ -1,6 +1,6 @@
 
-let base_url = 'http://localhost:8080' //untuk php spark serve
-// let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
+// let base_url = 'http://localhost:8080' //untuk php spark serve
+let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition, userMarker, directionsRenderer, infoWindow, circle, map
 let markerArray = []
 let markerNearby
@@ -150,8 +150,7 @@ function manualLocation() {
         clearSlider()
         clearRadius()
         clearRoute()
-        userPosition = event.latLng
-        addUserMarkerToMap(userPosition)
+        addUserMarkerToMap(event.latLng)
     })
 }
 
@@ -414,16 +413,19 @@ function handleLocationError(browserHasGeolocation, currentWindow, pos) {
 // Add user marker
 function addUserMarkerToMap(location) {
     if (userMarker) {
-        userMarker.setPosition(location)
+        userPosition = location
+        userMarker.setPosition(userPosition)
     } else {
+        userPosition = location
         userMarker = new google.maps.Marker({
-            position: location,
+            position: userPosition,
             opacity: 0.8,
             title: "your location",
             animation: google.maps.Animation.DROP,
             draggable: false,
             map: map,
         });
+        
         content = `Your Location <div class="text-center"></div>`
         userMarker.addListener('click', () => { openInfoWindow(userMarker, content) })
     }
@@ -685,25 +687,17 @@ function showObject(object, id = null) {
         success: function (response) {
             setCenter({ lat: latApar, lng: lngApar })
             $('#rowObjectArround').css("display", "none")
-            atData = response.atData
-            atUrl = response.url
-
-            evData = response.evData
-            evUrl = response.url
-            if (atData && atUrl) {
-                clearMarker()
-                clearRadius()
-                clearRoute()
-                activeMenu('atraction')
-                loopingAllMarker(atData, atUrl)
-            }
-            if (evData && evUrl) {
-                clearMarker()
-                clearRadius()
-                clearRoute()
-                activeMenu('event')
-                loopingAllMarker(evData, evUrl)
-            }
+            clearMarker()
+            clearRadius()
+            clearRoute()
+            if (response.objectData && response.url) {
+                if(response.url == 'atraction'){
+                    activeMenu('atraction')
+                }else if (response.url =='event'){
+                    activeMenu('event')
+                }
+                return loopingAllMarker(response.objectData, response.url)
+            }   
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" +
@@ -721,14 +715,14 @@ function setObjectByName(object) {
             let listObject = []
             let url = response.url
             if (url == 'atraction') {
-                atData = response.atData
+                atData = response.objectData
                 for (let i = 0; i < atData.length; i++) {
                     let name = atData[i].name
                     listObject.push(`<option>${name}</option>`)
                 }
                 return $('#basicSelect').html(`<option value="">Select ${url}</option>${listObject}`)
             } else if (url == 'event') {
-                evData = response.evData
+                evData = response.objectData
                 for (let i = 0; i < evData.length; i++) {
                     let name = evData[i].name
                     listObject.push(`<option>${name}</option>`)
@@ -762,17 +756,8 @@ function getObjectByName(val = null, url) {
             clearMarker()
             clearRadius()
             clearRoute()
-            if (url == 'atraction') {
-                atData = response.atData
-                atUrl = response.url
-                activeMenu('atraction')
-                loopingAllMarker(atData, atUrl)
-            } else if (url == 'event') {
-                evData = response.evData
-                evUrl = response.url
-                activeMenu('event')
-                loopingAllMarker(evData, evUrl)
-            }
+            loopingAllMarker(response.objectData, response.url)
+            if (url == 'atraction') {activeMenu('atraction')} else if (url == 'event') {activeMenu('event')}
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" +
@@ -796,16 +781,11 @@ function getObjectByRate(val, url) {
             clearMarker()
             clearRadius()
             clearRoute()
+            loopingAllMarker(response.objectData, response.url)
             if (url == 'atraction') {
-                atData = response.atData
-                atUrl = response.url
-                loopingAllMarker(atData, atUrl)
                 setStar(val)
                 activeMenu('atraction')
             } else if (url == 'event') {
-                evData = response.evData
-                evUrl = response.url
-                loopingAllMarker(evData, evUrl)
                 setStar2(val)
                 activeMenu('event')
             }
@@ -910,7 +890,7 @@ function setObjectByCategory() {
         dataType: "json",
         success: function (response) {
             let listObject = []
-            atData = response.atData
+            atData = response.objectData
             for (i in atData) {
                 let category = atData[i].category
                 listObject.push(`<option>${category}</option>`)
@@ -938,9 +918,7 @@ function getObjectByCategory(val = null) {
             clearRadius()
             clearRoute()
             activeMenu('atraction')
-            atData = response.atData
-            atUrl = response.url
-            loopingAllMarker(atData, atUrl)
+            loopingAllMarker(response.objectData, response.url)
 
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -966,9 +944,7 @@ function getObjectByDate() {
                 clearRadius()
                 clearRoute()
                 activeMenu('event')
-                evData = response.evData
-                evUrl = response.url
-                loopingAllMarker(evData, evUrl)
+                loopingAllMarker(response.objectData, response.url)
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" +

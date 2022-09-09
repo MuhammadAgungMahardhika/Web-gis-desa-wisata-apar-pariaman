@@ -44,7 +44,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelAtraction->getAtractions();
         }
         $data = [
-            'atData' =>  $objectData,
+            'objectData' =>  $objectData,
             'url' => 'atraction'
         ];
 
@@ -56,7 +56,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelAtraction->getAtractionByName($name)->getResult();
         }
         $data = [
-            'atData' => $objectData,
+            'objectData' => $objectData,
             'url' => 'atraction'
         ];
         return json_encode($data);
@@ -68,7 +68,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelAtraction->getAtractionByRate($rate)->getResult();
         }
         $data = [
-            'atData' => $objectData,
+            'objectData' => $objectData,
             'url' => 'atraction'
         ];
         return json_encode($data);
@@ -81,7 +81,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelAtraction->getCategory()->getResult();
         }
         $data = [
-            'atData' => $objectData,
+            'objectData' => $objectData,
             'url' => 'atraction'
         ];
         return json_encode($data);
@@ -95,7 +95,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelEvent->getEvents();
         }
         $data = [
-            'evData' => $objectData,
+            'objectData' => $objectData,
             'url' => 'event'
         ];
         return json_encode($data);
@@ -107,7 +107,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelEvent->getEventByName($name)->getResult();
         }
         $data = [
-            'evData' => $objectData,
+            'objectData' => $objectData,
             'url' => 'event'
         ];
         return json_encode($data);
@@ -119,7 +119,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelEvent->getEventByDate($date_1, $date_2)->getResult();
         }
         $data = [
-            'evData' => $objectData,
+            'objectData' => $objectData,
             'url' => 'event'
         ];
         return json_encode($data);
@@ -130,7 +130,7 @@ class ListObjectController extends BaseController
             $objectData = $this->modelEvent->getEventByRate($rate)->getResult();
         }
         $data = [
-            'evData' => $objectData,
+            'objectData' => $objectData,
             'url' => 'event'
         ];
         return json_encode($data);

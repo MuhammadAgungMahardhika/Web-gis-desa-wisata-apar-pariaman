@@ -27,23 +27,6 @@ jQuery(document).ready(function ($) {
             'transform': 'translate(0px,' + wScrool / 4 + '%)'
         });
 
-        //mengubah navbar menjadi fixed saat di seksi about
-
-        // if(wScrool >= $('#AboutMe').offset().top-20){
-
-        //   $('#Nav').css({
-        //     'position' : 'fixed',
-        //     'background-color' : 'rgb(52,56,114)'
-
-        //   });
-        // }else if(wScrool < $('#AboutMe').offset().top-0){
-        //   $('#Nav').css({
-        //     'position' : 'absolute',
-        //     'background-color' : 'transparent'
-        //   });
-        // }
-
-
         //parallax efek untuk tulisan about me
 
         if (wScrool > $('#About').offset().top - 500) {
