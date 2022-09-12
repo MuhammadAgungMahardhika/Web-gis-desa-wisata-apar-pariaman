@@ -24,7 +24,6 @@ function initMap() {
 function showMap() {
     map = new google.maps.Map(document.getElementById("map"), { center: { lat: latApar, lng: lngApar }, zoom: 16, clickableIcons: false, styles: mapStyles });
     addAparPolygon(geomApar, '#ffffff')
-    addAparLabel()
 }
 function showDarkMap() {
     let darkMap = [
@@ -44,9 +43,6 @@ function showDarkMap() {
 function showDayMap() {
     map.setOptions({ styles: mapStyles });
     buttonDarkMode.innerHTML = `<a id="darkMap" title="dark mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
-}
-function addAparLabel() {
-
 }
 
 //show atraction gallery when url is in home
@@ -273,9 +269,9 @@ function infoMarkerData(data, url) {
     let lng = data.lng
     let infoMarker
 
-    if(window.location.pathname.split('/').pop() == 'mobile'){
+    if (window.location.pathname.split('/').pop() == 'mobile') {
         infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a>` } else { return '' } })()}</div>`
-    }else{
+    } else {
         infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>` } else { return '' } })()} ${(() => { if (url == 'atraction' || url == 'event') { return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >` } else { return '' } })()} </div>`
     }
     return infoMarker
@@ -349,9 +345,9 @@ function addMarkerToMap(data, url = null, pass = null) {
     objectMarker.addListener('click', () => {
         if (window.location.pathname.split('/').pop() == 'list_object') {
             openInfoWindow(objectMarker, infoMarkerData(data, url))
-        } else if(window.location.pathname.split('/').pop() == 'mobile') {
+        } else if (window.location.pathname.split('/').pop() == 'mobile') {
             openInfoWindow(objectMarker, infoMarkerData(data, url))
-        } else{
+        } else {
             openInfoWindow(objectMarker, data.name)
         }
     })
@@ -431,7 +427,7 @@ function addUserMarkerToMap(location) {
             draggable: false,
             map: map,
         });
-        
+
         content = `Your Location <div class="text-center"></div>`
         userMarker.addListener('click', () => { openInfoWindow(userMarker, content) })
     }
@@ -697,13 +693,13 @@ function showObject(object, id = null) {
             clearRadius()
             clearRoute()
             if (response.objectData && response.url) {
-                if(response.url == 'atraction'){
+                if (response.url == 'atraction') {
                     activeMenu('atraction')
-                }else if (response.url =='event'){
+                } else if (response.url == 'event') {
                     activeMenu('event')
                 }
                 return loopingAllMarker(response.objectData, response.url)
-            }   
+            }
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" +
@@ -763,7 +759,7 @@ function getObjectByName(val = null, url) {
             clearRadius()
             clearRoute()
             loopingAllMarker(response.objectData, response.url)
-            if (url == 'atraction') {activeMenu('atraction')} else if (url == 'event') {activeMenu('event')}
+            if (url == 'atraction') { activeMenu('atraction') } else if (url == 'event') { activeMenu('event') }
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" +
@@ -966,7 +962,7 @@ function activeMenu(url) {
     $('#adminMenu').removeClass('active');
     if (url == 'index') {
         $('#indexMenu').addClass('active');
-    }else if (url == 'atraction') {
+    } else if (url == 'atraction') {
         $('#atractionMenu').addClass('active');
     } else if (url == 'event') {
         $('#eventMenu').addClass('active');

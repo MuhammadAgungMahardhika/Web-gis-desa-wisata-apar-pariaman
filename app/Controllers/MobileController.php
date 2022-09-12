@@ -19,6 +19,15 @@ class MobileController extends BaseController
         $this->modelFacility = new \App\Models\facilityModel();
     }
 
+    public function login()
+    {
+        if (logged_in() == true) {
+            return json_encode(true);
+        } else {
+            return json_encode(false);
+        }
+    }
+
     public function index()
     {
         //direct biasa
