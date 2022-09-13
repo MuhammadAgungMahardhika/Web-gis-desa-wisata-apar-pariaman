@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Password;
 
-class MobileController extends BaseController
+class ApiController extends BaseController
 {
+    use ResponseTrait;
     protected $auth;
     protected $modelUser, $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
     protected $title =  'List Object | Tourism Village';
@@ -24,17 +26,80 @@ class MobileController extends BaseController
 
     public function login()
     {
+
         $login = $this->request->getPost('login');
         $password = $this->request->getPost('password');
-        $remember = (bool)$this->request->getPost('remember');
-        $type = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
+        // Determine credential type
+        $type = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         // Try to log them in...
-        if (!$this->auth->attempt([$type => $login, 'password' => $password], $remember)) {
-            return json_encode(false);
-        } else {
-            return json_encode(true);
+        if (!$this->auth->attempt([$type => $login, 'password' => $password], false)) {
+            $contents = $this->auth->error();
+            $response = [
+                'data' => $contents,
+                'status' => 400,
+                'message' => [
+                    "Error login"
+                ]
+            ];
+            return $this->respond($response, 400);
         }
+        $redirectURL = session('redirect_url') ?? site_url('/web');
+        unset($_SESSION['redirect_url']);
+
+        $contents = [
+            'url' => $redirectURL,
+            'user' => user(),
+            'in_group' => in_groups('user') || in_groups('admin')
+        ];
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success login"
+            ]
+        ];
+        return $this->respond($response, 200);
+    }
+    public function logout()
+    {
+        if ($this->auth->check()) {
+            $this->auth->logout();
+        }
+
+        $response = [
+            'status' => 200,
+            'message' => [
+                "Successfully logged out"
+            ]
+        ];
+        return $this->respond($response, 200);
+    }
+
+    public function profile()
+    {
+        $id = $this->request->getPost('id');
+        if (logged_in()) {
+            if (user()->id == $id) {
+                $contents = user();
+                $response = [
+                    'data' => $contents,
+                    'status' => 200,
+                    'message' => [
+                        "Getting user data"
+                    ]
+                ];
+                return $this->respond($response, 200);
+            }
+        }
+
+        $response = [
+            'status' => 400,
+            'message' => [
+                "Failed get user data"
+            ]
+        ];
+        return $this->respond($response, 400);
     }
 
     public function index()
@@ -61,12 +126,14 @@ class MobileController extends BaseController
         } else {
             $objectData = $this->modelAtraction->getAtractions();
         }
-        $data = [
-            'objectData' =>  $objectData,
-            'url' => 'atraction'
+        $response = [
+            'data' => $objectData,
+            'status' => 200,
+            'message' => [
+                "Success get list of atraction"
+            ]
         ];
-
-        return json_encode($data);
+        return $this->respond($response);
     }
     public function atraction_by_name($name = null)
     {
