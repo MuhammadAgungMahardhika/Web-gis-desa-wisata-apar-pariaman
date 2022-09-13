@@ -233,7 +233,6 @@ $routes->group('manage_facility', function ($routes) {
 // Mobile route
 $routes->group('mobile', function ($routes) {
     $routes->post('login', 'MobileController::login');
-
     $routes->get('index', 'MobileController::index');
     $routes->get('/', 'MobileController::index');
     $routes->get('atraction', 'MobileController::atraction');

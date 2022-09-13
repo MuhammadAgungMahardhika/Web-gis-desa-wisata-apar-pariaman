@@ -3,14 +3,15 @@
 namespace App\Controllers;
 
 use Myth\Auth\Password;
-use App\Models\atractionModel;
 
 class MobileController extends BaseController
 {
+    protected $auth;
     protected $modelUser, $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
     protected $title =  'List Object | Tourism Village';
     public function __construct()
     {
+        $this->auth = service('authentication');
         $this->modelUser = new \App\Models\usersModel();
         $this->modelApar = new \App\Models\aparModel();
         $this->modelAtraction = new \App\Models\atractionModel();
@@ -25,10 +26,15 @@ class MobileController extends BaseController
     {
         $login = $this->request->getPost('login');
         $password = $this->request->getPost('password');
-        $encript_password = $this->attributes['password_hash'] = Password::hash($password);
-        $checkLogin = $this->modelUser->checkLogin($login, $encript_password);
+        $remember = (bool)$this->request->getPost('remember');
+        $type = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        return json_encode($checkLogin);
+        // Try to log them in...
+        if (!$this->auth->attempt([$type => $login, 'password' => $password], $remember)) {
+            return json_encode(false);
+        } else {
+            return json_encode(true);
+        }
     }
 
     public function index()
