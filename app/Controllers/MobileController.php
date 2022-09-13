@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Password;
 
-class ApiController extends BaseController
+class MobileController extends BaseController
 {
     use ResponseTrait;
     protected $auth;
