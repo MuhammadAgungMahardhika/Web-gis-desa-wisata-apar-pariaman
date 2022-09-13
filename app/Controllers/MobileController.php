@@ -2,14 +2,16 @@
 
 namespace App\Controllers;
 
+use Myth\Auth\Password;
 use App\Models\atractionModel;
 
 class MobileController extends BaseController
 {
-    protected $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
+    protected $modelUser, $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
     protected $title =  'List Object | Tourism Village';
     public function __construct()
     {
+        $this->modelUser = new \App\Models\usersModel();
         $this->modelApar = new \App\Models\aparModel();
         $this->modelAtraction = new \App\Models\atractionModel();
         $this->modelEvent = new \App\Models\eventModel();
@@ -21,11 +23,12 @@ class MobileController extends BaseController
 
     public function login()
     {
-        if (logged_in() == true) {
-            return json_encode(true);
-        } else {
-            return json_encode(false);
-        }
+        $login = $this->request->getPost('login');
+        $password = $this->request->getPost('password');
+        $encript_password = $this->attributes['password_hash'] = Password::hash($password);
+        $checkLogin = $this->modelUser->checkLogin($login, $encript_password);
+
+        return json_encode($checkLogin);
     }
 
     public function index()

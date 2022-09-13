@@ -1,6 +1,6 @@
 
-// let base_url = 'http://localhost:8080' //untuk php spark serve
-let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
+let base_url = 'http://localhost:8080' //untuk php spark serve
+// let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition, userMarker, directionsRenderer, infoWindow, circle, map
 let markerArray = []
 let markerNearby
@@ -55,9 +55,9 @@ function showUpcoming() {
             <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class=""></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>
-            <div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>
-            <div class="carousel-item"><img src="https://source.unsplash.com/random/0x300/?wallpaper,landscape" onclick="showObject('atraction')" style="cursor: pointer;"></div>
+            <div class="carousel-item active"><img src="" onclick="showObject('atraction')" style="cursor: pointer;"></div>
+            <div class="carousel-item"><img src="" onclick="showObject('atraction')" style="cursor: pointer;"></div>
+            <div class="carousel-item"><img src="" onclick="showObject('atraction')" style="cursor: pointer;"></div>
         </div>
         <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -48,4 +48,18 @@ class usersModel extends Model
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
+
+    // Check Login-----------------------
+    public function checkLogin($login, $password)
+    {
+        $query =  $this->db->table($this->table)
+            ->select("{$this->columns}")
+            ->join('auth_groups_users', 'auth_groups_users.user_id = users.id')
+            ->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id')
+            ->where('users.username ', $login)
+            ->where('users.password_hash', $password)
+            ->get()->getRow();
+
+        return $query;
+    }
 }
