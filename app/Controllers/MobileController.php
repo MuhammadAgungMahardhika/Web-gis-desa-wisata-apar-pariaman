@@ -44,7 +44,7 @@ class MobileController extends BaseController
             ];
             return $this->respond($response, 400);
         }
-        $redirectURL = session('redirect_url') ?? site_url('/web');
+        $redirectURL = session('redirect_url') ?? site_url('/list_object');
         unset($_SESSION['redirect_url']);
 
         $contents = [

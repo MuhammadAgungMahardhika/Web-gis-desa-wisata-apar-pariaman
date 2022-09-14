@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -110,15 +110,6 @@
     </section>
     <!-- Akhir My Projects -->
 
-    <!-- Awal My Certificate -->
-    <section class="container-fluid text-center" id="MyCertificates">
-        <div class="row">
-            <div class="col">
-                <h2 class="efek3">Award</h2>
-            </div>
-        </div>
-    </section>
-    <!-- Akhir My Cerficate -->
     <!-- Awal Award  -->
     <div class="container-xxl bg-primary facts my-5 py-5" id="MyCertificates">
         <div class="container py-5">
@@ -138,7 +129,7 @@
     </div>
     <!--  Akhir Award -->
     <!-- Footer Start -->
-    <div class="container-fluid footer bg-dark text-light footer mt-5 pt-5  " 0.1s">
+    <div class="container-fluid footer bg-dark text-light footer mt-5 pt-5 0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-9 col-md-6">
@@ -154,7 +145,7 @@
                     </p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/desa_wisata_apar"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/Kampuang%20Minang%20Nagari%20Sumpu"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
 
@@ -200,7 +191,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="<?= base_url('assets/js/script.js'); ?>"></script>
-    <script src="<?= base_url('/assets/js/map.js') ?>"></script>
+    <script src="<?= base_url('assets/js/map.js') ?>"></script>
     <!-- Maps JS -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&callback=initMap"></script>
 </body>

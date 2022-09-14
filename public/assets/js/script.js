@@ -65,12 +65,6 @@ jQuery(document).ready(function ($) {
         }
         //parallax efek untuk tulisan contact
 
-        if (wScrool > $('#MyContacts').offset().top - 500) {
-            $('.efek4').addClass('Muncul');
-
-        }
-        //parallax efek untuk card my contact
-
     });
 
 });
