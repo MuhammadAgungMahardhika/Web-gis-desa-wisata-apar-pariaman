@@ -179,11 +179,14 @@ class MobileController extends BaseController
         } else {
             $objectData = $this->modelEvent->getEvents();
         }
-        $data = [
-            'objectData' => $objectData,
-            'url' => 'event'
+        $response = [
+            'data' => $objectData,
+            'status' => 200,
+            'message' => [
+                "Success get list of atraction"
+            ]
         ];
-        return json_encode($data);
+        return $this->respond($response);
     }
 
     public function event_by_name($name = null)

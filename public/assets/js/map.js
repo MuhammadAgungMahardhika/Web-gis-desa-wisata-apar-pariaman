@@ -17,32 +17,16 @@ function initMap() {
     directionsRenderer = new google.maps.DirectionsRenderer(); //render route
     if (datas && url) { loopingAllMarker(datas, url) } // detail object
     mata_angin() // mata angin compas on map
-    addButtonDarkMap() // button dark map on map
     highlightCurrentManualLocation() //highligth when button location not clicked
     showUpcoming()//showing upcoming 
 }
 function showMap() {
     map = new google.maps.Map(document.getElementById("map"), { center: { lat: latApar, lng: lngApar }, zoom: 16, clickableIcons: false, styles: mapStyles });
     addAparPolygon(geomApar, '#ffffff')
-}
-function showDarkMap() {
-    let darkMap = [
-        { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-        { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-        { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }], },
-        { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }], },
-        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }], },
-        { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }], },
-        { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }], },
-        { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }], },
-        { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] }]
-    map.setOptions({ styles: darkMap });
-    buttonDarkMode.innerHTML = `<a id="dayMap" title="day mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDayMap()"><i class="fa fa-sun-o"></i></a>`
-}
-function showDayMap() {
-    map.setOptions({ styles: mapStyles });
-    buttonDarkMode.innerHTML = `<a id="darkMap" title="dark mode" role="button" class="btn btn-light" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
+    // remove unecessary button when in mobile
+    if (window.location.pathname.split('/').pop() == 'mobile'){
+        map.setOptions({ mapTypeControl: false });
+    }
 }
 
 //show atraction gallery when url is in home
@@ -617,13 +601,7 @@ function mata_angin() {
     centerControlDiv.innerHTML = `<div class="mb-4"><img src="${legendIcon}mata_angin.png" width="25"></img><div>`
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 }
-// add button dark map
-function addButtonDarkMap() {
-    let buttonDarkMode = document.createElement("div");
-    buttonDarkMode.id = 'buttonDarkMode'
-    buttonDarkMode.innerHTML = `<a id="darkMap" title="dark mode" role="button" class="btn btn-light shadow-sm" style="margin-top:10px" onclick="showDarkMap()"><i class="fa fa-moon-o"></i></a>`
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(buttonDarkMode);
-}
+
 //add legend to map
 function legend() {
     const legendIcon = `${base_url}/assets/images/marker-icon/`
