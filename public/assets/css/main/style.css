@@ -344,9 +344,6 @@
    color: gold;
  }
 
- .fa-star:hover {}
-
-
  @keyframes loader {
    0% {
      transform: scale(1, 1);

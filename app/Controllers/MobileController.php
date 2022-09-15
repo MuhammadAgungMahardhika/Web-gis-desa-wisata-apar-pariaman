@@ -124,7 +124,17 @@ class MobileController extends BaseController
         if ($id) {
             $objectData = $this->modelAtraction->getAtraction($id)->getResult();
         } else {
-            $objectData = $this->modelAtraction->getAtractions();
+            $objectData = array();
+            $atractions = $this->modelAtraction->getAtractions();
+            foreach ($atractions as $atraction) {
+                $list_gallery = $this->modelAtraction->getGallery($atraction->id)->getResultArray();
+                $galleries = array();
+                foreach ($list_gallery as $gallery) {
+                    $galleries[] = $gallery['url'];
+                }
+                $atraction->gallery = $galleries[0];
+                $objectData[] = $atraction;
+            }
         }
         $response = [
             'data' => $objectData,
