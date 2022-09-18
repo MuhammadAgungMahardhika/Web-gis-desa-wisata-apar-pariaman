@@ -44,12 +44,21 @@
         <!-- Main Content -->
         <div id="main">
             <?= $this->include('message/message.php'); ?>
-            <?= $this->include('layout/navbar'); ?>
+
+            <?php if (isset($currentUrl) != 'mobile') : ?>
+                <?= $this->include('layout/navbar'); ?>
+            <?php endif; ?>
+
             <?= $this->renderSection('content'); ?>
             <?= $this->include('layout/footer'); ?>
         </div>
     </div>
 </body>
+<?php if (isset($currentUrl) == "mobile") : ?>
+    <script>
+        $('#sidebar').css("display", "none")
+    </script>
+<?php endif; ?>
 
 <!-- Template JS -->
 <script src="<?= base_url('/assets/js/app.js') ?>"></script>

@@ -245,6 +245,7 @@ $routes->group('mobile', function ($routes) {
     $routes->get('atraction_by_rate/(:segment)', 'MobileController::atraction_by_rate/$1');
     $routes->get('atraction_by_category/(:segment)', 'MobileController::atraction_by_category/$1');
     $routes->get('atraction_by_category', 'MobileController::atraction_by_category');
+    $routes->get('detail_atraction/(:segment)', 'MobileController::detail_atraction/$1');
 
 
     $routes->get('event', 'MobileController::event');
@@ -252,6 +253,8 @@ $routes->group('mobile', function ($routes) {
     $routes->get('event_by_name/(:segment)', 'MobileController::event_by_name/$1');
     $routes->get('event_by_date/(:segment)/(:segment)', 'MobileController::event_by_date/$1/$2');
     $routes->get('event_by_rate/(:segment)', 'MobileController::event_by_rate/$1');
+    $routes->get('detail_event/(:segment)', 'MobileController::detail_event/$1');
+
 
     $routes->get('souvenir_place', 'MobileController::souvenir_place');
     $routes->get('souvenir_place/(:segment)', 'MobileController::souvenir_place/$1');

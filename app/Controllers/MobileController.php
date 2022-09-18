@@ -92,7 +92,6 @@ class MobileController extends BaseController
                 return $this->respond($response, 200);
             }
         }
-
         $response = [
             'status' => 400,
             'message' => [
@@ -128,12 +127,17 @@ class MobileController extends BaseController
             $atractions = $this->modelAtraction->getAtractions();
             foreach ($atractions as $atraction) {
                 $list_gallery = $this->modelAtraction->getGallery($atraction->id)->getResultArray();
-                $galleries = array();
-                foreach ($list_gallery as $gallery) {
-                    $galleries[] = $gallery['url'];
+                if ($list_gallery) {
+                    $galleries = array();
+                    foreach ($list_gallery as $gallery) {
+                        $galleries[] = $gallery['url'];
+                    }
+                    $atraction->gallery = $galleries[0];
+                    $objectData[] = $atraction;
+                } else {
+                    $atraction->gallery = '';
+                    $objectData[] = $atraction;
                 }
-                $atraction->gallery = $galleries[0];
-                $objectData[] = $atraction;
             }
         }
         $response = [
@@ -182,12 +186,64 @@ class MobileController extends BaseController
         return json_encode($data);
     }
 
+    public function detail_atraction($id = null)
+    {
+        $objectData = $this->modelAtraction->getAtraction($id)->getRow();
+        $galleryData = $this->modelAtraction->getGallery($id)->getResult();
+        $aparData =  $this->modelApar->getApar();
+
+        //untuk ajax
+        if ($this->request->isAJAX()) {
+            $user_id = $this->request->getGet('user_id');
+            if ($id) {
+                $countRating = $this->modelRating->getRating($id, 'atraction_id')->getRow();
+                $userTotal = $this->modelRating->getUserTotal($id, 'atraction_id')->getRow();
+                $userRating = $this->modelRating->getUserRating($user_id, 'atraction_id', $id)->getRow();
+            }
+            $data = [
+                'countRating' =>  $countRating,
+                'userTotal' =>  $userTotal,
+                'userRating' => $userRating
+            ];
+            return json_encode($data);
+        }
+        if (is_object($objectData)) {
+            $data = [
+                'title' => $this->title,
+                'config' => config('Auth'),
+                'objectData' => $objectData,
+                'galleryData'  => $galleryData,
+                'url' =>  'atraction',
+                'currentUrl' => 'mobile',
+                'aparData' => $aparData
+            ];
+            return view('mobile/detail_object', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
     public function event($id = null)
     {
         if ($id) {
             $objectData = $this->modelEvent->getEvent($id)->getResult();
         } else {
-            $objectData = $this->modelEvent->getEvents();
+            $objectData = array();
+            $atractions = $this->modelEvent->getEvents();
+            foreach ($atractions as $atraction) {
+                $list_gallery = $this->modelEvent->getGallery($atraction->id)->getResultArray();
+                if ($list_gallery) {
+                    $galleries = array();
+                    foreach ($list_gallery as $gallery) {
+                        $galleries[] = $gallery['url'];
+                    }
+                    $atraction->gallery = $galleries[0];
+                    $objectData[] = $atraction;
+                } else {
+                    $atraction->gallery = '';
+                    $objectData[] = $atraction;
+                }
+            }
         }
         $response = [
             'data' => $objectData,
@@ -232,6 +288,44 @@ class MobileController extends BaseController
             'url' => 'event'
         ];
         return json_encode($data);
+    }
+
+    public function detail_event($id = null)
+    {
+        $objectData = $this->modelEvent->getEvent($id)->getRow();
+        $galleryData = $this->modelEvent->getGallery($id)->getResult();
+        $aparData =  $this->modelApar->getApar();
+
+        //untuk ajax
+        if ($this->request->isAJAX()) {
+            $user_id = $this->request->getGet('user_id');
+            if ($id) {
+                $countRating = $this->modelRating->getRating($id, 'event_id')->getRow();
+                $userTotal = $this->modelRating->getUserTotal($id, 'event_id')->getRow();
+                $userRating = $this->modelRating->getUserRating($user_id, 'event_id', $id)->getRow();
+            }
+            $data = [
+                'countRating' =>  $countRating,
+                'userTotal' =>  $userTotal,
+                'userRating' => $userRating
+            ];
+            return json_encode($data);
+        }
+        if (is_object($objectData)) {
+            $data = [
+                'title' => $this->title,
+                'config' => config('Auth'),
+                'objectData' => $objectData,
+                'galleryData'   => $galleryData,
+                'url' => 'event',
+                'currentUrl' => "mobile",
+                'aparData' => $aparData
+            ];
+
+            return view('user-menu/detail_object', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
     }
 
 
