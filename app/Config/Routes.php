@@ -125,6 +125,10 @@ $routes->group('review', function ($routes) {
 
 
 // Route Admin menu
+
+//  0. Dashboard
+$routes->get('dashboard', 'Pages::dashboard', ['filter' => 'role:admin']);
+
 //  1. Route Users
 $routes->group('manage_users', function ($routes) {
     $routes->get('/', 'ManageUsersController::index', ['filter' => 'role:admin']);

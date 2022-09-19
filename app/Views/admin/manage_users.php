@@ -11,7 +11,7 @@
     <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary text-center">Manage Users</h6>
+            <h5 class="m-0 font-weight-bold text-primary text-center">Manage Users</h5>
             <a href="<?= base_url('manage_users/insert') ?> " title="Add user" role="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</a>
         </div>
         <div class="card-body">

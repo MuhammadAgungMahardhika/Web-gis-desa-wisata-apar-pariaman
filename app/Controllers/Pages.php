@@ -41,12 +41,23 @@ class Pages extends BaseController
     // Masuk Halaman about
     public function about()
     {
-        $apar = new \App\Models\aparModel();
-        $aparData = $apar->getApar();
+
+        $aparData = $this->modelApar->getApar();
         $data = [
             'title' => 'About | Tourism Village',
             'aparData' => $aparData
         ];
         return view('user-menu/about', $data);
+    }
+
+    // Masuk Halaman Dashboard
+    public function dashboard()
+    {
+        $aparData = $this->modelApar->getApar();
+        $data = [
+            'title' => 'Dashboard | Tourism Village',
+            'aparData' => $aparData
+        ];
+        return view('admin/dashboard', $data);
     }
 }
