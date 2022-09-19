@@ -908,11 +908,17 @@ function getObjectByCategory(val = null) {
     });
 }
 // search fitur, Show event on map by date
-function getObjectByDate() {
+function getObjectByDate(date_start = null,date_end=null) {
     $('#rowObjectArround').css("display", "none")
     let date_1 = $('#date_1').val()
     let date_2 = $('#date_2').val()
 
+    if(date_start&&date_end){
+        console.log(date_start)
+        date_1 = date_start
+        date_2 = date_end
+    }
+   
     if (date_1 && date_2) {
         $.ajax({
             url: base_url + "/" + "list_object" + "/" + "event_by_date" + "/" + date_1 + "/" + date_2,

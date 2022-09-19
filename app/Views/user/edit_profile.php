@@ -124,10 +124,10 @@ if (session()->getFlashdata('success')) : ?>
         stylePanelLayout: 'circle',
         stylePanelAspectRatio: '1:1'
     })
-    <?php if (user()->user_image != 'default.svg') : ?>
+    <?php if (user()->user_image != 'default.png') : ?>
         pond.addFiles(`<?= base_url('assets/images/user-photos'); ?>/<?= user()->user_image; ?>`)
     <?php else : ?>
-        pond.addFiles(`<?= base_url('assets/images/user-photos' . '/' . 'default.svg'); ?>`)
+        pond.addFiles(`<?= base_url('assets/images/user-photos' . '/' . 'default.png'); ?>`)
     <?php endif; ?>
     pond.setOptions({
         server: "<?= base_url('upload/avatar') ?>"

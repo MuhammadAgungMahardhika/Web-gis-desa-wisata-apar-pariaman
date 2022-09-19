@@ -17,7 +17,7 @@ class UploadController extends BaseController
         $folder = uniqid() . '-' . date('YmdHis');
         $img = $this->request->getFile('avatar');
         $originalName = $img->getName();
-        if (!$img->hasMoved() && $originalName != 'default.svg') {
+        if (!$img->hasMoved() && $originalName != 'default.png') {
             $file = $img->getRandomName();
             mkdir(WRITEPATH . 'uploads/' . $folder);
             $filepath = WRITEPATH . 'uploads/' . $img->store($folder, $file);
@@ -28,7 +28,7 @@ class UploadController extends BaseController
     public function remove()
     {
         $folder = $this->request->getBody();
-        if ($folder != 'default.svg') {
+        if ($folder != 'default.png') {
             $filepath = WRITEPATH . 'uploads/' . $folder;
             delete_files($filepath);
             rmdir($filepath);

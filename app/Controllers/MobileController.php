@@ -322,7 +322,7 @@ class MobileController extends BaseController
                 'aparData' => $aparData
             ];
 
-            return view('user-menu/detail_object', $data);
+            return view('mobile/detail_object', $data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }

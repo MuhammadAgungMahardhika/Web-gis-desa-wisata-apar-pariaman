@@ -67,7 +67,7 @@ class User extends BaseController
                 delete_files($filepath);
                 rmdir($filepath);
             } else {
-                $requestData['user_image'] = 'default.svg';
+                $requestData['user_image'] = 'default.png';
             }
             // dd($requestData);
 
