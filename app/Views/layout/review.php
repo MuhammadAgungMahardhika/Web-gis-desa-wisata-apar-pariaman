@@ -2,7 +2,7 @@
 <div class="card">
     <div class="card-header text-center">
         <h4 class="card-title">Rating and Review</h4>
-        <?php if (logged_in() == true) : ?>
+        <?php if (logged_in()) : ?>
             <form class="form form-vertical" id="formReview" method="POST">
                 <div class="form-body">
                     <div class="star-containter mb-3">

@@ -25,6 +25,7 @@
                             <th>No</th>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>Date start</th>
                             <th class="text-center">Action</th>
 
                         </tr>
@@ -36,6 +37,7 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $event->id; ?></td>
                                 <td><?= $event->name; ?></td>
+                                <td><?= $event->date_start; ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Detail event" href="<?= base_url('manage_event/detail/' . $event->id); ?>"><i class="fa fa-eye"></i> </a>
                                     <a class="btn btn-outline-danger btn-sm" title="Delete Event" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $event->id; ?>">

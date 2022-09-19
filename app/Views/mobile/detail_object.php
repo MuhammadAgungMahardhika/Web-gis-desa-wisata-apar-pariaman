@@ -20,9 +20,6 @@
                     <?= $this->include('/layout/detail_object_body'); ?>
                 </div>
             </div>
-
-            <!--Rating and Review Section-->
-            <?= $this->include('layout/review'); ?>
         </div>
         <div class="col-md-6 col-12">
             <!-- Object Location on Map -->
