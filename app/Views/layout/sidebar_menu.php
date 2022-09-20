@@ -112,10 +112,9 @@
                                 <ul class="submenu">
                                     <li class="submenu-item">
                                         <div class="input-group input-daterange">
-                                            <div class="input-group-addon">from</div>
-                                            <input id="date_1" type="date" onchange="getObjectByDate()" class="date">
-                                            <div class="input-group-addon">to</div>
-                                            <input id="date_2" type="date" onchange="getObjectByDate()" class="date">
+                                            <div class="input-group-addon">from <input id="date_1" type="date" onchange="getObjectByDate()" class="date"></div>
+
+                                            <div class="input-group-addon">to <input id="date_2" type="date" onchange="getObjectByDate()" class="date"></div>
                                         </div>
                                     </li>
                                 </ul>

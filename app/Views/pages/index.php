@@ -25,86 +25,101 @@
 
 <body>
     <!-- Awal landing -->
-    <section class="container-fluid" id="landing">
-        <div class="row">
-            <div class="col">
-                <!-- Awal navigasi -->
-                <nav class="container-fluid navbar navbar-expand-lg " id="Nav">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-example" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-center" id="navbar-example">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#landing">LANDING PAGE</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('list_object'); ?>">EXPLORE</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#About">ABOUT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#MyProjects">PREVIEW</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#MyCertificates">CERTIFICATES</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#MyContacts">GET IN TOUCH</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <!-- Akhir navigasi -->
-                <div class="bg" id="bg">
-                    <video autoplay muted poster="<?= base_url('/assets/images/bg-movie-ss.PNG') ?>" loop class="bg-video">
-                        <source src="<?= base_url('media/videos/' . $aparData->video_url); ?>">
-                    </video>
-                    <div class="bg-content">
-                        <h1 style="color: #eaeaea;">Welcome To Apar Tourism Village</h1>
-                        <p>Pariaman City, West Sumatra, Indonesia</p>
-                        <a class="btn btn-success " href="<?= base_url('list_object') ?>">Explore Now!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Akhir landing -->
 
+    <!-- Awal navigasi -->
+    <nav class="container-fluid navbar navbar-expand-lg " id="Nav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-example" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbar-example">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#landing">LANDING PAGE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('list_object'); ?>">EXPLORE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#About">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#MyProjects">PREVIEW</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#MyCertificates">CERTIFICATES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#MyContacts">GET IN TOUCH</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Akhir navigasi -->
+    <div class="bg" id="bg">
+        <video autoplay muted poster="<?= base_url('/assets/images/bg-movie-ss.PNG') ?>" loop class="bg-video">
+            <source src="<?= base_url('media/videos/bg-movie.MP4'); ?>">
+        </video>
+        <div class="bg-content">
+            <h1 style="color: #eaeaea;">Welcome To Apar Tourism Village</h1>
+            <p>Pariaman City, West Sumatra, Indonesia</p>
+            <a class="btn btn-success " href="<?= base_url('list_object') ?>">Explore Now!</a>
+        </div>
+    </div>
+
+    <!-- Akhir landing -->
     <!-- About  -->
-    <section class="container-fluid" id="About">
-        <div class="row text-center">
-            <div class="col">
+    <section class="container-fluid mb-2" id="About">
+        <div class="row">
+            <div class="col-md-6 text-center">
                 <h2 class="efek1">ABOUT APAR</h2>
                 <p style="text-align: justify">
                     <?= $aparData->description; ?>
                 </p>
             </div>
+
+        </div>
+        <div class="row justify-content-end text-center ">
+            <div class="col-md-6 shadow">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="assets/images/samples/banana.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/images/samples/bg-mountain.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+
+            </div>
+
         </div>
     </section>
     <!-- Akhir About me -->
     <!-- My Projects -->
     <section class="container-fluid" id="MyProjects">
-        <div class="row text-center">
-            <div class="col">
+        <div class="row justify-content-center ">
+            <div class="col-md-8 text-center">
                 <h2 class="efek2">PREVIEW</h2>
-                <button class="btn btn-success" onclick="showObject('atraction')">Atraction</button>
-                <button class="btn btn-success" onclick="showObject('event')">Event</button>
-                <button class="btn btn-success" onclick="showObject('culinary_place')">Culinary place</button>
-                <button class="btn btn-success" onclick="showObject('souvenir_place')">Souvenir place</button>
-                <button class="btn btn-success" onclick="showObject('worship_place')">Worship place</button>
-                <button class="btn btn-success" onclick="showObject('facility')">Facility</button>
+                <button class="btn btn-outline-success" onclick="showObject('atraction')">Atraction</button>
+                <button class="btn btn-outline-success" onclick="showObject('event')">Event</button>
+                <button class="btn btn-outline-success" onclick="showObject('culinary_place')">Culinary place</button>
+                <button class="btn btn-outline-success" onclick="showObject('souvenir_place')">Souvenir place</button>
+                <button class="btn btn-outline-success" onclick="showObject('worship_place')">Worship place</button>
+                <button class="btn btn-outline-success" onclick="showObject('facility')">Facility</button>
             </div>
         </div>
         <div class="row justify-content-center m-2">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-body">
-                        <?= $this->include('/layout/map-body.php'); ?>
-                    </div>
-                </div>
-
+            <div class="col-md-8 shadow">
+                <?= $this->include('/layout/map-body.php'); ?>
             </div>
         </div>
     </section>
@@ -119,10 +134,10 @@
                     <h1 class="text-white mb-2" data-toggle="counter-up">50</h1>
                     <p class="text-white mb-0">Besar ADWI 2021</p>
                 </div>
-                <div class="col-md-6 col-lg-6 text-center  " 0.3s">
+                <div class="col-md-6 col-lg-6 text-center">
                     <img src="media/photos/landing-page/rumah-gadang.png" alt="" style="filter: invert(100%); max-width: 5em">
-                    <h1 class="text-white mb-2" data-toggle="counter-up">70</h1>
-                    <p class="text-white mb-0">Rumah Gadang</p>
+                    <h1 class="text-white mb-2" data-toggle="counter-up"></h1>
+                    <p class="text-white mb-0">Eco tourism</p>
                 </div>
             </div>
         </div>
