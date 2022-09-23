@@ -76,9 +76,15 @@
                     <?= $aparData->description; ?>
                 </p>
             </div>
+            <div class="col-md-6">
+                <img src="media/photos/landing-page/turtle-1.png" alt="" style=" max-width: 100%" class="mb-3 efek5">
+            </div>
 
         </div>
         <div class="row justify-content-end text-center ">
+            <div class="col-md-6">
+                <img src="media/photos/landing-page/turtle-2.png" alt="" style=" max-width: 100%" class="mb-3">
+            </div>
             <div class="col-md-6 shadow">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
@@ -98,9 +104,7 @@
                         <span class="visually-hidden">Next</span>
                     </a>
                 </div>
-
             </div>
-
         </div>
     </section>
     <!-- Akhir About me -->
@@ -109,12 +113,12 @@
         <div class="row justify-content-center ">
             <div class="col-md-8 text-center">
                 <h2 class="efek2">PREVIEW</h2>
-                <button class="btn btn-outline-success" onclick="showObject('atraction')">Atraction</button>
-                <button class="btn btn-outline-success" onclick="showObject('event')">Event</button>
-                <button class="btn btn-outline-success" onclick="showObject('culinary_place')">Culinary place</button>
-                <button class="btn btn-outline-success" onclick="showObject('souvenir_place')">Souvenir place</button>
-                <button class="btn btn-outline-success" onclick="showObject('worship_place')">Worship place</button>
-                <button class="btn btn-outline-success" onclick="showObject('facility')">Facility</button>
+                <button class="btn btn-outline-primary" onclick="showObject('atraction')">Atraction</button>
+                <button class="btn btn-outline-primary" onclick="showObject('event')">Event</button>
+                <button class="btn btn-outline-primary" onclick="showObject('culinary_place')">Culinary place</button>
+                <button class="btn btn-outline-primary" onclick="showObject('souvenir_place')">Souvenir place</button>
+                <button class="btn btn-outline-primary" onclick="showObject('worship_place')">Worship place</button>
+                <button class="btn btn-outline-primary" onclick="showObject('facility')">Facility</button>
             </div>
         </div>
         <div class="row justify-content-center m-2">

@@ -1,6 +1,6 @@
 
-// let base_url = 'http://localhost:8080' //untuk php spark serve
-let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
+let base_url = 'http://localhost:8080' //untuk php spark serve
+// let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition, userMarker, directionsRenderer, infoWindow, circle, map
 let markerArray = []
 let markerNearby
@@ -31,17 +31,15 @@ function showMap() {
 
 //show atraction gallery when url is in home
 function showUpcoming() {
-    $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">Upcoming events</h5></div><div class="card-body">
+    $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">UNIQE ATRACTION</h5></div><div class="card-body">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
             <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class=""></li>
-            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class=""></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active"><img src="" onclick="showObject('atraction')" style="cursor: pointer;"></div>
-            <div class="carousel-item"><img src="" onclick="showObject('atraction')" style="cursor: pointer;"></div>
-            <div class="carousel-item"><img src="" onclick="showObject('atraction')" style="cursor: pointer;"></div>
+            <div class="carousel-item active"><img src="${base_url}/assets/images/dashboard-images/atraction.jpg" onclick="showObject('atraction','A01')" style="cursor: pointer;" width="500"></div>
+            <div class="carousel-item"><img src="${base_url}/assets/images/dashboard-images/turtle.jpg" onclick="showObject('atraction','A02')" style="cursor: pointer;" width="500"></div>
         </div>
         <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

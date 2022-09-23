@@ -7,11 +7,30 @@
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
+            <div class="col-12 col-md-3 order-md-1 order-second">
                 <h3>Tourism Village</h3>
                 <p class="text-subtitle text-muted">Desa Wisata Apar Pariaman</p>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first mb-md-0 mb-3">
+            <div class="col-4 col-md-6 col-sm-2 order-md-1 order-last ">
+                <ul class="list-group list-group-horizontal-lg d-flex justify-content-end" id="socialMediaList">
+                    <a href="https://www.tiktok.com/" title="Tiktok">
+                        <li class="list-group-item rounded border-0 shadow-sm m-1" style="background-color: white;">
+                            <i class="fab fa-tiktok fa-2x text-secondary"></i>
+                        </li>
+                    </a>
+                    <a href="https://www.instagram.com/desa_wisata_apar/" title="Instagram">
+                        <li class="list-group-item rounded border-0 shadow-sm m-1" style="background-color: white;">
+                            <i class="fab fa-instagram fa-2x text-danger"></i>
+                        </li>
+                    </a>
+                    <a href="#" title="Youtube">
+                        <li class="list-group-item rounded border-0 shadow-sm m-1" style="background-color: white;">
+                            <i class="fab fa-youtube fa-2x text-danger"></i>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            <div class="col-12 col-md-3 order-md-2 order-first mb-md-0 mb-3">
                 <div class="float-end">
                     <div class="btn-group mb-1">
                         <div class="dropdown">

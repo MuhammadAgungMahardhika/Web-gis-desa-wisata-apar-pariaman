@@ -3,7 +3,7 @@
 jQuery(document).ready(function ($) {
     var scrollSpy = new bootstrap.ScrollSpy(document.body, { target: '#navbar-example' });
 
-    $('#MyName .NamaSaya').addClass('Muncul');
+    $('#MyName .NamaSaya').addClass('muncul');
     $('#MyFoto .rounded-circle').addClass('muncul');
 
     $('#MyCertificates .card').hover(function () {
@@ -30,13 +30,14 @@ jQuery(document).ready(function ($) {
         //parallax efek untuk tulisan about me
 
         if (wScrool > $('#About').offset().top - 500) {
-            $('.efek1').addClass('Muncul');
+            $('.efek1').addClass('muncul');
+           $('.efek5').addClass('muncul');
 
         }
         //parallax untuk tulisan myproject
 
         if (wScrool > $('#MyProjects').offset().top - 500) {
-            $('#MyProjects .efek2').addClass('Muncul');
+            $('#MyProjects .efek2').addClass('muncul');
 
         }
 
@@ -51,7 +52,7 @@ jQuery(document).ready(function ($) {
         }
         //parallax untuk tulisan My certificate
         if (wScrool > $('#MyCertificates').offset().top - 500) {
-            $('#MyCertificates .efek3').addClass('Muncul');
+            $('#MyCertificates .efek3').addClass('muncul');
 
         }
         //parallax efek pada card my certificate

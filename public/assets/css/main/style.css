@@ -227,6 +227,11 @@
    transform: translate(-10px, 0px);
  }
 
+ .efek5{
+  opacity: 0;
+  transform: translate(15px, 0px);
+}
+
  /* Akhir Contacts-----------------------------------------------------------*/
 
  /* Animation */
@@ -234,12 +239,6 @@
    opacity: 1;
    transform: translate(0px, 0px);
    transition-duration: 2s;
- }
-
- .Muncul {
-   opacity: 1;
-   transition-duration: 1s;
-   transform: translate(0px, 0px);
  }
 
  @keyframes bergerak {
