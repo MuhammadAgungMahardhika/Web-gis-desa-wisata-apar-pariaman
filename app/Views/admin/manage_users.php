@@ -6,21 +6,16 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-
-    <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary text-center">Manage Users</h5>
-            <a href="<?= base_url('manage_users/insert') ?> " title="Add user" role="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</a>
+            <h5 class="m-0 font-weight-bold text-primary text-center">List Admin</h5>
+            <a href="<?= base_url('manage_users/insert') ?> " title="Add new admin" role="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <?php $no = 1;
-
-                        ?>
+                        <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
                             <th>Email</th>
@@ -33,16 +28,6 @@
                         </tr>
 
                     </thead>
-                    <!-- <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot> -->
                     <tbody>
                         <?php foreach ($users as $user) : ?>
                             <tr>

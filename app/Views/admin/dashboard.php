@@ -20,21 +20,21 @@
         <div class="card-body">
             <section id="groups">
                 <div class="row d-flex ">
-                    <!-- <div class="col-md-3">
+                    <div class="col-md-3">
                         <div class="card  shadow efek" id="users">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_users') ?>">
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/users.JPG') ?>" alt="Card image cap">
                                     <div class="card-body">
-                                        <h4 class="card-title">Users</h4>
+                                        <h4 class="card-title">Admin</h4>
                                         <p class="card-text">
-                                            Manage all users at Apar Tourism Village</p>
+                                            Manage all admin at Apar Tourism Village</p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="col-md-3">
                         <div class="card  shadow efek" id="village">
                             <div class="card-content">
@@ -55,7 +55,7 @@
                         <div class="card  shadow efek" id="at">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_atraction') ?>">
-                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/atraction.JPG') ?>" alt="Card image cap">
+                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/mangrove.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Atraction</h4>
                                         <p class="card-text">

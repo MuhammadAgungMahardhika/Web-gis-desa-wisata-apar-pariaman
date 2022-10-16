@@ -38,8 +38,8 @@ function showUpcoming() {
             <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class=""></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active"><img src="${base_url}/assets/images/dashboard-images/atraction.jpg" onclick="showObject('atraction','A01')" style="cursor: pointer;" width="500"></div>
-            <div class="carousel-item"><img src="${base_url}/assets/images/dashboard-images/turtle.jpg" onclick="showObject('atraction','A02')" style="cursor: pointer;" width="500"></div>
+            <div class="carousel-item active"><img src="${base_url}/assets/images/dashboard-images/mangrove.jpg" onclick="showObject('atraction','A001')" style="cursor: pointer;" width="100%"></div>
+            <div class="carousel-item"><img src="${base_url}/assets/images/dashboard-images/turtle.jpg" onclick="showObject('atraction','A002')" style="cursor: pointer;" width="100%"></div>
         </div>
         <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

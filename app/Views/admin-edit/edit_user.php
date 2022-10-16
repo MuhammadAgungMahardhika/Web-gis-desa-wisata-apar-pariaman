@@ -11,7 +11,7 @@
             <div class="card mb-3">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary text-center">Edit User</h6>
-                    <a href="<?= base_url('manage_users/detail/' . $user->userid) ?>" title="Back to detail " class="small btn btn-success btn-sm text-right"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="<?= base_url('manage_users/detail/' . $user->userid) ?>" title="Back to detail admin" class="small btn btn-primary btn-sm text-right"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="row g-0">
                     <div class="col-md-2 text-center p-3">
