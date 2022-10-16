@@ -16,17 +16,6 @@ jQuery(document).ready(function ($) {
     $(window).scroll(function () {
 
         var wScrool = $(this).scrollTop();
-        // parallax efex pada tulisan Nama saya
-
-
-        $('#MyFoto').css({
-            'transform': 'translate(0px,' + wScrool / 12 + '%)'
-        });
-
-        $('#MyName').css({
-            'transform': 'translate(0px,' + wScrool / 4 + '%)'
-        });
-
         //parallax efek untuk tulisan about me
 
         if (wScrool > $('#About').offset().top - 500) {

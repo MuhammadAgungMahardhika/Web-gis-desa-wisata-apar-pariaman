@@ -55,12 +55,6 @@
                                 </table>
 
                                 <div class="form-group row">
-                                    <label for="id" class=" col-sm-2 col-form-label">Id</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="id" required autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="name" class=" col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="name" required autocomplete="off">

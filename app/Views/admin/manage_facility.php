@@ -21,7 +21,6 @@
                         <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
-                            <th>Id</th>
                             <th>Facility Name</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -30,7 +29,6 @@
                         <?php foreach ($facilityData as $facility) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $facility->id; ?></td>
                                 <td><?= $facility->name; ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_facility/detail/' . $facility->id); ?>"><i class="fa fa-eye"></i> </a>

@@ -7,71 +7,69 @@
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
-            <div class="col-12 col-md-3 order-md-1 order-second">
+            <div class="col order-md-2 order-first">
                 <h3>Tourism Village</h3>
                 <p class="text-subtitle text-muted">Desa Wisata Apar Pariaman</p>
             </div>
-            <div class="col-4 col-md-6 col-sm-2 order-md-1 order-last ">
-                <ul class="list-group list-group-horizontal-lg d-flex justify-content-end" id="socialMediaList">
-                    <a href="https://www.tiktok.com/" title="Tiktok">
-                        <li class="list-group-item rounded border-0 shadow-sm m-1" style="background-color: white;">
-                            <i class="fab fa-tiktok fa-2x text-secondary"></i>
-                        </li>
-                    </a>
-                    <a href="https://www.instagram.com/desa_wisata_apar/" title="Instagram">
-                        <li class="list-group-item rounded border-0 shadow-sm m-1" style="background-color: white;">
-                            <i class="fab fa-instagram fa-2x text-danger"></i>
-                        </li>
-                    </a>
-                    <a href="#" title="Youtube">
-                        <li class="list-group-item rounded border-0 shadow-sm m-1" style="background-color: white;">
-                            <i class="fab fa-youtube fa-2x text-danger"></i>
-                        </li>
-                    </a>
-                </ul>
+            <div class="col  d-flex order-md-2 order-second justify-content-end">
+
+                <a href="https://www.tiktok.com/" title="Tiktok" class="m-1">
+                    <i class="fab fa-tiktok fa-2x text-secondary p-2 bg-white shadow-sm rounded"></i>
+                </a>
+
+                <a href="https://www.instagram.com/desa_wisata_apar/" title="Instagram" class="m-1">
+                    <i class="fab fa-instagram fa-2x text-danger p-2 bg-white shadow-sm rounded"></i>
+                </a>
+
+
+                <a href="#" title="Youtube" class="m-1">
+                    <i class="fab fa-youtube fa-2x text-danger p-2 bg-white shadow-sm rounded"></i>
+                </a>
             </div>
-            <div class="col-12 col-md-3 order-md-2 order-first mb-md-0 mb-3">
-                <div class="float-end">
-                    <div class="btn-group mb-1">
-                        <div class="dropdown">
-                            <a class="" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="card mb-0">
-                                    <div class="card-body py-3 px-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar avatar-lg me-0">
-                                                <?php if (in_groups('admin') || in_groups('user')) : ?>
-                                                    <img src="<?= base_url('/assets/images/user-photos/') . "/" . user()->user_image; ?>" />
-                                                <?php else : ?>
-                                                    <img src=" <?= base_url('assets/images/user-photos/default.png') ?>" />
-                                                <?php endif; ?>
+            <?php if (in_groups('admin')) : ?>
+                <div class="col order-md-2 order-last mb-md-0 mb-3">
+                    <div class="float-end">
+                        <div class="btn-group mb-1">
+                            <div class="dropdown">
+                                <a class="" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="card mb-0">
+                                        <div class="card-body py-3 px-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar avatar-lg me-0">
+                                                    <?php if (in_groups('admin') || in_groups('user')) : ?>
+                                                        <img src="<?= base_url('/assets/images/user-photos/') . "/" . user()->user_image; ?>" />
+                                                    <?php else : ?>
+                                                        <img src=" <?= base_url('assets/images/user-photos/default.png') ?>" />
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <?php if (in_groups('admin') || in_groups('user')) : ?>
+                                        <a class="dropdown-item <?php if (current_url() == base_url('user/profile')) echo 'active'; ?>" href="<?= base_url('user/profile') ?>">
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Profile
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if (in_groups('admin') || in_groups('user')) : ?>
+                                        <a class="dropdown-item" href="<?= base_url('logout') ?>">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Logout
+                                        </a>
+                                    <?php else : ?>
+                                        <a class="dropdown-item" href="<?= base_url('login') ?>">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Login
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <?php if (in_groups('admin') || in_groups('user')) : ?>
-                                    <a class="dropdown-item <?php if (current_url() == base_url('user/profile')) echo 'active'; ?>" href="<?= base_url('user/profile') ?>">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                <?php endif; ?>
-                                <?php if (in_groups('admin') || in_groups('user')) : ?>
-                                    <a class="dropdown-item" href="<?= base_url('logout') ?>">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                <?php else : ?>
-                                    <a class="dropdown-item" href="<?= base_url('login') ?>">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Login
-                                    </a>
-                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

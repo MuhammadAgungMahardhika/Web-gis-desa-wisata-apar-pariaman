@@ -32,7 +32,7 @@
 <div class="row">
     <div class="col">
         <p class="fw-bold">Description</p>
-        <p><?= $objectData->description; ?>
+        <p style="text-align: justify;"><?= $objectData->description; ?>
         </p>
     </div>
 </div>

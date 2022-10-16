@@ -14,6 +14,14 @@ class worshipPlaceModel extends Model
     protected $columns = 'id,name,category,open,close,building_size,capacity,description';
     protected $coords = "ST_Y(ST_Centroid(worship_place.geom)) AS lat ,ST_X(ST_Centroid(worship_place.geom)) AS lng ";
     protected $geom_area = "ST_AsGeoJSON(worship_place.geom_area) AS geoJSON";
+
+    public function get_new_id()
+    {
+        $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
+        $count = (int)substr($lastId['id'], 2);
+        $id = sprintf('WP%03d', $count + 1);
+        return $id;
+    }
     public function getWorshipPlaces()
     {
         $query = $this->db->table($this->table)

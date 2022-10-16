@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="<?= base_url('manage_event'); ?>" role="button" class="btn btn-primary justify-item-center" title="List event"><i class="fa fa-arrow-left"></i></a>
-                    <h4 class="card-title text-center">Insert souvenir place</h4>
+                    <h4 class="card-title text-center">Insert facility</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -53,13 +53,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
-                                <div class="form-group row">
-                                    <label for="id" class=" col-sm-2 col-form-label">Id</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="id" required autocomplete="off">
-                                    </div>
-                                </div>
                                 <div class="form-group row">
                                     <label for="name" class=" col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">

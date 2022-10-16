@@ -19,7 +19,6 @@
                         <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
-                            <th>Id</th>
                             <th>Worship Place Name</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -28,7 +27,6 @@
                         <?php foreach ($worshipPlaceData as $worshipPlace) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $worshipPlace->id; ?></td>
                                 <td><?= $worshipPlace->name; ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_worship_place/detail/' . $worshipPlace->id); ?>"><i class="fa fa-eye"></i> </a>

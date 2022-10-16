@@ -16,6 +16,13 @@ class souvenirPlaceModel extends Model
     protected $coords    = "ST_Y(ST_Centroid(souvenir_place.geom)) AS lat ,ST_X(ST_Centroid(souvenir_place.geom)) AS lng ";
     protected $geom_area = "ST_AsGeoJSON(souvenir_place.geom_area) AS geoJSON";
 
+    public function get_new_id()
+    {
+        $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
+        $count = (int)substr($lastId['id'], 2);
+        $id = sprintf('SP%03d', $count + 1);
+        return $id;
+    }
     public function getSouvenirPlaces()
     {
         $query = $this->db

@@ -7,14 +7,14 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title text-center">Object Information</h4>
-                    <div class="text-center">
+                    <!-- <div class="text-center">
                         <span class="material-symbols-outlined rating-color" id="s-1">star</span>
                         <span class="material-symbols-outlined rating-color" id="s-2">star</span>
                         <span class="material-symbols-outlined rating-color" id="s-3">star</span>
                         <span class="material-symbols-outlined rating-color" id="s-4">star</span>
                         <span class="material-symbols-outlined rating-color" id="s-5">star</span>
                     </div>
-                    <p id="userTotal" class="text-center text-sm"></p>
+                    <p id="userTotal" class="text-center text-sm"></p> -->
                 </div>
                 <div class="card-body">
                     <?= $this->include('/layout/detail_object_body'); ?>
@@ -22,7 +22,6 @@
             </div>
 
             <!--Rating and Review Section-->
-            <?= $this->include('layout/review'); ?>
         </div>
         <div class="col-md-6 col-12">
             <!-- Object Location on Map -->

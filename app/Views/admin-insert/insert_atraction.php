@@ -57,12 +57,6 @@
                                 </div>
                                 <!-- Form data nonspasial -->
                                 <div class="form-group row">
-                                    <label for="name" class="col-sm-2 col-form-label">Id</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="id" autocomplete="off" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="name" required autocomplete="off">

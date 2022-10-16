@@ -23,7 +23,6 @@
                         ?>
                         <tr>
                             <th>No</th>
-                            <th>Id</th>
                             <th>Name</th>
                             <th>Date start</th>
                             <th class="text-center">Action</th>
@@ -35,7 +34,6 @@
                         <?php foreach ($objectData as $event) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $event->id; ?></td>
                                 <td><?= $event->name; ?></td>
                                 <td><?= $event->date_start; ?></td>
                                 <td class="text-center">

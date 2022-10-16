@@ -137,15 +137,14 @@ class ManageWorshipPlaceController extends BaseController
     {
         //validation data
         $validateRules = $this->validate([
-            'id' => 'is_unique[worship_place.id]|required|max_length[10]',
             'name' => 'required|max_length[50]',
             'description' => 'max_length[255]'
         ]);
         // ---------------------Data request------------------------------
         $request = $this->request->getPost();
-        $id = $this->request->getPost('id');
+        $id = $this->model->get_new_id();
         $insertRequest = [
-            'id' => $this->request->getPost('id'),
+            'id' => $id,
             'name' => $this->request->getPost('name'),
             'category' => $this->request->getPost('category'),
             'open' => $this->request->getPost('open'),

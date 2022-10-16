@@ -1,6 +1,6 @@
 
 let base_url = 'http://localhost:8080' //untuk php spark serve
-// let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
+// let base_url = 'http://10.24.3.144:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition, userMarker, directionsRenderer, infoWindow, circle, map
 let markerArray = []
 let markerNearby
@@ -183,7 +183,7 @@ function addAparPolygon(geoJson, color, opacity) {
 }
 
 // move camera
-function moveCamera(z = 16.8) {
+function moveCamera(z = 16) {
     map.moveCamera({ zoom: z })
 }
 // add callroute
@@ -254,7 +254,7 @@ function infoMarkerData(data, url) {
     if (window.location.pathname.split('/').pop() == 'mobile') {
         infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a>` } else { return '' } })()}</div>`
     } else {
-        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>` } else { return '' } })()} ${(() => { if (url == 'atraction' || url == 'event') { return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >` } else { return '' } })()} </div>`
+        infoMarker = `<div class="text-center mb-1">${name}</div>${(() => { if (url != 'atraction') { return `<div class="text-center"><button title="detail" onclick="showSupportModal(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#supportModal"><i class="fa fa-eye fa-xs"></i></button></div>` } else { return '' } })()}${(() => { if (url == 'event') { return `<div class="text-center mb-1"><i class="fa fa-calendar"></i> ${dateStart}</div>` } else { return '' } })()}${(() => { if (url == 'atraction') { return `<div class="text-center mb-1">${category}</div>` } else { return '' } })()}<div class="col-md text-center" id="infoWindowDiv" >${(() => { if (url == 'event' || url == 'atraction') { return `<a role ="button" title ="route here" class="btn btn-outline-primary" onclick ="calcRoute(${lat},${lng})"> <i class ="fa fa-road"> </i></a > <a href="${base_url}/detail_object/${url}/${id}" target="_blank" role="button" class="btn btn-outline-primary" title="detail information"> <i class="fa fa-info"></i></a>` } else { return '' } })()} ${(() => { if (url == 'atraction' || url == 'event') { return `<a onclick = "setNearby(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" target="_blank" role = "button" class="btn btn-outline-primary" title="object arround you"><i class="fa fa-compass"></i></a >` } else { return '' } })()} </div>`
     }
     return infoMarker
 }
@@ -272,10 +272,10 @@ function showPanelList(datas, url) {
         let name = datas[i].name
         let lat = datas[i].lat
         let lng = datas[i].lng
-        listPanel.push(`<tr><td>${i + 1}</td><td>${name} ${(() => { if (url == 'event') { return `<br>${data.date_start}` } else { return '' } })()}</td><td class="text-center"><button title="info on map" onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button title="route" onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button>${(() => { if (url != 'atraction' && url != 'event') { return ` <button title="open object detail" onclick="showSupportModal(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#supportModal"><i class="fa fa-marker fa-xs"></i></button>` } else { return '' } })()}</td></tr>`)
+        listPanel.push(`<tr><td>${i + 1}</td><td>${name} ${(() => { if (url == 'event') { return `<br>${data.date_start}` } else { return '' } })()}</td><td class="text-center"><button title="info on map" onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button title="route" onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button>${(() => { if (url != 'atraction' && url != 'event') { return ` <button title="detail" onclick="showSupportModal(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#supportModal"><i class="fa fa-eye fa-xs"></i></button>` } else { return '' } })()}</td></tr>`)
     }
     if (url == 'atraction') {
-        $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">List atraction</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
+        $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">Atraction</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
     }
     if (url == 'event') {
         $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">List event</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
@@ -522,9 +522,10 @@ function supportNearby(val = null) {
     clearMarker('pass')
     if (cp == false && wp == false && sp == false && f == false) {
         Swal.fire({
+            position: 'top-end',
             text: 'Please check the box!',
             icon: 'warning',
-            showClass: { popup: 'animate__animated animate__fadeInUp' },
+            showClass: { popup: 'animate__animated animate__fadeInDown' },
             timer: 1200,
             confirmButtonText: 'Oke'
         })
@@ -578,7 +579,8 @@ function supportNearby(val = null) {
 }
 function setNearby(data, url) {
     userPosition = { lat: parseFloat(data.lat), lng: parseFloat(data.lng) }
-    setCenter({ lat: latApar, lng: lngApar })
+    setCenter({ lat: parseFloat(data.lat), lng: parseFloat(data.lng) })
+    moveCamera(17)
     setSupportSliderToZero()
     setMainSliderToZero()
     clearUser()
@@ -586,9 +588,7 @@ function setNearby(data, url) {
     clearMarker()
     clearRadius()
     showObjectArroundPanel()
-    addMarkerToMap(data, url, 'pass')
-    return supportNearby("0")
-
+    return addMarkerToMap(data, url, 'pass')
 }
 // add mata angin 
 function mata_angin() {
@@ -612,7 +612,7 @@ function legend() {
     content.push('<h6 class="text-center">Legend</h6>')
     content.push(`<p><img src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png" width="15"></img> User</p>`)
     content.push(`<p><img src="${legendIcon}marker-atraction.png" width="15"></img> Atraction</p>`)
-    content.push(`<p><img src="${legendIcon}marker_ev.png" width="15"></img> Event</p>`)
+    // content.push(`<p><img src="${legendIcon}marker_ev.png" width="15"></img> Event</p>`)
     content.push(`<p><img src="${legendIcon}marker_cp.png" width="15"></img> Culinary place</p>`)
     content.push(`<p><img src="${legendIcon}marker_wp.png" width="15"></img> Worship place</p>`)
     content.push(`<p><img src="${legendIcon}marker_sp.png" width="15"></img> Souvenir place</p>`)
@@ -668,11 +668,12 @@ function showObject(object, id = null) {
             clearMarker()
             clearRadius()
             clearRoute()
+          
             if (response.objectData && response.url) {
-                if (response.url == 'atraction') {
-                    activeMenu('atraction')
-                } else if (response.url == 'event') {
-                    activeMenu('event')
+                if (response.objectData[0].id == 'A001') {
+                    activeMenu('mangrove')
+                } else if (response.objectData[0].id == 'A002') {
+                    activeMenu('turtle')
                 }
                 return loopingAllMarker(response.objectData, response.url)
             }
@@ -939,15 +940,15 @@ function getObjectByDate(date_start = null,date_end=null) {
 }
 function activeMenu(url) {
     $('#indexMenu').removeClass('active');
-    $('#atractionMenu').removeClass('active');
-    $('#eventMenu').removeClass('active');
-    $('#adminMenu').removeClass('active');
+    $('#mangroveMenu').removeClass('active');
+    $('#turtleMenu').removeClass('active');
+       $('#adminMenu').removeClass('active');
     if (url == 'index') {
         $('#indexMenu').addClass('active');
-    } else if (url == 'atraction') {
-        $('#atractionMenu').addClass('active');
-    } else if (url == 'event') {
-        $('#eventMenu').addClass('active');
+    } else if (url == 'mangrove') {
+        $('#mangroveMenu').addClass('active');
+    } else if (url == 'turtle') {
+        $('#turtleMenu').addClass('active');
     } else if (url == 'admin') {
         $('#adminMenu').addClass('active');
     }

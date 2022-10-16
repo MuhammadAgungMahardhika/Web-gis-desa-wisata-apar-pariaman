@@ -114,7 +114,7 @@ class ManageAparController extends BaseController
         if ($validateRules) {
             $update =  $this->model->updateApar($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
             if ($update) {
-                session()->setFlashdata('success', 'Success! Atraction updated.');
+                session()->setFlashdata('success', 'Success! Village updated.');
                 return redirect()->to(site_url('manage_apar/edit/' . $id));
             } else {
                 session()->setFlashdata('failed', 'Failed! Failed to update apar.');
@@ -122,7 +122,7 @@ class ManageAparController extends BaseController
             }
         } else {
             $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed to update apar.');
+            session()->setFlashdata('failed', 'Failed! Failed to update village.');
             return redirect()->to(site_url('manage_apar/edit/' . $id));
         }
     }

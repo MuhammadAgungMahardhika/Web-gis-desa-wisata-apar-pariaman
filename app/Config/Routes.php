@@ -123,6 +123,12 @@ $routes->group('review', function ($routes) {
     $routes->get('get_event_comment', 'RatingReviewController::get_event_comment');
 });
 
+// Menu package
+$routes->group('package', function ($routes) {
+    $routes->get('index', 'packageController::index');
+    $routes->get('/', 'packageController::index');
+});
+
 
 // Route Admin menu
 

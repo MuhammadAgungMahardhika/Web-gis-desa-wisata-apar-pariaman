@@ -21,7 +21,6 @@
                         <?php $no = 1; ?>
                         <tr>
                             <th>No</th>
-                            <th>Id</th>
                             <th>Sovenir Place Name</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -30,7 +29,6 @@
                         <?php foreach ($souvenirPlaceData as $souvenirPlace) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $souvenirPlace->id; ?></td>
                                 <td><?= $souvenirPlace->name; ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-outline-primary btn-sm" title="Update atraction" href="<?= base_url('manage_souvenir_place/detail/' . $souvenirPlace->id); ?>"><i class="fa fa-eye"></i> </a>

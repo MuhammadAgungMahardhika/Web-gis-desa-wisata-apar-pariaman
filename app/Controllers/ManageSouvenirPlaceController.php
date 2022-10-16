@@ -141,9 +141,9 @@ class ManageSouvenirPlaceController extends BaseController
         ]);
         // ---------------------Data request------------------------------
         $request = $this->request->getPost();
-        $id = $this->request->getPost('id');
+        $id = $this->model->get_new_id();
         $insertRequest = [
-            'id' => $this->request->getPost('id'),
+            'id' => $id,
             'name' => $this->request->getPost('name'),
             'owner' => $this->request->getPost('owner'),
             'open' => $this->request->getPost('open'),

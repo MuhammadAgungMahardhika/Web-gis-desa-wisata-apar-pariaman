@@ -20,9 +20,11 @@ class Pages extends BaseController
     public function index()
     {
         $aparData = $this->modelApar->getApar();
+        $galleryData = $this->modelApar->getGallery('A01')->getResult();;
         $data = [
             'title' => 'LandingPage | Tourism Village',
             'aparData' => $aparData,
+            'galleryData' => $galleryData,
             'config' => config('Auth')
         ];
         return view('pages/index', $data);

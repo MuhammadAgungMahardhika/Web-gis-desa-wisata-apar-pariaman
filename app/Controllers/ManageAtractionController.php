@@ -161,7 +161,6 @@ class ManageAtractionController extends BaseController
     {
         //-------------------validation data----------------------------------
         $validateRules = $this->validate([
-            'id' => 'is_unique[atraction.id]|required|max_length[10]',
             'name' => 'max_length[50]',
             'price' => 'max_length[50]',
             'contact_person' => 'max_length[14]',
@@ -169,7 +168,7 @@ class ManageAtractionController extends BaseController
         ]);
         // ---------------------Data request------------------------------------
         $request = $this->request->getPost();
-        $id = $this->request->getPost('id');
+        $id = $this->model->get_new_id();
         $insertRequest = [
             'id' => $id,
             'name' => $this->request->getPost('name'),

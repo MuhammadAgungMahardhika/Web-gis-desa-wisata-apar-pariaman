@@ -154,7 +154,6 @@ class ManageEventController extends BaseController
     {
         //validation data
         $validateRules = $this->validate([
-            'id' => 'is_unique[event.id]|required|max_length[10]',
             'name' => 'required|max_length[50]',
             'date_start' => 'required',
             'date_end' => 'required',
@@ -164,7 +163,7 @@ class ManageEventController extends BaseController
         ]);
         // ---------------------Data request------------------------------------
         $request = $this->request->getPost();
-        $id = $this->request->getPost('id');
+        $id = $this->model->get_new_id();
         $insertRequest = [
             'id' => $id,
             'name' => $this->request->getPost('name'),

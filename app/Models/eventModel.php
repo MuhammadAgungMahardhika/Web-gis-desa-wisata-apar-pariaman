@@ -26,6 +26,13 @@ class eventModel extends Model
     protected $coords    = "ST_Y(ST_Centroid(event.geom)) AS lat ,ST_X(ST_Centroid(event.geom)) AS lng ";
     protected $geom_area = "ST_AsGeoJSON(event.geom_area) AS geoJSON";
 
+    public function get_new_id()
+    {
+        $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
+        $count = (int)substr($lastId['id'], 2);
+        $id = sprintf('E%03d', $count + 1);
+        return $id;
+    }
     public function getEvents()
     {
         $query = $this->db->table($this->table)

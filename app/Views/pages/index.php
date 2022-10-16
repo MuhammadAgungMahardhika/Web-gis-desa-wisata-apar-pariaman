@@ -18,6 +18,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/de7d18ea4d.js" crossorigin="anonymous"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Rubik+Dirt&display=swap" rel="stylesheet">
+
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/main/style.css') ?>" />
     <title><?= $title ?></title>
@@ -37,7 +41,7 @@
                     <a class="nav-link" href="#landing">LANDING PAGE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('list_object'); ?>">EXPLORE</a>
+                    <a class="nav-link" href="<?= base_url('list_object'); ?>">EXPLORE APAR TOURISM VILLAGE</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#About">ABOUT</a>
@@ -46,10 +50,7 @@
                     <a class="nav-link" href="#MyProjects">PREVIEW</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#MyCertificates">CERTIFICATES</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#MyContacts">GET IN TOUCH</a>
+                    <a class="nav-link" href="#MyCertificates">AWARDS</a>
                 </li>
             </ul>
         </div>
@@ -65,45 +66,59 @@
             <a class="btn btn-success " href="<?= base_url('list_object') ?>">Explore Now!</a>
         </div>
     </div>
-
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#0C0C0C" fill-opacity="1" d="M0,160L48,133.3C96,107,192,53,288,26.7C384,0,480,0,576,16C672,32,768,64,864,112C960,160,1056,224,1152,213.3C1248,203,1344,117,1392,74.7L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+    </svg>
     <!-- Akhir landing -->
     <!-- About  -->
     <section class="container-fluid mb-2" id="About">
         <div class="row">
             <div class="col-md-6 text-center">
-                <h2 class="efek1">ABOUT APAR</h2>
-                <p style="text-align: justify">
+                <h1 class="efek1 text-success">Enjoy Our Culture!</h1>
+                <p style=" font-size:20px;font-family: 'Roboto', sans-serif;">
                     <?= $aparData->description; ?>
                 </p>
             </div>
-            <div class="col-md-6">
-                <img src="media/photos/landing-page/turtle-1.png" alt="" style=" max-width: 100%" class="mb-3 efek5">
+            <div class="col-md-6 p-4">
+                <img src="media/photos/landing-page/turtle-1.png" alt="" style="max-width: 100%;" class="mb-3 efek5">
             </div>
 
         </div>
         <div class="row justify-content-end text-center ">
             <div class="col-md-6">
-                <img src="media/photos/landing-page/turtle-2.png" alt="" style=" max-width: 100%" class="mb-3">
+                <img src="media/photos/landing-page/turtle-2.png" alt="" style=" max-width: 100%" class="mb-3 efek1">
             </div>
-            <div class="col-md-6 shadow">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="assets/images/samples/banana.jpg" class="d-block w-100" alt="...">
+            <div class="col-md-6 ">
+                <div class="card-body" style="box-shadow: 5px 5px  inset #228D69">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <?php $no = 0; ?>
+                        <ol class="carousel-indicators">
+                            <?php foreach ($galleryData as $gallery) : ?>
+                                <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= esc($no); ?>" class="<?php if ($no == 0) echo 'active'; ?>"></li>
+                                <?php $no++; ?>
+                            <?php endforeach; ?>
+                        </ol>
+                        <div class="carousel-inner">
+                            <!-- List gallery -->
+                            <?php $no = 0; ?>
+                            <?php foreach ($galleryData as $gallery) : ?>
+                                <div class="carousel-item <?php if ($no == 0) echo 'active'; ?>">
+                                    <img src="<?= base_url('media/photos/'); ?>/<?= $gallery->url; ?>" class="d-block w-100">
+                                </div>
+                                <?php $no++; ?>
+                            <?php endforeach; ?>
                         </div>
-                        <div class="carousel-item">
-                            <img src="assets/images/samples/bg-mountain.jpg" class="d-block w-100" alt="...">
-                        </div>
+                        <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </a>
                 </div>
+
             </div>
         </div>
     </section>
@@ -112,9 +127,8 @@
     <section class="container-fluid" id="MyProjects">
         <div class="row justify-content-center ">
             <div class="col-md-8 text-center">
-                <h2 class="efek2">PREVIEW</h2>
+                <h1 class="efek2 text-success">PREVIEW</h1>
                 <button class="btn btn-outline-primary" onclick="showObject('atraction')">Atraction</button>
-                <button class="btn btn-outline-primary" onclick="showObject('event')">Event</button>
                 <button class="btn btn-outline-primary" onclick="showObject('culinary_place')">Culinary place</button>
                 <button class="btn btn-outline-primary" onclick="showObject('souvenir_place')">Souvenir place</button>
                 <button class="btn btn-outline-primary" onclick="showObject('worship_place')">Worship place</button>
@@ -122,7 +136,7 @@
             </div>
         </div>
         <div class="row justify-content-center m-2">
-            <div class="col-md-8 shadow">
+            <div class="col-md-8">
                 <?= $this->include('/layout/map-body.php'); ?>
             </div>
         </div>
@@ -139,9 +153,9 @@
                     <p class="text-white mb-0">Besar ADWI 2021</p>
                 </div>
                 <div class="col-md-6 col-lg-6 text-center">
-                    <img src="media/photos/landing-page/rumah-gadang.png" alt="" style="filter: invert(100%); max-width: 5em">
-                    <h1 class="text-white mb-2" data-toggle="counter-up"></h1>
-                    <p class="text-white mb-0">Eco tourism</p>
+                    <img src="media/photos/landing-page/atraksi.png" alt="" style="filter: invert(100%); max-width: 5em">
+                    <h1 class="text-white mb-2" data-toggle="counter-up">2</h1>
+                    <p class="text-white mb-0">Uniqe Atraction</p>
                 </div>
             </div>
         </div>
@@ -164,7 +178,7 @@
                     </p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/desa_wisata_apar"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
 
