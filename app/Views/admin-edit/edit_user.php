@@ -24,33 +24,33 @@
                         <div class="card-body">
 
                             <form action="<?= base_url('manage_users/save_update/' . $user->userid); ?>" method="post" autocomplete="off">
-                                <div class="form-group row">
-                                    <label for="username" class=" col-sm-2 col-form-label">Username</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="username" class=" col col-form-label">Username</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="username" value="<?= $user->username; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="email" class="col col-form-label">Email</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="email" value="<?= $user->email; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="name" class=" col-sm-2 col-form-label">Name</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="name" class=" col col-form-label">Name</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="name" value="<?= $user->fullname; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="address" class=" col-sm-2 col-form-label">Address</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="address" class=" col col-form-label">Address</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="address" value="<?= $user->address; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="contact" class=" col-sm-2 col-form-label">Contact</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="contact" class=" col col-form-label">Contact</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="contact" value="<?= $user->contact; ?>">
                                     </div>
                                 </div>

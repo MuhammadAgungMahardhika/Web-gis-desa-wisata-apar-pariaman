@@ -51,46 +51,46 @@
                                 </div>
                                 <!-- Form data nonspasial -->
                                 <div class="form-group row">
-                                    <label for="name" class="col-sm-2 col-form-label">Name</label>
-                                    <div class="col-sm-10">
+                                    <label for="name" class="col col-form-label">Name</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="name" value="<?= $aparData->name; ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="status" class="col-sm-2 col-form-label">Type</label>
-                                    <div class="col-sm-10">
+                                    <label for="status" class="col col-form-label">Type</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="type_of_tourism" value="<?= $aparData->type_of_tourism; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="status" class="col-sm-2 col-form-label">Adress</label>
-                                    <div class="col-sm-10">
+                                    <label for="status" class="col col-form-label">Adress</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="address" value="<?= $aparData->address; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="status" class="col-sm-2 col-form-label">Open</label>
-                                    <div class="col-sm-10">
+                                    <label for="status" class="col col-form-label">Open</label>
+                                    <div class="col">
                                         <input type="time" class="form-control" name="open" value="<?= $aparData->open; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="status" class="col-sm-2 col-form-label">Close</label>
-                                    <div class="col-sm-10">
+                                    <label for="status" class="col col-form-label">Close</label>
+                                    <div class="col">
                                         <input type="time" class="form-control" name="close" value="<?= $aparData->close; ?>">
                                     </div>
                                 </div>
 
 
                                 <div class="form-group row">
-                                    <label for="price" class=" col-sm-2 col-form-label">Ticket</label>
-                                    <div class="col-sm-10">
+                                    <label for="price" class=" col col-form-label">Ticket</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="ticket" value="<?= $aparData->ticket; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="contact_person" class=" col-sm-2 col-form-label">Contact person</label>
-                                    <div class="col-sm-10">
+                                    <label for="contact_person" class=" col col-form-label">Contact person</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="contact_person" value="<?= $aparData->contact_person; ?>">
                                     </div>
                                 </div>

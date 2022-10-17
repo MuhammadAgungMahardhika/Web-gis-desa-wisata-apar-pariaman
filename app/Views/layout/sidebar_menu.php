@@ -8,6 +8,7 @@
             </a>
         </li>
         <?php if (current_url() == base_url('list_object')) : ?>
+            <!-- Apar mangrove Menu -->
             <li class="sidebar-item" id="mangroveMenu">
                 <a class='sidebar-link' onclick="showObject('atraction','A001')" style="cursor: pointer;">
                     <i class="iconify" data-icon="material-symbols:forest-rounded" data-width="25" data-height="25"></i>
@@ -15,6 +16,7 @@
                 </a>
 
             </li>
+            <!-- Turtle Menu -->
             <li class="sidebar-item" id="turtleMenu">
                 <a class='sidebar-link' onclick="showObject('atraction','A002')" style="cursor: pointer;">
                     <i class="iconify" data-icon="mdi:turtle" data-width="25" data-height="25"></i>
@@ -24,14 +26,56 @@
             </li>
 
         <?php endif; ?>
-
-        <li class="sidebar-item <?= current_url() == base_url('package') ? 'active' : ''; ?>" id="packageMenu">
-            <a href="<?= base_url('package') ?>" class='sidebar-link'>
-                <i class="iconify" data-icon="material-symbols:package-sharp" data-width="25" data-height="25"></i>
-                <span>Tourism Package</span>
+        <!-- Package Menu -->
+        <li class="sidebar-item has-sub">
+            <a href="" class="sidebar-link">
+                <i class="fa-solid fa-square"></i><span>Tourism Package</span>
             </a>
 
+            <ul class="submenu">
+                <!-- List Event -->
+                <li class="submenu-item" id="package-list">
+                    <a href="<?= base_url('package'); ?>"><i class="fa-solid fa-list me-3"></i>List Package</a>
+                </li>
+
+                <li class="submenu-item has-sub" id="package-search">
+                    <a data-bs-toggle="collapse" href="#subsubmenu-package" role="button" aria-expanded="false" aria-controls="subsubmenu-ev" class="collapse"><i class="fa-solid fa-magnifying-glass me-3"></i>Search by</a>
+                    <ul class="subsubmenu collapse" id="subsubmenu-package" style="list-style: none;">
+                        <!-- Package by Name -->
+                        <li class="submenu-item" id="package-by-name">
+                            <a data-bs-toggle="collapse" href="#searchNameEV" role="button" aria-expanded="false" aria-controls="searchNamePackage"><i class="fa-solid fa-arrow-down-a-z me-3"></i>Name</a>
+                            <div class="collapse mb-3" id="searchNameEV">
+                                <div class="d-grid gap-2">
+                                    <input type="text" name="nameEV" id="nameEV" class="form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                                        <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">search</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Package by Category -->
+                        <li class="submenu-item" id="package-by-category">
+                            <a data-bs-toggle="collapse" href="#searchCategoryEV" role="button" aria-expanded="false" aria-controls="searchCategoryPackage"><i class="fa-solid fa-check-to-slot me-3"></i>Category</a>
+                            <div class="collapse mb-3" id="searchCategoryEV">
+                                <div class="d-grid">
+                                    <fieldset class="form-group">
+                                        <select class="form-select" id="categoryEVSelect">
+                                        </select>
+                                    </fieldset>
+                                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                                        <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">search</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </li>
+            </ul>
         </li>
+        <!-- Admin Menu -->
         <?php if (in_groups('admin')) : ?>
             <li class="sidebar-title">Admin</li>
             <li class="sidebar-item <?= current_url() == base_url('dashboard') ? 'active' : ''; ?>" id="indexMenu">

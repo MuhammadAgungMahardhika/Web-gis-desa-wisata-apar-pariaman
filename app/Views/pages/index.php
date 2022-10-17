@@ -72,24 +72,28 @@
     <!-- Akhir landing -->
     <!-- About  -->
     <section class="container-fluid mb-2" id="About">
-        <div class="row">
+        <div class="row" style="position: relative;">
             <div class="col-md-6 text-center">
                 <h1 class="efek1 text-success">Enjoy Our Culture!</h1>
                 <p style=" font-size:20px;font-family: 'Roboto', sans-serif;">
                     <?= $aparData->description; ?>
                 </p>
             </div>
-            <div class="col-md-6 p-4">
-                <img src="media/photos/landing-page/turtle-1.png" alt="" style="max-width: 100%;" class="mb-3 efek5">
+            <div class="col-md-6 p-4 text-center">
+                <img src="media/photos/landing-page/pohon-mangrove.png" alt="" style=" max-width: 100%" class="mb-3 efek1">
+                <figcaption class="figure-caption">(Mangrove) Tanaman dengan banyak manfaat yang berada di pesisir pantai <a class="text-link text-success" href="<?= base_url('list_object'); ?>"> Selengkapnya</a></figcaption>
             </div>
-
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="position: absolute; bottom:0;left:0;right:0;z-index:-1;">
+                <path fill="#F3F4F5" fill-opacity="1" d="M0,320L48,272C96,224,192,128,288,122.7C384,117,480,203,576,229.3C672,256,768,224,864,186.7C960,149,1056,107,1152,106.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
         </div>
-        <div class="row justify-content-end text-center ">
-            <div class="col-md-6">
-                <img src="media/photos/landing-page/turtle-2.png" alt="" style=" max-width: 100%" class="mb-3 efek1">
+        <div class="row justify-content-end text-center bg-light p-4">
+            <div class="col-md-6 my-2">
+                <img src="media/photos/landing-page/turtle-1.png" alt="" style="max-width: 100%;" class="mb-3 efek5">
+                <figcaption class="figure-caption">Salah satu dari 3 jenis penyu yang ada di Desa Wisata Apar (Hanya 7 di dunia) <a class="text-link text-success" href="<?= base_url('list_object'); ?>"> Selengkapnya</a></figcaption>
             </div>
             <div class="col-md-6 ">
-                <div class="card-body" style="box-shadow: 5px 5px  inset #228D69">
+                <div class="card-body rounded shadow border">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <?php $no = 0; ?>
                         <ol class="carousel-indicators">
@@ -128,11 +132,11 @@
         <div class="row justify-content-center ">
             <div class="col-md-8 text-center">
                 <h1 class="efek2 text-success">PREVIEW</h1>
-                <button class="btn btn-outline-primary" onclick="showObject('atraction')">Atraction</button>
-                <button class="btn btn-outline-primary" onclick="showObject('culinary_place')">Culinary place</button>
-                <button class="btn btn-outline-primary" onclick="showObject('souvenir_place')">Souvenir place</button>
-                <button class="btn btn-outline-primary" onclick="showObject('worship_place')">Worship place</button>
-                <button class="btn btn-outline-primary" onclick="showObject('facility')">Facility</button>
+                <button class="btn btn-outline-primary m-1" onclick="showObject('atraction')">Atraction</button>
+                <button class="btn btn-outline-primary m-1" onclick="showObject('culinary_place')">Culinary place</button>
+                <button class="btn btn-outline-primary m-1" onclick="showObject('souvenir_place')">Souvenir place</button>
+                <button class="btn btn-outline-primary m-1" onclick="showObject('worship_place')">Worship place</button>
+                <button class="btn btn-outline-primary m-1" onclick="showObject('facility')">Facility</button>
             </div>
         </div>
         <div class="row justify-content-center m-2">
@@ -144,13 +148,13 @@
     <!-- Akhir My Projects -->
 
     <!-- Awal Award  -->
-    <div class="container-xxl bg-primary facts my-5 py-5" id="MyCertificates">
+    <div class="container bg-primary facts my-5 py-5 border border-success" id="MyCertificates">
         <div class="container py-5">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-6 text-center">
                     <img src="media/photos/landing-page/trophy.png" alt="" style="filter: invert(100%); max-width: 4em" class="mb-3">
-                    <h1 class="text-white mb-2" data-toggle="counter-up">50</h1>
-                    <p class="text-white mb-0">Besar ADWI 2021</p>
+                    <h1 class="text-white mb-2" data-toggle="counter-up">Top 3</h1>
+                    <p class="text-white mb-0">ADWI 2021</p>
                 </div>
                 <div class="col-md-6 col-lg-6 text-center">
                     <img src="media/photos/landing-page/atraksi.png" alt="" style="filter: invert(100%); max-width: 5em">

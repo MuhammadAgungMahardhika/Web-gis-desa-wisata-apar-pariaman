@@ -54,39 +54,39 @@
                                     </tbody>
                                 </table>
 
-                                <div class="form-group row">
-                                    <label for="name" class=" col-sm-2 col-form-label">Name</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="name" class=" col col-form-label">Name</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="name" required autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="category" class=" col-sm-2 col-form-label">Category</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="category" class=" col col-form-label">Category</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="category" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="name" class=" col-sm-2 col-form-label">Open</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="name" class=" col col-form-label">Open</label>
+                                    <div class="col">
                                         <input type="time" class="form-control" name="open" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="name" class=" col-sm-2 col-form-label">Close</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="name" class=" col col-form-label">Close</label>
+                                    <div class="col">
                                         <input type="time" class="form-control" name="close" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="building_size" class=" col-sm-2 col-form-label">Building size</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="building_size" class=" col col-form-label">Building size</label>
+                                    <div class="col">
                                         <input type="number" class="form-control" name="building_size" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="capacity" class=" col-sm-2 col-form-label">Capacity</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="capacity" class=" col col-form-label">Capacity</label>
+                                    <div class="col">
                                         <input type="number" class="form-control" name="capacity" autocomplete="off">
                                     </div>
                                 </div>

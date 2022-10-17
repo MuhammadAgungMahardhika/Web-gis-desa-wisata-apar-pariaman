@@ -52,45 +52,45 @@
                                     </tbody>
                                 </table>
 
-                                <div class="form-group row">
-                                    <label for="name" class=" col-sm-2 col-form-label">Name</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="name" class=" col col-form-label">Name</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="status" class="col-sm-2 col-form-label">Date</label>
+                                <div class="form-group">
+                                    <label for="status" class="col col-form-label">Date</label>
                                     <div class="col-sm-4">
                                         <input type="date" class="form-control" name="date_start" value="<?= $objectData->date_start; ?>">
                                     </div>
-                                    <div class="col-sm-2 ">
+                                    <div class="col ">
                                         <p class="text-center">to</p>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="date" class="form-control" name="date_end" value="<?= $objectData->date_end; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="status" class="col-sm-2 col-form-label">Time</label>
+                                <div class="form-group">
+                                    <label for="status" class="col col-form-label">Time</label>
                                     <div class="col-sm-4">
                                         <input type="time" class="form-control" name="time_start" value="<?= $objectData->time_start; ?>">
                                     </div>
-                                    <div class="col-sm-2 ">
+                                    <div class="col">
                                         <p class="text-center">to</p>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="time" class="form-control" name="time_end" value="<?= $objectData->time_end; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="price" class=" col-sm-2 col-form-label">Price</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="price" class=" col col-form-label">Price</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="price" value="<?= $objectData->price; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="contact_person" class=" col-sm-2 col-form-label">Contact person</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="contact_person" class=" col col-form-label">Contact person</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>">
                                     </div>
                                 </div>

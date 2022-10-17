@@ -52,38 +52,38 @@
                                     </tbody>
                                 </table>
 
-                                <div class="form-group row">
-                                    <label for="name" class=" col-sm-4 col-form-label">Name</label>
+                                <div class="form-group">
+                                    <label for="name" class=" col col-form-label">Name</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="employe" class="col-sm-4 col-form-label">Employe</label>
+                                <div class="form-group">
+                                    <label for="employe" class="col col-form-label">Employe</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="employe" value="<?= $objectData->employe; ?>" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="area_size" class="col-sm-4 col-form-label">Area size</label>
+                                <div class="form-group">
+                                    <label for="area_size" class="col col-form-label">Area size</label>
                                     <div class="col-sm-8">
                                         <input type="number" class="form-control" name="open" value="<?= $objectData->area_size; ?>" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="open" class="col-sm-4 col-form-label">Open</label>
+                                <div class="form-group">
+                                    <label for="open" class="col col-form-label">Open</label>
                                     <div class="col-sm-8">
                                         <input type="time" class="form-control" name="open" value="<?= $objectData->open; ?>" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="close" class="col-sm-4 col-form-label">Close</label>
+                                <div class="form-group">
+                                    <label for="close" class="col col-form-label">Close</label>
                                     <div class="col-sm-8">
                                         <input type="time" class="form-control" name="close" value="<?= $objectData->close; ?>" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="contact_person" class="col-sm-4 col-form-label">Contact person</label>
+                                <div class="form-group">
+                                    <label for="contact_person" class="col col-form-label">Contact person</label>
                                     <div class="col-sm-8">
                                         <input type="number" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>" autocomplete="off">
                                     </div>

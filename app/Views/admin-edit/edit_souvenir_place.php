@@ -52,33 +52,33 @@
                                     </tbody>
                                 </table>
 
-                                <div class="form-group row">
-                                    <label for="name" class=" col-sm-2 col-form-label">Name</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="name" class=" col col-form-label">Name</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="price" class=" col-sm-2 col-form-label">Owner</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="price" class=" col col-form-label">Owner</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="owner" value="<?= $objectData->owner; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="price" class=" col-sm-2 col-form-label">Open</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="price" class=" col col-form-label">Open</label>
+                                    <div class="col">
                                         <input type="time" class="form-control" name="open" value="<?= $objectData->open; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="price" class=" col-sm-2 col-form-label">Close</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="price" class=" col col-form-label">Close</label>
+                                    <div class="col">
                                         <input type="time" class="form-control" name="close" value="<?= $objectData->close; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="contact_person" class=" col-sm-2 col-form-label">Contact person</label>
-                                    <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label for="contact_person" class=" col col-form-label">Contact person</label>
+                                    <div class="col">
                                         <input type="text" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>">
                                     </div>
                                 </div>
