@@ -12,69 +12,45 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <section class="section">
-    <div class="row">
-        <!-- Object Detail Information -->
-        <div class="col-md-6 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <a href="<?= base_url('manage_apar'); ?>" role="button" class="btn btn-primary justify-item-center" title="edit apar info"><i class="fa fa-arrow-left"></i></a>
-                    <h4 class="card-title text-center">Edit Tourism Village</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <form class="form form-vertical" action="<?= base_url('manage_apar/save_update/' . $aparData->id); ?>" method="post">
+    <form class="form form-vertical" action="<?= base_url('manage_apar/save_update/' . $aparData->id); ?>" method="post">
+        <div class="row">
+            <!-- Object Detail Information -->
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="<?= base_url('manage_apar'); ?>" role="button" class="btn btn-primary justify-item-center" title="edit apar info"><i class="fa fa-arrow-left"></i></a>
+                        <h4 class="card-title text-center">Edit Tourism Village</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
                             <div class="form-body">
-                                <!-- Form data spasial -->
-                                <table class="table table-border">
-                                    <thead>
-                                        <th>Data spasial </th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Village geom</td>
-                                            <td colspan="2"><input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly" required value='<?= $aparData->geoJSON; ?>'></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Center</td>
-                                            <td><input type="text" class="form-control" id="latitude" name="latitude" value="<?= $aparData->lat; ?>" autocomplete="off" readonly="readonly" required></td>
 
-                                            <td><input type="text" class="form-control" id="longitude" name="longitude" value="<?= $aparData->lng; ?>" autocomplete="off" readonly="readonly" required></td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <div class="form-group row">
-                                    <small>*Edit data spasial on map</small>
-                                    <div class="col-sm-4">
-
-                                    </div>
-                                </div>
                                 <!-- Form data nonspasial -->
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="name" class="col col-form-label">Name</label>
                                     <div class="col">
                                         <input type="text" class="form-control" name="name" value="<?= $aparData->name; ?>" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="status" class="col col-form-label">Type</label>
                                     <div class="col">
                                         <input type="text" class="form-control" name="type_of_tourism" value="<?= $aparData->type_of_tourism; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="status" class="col col-form-label">Adress</label>
                                     <div class="col">
                                         <input type="text" class="form-control" name="address" value="<?= $aparData->address; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="status" class="col col-form-label">Open</label>
                                     <div class="col">
                                         <input type="time" class="form-control" name="open" value="<?= $aparData->open; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="status" class="col col-form-label">Close</label>
                                     <div class="col">
                                         <input type="time" class="form-control" name="close" value="<?= $aparData->close; ?>">
@@ -82,16 +58,40 @@
                                 </div>
 
 
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="price" class=" col col-form-label">Ticket</label>
                                     <div class="col">
                                         <input type="text" class="form-control" name="ticket" value="<?= $aparData->ticket; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="contact_person" class=" col col-form-label">Contact person</label>
                                     <div class="col">
                                         <input type="text" class="form-control" name="contact_person" value="<?= $aparData->contact_person; ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="facebook" class="col col-form-label"><i class="fa fa-facebook"></i> Facebook</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="facebook" value="<?= $aparData->facebook; ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tiktok" class="col col-form-label"><i class="fab fa-tiktok"></i> Tiktok</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="tiktok" value="<?= $aparData->tiktok; ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instagram" class=" col col-form-label"><i class="fa fa-instagram"></i> Instagram</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="instagram" value="<?= $aparData->instagram; ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="youtube" class=" col col-form-label"><i class="fa fa-youtube"></i> Youtube</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="youtube" value="<?= $aparData->youtube; ?>">
                                     </div>
                                 </div>
 
@@ -120,27 +120,59 @@
                                 <button type="submit" class="btn btn-success btn-sm">Save</button>
                                 <button type="reset" class="btn btn-danger btn-sm">cancel</button>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12">
-            <!-- Object Location on Map -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-12 mb-3">
-                            <h5 class="card-title">Google Maps</h5>
+
                         </div>
                     </div>
                 </div>
-                <!-- Object Map body -->
-                <?= $this->include('layout/map-body'); ?>
             </div>
+            <div class="col-md-6 col-12">
+                <!-- Object Location on Map -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-12 mb-3">
+                                <h5 class="card-title">Google Maps</h5>
+                            </div>
+                        </div>
 
+                    </div>
+                    <!-- Object Map body -->
+                    <?= $this->include('layout/map-body'); ?>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Form data spasial -->
+                                <table class="table table-border">
+                                    <thead>
+                                        <th>Data spasial </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Village geom</td>
+                                            <td colspan="2"><input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly" required value='<?= $aparData->geoJSON; ?>'></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Center</td>
+                                            <td><input type="text" class="form-control" id="latitude" name="latitude" value="<?= $aparData->lat; ?>" autocomplete="off" readonly="readonly" required></td>
+
+                                            <td><input type="text" class="form-control" id="longitude" name="longitude" value="<?= $aparData->lng; ?>" autocomplete="off" readonly="readonly" required></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <small>*Edit spatial data on map above</small>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>

@@ -23,12 +23,30 @@
                                         <td><?= $objectData->address; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Contact Person</td>
+                                        <td class="fw-bold">Contact</td>
                                         <td><?= $objectData->contact_person; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Description</td>
-                                        <td><?= $objectData->description; ?></td>
+                                        <td class="fw-bold"><i class="fa fa-facebook"></i> Facebook</td>
+                                        <td><?= $objectData->facebook; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold"><i class="fab fa-tiktok"></i> Tiktok</td>
+                                        <td><?= $objectData->tiktok; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold"><i class="fa fa-instagram"></i> Instagram</td>
+                                        <td><?= $objectData->instagram; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold"><i class="fa fa-youtube"></i> Youtube</td>
+                                        <td><?= $objectData->youtube; ?></td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold" colspan="2">Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: justify;" colspan="2"><?= $objectData->description; ?></td>
                                     </tr>
                                 </tbody>
                             </table>

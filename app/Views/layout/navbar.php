@@ -12,19 +12,30 @@
                 <p class="text-subtitle text-muted">Desa Wisata Apar Pariaman</p>
             </div>
             <div class="col  d-flex order-md-2 order-second justify-content-end">
-
-                <a href="https://www.tiktok.com/" title="Tiktok" class="m-1">
-                    <i class="fab fa-tiktok fa-2x text-secondary p-2 bg-white shadow-sm rounded"></i>
-                </a>
-
-                <a href="https://www.instagram.com/desa_wisata_apar/" title="Instagram" class="m-1">
-                    <i class="fab fa-instagram fa-2x text-danger p-2 bg-white shadow-sm rounded"></i>
-                </a>
-
-
-                <a href="#" title="Youtube" class="m-1">
-                    <i class="fab fa-youtube fa-2x text-danger p-2 bg-white shadow-sm rounded"></i>
-                </a>
+                <!-- Facebook -->
+                <?php if (isset($aparData->facebook)) : ?>
+                    <a href="https://www.facebook.com/<?= $aparData->facebook ?>" title="Facebook" class="m-1">
+                        <i class="fab fa-facebook fa-2x text-primary p-2 bg-white shadow-sm rounded"></i>
+                    </a>
+                <?php endif; ?>
+                <!-- Tiktok -->
+                <?php if (isset($aparData->tiktok)) : ?>
+                    <a href="https://www.tiktok.com/<?= $aparData->tiktok ?>" title="Tiktok" class="m-1">
+                        <i class="fab fa-tiktok fa-2x text-secondary p-2 bg-white shadow-sm rounded"></i>
+                    </a>
+                <?php endif; ?>
+                <!-- Instagram -->
+                <?php if (isset($aparData->instagram)) : ?>
+                    <a href="https://www.instagram.com/<?= $aparData->instagram ?>" title="Instagram" class="m-1">
+                        <i class="fab fa-instagram fa-2x text-danger p-2 bg-white shadow-sm rounded"></i>
+                    </a>
+                <?php endif; ?>
+                <!-- Youtube -->
+                <?php if (isset($aparData->youtube)) : ?>
+                    <a href="https://www.youtube.com/<?= $aparData->youtube ?>" title="Youtube" class="m-1">
+                        <i class="fab fa-youtube fa-2x text-danger p-2 bg-white shadow-sm rounded"></i>
+                    </a>
+                <?php endif ?>
             </div>
             <?php if (in_groups('admin')) : ?>
                 <div class="col order-md-2 order-last mb-md-0 mb-3">

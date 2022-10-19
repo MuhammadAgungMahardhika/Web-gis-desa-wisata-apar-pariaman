@@ -56,6 +56,7 @@ class ManageAparController extends BaseController
 
         // ---------------------Data request
         $request = $this->request->getPost();
+        dd($request);
         $updateRequest = [
             'name' => $this->request->getPost('name'),
             'type_of_tourism' => $this->request->getPost('type_of_tourism'),
@@ -65,6 +66,10 @@ class ManageAparController extends BaseController
             'status' => $this->request->getPost('status'),
             'ticket' => $this->request->getPost('ticket'),
             'contact_person' => $this->request->getPost('contact_person'),
+            'facebook' => $this->request->getPost('facebook'),
+            'tiktok' => $this->request->getPost('tiktok'),
+            'instagram' => $this->request->getPost('instagram'),
+            'youtube' => $this->request->getPost('youtube'),
             'description' => $this->request->getPost('description')
         ];
         $geojson = $this->request->getPost('geojson');

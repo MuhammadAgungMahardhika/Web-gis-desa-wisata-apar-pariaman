@@ -14,42 +14,36 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group row">
-                                <label for="category" class="col-sm-4 col-form-label">Category</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->category; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="open" class="col-sm-4 col-form-label">Open</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->open; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="close" class="col-sm-4 col-form-label">Close</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->close; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="building_size" class="col-sm-4 col-form-label">Building size</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->building_size; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="capacity" class="col-sm-4 col-form-label">Capacity</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->capacity; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="description" class="col-sm-4 col-form-label">Description</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->description; ?></span>
-                                </div>
-                            </div>
+                            <table class="table table-border">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Category</td>
+                                        <td><?= $objectData->category; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Open</td>
+                                        <td><?= $objectData->open; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Close</td>
+                                        <td><?= $objectData->close; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Bulding size</td>
+                                        <td><?= $objectData->building_size; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Capacity</td>
+                                        <td><?= $objectData->capacity; ?></td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold" colspan="2">Description</td>
+                                    </tr>
+                                    <tr class="border">
+                                        <td style="text-align: justify;" colspan="2"><?= $objectData->description; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="row my-2">
                             <h4 class="card-title text-center">Gallery</h4>

@@ -26,6 +26,10 @@ class aparModel extends Model
         {$this->table}.type_of_tourism,
         {$this->table}.address,
         {$this->table}.contact_person,
+        {$this->table}.facebook,
+        {$this->table}.tiktok,
+        {$this->table}.instagram,
+        {$this->table}.youtube,
         {$this->table}.description,
         {$this->table}.video_url";
 
@@ -49,6 +53,10 @@ class aparModel extends Model
         {$this->table}.type_of_tourism,
         {$this->table}.address,
         {$this->table}.contact_person,
+        {$this->table}.facebook,
+        {$this->table}.tiktok,
+        {$this->table}.instagram,
+        {$this->table}.youtube,
         {$this->table}.description,
         {$this->table}.video_url";
         $query = $this->db->table($this->table)

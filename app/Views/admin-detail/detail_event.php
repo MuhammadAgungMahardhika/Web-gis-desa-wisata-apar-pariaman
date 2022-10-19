@@ -14,36 +14,32 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group row">
-                                <label for="date" class="col-sm-4 col-form-label">Date</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->date_start; ?> - <?= $objectData->date_end; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="time" class="col-sm-4 col-form-label">Time</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->time_start; ?> - <?= $objectData->time_end; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="price" class="col-sm-4 col-form-label">Price</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->price; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="contact_person" class="col-sm-4 col-form-label">Contact person</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->contact_person; ?></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="description" class="col-sm-4 col-form-label">Description</label>
-                                <div class="col-sm-8">
-                                    <span class="form-control"><?= $objectData->description; ?></span>
-                                </div>
-                            </div>
+                            <table class="table table-border">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Date</td>
+                                        <td><?= $objectData->date_start; ?> - <?= $objectData->date_end; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Time</td>
+                                        <td><?= $objectData->time_start; ?> - <?= $objectData->time_end; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Price</td>
+                                        <td><?= $objectData->price; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Contact</td>
+                                        <td><?= $objectData->contact_person; ?></td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold" colspan="2">Description</td>
+                                    </tr>
+                                    <tr class="border">
+                                        <td style="text-align: justify;" colspan="2"><?= $objectData->description; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="row my-2">
                             <h4 class="card-title text-center">Gallery</h4>

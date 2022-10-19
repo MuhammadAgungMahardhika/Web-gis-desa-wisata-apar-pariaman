@@ -12,47 +12,18 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <section class="section">
-    <div class="row">
-        <!-- Object Detail Information -->
-        <div class="col-md-6 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <a href="<?= base_url('manage_event'); ?>" role="button" class="btn btn-primary justify-item-center" title="List event"><i class="fa fa-arrow-left"></i></a>
-                    <h4 class="card-title text-center">Insert facility</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <form class="form form-vertical" action="<?= base_url('manage_facility/save_insert'); ?>" method="post">
+    <form class="form form-vertical" action="<?= base_url('manage_facility/save_insert'); ?>" method="post">
+        <div class="row">
+            <!-- Object Detail Information -->
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="<?= base_url('manage_event'); ?>" role="button" class="btn btn-primary justify-item-center" title="List event"><i class="fa fa-arrow-left"></i></a>
+                        <h4 class="card-title text-center">Insert facility</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
                             <div class="form-body">
-                                <table class="table table-border">
-                                    <thead>
-                                        <th>Data spasial </th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Geom area</td>
-                                            <td>
-                                                <input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly">
-                                            </td>
-                                            <td>
-                                                <a onclick="clearGeomArea()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear geom area" class="btn icon btn-outline-primary" id="clear-drawing"> <i class="fa fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Latitude</td>
-                                            <td colspan="2"><input type="text" class="form-control" id="latitude" name="latitude" autocomplete="off" readonly="readonly" required></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Longitude</td>
-                                            <td colspan="2"><input type="text" class="form-control" id="longitude" name="longitude" autocomplete="off" readonly="readonly" required></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <small>*Edit data spasial on map</small>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                                 <div class="form-group">
                                     <label for="name" class=" col col-form-label">Name</label>
                                     <div class="col">
@@ -109,27 +80,57 @@
                                 <button type="submit" class="btn btn-success btn-sm">Save</button>
                                 <button type="reset" class="btn btn-danger btn-sm">cancel</button>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12">
-            <!-- Object Location on Map -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-12 mb-3">
-                            <h5 class="card-title">Google Maps</h5>
                         </div>
                     </div>
                 </div>
-                <!-- Object Map body -->
-                <?= $this->include('layout/map-body'); ?>
             </div>
-
+            <div class="col-md-6 col-12">
+                <!-- Object Location on Map -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-12 mb-3">
+                                <h5 class="card-title">Google Maps</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Object Map body -->
+                    <?= $this->include('layout/map-body'); ?>
+                    <div class="card-footer">
+                        <table class="table table-border">
+                            <thead>
+                                <th>Data spasial </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Geom area</td>
+                                    <td>
+                                        <input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly">
+                                    </td>
+                                    <td>
+                                        <a onclick="clearGeomArea()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear geom area" class="btn icon btn-outline-primary" id="clear-drawing"> <i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Latitude</td>
+                                    <td colspan="2"><input type="text" class="form-control" id="latitude" name="latitude" autocomplete="off" readonly="readonly" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Longitude</td>
+                                    <td colspan="2"><input type="text" class="form-control" id="longitude" name="longitude" autocomplete="off" readonly="readonly" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <small>*Insert spatial data on map</small>
+                            <div class="col-sm-4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
