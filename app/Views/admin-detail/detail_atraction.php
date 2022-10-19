@@ -7,16 +7,19 @@
             <div class="row">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="m-0 font-weight-bold text-primary text-center">Detail <?= $objectData->name; ?></h5>
                         <div class="text-end">
                             <a href="<?= base_url('manage_atraction/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit"><i class="fa fa-edit"></i></a>
                         </div>
-
+                        <h5 class="m-0 font-weight-bold  text-center"> Detail Atraction</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <table class="table table-border">
                                 <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Name</td>
+                                        <td><?= $objectData->name; ?></td>
+                                    </tr>
                                     <tr>
                                         <td class="fw-bold">Category</td>
                                         <td><?= $objectData->category; ?></td>

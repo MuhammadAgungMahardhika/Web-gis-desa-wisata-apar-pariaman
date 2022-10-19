@@ -81,7 +81,7 @@ function showSupportModal(data, url) {
             $('#supportData').html
                 (`
                 ${(() => { if (data.owner) { return `<tr><td class="fw-bold">owner </td><td>: ${data.owner}</td></tr>` } else { return '' } })()}
-                ${(() => { if (data.emloye) { return `<tr><td class="fw-bold">employe</td><td>: ${data.employe}</td></tr>` } else { return '' } })()}
+                ${(() => { if (data.employe) { return `<tr><td class="fw-bold">employe</td><td>: ${data.employe}</td></tr>` } else { return '' } })()}
                 ${(() => { if (data.area_size) { return `<tr><td class="fw-bold">area size</td><td>: ${data.area_size} m<sup>2</sup></td></tr>` } else { return '' } })()}
                 ${(() => { if (data.open) { return `<tr><td class="fw-bold">open</td><td>: ${data.open}</td></tr>` } else { return '' } })()}
                 ${(() => { if (data.close) { return `<tr><td class="fw-bold">close</td><td>: ${data.close}</td></tr>` } else { return '' } })()}

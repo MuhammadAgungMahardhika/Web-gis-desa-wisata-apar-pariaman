@@ -56,7 +56,6 @@ class ManageAparController extends BaseController
 
         // ---------------------Data request
         $request = $this->request->getPost();
-        dd($request);
         $updateRequest = [
             'name' => $this->request->getPost('name'),
             'type_of_tourism' => $this->request->getPost('type_of_tourism'),

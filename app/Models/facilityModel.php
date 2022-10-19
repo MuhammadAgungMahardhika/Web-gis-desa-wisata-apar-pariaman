@@ -10,7 +10,7 @@ class facilityModel extends Model
 {
     protected $table = 'facility';
     protected $table_gallery = 'facility_gallery';
-    protected $columns = 'id,name,employe,area_size,open,close,contact_person,description';
+    protected $columns = 'id,name,area_size,open,close,description';
     protected $coords = "ST_Y(ST_Centroid(facility.geom)) AS lat ,ST_X(ST_Centroid(facility.geom)) AS lng ";
     protected $geom_area = "ST_AsGeoJSON(facility.geom_area) AS geoJSON";
 

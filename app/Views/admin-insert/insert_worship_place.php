@@ -18,7 +18,7 @@
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('manage_event'); ?>" role="button" class="btn btn-primary justify-item-center" title="List event"><i class="fa fa-arrow-left"></i></a>
+                        <a href="<?= base_url('manage_worship_place'); ?>" role="button" class="btn btn-primary justify-item-center" title="List worship place"><i class="fa fa-arrow-left"></i></a>
                         <h4 class="card-title text-center">Insert souvenir place</h4>
                     </div>
                     <div class="card-body">

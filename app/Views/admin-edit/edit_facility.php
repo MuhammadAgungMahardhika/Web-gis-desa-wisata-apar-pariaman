@@ -19,45 +19,34 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="<?= base_url('manage_facility/detail/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="back to detail facility"><i class="fa fa-arrow-left"></i></a>
-                        <h4 class="card-title text-center"><?= $objectData->name; ?></h4>
+                        <h4 class="card-title text-center">Edit Facility</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="form-body">
                                 <div class="form-group">
                                     <label for="name" class=" col col-form-label">Name</label>
-                                    <div class="col-sm-8">
+                                    <div class="col">
                                         <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="employe" class="col col-form-label">Employe</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="employe" value="<?= $objectData->employe; ?>" autocomplete="off">
-                                    </div>
-                                </div>
+
                                 <div class="form-group">
                                     <label for="area_size" class="col col-form-label">Area size</label>
-                                    <div class="col-sm-8">
+                                    <div class="col">
                                         <input type="number" class="form-control" name="open" value="<?= $objectData->area_size; ?>" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="open" class="col col-form-label">Open</label>
-                                    <div class="col-sm-8">
+                                    <div class="col">
                                         <input type="time" class="form-control" name="open" value="<?= $objectData->open; ?>" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="close" class="col col-form-label">Close</label>
-                                    <div class="col-sm-8">
+                                    <div class="col">
                                         <input type="time" class="form-control" name="close" value="<?= $objectData->close; ?>" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="contact_person" class="col col-form-label">Contact person</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>" autocomplete="off">
                                     </div>
                                 </div>
                                 <!-- Description -->

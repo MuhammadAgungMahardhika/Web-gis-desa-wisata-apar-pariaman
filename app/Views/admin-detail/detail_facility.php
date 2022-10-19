@@ -10,19 +10,19 @@
                         <div class="text-end">
                             <a href="<?= base_url('manage_facility/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit"><i class="fa fa-edit"></i></a>
                         </div>
-                        <h4 class="card-title text-center"><?= $objectData->name; ?></h4>
+                        <h4 class="card-title text-center">Detail Facility</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <table class="table table-border">
                                 <tbody>
                                     <tr>
-                                        <td class="fw-bold">Area size</td>
-                                        <td><?= $objectData->area_size; ?></td>
+                                        <td class="fw-bold">Name</td>
+                                        <td><?= $objectData->name; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Employe</td>
-                                        <td><?= $objectData->employe; ?></td>
+                                        <td class="fw-bold">Area size</td>
+                                        <td><?= $objectData->area_size; ?></td>
                                     </tr>
                                     <tr>
                                         <td class="fw-bold">Open</td>
@@ -31,10 +31,6 @@
                                     <tr>
                                         <td class="fw-bold">Close</td>
                                         <td><?= $objectData->close; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Contact</td>
-                                        <td><?= $objectData->contact_person; ?></td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold" colspan="2">Description</td>

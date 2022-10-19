@@ -10,12 +10,16 @@
                         <div class="text-end">
                             <a href="<?= base_url('manage_worship_place/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit"><i class="fa fa-edit"></i></a>
                         </div>
-                        <h4 class="card-title text-center"><?= $objectData->name; ?></h4>
+                        <h4 class="card-title text-center">Detail Worship Place</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <table class="table table-border">
                                 <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Name</td>
+                                        <td><?= $objectData->name; ?></td>
+                                    </tr>
                                     <tr>
                                         <td class="fw-bold">Category</td>
                                         <td><?= $objectData->category; ?></td>

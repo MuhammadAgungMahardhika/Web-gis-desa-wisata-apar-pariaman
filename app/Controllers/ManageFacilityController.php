@@ -71,10 +71,8 @@ class ManageFacilityController extends BaseController
         $request = $this->request->getPost();
         $updateRequest = [
             'name' => $this->request->getPost('name'),
-            'employe' => $this->request->getPost('employe'),
             'open' => $this->request->getPost('open'),
             'close' => $this->request->getPost('close'),
-            'contact_person' => $this->request->getPost('contact_person'),
             'description' => $this->request->getPost('description')
         ];
         $geojson = $this->request->getPost('geojson');
@@ -147,11 +145,9 @@ class ManageFacilityController extends BaseController
         $insertRequest = [
             'id' => $id,
             'name' => $this->request->getPost('name'),
-            'employe' => $this->request->getPost('employe'),
             'area_size' => $this->request->getPost('area_size'),
             'open' => $this->request->getPost('open'),
             'close' => $this->request->getPost('close'),
-            'contact_person' => $this->request->getPost('contact_person'),
             'description' => $this->request->getPost('description')
         ];
         $geojson = $this->request->getPost('geojson');

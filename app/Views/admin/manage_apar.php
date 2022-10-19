@@ -7,7 +7,9 @@
             <div class="row">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('manage_apar/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit apar info"><i class="fa fa-edit"></i></a>
+                        <div class="text-end">
+                            <a href="<?= base_url('manage_apar/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit apar info"><i class="fa fa-edit"></i></a>
+                        </div>
                         <h5 class="card-title text-primary text-center"><?= $objectData->name; ?></h5>
                     </div>
                     <div class="card-body">

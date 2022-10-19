@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="<?= base_url('manage_worship_place/detail/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="back to detail worship place"><i class="fa fa-arrow-left"></i></a>
-                        <h4 class="card-title text-center"><?= $objectData->name; ?></h4>
+                        <h4 class="card-title text-center">Edit Worship Place</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
