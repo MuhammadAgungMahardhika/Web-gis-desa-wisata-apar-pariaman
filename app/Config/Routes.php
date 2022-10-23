@@ -263,6 +263,8 @@ $routes->group('mobile', function ($routes) {
     $routes->get('atraction_by_category', 'MobileController::atraction_by_category');
     $routes->get('detail_atraction/(:segment)', 'MobileController::detail_atraction/$1');
 
+    $routes->get('package', 'MobileController::package');
+    $routes->get('package/(:segment)', 'MobileController::package/$1');
 
     $routes->get('event', 'MobileController::event');
     $routes->get('event/(:segment)', 'MobileController::event/$1');

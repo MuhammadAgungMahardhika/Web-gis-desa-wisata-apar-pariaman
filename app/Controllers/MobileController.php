@@ -9,7 +9,7 @@ class MobileController extends BaseController
 {
     use ResponseTrait;
     protected $auth;
-    protected $modelUser, $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
+    protected $modelUser, $modelApar, $modelEvent, $modelAtraction, $modelPackage, $modelProduct, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
     protected $title =  'List Object | Tourism Village';
     public function __construct()
     {
@@ -17,6 +17,8 @@ class MobileController extends BaseController
         $this->modelUser = new \App\Models\usersModel();
         $this->modelApar = new \App\Models\aparModel();
         $this->modelAtraction = new \App\Models\atractionModel();
+        $this->modelPackage = new \App\Models\packageModel();
+        $this->modelProduct = new \App\Models\productModel();
         $this->modelEvent = new \App\Models\eventModel();
         $this->modelSouvenir = new \App\Models\souvenirPlaceModel();
         $this->modelCulinary = new \App\Models\culinaryPlaceModel();
@@ -222,6 +224,25 @@ class MobileController extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
+
+    // Package
+    public function package($id = null)
+    {
+        if ($id) {
+            $objectData = $this->modelPackage->getPackage($id)->getResult();
+        } else {
+            $objectData = $this->modelPackage->getPackages();
+        }
+        $response = [
+            'data' => $objectData,
+            'status' => 200,
+            'message' => [
+                "Success get list of package"
+            ]
+        ];
+        return $this->respond($response);
+    }
+
 
     public function event($id = null)
     {
