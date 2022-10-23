@@ -9,7 +9,7 @@ class MobileController extends BaseController
 {
     use ResponseTrait;
     protected $auth;
-    protected $modelUser, $modelApar, $modelEvent, $modelAtraction, $modelPackage, $modelProduct, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
+    protected $modelUser, $modelApar, $modelEvent, $modelAtraction, $modelPackage, $modelFp, $modelAc, $modelProduct, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
     protected $title =  'List Object | Tourism Village';
     public function __construct()
     {
@@ -18,6 +18,8 @@ class MobileController extends BaseController
         $this->modelApar = new \App\Models\aparModel();
         $this->modelAtraction = new \App\Models\atractionModel();
         $this->modelPackage = new \App\Models\packageModel();
+        $this->modelFp = new \App\Models\facilityPackageModel();
+        $this->modelAc = new \App\Models\activitiesModel();
         $this->modelProduct = new \App\Models\productModel();
         $this->modelEvent = new \App\Models\eventModel();
         $this->modelSouvenir = new \App\Models\souvenirPlaceModel();
@@ -219,7 +221,7 @@ class MobileController extends BaseController
                 'currentUrl' => 'mobile',
                 'aparData' => $aparData
             ];
-            return view('mobile/detail_object', $data);
+            return view('user-menu/detail_object', $data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -241,6 +243,35 @@ class MobileController extends BaseController
             ]
         ];
         return $this->respond($response);
+    }
+
+    public function detail_package($id = null)
+    {
+        $objectData = $this->modelPackage->getPackage($id)->getRow();
+        $facilityPackage = $this->modelFp->getFacilityPackage($id)->getResult();
+        $activitiesData = $this->modelAc->getActivities($id)->getResult();
+        $activitiesGallery = array();
+        foreach ($activitiesData as $activities) {
+            array_push($activitiesGallery, $this->modelAc->getGallery($activities->id)->getResult());
+        }
+        $facilityPackage = $this->modelFp->getFacilityPackage($id)->getResult();
+        // $galleryData = $this->modelPackage->getGallery($id)->getResult();
+        // $aparData =  $this->modelApar->getApar();
+        if (is_object($objectData)) {
+            $data = [
+                'title' => $this->title,
+                'config' => config('Auth'),
+                'objectData' => $objectData,
+                'facilityPackage' => $facilityPackage,
+                'activitiesData' => $activitiesData,
+                // 'galleryData'  => $galleryData,
+                'currentUrl' => 'mobile',
+                // 'aparData' => $aparData
+            ];
+            return view('user-menu/detail_package', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
     }
 
 

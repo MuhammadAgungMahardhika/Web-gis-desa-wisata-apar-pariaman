@@ -265,6 +265,7 @@ $routes->group('mobile', function ($routes) {
 
     $routes->get('package', 'MobileController::package');
     $routes->get('package/(:segment)', 'MobileController::package/$1');
+    $routes->get('detail_package/(:segment)', 'MobileController::detail_package/$1');
 
     $routes->get('event', 'MobileController::event');
     $routes->get('event/(:segment)', 'MobileController::event/$1');
