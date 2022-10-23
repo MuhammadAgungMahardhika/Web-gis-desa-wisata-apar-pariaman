@@ -6,27 +6,42 @@ use App\Models\atractionModel;
 
 class packageController extends BaseController
 {
-    protected $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;
-    protected $title =  'List Object | Tourism Village';
+    protected $model, $modelFp, $modelAc;
+    protected $title =  'Tourism Package | Tourism Village';
     public function __construct()
     {
-        $this->modelApar = new \App\Models\aparModel();
-        $this->modelAtraction = new \App\Models\atractionModel();
-        $this->modelEvent = new \App\Models\eventModel();
-        $this->modelSouvenir = new \App\Models\souvenirPlaceModel();
-        $this->modelCulinary = new \App\Models\culinaryPlaceModel();
-        $this->modelWorship = new \App\Models\worshipPlaceModel();
-        $this->modelFacility = new \App\Models\facilityModel();
+        $this->model = new \App\Models\packageModel();
+        $this->modelFp = new \App\Models\facilityPackageModel();
+        $this->modelAc = new \App\Models\activitiesModel();
     }
 
-    public function index()
+    public function packages()
     {
         //direct biasa
-        $aparData = $this->modelApar->getApar();
+        $objectData = $this->model->getPackages();
         $data = [
-            'title' => $this->title
+            'title' => $this->title,
+            'objectData' => $objectData
         ];
-
         return view('user-menu/package', $data);
+    }
+    public function package($id)
+    {
+        $objectData = $this->model->getPackage($id)->getRow();
+        $activitiesData = $this->modelAc->getActivities($id)->getResult();
+        $activitiesGallery = array();
+        foreach ($activitiesData as $activities) {
+            array_push($activitiesGallery, $this->modelAc->getGallery($activities->id)->getResult());
+        }
+        $facilityPackage = $this->modelFp->getFacilityPackage($id)->getResult();
+
+        $data = [
+            'title' => $this->title,
+            'objectData' => $objectData,
+            'facilityPackage' => $facilityPackage,
+            'activitiesData' => $activitiesData,
+            'activitiesGallery' => $activitiesGallery
+        ];
+        return view('user-menu/detail_package', $data);
     }
 }

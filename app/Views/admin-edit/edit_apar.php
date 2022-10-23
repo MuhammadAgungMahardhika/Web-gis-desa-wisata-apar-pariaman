@@ -73,25 +73,46 @@
                                 <div class="form-group">
                                     <label for="facebook" class="col col-form-label"><i class="fa fa-facebook"></i> Facebook</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="facebook" value="<?= $aparData->facebook; ?>">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">https://facebook.com/</div>
+                                            </div>
+                                            <input type="text" class="form-control" name="facebook" placeholder="Username" value="<?= $aparData->facebook; ?>">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="tiktok" class="col col-form-label"><i class="fab fa-tiktok"></i> Tiktok</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="tiktok" value="<?= $aparData->tiktok; ?>">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">https://tiktok.com/</div>
+                                            </div>
+                                            <input type="text" class="form-control" name="tiktok" placeholder="username" value="<?= $aparData->tiktok; ?>">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="instagram" class=" col col-form-label"><i class="fa fa-instagram"></i> Instagram</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="instagram" value="<?= $aparData->instagram; ?>">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">https://instagram.com/</div>
+                                            </div>
+                                            <input type="text" class="form-control" name="instagram" placeholder="username" value="<?= $aparData->instagram; ?>">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="youtube" class=" col col-form-label"><i class="fa fa-youtube"></i> Youtube</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="youtube" value="<?= $aparData->youtube; ?>">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">https://youtube.com/</div>
+                                            </div>
+                                            <input type="text" class="form-control" name="youtube" placeholder="channel" value="<?= $aparData->youtube; ?>">
+                                        </div>
+
                                     </div>
                                 </div>
 

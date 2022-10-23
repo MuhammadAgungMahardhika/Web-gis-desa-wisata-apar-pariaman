@@ -125,8 +125,14 @@ $routes->group('review', function ($routes) {
 
 // Menu package
 $routes->group('package', function ($routes) {
-    $routes->get('index', 'packageController::index');
-    $routes->get('/', 'packageController::index');
+    $routes->get('/', 'packageController::packages');
+    $routes->get('detail/(:segment)', 'packageController::package/$1');
+});
+
+// Menu product
+$routes->group('product', function ($routes) {
+    $routes->get('culinary', 'productController::culinary');
+    $routes->get('souvenir', 'productController::souvenir');
 });
 
 
