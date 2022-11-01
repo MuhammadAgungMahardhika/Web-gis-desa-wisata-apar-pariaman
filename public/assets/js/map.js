@@ -1,6 +1,6 @@
 
-// let base_url = 'http://localhost:8080' //untuk php spark serve
-let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
+let base_url = 'http://localhost:8080' //untuk php spark serve
+// let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition, userMarker, directionsRenderer, infoWindow, circle, map
 let markerArray = []
 let markerNearby
@@ -299,12 +299,19 @@ function addMarkerToMap(data, url = null, pass = null) {
     let lat = parseFloat(data.lat)
     let lng = parseFloat(data.lng)
     let geoJSON, color
+    let anim
+
+    if(!pass){
+        anim = google.maps.Animation.DROP
+    }else{
+        anim = null
+    }
     const objectMarker = new google.maps.Marker({
         position: { lat: lat, lng: lng },
         icon: checkIcon(url),
         opacity: 0.8,
         title: "info object",
-        animation: google.maps.Animation.DROP,
+        animation: anim,
         map: map,
     })
     // add geom to map

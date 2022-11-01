@@ -2,14 +2,14 @@
 <?= $this->section('content') ?>
 <div class="container-fluid">
     <div class="card p-2">
-        <div class="card-header text-center card-title  mb-2">Culinary From Apar Tourism Village</div>
+        <div class="card-header text-center card-title  mb-2">LIST CULINARY FROM APAR</div>
         <div class="card-body">
             <div class="row d-flex">
                 <?php foreach ($objectData as $data) : ?>
                     <div class="col-md-3 col-sm-6">
                         <div class="card  shadow efek" id="cp">
                             <div class="card-content">
-                                <a role="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $data->id ?>">
+                                <a class="hover-efek" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $data->id ?>">
                                     <img class=" card-img-top img-fluid" src="<?= base_url('media/photos/culinary/'); ?>/<?= $data->url; ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title"><?= $data->name; ?></h4>
@@ -46,7 +46,4 @@
 
     </div>
 </div>
-<?= $this->endSection() ?>
-<?= $this->section('script') ?>
-
 <?= $this->endSection() ?>

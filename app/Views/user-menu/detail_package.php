@@ -88,17 +88,19 @@
                                             <div class="col-md-5 p-1">
                                                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                                     <ol class="carousel-indicators">
-                                                        <?php foreach ($activitiesGallery as $gallery) : ?>
+                                                        <?php foreach ($activities as $gallery) : ?>
                                                             <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= esc($no); ?>" class="<?php if ($no == 0) echo 'active'; ?>"></li>
                                                         <?php endforeach; ?>
                                                     </ol>
                                                     <div class="carousel-inner">
                                                         <!-- List gallery -->
-                                                        <?php foreach ($activitiesGallery as $gallery) : ?>
-                                                            <div class="carousel-item <?php if ($no == 0) echo 'active'; ?>">
-                                                                <?php echo $gallery[$no]->url; ?>
-                                                                <!-- <img src="<?= base_url('media/photos/activities/'); ?>/<?= $gallery[$no]->url; ?>" class="d-block w-100"> -->
+                                                        <?php $no_image = 0; ?>
+                                                        <?php foreach ($activities as $gallery) : ?>
+                                                            <?php dd($activitiesData) ?>
+                                                            <div class="carousel-item <?php if ($no_image == 0) echo 'active'; ?>">
+                                                                <img src="<?= base_url('media/photos/activities/'); ?>/<?= $gallery[$no_image]->url; ?>" class="d-block w-100">
                                                             </div>
+                                                            <?php $no_image++ ?>
                                                         <?php endforeach; ?>
                                                     </div>
                                                     <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">

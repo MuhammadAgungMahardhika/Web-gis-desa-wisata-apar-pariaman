@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\atractionModel;
-
 class DetailObjectController extends BaseController
 {
 

@@ -17,7 +17,7 @@ class packageModel extends Model
     package.min_capacity,
     package.price,
     package.contact_person,
-    package.brosur_url,
+    package.brosur_url as url,
     package.description';
 
     protected $columns_activities = '

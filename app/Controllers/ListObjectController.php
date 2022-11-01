@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\atractionModel;
-
 class ListObjectController extends BaseController
 {
     protected $modelApar, $modelEvent, $modelAtraction, $modelSouvenir, $modelCulinary, $modelWorship, $modelFacility;

@@ -62,7 +62,9 @@
    top: 0;
  } */
  
-
+.hover-efek:hover{
+  filter:brightness(110%)
+}
 
  .efek1 {
    opacity: 0;
