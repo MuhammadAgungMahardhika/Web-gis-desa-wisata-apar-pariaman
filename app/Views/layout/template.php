@@ -9,8 +9,7 @@
     <!-- template CSS -->
     <link rel="stylesheet" href="<?= base_url('/assets/css/main/app.css') ?>">
     <link rel="stylesheet" href="<?= base_url('/assets/css/main/app-dark.css') ?>">
-    <link rel="shortcut icon" href="<?= base_url('/assets/images/logo/favicon.svg') ?>" type="image/x-icon">
-    <link rel="shortcut icon" href="<?= base_url('/assets/images/logo/favicon.png') ?>" type="image/png">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/pesona_apar.png') ?>">
 
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url('/assets/css/main/style.css') ?>">

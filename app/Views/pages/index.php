@@ -15,6 +15,7 @@
     <link href="<?= base_url('assets/lib/lightbox/css/lightbox.min.css') ?>" rel="stylesheet" />
     <link href="<?= base_url('assets/lib/owlcarousel/assets/owl.carousel.min.css') ?>" rel="stylesheet" />
     <!-- Third Party CSS and JS -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/de7d18ea4d.js" crossorigin="anonymous"></script>
 
@@ -22,37 +23,84 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Rubik+Dirt&display=swap" rel="stylesheet">
 
+    <!-- Font google -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/main/style.css') ?>" />
     <title><?= $title ?></title>
 </head>
 
+<style type="text/css">
+    /* ============ only desktop view ============ */
+    @media all and (min-width: 992px) {
+        .navbar .nav-item .dropdown-menu {
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+            margin-top: 0;
+        }
+
+        .navbar .nav-item:hover .nav-link {
+            color: #ffff;
+        }
+
+        .navbar .dropdown-menu {
+            top: 80%;
+            transform: rotateX(-75deg);
+            transform-origin: 0% 0%;
+        }
+
+        .navbar .dropdown-menu.fade-up {
+            top: 180%;
+        }
+
+        .navbar .nav-item:hover .dropdown-menu {
+            transition: .3s;
+            opacity: 1;
+            visibility: visible;
+            top: 100%;
+            transform: rotateX(0deg);
+        }
+
+    }
+
+    /* ============ desktop view .end// ============ */
+</style>
+
 <body>
     <!-- Awal landing -->
 
     <!-- Awal navigasi -->
-    <nav class="container-fluid navbar navbar-expand-lg " id="Nav">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-example" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbar-example">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#landing">LANDING PAGE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('list_object'); ?>">EXPLORE APAR TOURISM VILLAGE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#About">ABOUT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#MyProjects">PREVIEW</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#MyCertificates">AWARDS</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-light position-fixed shadow-sm bg-white" style="z-index: 999; right:0;left:0;">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex justify-content-center" href="index.php">
+                <a href="<?= base_url(''); ?>"> <i class="iconify" data-icon="fontisto:holiday-village" data-width="70" data-height="70"></i>
+                    <span class="display-6 ms-2 ">Tourism Village</span>
+                </a>
+            </a>
+            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main_nav">
+                <ul class="navbar-nav ms-auto me-4 rounded ">
+                    <li class="nav-item ">
+                        <a class="nav-link text-secondary" href="#landing">LANDING PAGE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="<?= base_url('list_object'); ?>">EXPLORE APAR TOURISM VILLAGE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#About">ABOUT</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-secondary" href="#MyProjects">PREVIEW</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#MyCertificates">AWARDS</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <!-- Akhir navigasi -->
@@ -63,7 +111,7 @@
         <div class="bg-content">
             <h1 style="color: #eaeaea;">Welcome To Apar Tourism Village</h1>
             <p>Pariaman City, West Sumatra, Indonesia</p>
-            <a class="btn btn-success " href="<?= base_url('list_object') ?>">Explore Now!</a>
+            <a class="btn btn-success btn-lg" href="<?= base_url('list_object') ?>">Explore Now!</a>
         </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -71,29 +119,28 @@
     </svg>
     <!-- Akhir landing -->
     <!-- About  -->
-    <section class="container-fluid mb-2" id="About">
+    <section class="container mb-2" id="About">
         <div class="row" style="position: relative;">
-            <div class="col-md-6 text-center">
-                <h1 class="efek1 text-success">Enjoy Our Culture!</h1>
-                <p style=" font-size:20px;font-family: 'Roboto', sans-serif;">
+            <div class="col-md-6">
+                <p class="text-secondary"><span class="text-success"> #</span> Welcome To Apar Tourism Village</p>
+                <h1 class="efek1 text-success text-start display-5" style="font-family: 'Roboto Condensed', sans-serif;">Why You Should Visit Apar Tourism Village</h1>
+                <p class="text-start text-secondary" style=" font-size:20px;font-family: 'Roboto Condensed', sans-serif; font-weight:300;">
                     <?= $aparData->description; ?>
                 </p>
             </div>
-            <div class="col-md-6 p-4 text-center">
-                <img src="media/photos/landing-page/pohon-mangrove.png" alt="" style=" max-width: 100%" class="mb-3 efek1">
-                <figcaption class="figure-caption">(Mangrove) Tanaman dengan banyak manfaat yang berada di pesisir pantai <a class="text-link text-success" href="<?= base_url('list_object'); ?>"> Selengkapnya</a></figcaption>
+            <div class=" col-md-6 p-4 ">
+                <img src="media/photos/landing-page/pohon-mangrove.png" alt="" style="max-width: 100%" class="efek1">
+                <figcaption class="figure-caption text-start">(Mangrove) Tanaman dengan banyak manfaat yang berada di pesisir pantai <a class="text-link text-success" href="<?= base_url('list_object'); ?>"> Selengkapnya</a></figcaption>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="position: absolute; bottom:0;left:0;right:0;z-index:-1;">
-                <path fill="#F3F4F5" fill-opacity="1" d="M0,320L48,272C96,224,192,128,288,122.7C384,117,480,203,576,229.3C672,256,768,224,864,186.7C960,149,1056,107,1152,106.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
+
         </div>
-        <div class="row justify-content-end text-center bg-light p-4">
-            <div class="col-md-6 my-2">
-                <img src="media/photos/landing-page/turtle-1.png" alt="" style="max-width: 100%;" class="mb-3 efek5">
-                <figcaption class="figure-caption">Salah satu dari 3 jenis penyu yang ada di Desa Wisata Apar (Hanya 7 di dunia) <a class="text-link text-success" href="<?= base_url('list_object'); ?>"> Selengkapnya</a></figcaption>
+        <div class="row justify-content-end " style="padding-top: 100px;">
+            <div class="col-md-4 my-2">
+                <img src="media/photos/landing-page/turtle-1.png" alt="" style="max-width: 100%;" class="efek5">
+                <figcaption class="figure-caption  text-start">Salah satu dari 3 jenis penyu yang ada di Desa Wisata Apar (Hanya 7 di dunia) <a class="text-link text-success" href="<?= base_url('list_object'); ?>"> Selengkapnya</a></figcaption>
             </div>
-            <div class="col-md-6 ">
-                <div class="card-body rounded shadow border">
+            <div class="col-md-8 ">
+                <div class="card-body rounded shadow-sm">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <?php $no = 0; ?>
                         <ol class="carousel-indicators">
@@ -127,20 +174,20 @@
         </div>
     </section>
     <!-- Akhir About me -->
+
     <!-- My Projects -->
     <section class="container-fluid" id="MyProjects">
-        <div class="row justify-content-center ">
+        <div class="row justify-content-center " style="padding-top: 100px;">
             <div class="col-md-8 text-center">
-                <h1 class="efek2 text-success">PREVIEW</h1>
-                <button class="btn btn-outline-primary m-1" onclick="showObject('atraction')">Atraction</button>
-                <button class="btn btn-outline-primary m-1" onclick="showObject('culinary_place')">Culinary place</button>
-                <button class="btn btn-outline-primary m-1" onclick="showObject('souvenir_place')">Souvenir place</button>
-                <button class="btn btn-outline-primary m-1" onclick="showObject('worship_place')">Worship place</button>
-                <button class="btn btn-outline-primary m-1" onclick="showObject('facility')">Facility</button>
+                <button class="btn btn-outline-success btn-lg mx-2 rounded shadow-sm" onclick="showObject('atraction')">Atraction</button>
+                <button class="btn btn-outline-success btn-lg mx-2 rounded shadow-sm" onclick="showObject('culinary_place')">Culinary place</button>
+                <button class="btn btn-outline-success btn-lg mx-2 rounded shadow-sm" onclick="showObject('souvenir_place')">Souvenir place</button>
+                <button class="btn btn-outline-success btn-lg mx-2 rounded shadow-sm" onclick="showObject('worship_place')">Worship place</button>
+                <button class="btn btn-outline-success btn-lg mx-2 rounded shadow-sm" onclick="showObject('facility')">Facility</button>
             </div>
         </div>
         <div class="row justify-content-center m-2">
-            <div class="col-md-8">
+            <div class="col-10 shadow-sm">
                 <?= $this->include('/layout/map-body.php'); ?>
             </div>
         </div>
