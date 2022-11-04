@@ -1,4 +1,4 @@
-# Tourism Website for Apar Tourism Village in Pariaman City
+# GIS Tourism Website for Apar Tourism Village in Pariaman City
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
