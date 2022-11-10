@@ -37,18 +37,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="open" class="col col-form-label">Open</label>
-                                    <div class="col">
-                                        <input type="time" class="form-control" name="open" value="<?= $objectData->open; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="close" class="col col-form-label">Close</label>
-                                    <div class="col">
-                                        <input type="time" class="form-control" name="close" value="<?= $objectData->close; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label for="building_size" class="col col-form-label">Building size</label>
                                     <div class="col">
                                         <input type="number" class="form-control" name="building_size" value="<?= $objectData->building_size; ?>">

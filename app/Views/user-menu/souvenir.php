@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template.php') ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">
-    <div class="card p-2">
+    <div class="card p-2 shadow-sm">
         <div class="card-header text-center card-title  mb-2">LIST SOUVENIR FROM APAR</div>
         <div class="card-body">
             <div class="row d-flex">
@@ -10,7 +10,7 @@
                         <div class="card  shadow efek" id="cp">
                             <div class="card-content">
                                 <a class="hover-efek" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $data->id ?>">
-                                    <img class=" card-img-top img-fluid" src="<?= base_url('media/photos/souvenir/'); ?>/<?= $data->url; ?>" alt="Card image cap">
+                                    <img class=" card-img-top img-fluid" src="<?= base_url('media/photos/product/'); ?>/<?= $data->url; ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title"><?= $data->name; ?></h4>
                                         <small class="text-muted"><?= $data->price; ?> IDR</small>
@@ -29,7 +29,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <img class="img-fluid w-100" src="<?= base_url('media/photos/souvenir/'); ?>/<?= $data->url; ?>" alt="Card image cap">
+                                    <img class="img-fluid w-100" src="<?= base_url('media/photos/product/'); ?>/<?= $data->url; ?>" alt="Card image cap">
                                     <p class="card-text my-4" style="text-align: justify;">
                                         <?= $data->description; ?>
                                     </p>

@@ -88,7 +88,7 @@
                         <a class="nav-link text-secondary" href="#landing">LANDING PAGE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="<?= base_url('list_object'); ?>">EXPLORE APAR TOURISM VILLAGE</a>
+                        <a class="nav-link text-secondary" href="<?= base_url('list_object'); ?>">EXPLORE </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-secondary" href="#About">ABOUT</a>
@@ -135,40 +135,39 @@
 
         </div>
         <div class="row justify-content-end " style="padding-top: 100px;">
-            <div class="col-md-4 my-2">
+            <div class="col-md-5 my-2">
                 <img src="media/photos/landing-page/turtle-1.png" alt="" style="max-width: 100%;" class="efek5">
                 <figcaption class="figure-caption  text-start">Salah satu dari 3 jenis penyu yang ada di Desa Wisata Apar (Hanya 7 di dunia) <a class="text-link text-success" href="<?= base_url('list_object'); ?>"> Selengkapnya</a></figcaption>
             </div>
-            <div class="col-md-8 ">
-                <div class="card-body rounded shadow-sm">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="col-md-7">
+                <div id="carouselExampleControls" class="carousel slide border" data-ride="carousel">
+                    <?php $no = 0; ?>
+                    <ol class="carousel-indicators">
+                        <?php foreach ($galleryData as $gallery) : ?>
+                            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= esc($no); ?>" class="<?php if ($no == 0) echo 'active'; ?>"></li>
+                            <?php $no++; ?>
+                        <?php endforeach; ?>
+                    </ol>
+                    <div class="carousel-inner">
+                        <!-- List gallery -->
                         <?php $no = 0; ?>
-                        <ol class="carousel-indicators">
-                            <?php foreach ($galleryData as $gallery) : ?>
-                                <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= esc($no); ?>" class="<?php if ($no == 0) echo 'active'; ?>"></li>
-                                <?php $no++; ?>
-                            <?php endforeach; ?>
-                        </ol>
-                        <div class="carousel-inner">
-                            <!-- List gallery -->
-                            <?php $no = 0; ?>
-                            <?php foreach ($galleryData as $gallery) : ?>
-                                <div class="carousel-item <?php if ($no == 0) echo 'active'; ?>">
-                                    <img src="<?= base_url('media/photos/'); ?>/<?= $gallery->url; ?>" class="d-block w-100">
-                                </div>
-                                <?php $no++; ?>
-                            <?php endforeach; ?>
-                        </div>
-                        <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </a>
+                        <?php foreach ($galleryData as $gallery) : ?>
+                            <div class="carousel-item <?php if ($no == 0) echo 'active'; ?>">
+                                <img src="<?= base_url('media/photos/'); ?>/<?= $gallery->url; ?>" class="d-block w-100">
+                            </div>
+                            <?php $no++; ?>
+                        <?php endforeach; ?>
                     </div>
+                    <a class=" carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
                 </div>
+
 
             </div>
         </div>

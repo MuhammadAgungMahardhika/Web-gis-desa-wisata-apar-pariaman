@@ -49,4 +49,21 @@ class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
     }
+    public function dbCheck()
+    {
+        $db = db_connect();
+        $content = [
+            'Platform' => $db->getPlatform(),
+            'Version' => $db->getVersion(),
+            'Database' => $db->getDatabase(),
+        ];
+        $response = [
+            'data' => $content,
+            'status' => 200,
+            'message' => [
+                "Successfully Connected to Database"
+            ]
+        ];
+        return json_encode($response);
+    }
 }

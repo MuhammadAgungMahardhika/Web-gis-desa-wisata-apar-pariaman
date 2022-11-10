@@ -134,7 +134,6 @@ class ListObjectController extends BaseController
         return json_encode($data);
     }
 
-
     public function souvenir_place($id = null)
     {
         if ($id) {

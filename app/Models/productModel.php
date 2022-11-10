@@ -9,6 +9,7 @@ use CodeIgniter\I18n\Time;
 class productModel extends Model
 {
     protected $table = 'product';
+    protected $table_category = 'product_category';
     protected $table_gallery = 'product_gallery';
     protected $columns = '
     product.id,
@@ -23,10 +24,32 @@ class productModel extends Model
     {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
         $count = (int)substr($lastId['id'], 2);
-        $id = sprintf('P%03d', $count + 1);
+        $id = sprintf('PD%04d', $count + 1);
         return $id;
     }
 
+    public function getProducts()
+    {
+        $query = $this->db->table($this->table)
+            ->select("{$this->columns}")
+            ->join('product_category', 'product_category.id = product.product_category_id')
+            ->get();
+        return $query;
+    }
+    public function getProduct($id)
+    {
+        $query = $this->db->table($this->table)
+            ->select("{$this->columns}")
+            ->join('product_category', 'product_category.id = product.product_category_id')
+            ->where('product.id', $id)
+            ->get();
+        return $query;
+    }
+    public function getCategory()
+    {
+        $query = $this->db->table($this->table_category)->select('id,name')->get();
+        return $query;
+    }
     public function getCulinary()
     {
         $query = $this->db->table($this->table)
@@ -50,32 +73,20 @@ class productModel extends Model
 
 
     // --------------------------------------Admin-------------------------------------------
-    public function addPackage($id, $data, $lng, $lat, $geojson = null)
+    public function addProduct($data)
     {
         $query = $this->db->table($this->table)->insert($data);
-        if ($query) {
-            $spasial = $this->db->table($this->table)
-                ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
-                ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
-                ->where('package.id', $id)
-                ->update();
-        }
-        return $query && $spasial;
+        return $query;
     }
-    public function updatePackage($id, $data, $lng, $lat, $geojson = null)
+    public function updateProduct($id, $data)
     {
         $query = $this->db->table($this->table)
-            ->where('package.id', $id)
+            ->where('product.id', $id)
             ->update($data);
-        $update = $this->db->table($this->table)
-            ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
-            ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
-            ->where('package.id', $id)
-            ->update();
-        return $query && $update;
+        return $query;
     }
 
-    public function deletePackage($id)
+    public function deleteProduct($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;

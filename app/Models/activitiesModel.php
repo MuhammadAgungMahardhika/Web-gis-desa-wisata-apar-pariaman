@@ -8,7 +8,8 @@ use CodeIgniter\I18n\Time;
 
 class activitiesModel extends Model
 {
-    protected $table = 'detail_package';
+    protected $table_detail = 'detail_package';
+    protected $table = 'activities';
     protected $table_gallery = 'activities_gallery';
     protected $columns = '
     activities.id,
@@ -23,9 +24,17 @@ class activitiesModel extends Model
         return $id;
     }
 
-    public function getActivities($id)
+    public function getActivities()
     {
         $query = $this->db->table($this->table)
+            ->select("{$this->columns}")
+            ->get();
+        return $query;
+    }
+
+    public function getPackageActivity($id)
+    {
+        $query = $this->db->table($this->table_detail)
             ->select("{$this->columns}")
             ->join('activities', 'activities.id = detail_package.activities_id')
             ->join('package', 'package.id = detail_package.package_id')
@@ -33,33 +42,36 @@ class activitiesModel extends Model
             ->get();
         return $query;
     }
+    public function getActivity($id)
+    {
+        $query = $this->db->table($this->table)
+            ->select("{$this->columns}")
+            ->where('activities.id', $id)
+            ->get();
+        return $query;
+    }
 
 
 
     // --------------------------------------Admin-------------------------------------------
-    public function addPackage($id, $data, $lng, $lat, $geojson = null)
+    public function addPackageActivities($data)
+    {
+        $query = $this->db->table($this->table_detail)->insert($data);
+        return $query;
+    }
+    public function addActivities($id, $data)
     {
         $query = $this->db->table($this->table)->insert($data);
-        if ($query) {
-            $spasial = $this->db->table($this->table)
-                ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
-                ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
-                ->where('package.id', $id)
-                ->update();
-        }
-        return $query && $spasial;
+
+        return $query;
     }
-    public function updatePackage($id, $data, $lng, $lat, $geojson = null)
+    public function updateActivities($id, $data)
     {
         $query = $this->db->table($this->table)
             ->where('package.id', $id)
             ->update($data);
-        $update = $this->db->table($this->table)
-            ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
-            ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
-            ->where('package.id', $id)
-            ->update();
-        return $query && $update;
+
+        return $query;
     }
 
     public function deletePackage($id)

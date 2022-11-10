@@ -12,48 +12,48 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <section class="section">
-    <form class="form form-vertical" action="<?= base_url('manage_worship_place/save_insert'); ?>" method="post">
+    <form class="form form-vertical" action="<?= base_url('manage_atraction/save_update/' . $objectData->id); ?>" method="post">
         <div class="row">
             <!-- Object Detail Information -->
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('manage_worship_place'); ?>" role="button" class="btn btn-primary justify-item-center" title="List worship place"><i class="fa fa-arrow-left"></i></a>
-                        <h4 class="card-title text-center">Insert worship place</h4>
+                        <a href="<?= base_url('manage_package/detail/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="back to detail"><i class="fa fa-arrow-left"></i></a>
+                        <h4 class="card-title text-center">Edit Atraction</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="form-body">
+                                <!-- Form data nonspasial -->
                                 <div class="form-group">
-                                    <label for="name" class=" col col-form-label">Name</label>
+                                    <label for="name" class="col col-form-label">Name</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="name" required autocomplete="off">
+                                        <input type="text" class="form-control" name="name" value="<?= $objectData->name; ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="category" class=" col col-form-label">Category</label>
+                                    <label for="min_capacity" class="col col-form-label">Min Capacity</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="category" autocomplete="off">
+                                        <input type="text" class="form-control" name="min_capacity" value="<?= $objectData->min_capacity; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="building_size" class=" col col-form-label">Building size</label>
+                                    <label for="price" class=" col col-form-label">Price</label>
                                     <div class="col">
-                                        <input type="number" class="form-control" name="building_size" autocomplete="off">
+                                        <input type="text" class="form-control" name="price" value="<?= $objectData->price; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="capacity" class=" col col-form-label">Capacity</label>
+                                    <label for="contact_person" class=" col col-form-label">Contact person</label>
                                     <div class="col">
-                                        <input type="number" class="form-control" name="capacity" autocomplete="off">
+                                        <input type="text" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>">
                                     </div>
                                 </div>
-
                                 <!-- Description -->
                                 <div class="row my-2">
                                     <div class="col">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Description" id="floatingTextarea" style="height: 150px" name="description"></textarea>
+                                            <textarea class="form-control" placeholder="Description" id="floatingTextarea" style="height: 150px" name="description"><?= $objectData->description; ?></textarea>
                                             <label for="floatingTextarea">Description</label>
                                         </div>
                                     </div>
@@ -61,62 +61,21 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group  mb-4">
-                                            <label for="gallery" class="form-label">Gallery</label>
-                                            <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                            <label for="gallery" class="form-label">Brosur Image</label>
+                                            <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery">
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-success btn-sm">Save</button>
                                 <button type="reset" class="btn btn-danger btn-sm">cancel</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-12">
-                <!-- Object Location on Map -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-12 mb-3">
-                                <h5 class="card-title">Google Maps</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Object Map body -->
-                    <?= $this->include('layout/map-body'); ?>
-                    <div class="card-footer">
-                        <table class="table table-border">
-                            <thead>
-                                <th>Data spasial </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Geom area</td>
-                                    <td>
-                                        <input type="text" id="geo-json" class="form-control" name="geojson" placeholder="GeoJSON" readonly="readonly">
-                                    </td>
-                                    <td>
-                                        <a onclick="clearGeomArea()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Clear geom area" class="btn icon btn-outline-primary" id="clear-drawing"> <i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Latitude</td>
-                                    <td colspan="2"><input type="text" class="form-control" id="latitude" name="latitude" autocomplete="off" readonly="readonly" required></td>
-                                </tr>
-                                <tr>
-                                    <td>Longitude</td>
-                                    <td colspan="2"><input type="text" class="form-control" id="longitude" name="longitude" autocomplete="off" readonly="readonly" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="form-group">
-                            <small>*Insert spatial data on map</small>
-                            <div class="col-sm-4">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
             </div>
         </div>
@@ -132,15 +91,6 @@
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <script src="<?= base_url('assets/js/extensions/form-element-select.js'); ?>"></script>
 <script>
-    $(document).ready(function() {
-        initDrawingManager(url)
-    });
-    let datas
-    let url = '<?= $url ?>'
-    let geomApar = JSON.parse('<?= $aparData->geoJSON; ?>')
-    let latApar = parseFloat(<?= $aparData->lat; ?>)
-    let lngApar = parseFloat(<?= $aparData->lng; ?>)
-
     FilePond.registerPlugin(
         FilePondPluginFileValidateType,
         FilePondPluginImageExifOrientation,
@@ -151,12 +101,20 @@
 
     // Get a reference to the file input element
     const photo = document.querySelector('input[id="gallery"]');
+
+
     // Create a FilePond instance
     const pond = FilePond.create(photo, {
-        imageResizeTargetHeight: 650,
+        imageResizeTargetHeight: 720,
         imageResizeUpscale: false,
         credits: false,
     })
+
+
+    pond.addFiles(
+        "<?= base_url('media/photos/package/'); ?>/<?= $objectData->url; ?>"
+    );
+
     pond.setOptions({
         server: "<?= base_url('upload/photo') ?>"
     })

@@ -62,14 +62,18 @@
             </li>
 
             <li class="sidebar-item  has-sub 
-            <?= (current_url() == base_url('manage_users') || current_url() == base_url('manage_apar') || current_url() == base_url('manage_atraction') || current_url() == base_url('manage_event') || current_url() == base_url('manage_culinary_place') || current_url() == base_url('manage_souvenir_place') || current_url() == base_url('manage_worship_place') || current_url() == base_url('manage_facility')) ? 'active' : '' ?>" id="adminMenu">
+            <?= (current_url() == base_url('manage_users') || current_url() == base_url('manage_apar') || current_url() == base_url('manage_atraction') || current_url() == base_url('manage_package') || current_url() == base_url('manage_product') || current_url() == base_url('manage_event') || current_url() == base_url('manage_culinary_place') || current_url() == base_url('manage_souvenir_place') || current_url() == base_url('manage_worship_place') || current_url() == base_url('manage_facility')) ? 'active' : '' ?>" id="adminMenu">
                 <a href="" class='sidebar-link'>
                     <i class="iconify" data-icon="fa6-solid:gear" data-width="25" data-height="25"></i>
                     <span>Manage menu</span>
                 </a>
                 <ul class="submenu 
-                <?php if (current_url() == base_url('manage_users') || current_url() == base_url('manage_apar') || current_url() == base_url('manage_atraction') || current_url() == base_url('manage_event') || current_url() == base_url('manage_culinary_place') || current_url() == base_url('manage_souvenir_place') || current_url() == base_url('manage_worship_place') || current_url() == base_url('manage_facility')) : echo 'active';
+                <?php if (current_url() == base_url('manage_users') || current_url() == base_url('manage_apar') || current_url() == base_url('manage_atraction') || current_url() == base_url('manage_package') || current_url() == base_url('manage_product') || current_url() == base_url('manage_event') || current_url() == base_url('manage_culinary_place') || current_url() == base_url('manage_souvenir_place') || current_url() == base_url('manage_worship_place') || current_url() == base_url('manage_facility')) : echo 'active';
                 endif; ?>">
+                    <li class="submenu-item sidebar-link  <?php if (current_url() == base_url('manage_users')) echo 'active'; ?>">
+                        <i class="iconify" data-icon="clarity:users-solid" data-width="25" data-height="25"></i>
+                        <a role="button" href="<?= base_url('manage_users') ?>">Admin</a>
+                    </li>
                     <li class="submenu-item sidebar-link  <?php if (current_url() == base_url('manage_apar')) echo 'active'; ?>">
                         <i class="iconify" data-icon="fontisto:holiday-village" data-width="25" data-height="25"></i>
                         <a role="button" href="<?= base_url('manage_apar') ?>">Village</a>
@@ -77,6 +81,14 @@
                     <li class="submenu-item sidebar-link  <?php if (current_url() == base_url('manage_atraction')) echo 'active'; ?>">
                         <i class="iconify" data-icon="ant-design:star-filled" data-width="25" data-height="25"></i>
                         <a role="button" href="<?= base_url('manage_atraction') ?>">Uniqe Atraction</a>
+                    </li>
+                    <li class="submenu-item sidebar-link  <?php if (current_url() == base_url('manage_package')) echo 'active'; ?>">
+                        <i class="iconify" data-icon="material-symbols:package-outline-rounded" data-width="25" data-height="25"></i>
+                        <a role="button" href="<?= base_url('manage_package') ?>">Package</a>
+                    </li>
+                    <li class="submenu-item sidebar-link  <?php if (current_url() == base_url('manage_product')) echo 'active'; ?>">
+                        <i class="iconify" data-icon="emojione-monotone:shopping-cart" data-width="25" data-height="25"></i>
+                        <a role="button" href="<?= base_url('manage_product') ?>">Product</a>
                     </li>
                     <li class="submenu-item sidebar-link  <?php if (current_url() == base_url('manage_souvenir_place')) echo 'active'; ?>">
                         <i class="iconify" data-icon="typcn:gift" data-width="25" data-height="25"></i>

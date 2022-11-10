@@ -57,7 +57,7 @@ class User extends BaseController
         if ($validateInput) {
             // -----------------------------Avatar -----------------------------------------
 
-            if ($request['avatar']) {
+            if ($request['avatar'] != 'default.png' && $request['avatar']) {
                 $folder = $request['avatar'];
                 $filepath = WRITEPATH . 'uploads/' . $folder;
                 $filenames = get_filenames($filepath);
@@ -69,7 +69,7 @@ class User extends BaseController
             } else {
                 $requestData['user_image'] = 'default.png';
             }
-            // dd($requestData);
+
 
             $update =  $this->model->update($id, $requestData);
             if ($update) {

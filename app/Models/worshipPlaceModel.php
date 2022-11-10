@@ -11,7 +11,7 @@ class worshipPlaceModel extends Model
 {
     protected $table = 'worship_place';
     protected $table_gallery = 'worship_place_gallery';
-    protected $columns = 'id,name,category,open,close,building_size,capacity,description';
+    protected $columns = 'id,name,category,building_size,capacity,description';
     protected $coords = "ST_Y(ST_Centroid(worship_place.geom)) AS lat ,ST_X(ST_Centroid(worship_place.geom)) AS lng ";
     protected $geom_area = "ST_AsGeoJSON(worship_place.geom_area) AS geoJSON";
 

@@ -29,6 +29,9 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
+//  check db
+
+$routes->get('base_controller', 'BaseController::dbCheck');
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
@@ -127,6 +130,7 @@ $routes->group('review', function ($routes) {
 $routes->group('package', function ($routes) {
     $routes->get('/', 'packageController::packages');
     $routes->get('detail/(:segment)', 'packageController::package/$1');
+    $routes->get('getActivityGallery/(:segment)', 'packageController::getActivityGallery/$1');
 });
 
 // Menu product
@@ -245,6 +249,29 @@ $routes->group('manage_facility', function ($routes) {
     $routes->get('delete/(:segment)', 'ManageFacilityController::delete/$1', ['filter' => 'role:admin']);
 });
 
+// 9. Route manage package
+$routes->group('manage_package', function ($routes) {
+    $routes->get('/', 'ManagePackageController::index', ['filter' => 'role:admin']);
+    $routes->get('index', 'ManagePackageController::index', ['filter' => 'role:admin']);
+    $routes->get('detail/(:segment)', 'ManagePackageController::detail/$1', ['filter' => 'role:admin']);
+    $routes->get('edit/(:segment)', 'ManagePackageController::edit/$1', ['filter' => 'role:admin']);
+    $routes->post('save_update/(:segment)', 'ManagePackageController::save_update/$1', ['filter' => 'role:admin']);
+    $routes->get('insert', 'ManagePackageController::insert', ['filter' => 'role:admin']);
+    $routes->post('save_insert', 'ManagePackageController::save_insert', ['filter' => 'role:admin']);
+    $routes->get('delete/(:segment)', 'ManagePackageController::delete/$1', ['filter' => 'role:admin']);
+});
+
+// 10. Route manage product
+$routes->group('manage_product', function ($routes) {
+    $routes->get('/', 'ManageProductController::index', ['filter' => 'role:admin']);
+    $routes->get('index', 'ManageProductController::index', ['filter' => 'role:admin']);
+    $routes->get('detail/(:segment)', 'ManageProductController::detail/$1', ['filter' => 'role:admin']);
+    $routes->get('edit/(:segment)', 'ManageProductController::edit/$1', ['filter' => 'role:admin']);
+    $routes->post('save_update/(:segment)', 'ManageProductController::save_update/$1', ['filter' => 'role:admin']);
+    $routes->get('insert', 'ManageProductController::insert', ['filter' => 'role:admin']);
+    $routes->post('save_insert', 'ManageProductController::save_insert', ['filter' => 'role:admin']);
+    $routes->get('delete/(:segment)', 'ManageProductController::delete/$1', ['filter' => 'role:admin']);
+});
 
 // Mobile route
 $routes->group('mobile', function ($routes) {

@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="<?= base_url('manage_culinary_place'); ?>" role="button" class="btn btn-primary justify-item-center" title="List culinary place"><i class="fa fa-arrow-left"></i></a>
-                        <h4 class="card-title text-center">Insert souvenir place</h4>
+                        <h4 class="card-title text-center">Insert culinary place</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">

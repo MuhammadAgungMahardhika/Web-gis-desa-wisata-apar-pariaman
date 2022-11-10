@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template.php') ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">
-    <div class="card p-2">
+    <div class="card p-2 shadow-sm">
         <div class="card-header text-center card-title  mb-2">LIST TOURISM PACKAGE</div>
         <div class="card-body">
             <div class="row d-flex">

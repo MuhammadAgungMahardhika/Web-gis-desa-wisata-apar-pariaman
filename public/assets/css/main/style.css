@@ -1,21 +1,7 @@
  /* Costume css */
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
- /* landing page */
- /* Awal nav=================================================================*/
- #Nav {
-   position: absolute;
-   z-index: 9999;
-   left: 0;
-   right: 0;
-   top: 0;
- }
 
- #Nav a { color: white;}
-
- #Nav a:hover {color: #c0c0c0;}
-
- /* Akhir nav------------------------------------------------------------------*/
  /* Awal header==============================================================*/
  #landing {
    position: relative;
@@ -50,20 +36,9 @@
    color: black;
  }
 
- /* #About::after {
-   z-index: -1;
-   content: '';
-   display: block;
-   width: 100%;
-   height: 3%;
-   background-image: linear-gradient(to bottom, rgb(20, 28, 28), rgba(0, 0, 0, 0));
-   position: absolute;
-   left: 0;
-   top: 0;
- } */
  
 .hover-efek:hover{
-  filter:brightness(110%)
+  filter:brightness(105%)
 }
 
  .efek1 {
@@ -104,36 +79,6 @@
    padding: 2px;
    justify-content: center;
  }
-
- /* 
- .card {
-   opacity: 0;
-   margin: 5px;
-   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-   transform: translate(-30px, 0px);
-
- }
-
-
- .card-text {
-   text-align: justify;
-   font-size: 12px;
- }
-
- .card:hover {
-   box-shadow: 2px 2px 10px rgb(66, 66, 138);
-   transition: 0.5s;
-   transform: translate(0px, -5px);
- }
-
- .card a {
-   text-decoration: none;
-   color: black;
-
- } */
-
-
-
 
  .efek2 {
    opacity: 0;

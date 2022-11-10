@@ -31,6 +31,7 @@ class atractionModel extends Model
     protected $geom_area = "ST_AsGeoJSON(atraction.geom_area) AS geoJSON";
 
 
+
     public function get_new_id()
     {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');

@@ -29,7 +29,7 @@ class packageModel extends Model
     {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
         $count = (int)substr($lastId['id'], 2);
-        $id = sprintf('P%03d', $count + 1);
+        $id = sprintf('P%04d', $count + 1);
         return $id;
     }
     public function getPackages()
@@ -47,42 +47,21 @@ class packageModel extends Model
             ->get();
         return $query;
     }
-    public function getActivities($id)
-    {
-        $query = $this->db->table($this->table_activities)
-            ->select("{$this->columns_activities}")
-            ->join('activities', 'activities.id = detail_package.activities_id')
-            ->join('package', 'package.id = detail_package.package_id')
-            ->where('detail_package.package_id', $id)
-            ->get();
-        return $query;
-    }
 
 
     // --------------------------------------Admin-------------------------------------------
-    public function addPackage($id, $data, $lng, $lat, $geojson = null)
+    public function addPackage($data)
     {
         $query = $this->db->table($this->table)->insert($data);
-        if ($query) {
-            $spasial = $this->db->table($this->table)
-                ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
-                ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
-                ->where('package.id', $id)
-                ->update();
-        }
-        return $query && $spasial;
+        return $query;
     }
-    public function updatePackage($id, $data, $lng, $lat, $geojson = null)
+    public function updatePackage($id, $data)
     {
         $query = $this->db->table($this->table)
             ->where('package.id', $id)
             ->update($data);
-        $update = $this->db->table($this->table)
-            ->set('geom_area', "ST_GeomFromGeoJSON('{$geojson}')", false)
-            ->set('geom', "ST_PointFromText('POINT($lng $lat)')", false)
-            ->where('package.id', $id)
-            ->update();
-        return $query && $update;
+
+        return $query;
     }
 
     public function deletePackage($id)

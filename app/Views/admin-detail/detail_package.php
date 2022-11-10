@@ -3,59 +3,49 @@
 <section class="section">
     <div class="row">
         <!-- Object Detail Information -->
-        <div class="col-md-4 col-12">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    <h5 class="m-0 font-weight-bold  text-center"> Detail Package</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>: <?= $objectData->name; ?></td>
-                                </tr>
-
-                                <tr>
-                                    <td>Price</td>
-                                    <td>: <?= $objectData->price; ?> IDR</td>
-                                </tr>
-                                <tr>
-                                    <td>Minimal</td>
-                                    <td>: <?= $objectData->min_capacity; ?> people</td>
-                                </tr>
-                                <tr>
-                                    <td>Contact</td>
-                                    <td>: <?= $objectData->contact_person; ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">Description</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: justify;" colspan="2"><?= $objectData->description; ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <?php if ($facilityPackage) : ?>
-                            <h5 class=" ps-2">Facility</h5>
-                            <?php $no = 1; ?>
-                            <?php foreach ($facilityPackage as $facility) : ?>
-                                <table class="">
+        <div class="col-md-6 col-12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="text-end">
+                            <a href="<?= base_url('manage_package/edit/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="edit"><i class="fa fa-edit"></i></a>
+                        </div>
+                        <h5 class="m-0 font-weight-bold  text-center"> Detail Package</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-borderless">
+                                <tbody>
                                     <tr>
-                                        <td class="ps-2">
-                                            <?= $no++; ?>. <?= $facility->name; ?>
-                                        </td>
+                                        <td>Name</td>
+                                        <td><?= $objectData->name; ?></td>
                                     </tr>
-                                </table>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                                    <tr>
+                                        <td>Price</td>
+                                        <td><?= $objectData->price; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Capacity</td>
+                                        <td><?= $objectData->min_capacity; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact</td>
+                                        <td><?= $objectData->contact_person; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: justify;" colspan="2"><?= $objectData->description; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="col-md-8 col-12">
+        <div class="col-md-6 col-12">
             <div class="card shadow-sm">
                 <div class="p-4">
                     <img class="d-block w-100 rounded" src="<?= base_url('media/photos/package/'); ?>/<?= $objectData->url; ?>" alt="">

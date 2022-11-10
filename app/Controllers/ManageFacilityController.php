@@ -160,7 +160,6 @@ class ManageFacilityController extends BaseController
         if ($validateRules) {
             $insert =  $this->model->addFacility($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
             if ($insert) {
-
                 // ----------------Gallery-----------------------------------------
                 // check if gallery have empty string then make it become empty array
                 foreach ($request['gallery'] as $key => $value) {
@@ -201,12 +200,12 @@ class ManageFacilityController extends BaseController
 
     public function delete($id)
     {
-        try {
-            $this->model->deleteFacility($id);
-        } catch (\Exception $e) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound($e);
-        } finally {
+        $delete =  $this->model->deleteFacility($id);
+        if ($delete) {
             session()->setFlashdata('success', 'Success! Facility Deleted.');
+            return redirect()->to(site_url('manage_facility'));
+        } else {
+            session()->setFlashdata('failed', 'Failed to delete facility.');
             return redirect()->to(site_url('manage_facility'));
         }
     }
