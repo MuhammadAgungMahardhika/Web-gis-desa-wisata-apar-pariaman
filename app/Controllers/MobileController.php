@@ -232,46 +232,50 @@ class MobileController extends BaseController
     {
         if ($id) {
             $objectData = $this->modelPackage->getPackage($id)->getResult();
+            $facilityPackage = $this->modelFp->getFacilityPackage($id)->getResult();
+            $activitiesData = $this->modelAc->getPackageActivity($id)->getResult();
+            $response = [
+                'title' => $this->title,
+                'currentUrl' => 'mobile',
+                'objectData' => $objectData,
+                'facilityPackage' => $facilityPackage,
+                'activitiesData' => $activitiesData,
+                'status' => 200,
+                'message' => [
+                    "Success get list of package"
+                ]
+            ];
         } else {
             $objectData = $this->modelPackage->getPackages();
+            $response = [
+                'title' => $this->title,
+                'currentUrl' => 'mobile',
+                'objectData' => $objectData,
+                'status' => 200,
+                'message' => [
+                    "Success get list of package"
+                ]
+            ];
         }
+        return view('mobile/package', $response);
+    }
+    public function detail_package($id = null)
+    {
+        $objectData = $this->modelPackage->getPackage($id)->getRow();
+        $facilityPackage = $this->modelFp->getFacilityPackage($id)->getResult();
+        $activitiesData = $this->modelAc->getPackageActivity($id)->getResult();
         $response = [
-            'data' => $objectData,
+            'title' => $this->title,
+            'currentUrl' => 'mobile',
+            'objectData' => $objectData,
+            'facilityPackage' => $facilityPackage,
+            'activitiesData' => $activitiesData,
             'status' => 200,
             'message' => [
                 "Success get list of package"
             ]
         ];
-        return $this->respond($response);
-    }
-
-    public function detail_package($id = null)
-    {
-        $objectData = $this->modelPackage->getPackage($id)->getRow();
-        $facilityPackage = $this->modelFp->getFacilityPackage($id)->getResult();
-        $activitiesData = $this->modelAc->getActivities($id)->getResult();
-        $activitiesGallery = array();
-        foreach ($activitiesData as $activities) {
-            array_push($activitiesGallery, $this->modelAc->getGallery($activities->id)->getResult());
-        }
-        $facilityPackage = $this->modelFp->getFacilityPackage($id)->getResult();
-        // $galleryData = $this->modelPackage->getGallery($id)->getResult();
-        // $aparData =  $this->modelApar->getApar();
-        if (is_object($objectData)) {
-            $data = [
-                'title' => $this->title,
-                'config' => config('Auth'),
-                'objectData' => $objectData,
-                'facilityPackage' => $facilityPackage,
-                'activitiesData' => $activitiesData,
-                // 'galleryData'  => $galleryData,
-                'currentUrl' => 'mobile',
-                // 'aparData' => $aparData
-            ];
-            return view('user-menu/detail_package', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
+        return view('user-menu/detail_package', $response);
     }
 
 

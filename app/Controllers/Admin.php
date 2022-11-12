@@ -13,7 +13,7 @@ class Admin extends BaseController
         $this->builder = $this->db->table('users');
     }
 
-    // 3. Manage atraction
+    // 1. Manage atraction
     public function manage_atraction()
     {
         $data = [
@@ -23,7 +23,7 @@ class Admin extends BaseController
 
         return view('admin/manage_atraction', $data);
     }
-    // 4. Manage apar information
+    // 2. Manage apar information
     public function manage_apar()
     {
         $data = [
@@ -34,7 +34,7 @@ class Admin extends BaseController
         return view('admin/manage_apar', $data);
     }
 
-    // 5. Manage event
+    // 3. Manage event
     public function manage_event()
     {
         $data = [
@@ -44,7 +44,7 @@ class Admin extends BaseController
 
         return view('admin/manage_event', $data);
     }
-    // 6. Manage souvenir place
+    // 4. Manage souvenir place
     public function manage_souvenir_place()
     {
         $data = [
@@ -54,7 +54,7 @@ class Admin extends BaseController
 
         return view('admin/manage_souvenir_place', $data);
     }
-    // 7. Manage culinary place
+    // 5. Manage culinary place
     public function manage_culinary_place()
     {
         $data = [
@@ -64,7 +64,7 @@ class Admin extends BaseController
 
         return view('admin/manage_culinary_place', $data);
     }
-    // 8. Manage worship place
+    // 6. Manage worship place
     public function  manage_worship_place()
     {
         $data = [
@@ -74,7 +74,7 @@ class Admin extends BaseController
 
         return view('admin/manage_worship_place', $data);
     }
-    // 9. Manage facility
+    // 7. Manage facility
     public function manage_facility()
     {
         $data = [
