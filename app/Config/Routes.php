@@ -294,9 +294,8 @@ $routes->group('mobile', function ($routes) {
     $routes->get('package/(:segment)', 'MobileController::package/$1');
     $routes->get('detail_package/(:segment)', 'MobileController::detail_package/$1');
 
-    $routes->get('product', 'MobileController::product');
-    $routes->get('product/(:segment)', 'MobileController::product/$1');
-    $routes->get('detail_product/(:segment)', 'MobileController::detail_product/$1');
+    $routes->get('products', 'MobileController::products');
+
 
     $routes->get('event', 'MobileController::event');
     $routes->get('event/(:segment)', 'MobileController::event/$1');

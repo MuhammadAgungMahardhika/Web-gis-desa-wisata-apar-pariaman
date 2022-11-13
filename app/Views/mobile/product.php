@@ -2,28 +2,20 @@
 <?= $this->section('content') ?>
 <div class="container-fluid">
     <div class="card p-2 shadow-sm">
+
         <div class="card-body">
             <div class="row d-flex">
                 <?php foreach ($objectData as $data) : ?>
-                    <div class="col-md-12">
-                        <div class="card mb-3 shadow-sm">
-                            <div class="row g-0">
-                                <div class="col-md-4 p-2">
-                                    <a class="hover-efek" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $data->id ?>">
-                                        <img src="<?= base_url('media/photos/package') . '/' . $data->url ?>" class="img-fluid rounded-start" alt="...">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card  shadow efek" id="cp">
+                            <div class="card-content">
+                                <a class="hover-efek" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $data->id ?>">
+                                    <img class=" card-img-top img-fluid" src="<?= base_url('media/photos/product/'); ?>/<?= $data->url; ?>" alt="Card image cap">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $data->name; ?></h5>
-                                        <p class="card-text"><?= $data->description; ?></p>
-                                        <p class="card-text"><small class="text-muted"><?= $data->price; ?> IDR</small></p>
-
+                                        <h4 class="card-title"><?= $data->name; ?></h4>
+                                        <small class="text-muted"><?= $data->price; ?> IDR</small>
                                     </div>
-                                    <div class="card-footer text-end" style="border: none;">
-                                        <a role="button" class="btn btn-success" href="<?= base_url('mobile/detail_package') . '/' . $data->id; ?>">Selengkapnya</a>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -37,7 +29,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <img class="img-fluid w-100" src="<?= base_url('media/photos/package/'); ?>/<?= $data->url; ?>" alt="Card image cap">
+                                    <img class="img-fluid w-100" src="<?= base_url('media/photos/product/'); ?>/<?= $data->url; ?>" alt="Card image cap">
                                     <p class="card-text my-4" style="text-align: justify;">
                                         <?= $data->description; ?>
                                     </p>
@@ -51,6 +43,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
+
     </div>
 </div>
 <?= $this->endSection() ?>

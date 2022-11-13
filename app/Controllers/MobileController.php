@@ -278,6 +278,24 @@ class MobileController extends BaseController
         return view('user-menu/detail_package', $response);
     }
 
+    // Product
+    public function products($id = null)
+    {
+
+        $objectData = $this->modelProduct->getProducts()->getResult();
+        $response = [
+            'title' => $this->title,
+            'currentUrl' => 'mobile',
+            'objectData' => $objectData,
+            'status' => 200,
+            'message' => [
+                "Success get list of product"
+            ]
+        ];
+
+        return view('mobile/product', $response);
+    }
+
 
     public function event($id = null)
     {
