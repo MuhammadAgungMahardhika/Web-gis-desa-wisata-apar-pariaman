@@ -19,8 +19,9 @@ The user guide corresponding to this version of the framework can be found
 
 ## Installation & updates
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+Using terminal, run git clone https://github.com/MuhammadAgungMahardhika/desa-wisata-apar-pariaman.git, go inside the directory with cd desa-wisata-apar-pariaman, then composer install to set up Codeigniter 4 framework.
+
+When updating, check the release notes to see if there are any changes you might need to apply to your app folder. The affected files can be copied or merged from vendor/codeigniter4/framework/app.
 
 When updating, check the release notes to see if there are any changes you might need to apply
 to your `app` folder. The affected files can be copied or merged from
