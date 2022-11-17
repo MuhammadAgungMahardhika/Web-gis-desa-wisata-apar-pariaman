@@ -259,6 +259,9 @@ $routes->group('manage_package', function ($routes) {
     $routes->get('insert', 'ManagePackageController::insert', ['filter' => 'role:admin']);
     $routes->post('save_insert', 'ManagePackageController::save_insert', ['filter' => 'role:admin']);
     $routes->get('delete/(:segment)', 'ManagePackageController::delete/$1', ['filter' => 'role:admin']);
+
+    // activity
+    $routes->post('save_activity/(:segment)', 'ManagePackageController::save_activity/$1', ['filter' => 'role:admin']);
 });
 
 // 10. Route manage product

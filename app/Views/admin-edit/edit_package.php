@@ -12,14 +12,14 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <section class="section">
-    <form class="form form-vertical" action="<?= base_url('manage_atraction/save_update/' . $objectData->id); ?>" method="post">
+    <form class="form form-vertical" action="<?= base_url('manage_package/save_update/' . $objectData->id); ?>" method="post">
         <div class="row">
             <!-- Object Detail Information -->
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
                         <a href="<?= base_url('manage_package/detail/' . $objectData->id); ?>" role="button" class="btn btn-primary justify-item-center" title="back to detail"><i class="fa fa-arrow-left"></i></a>
-                        <h4 class="card-title text-center">Edit Atraction</h4>
+                        <h4 class="card-title text-center">Edit Package</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -34,19 +34,19 @@
                                 <div class="form-group">
                                     <label for="min_capacity" class="col col-form-label">Min Capacity</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="min_capacity" value="<?= $objectData->min_capacity; ?>">
+                                        <input type="number" class="form-control" name="min_capacity" value="<?= $objectData->min_capacity; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="price" class=" col col-form-label">Price</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="price" value="<?= $objectData->price; ?>">
+                                        <input type="number" class="form-control" name="price" value="<?= $objectData->price; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="contact_person" class=" col col-form-label">Contact person</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>">
+                                        <input type="number" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>">
                                     </div>
                                 </div>
                                 <!-- Description -->
@@ -69,17 +69,77 @@
                                 <button type="submit" class="btn btn-success btn-sm">Save</button>
                                 <button type="reset" class="btn btn-danger btn-sm">cancel</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-12">
-
-
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-12 mb-3">
+                                <a class="btn btn-outline-success btn-sm my-2" title="add new activity" data-bs-toggle="modal" data-bs-target="#addModal">
+                                    <i class="fa fa-plus"></i>Add new activity
+                                </a>
+                                <h5 class="card-title my-2 text-secondary">List activities</h5>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <?php foreach ($activitiesData as $activity) : ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" <?php foreach ($activitiesPackage as $ac) : ?> <?php if ($activity->id == $ac->id) : ?> checked <?php endif; ?> <?php endforeach; ?> type="checkbox" value="<?= $activity->id; ?>" name="activities[]" multiple>
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <?= $activity->name; ?>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
+    <!-- Add activity Modal-->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form class="form form-vertical" action="<?= base_url('manage_package/save_activity/' . $objectData->id); ?>" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adding new activity</h5>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form data nonspasial -->
+                        <div class="form-group">
+                            <label for="name" class="col col-form-label">Activity name</label>
+                            <div class="col">
+                                <input type="text" class="form-control" name="name" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col col-form-label">Description</label>
+                            <div class="col">
+                                <textarea class="form-control" id="description" name="description" autocomplete="off"></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control" name="url" value="edit" autocomplete="off" required>
+                        <div class="form-group">
+                            <label for="galleryActivity" class="form-label">Gallery</label>
+                            <input class="form-control" accept="image/*" type="file" name="gallery[]" id="galleryActivity" multiple>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Add</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
@@ -110,12 +170,28 @@
         credits: false,
     })
 
-
-    pond.addFiles(
-        "<?= base_url('media/photos/package/'); ?>/<?= $objectData->url; ?>"
-    );
+    <?php if ($objectData->url) : ?>
+        pond.addFiles(
+            "<?= base_url('media/photos/package/'); ?>/<?= $objectData->url; ?>"
+        );
+    <?php endif; ?>
 
     pond.setOptions({
+        server: "<?= base_url('upload/photo') ?>"
+    })
+
+    // add new activity gallery
+    // Get a reference to the file input element
+    const photoActivity = document.querySelector('input[id="galleryActivity"]');
+
+    // Create a FilePond instance
+    const pondActivity = FilePond.create(photoActivity, {
+        imageResizeTargetHeight: 720,
+        imageResizeUpscale: false,
+        credits: false,
+    })
+
+    pondActivity.setOptions({
         server: "<?= base_url('upload/photo') ?>"
     })
 </script>

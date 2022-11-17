@@ -45,61 +45,71 @@ class ManagePackageController extends BaseController
     public function edit($id = null)
     {
         $objectData = $this->model->getPackage($id)->getRow();
-        $activitiesData = $this->modelActivities->getActivity($id)->getResult();
+        $activitiesData  = $this->modelActivities->getActivities()->getResult();
+        $activitiesPackage = $this->modelActivities->getPackageActivity($id)->getResult();
         $data = [
             'title' => $this->title,
             'config' => config('Auth'),
             'objectData' => $objectData,
-            'activitiesData' => $activitiesData
+            'activitiesData' => $activitiesData,
+            'activitiesPackage' => $activitiesPackage
         ];
         return view('admin-edit/edit_package', $data);
     }
 
     public function save_update($id = null)
     {
-        // ---------------------Data request-----------------------------
+        // ---------------------Data request------------------------------------
         $request = $this->request->getPost();
-        $updateRequest = [
-            'name' => $this->request->getPost('name'),
-            'min_capacity' => $this->request->getPost('min_capacity'),
-            'price' => $this->request->getPost('price'),
-            'contact_person' => $this->request->getPost('contact_person'),
-            'description' => $this->request->getPost('description')
-        ];
-        // ---------------------------------Update---------------------
-        $update =  $this->model->updatePackage($id, $updateRequest);
-        if ($update) {
-            // -----------------------------Gallery-----------------------------------------
-            // check if gallery have empty string then make it become empty array
-            foreach ($request['gallery'] as $key => $value) {
-                if (!strlen($value)) {
-                    unset($request['gallery'][$key]);
-                }
-            }
-            if ($request['gallery']) {
-                $folders = $request['gallery'];
-                $gallery = array();
-                foreach ($folders as $folder) {
-                    $filepath = WRITEPATH . 'uploads/' . $folder;
-                    $filenames = get_filenames($filepath);
-                    $fileImg = new File($filepath . '/' . $filenames[0]);
-                    $fileImg->move(FCPATH . 'media/photos');
-                    delete_files($filepath);
-                    rmdir($filepath);
-                    $gallery[] = $fileImg->getFilename();
-                }
-                $updateGallery =  $this->model->updateGallery($id, $gallery);
-            } else {
-                $updateGallery =   $this->model->deleteGallery($id);
+
+        foreach ($request['gallery'] as $key => $value) {
+            if (!strlen($value)) {
+                unset($request['gallery'][$key]);
             }
         }
-
-        if ($update && $updateGallery) {
-            session()->setFlashdata('success', 'Success! Atraction updated.');
-            return redirect()->to(site_url('manage_atraction/edit/' . $id));
+        if ($request['gallery']) {
+            $folders = $request['gallery'];
+            foreach ($folders as $folder) {
+                $filepath = WRITEPATH . 'uploads/' . $folder;
+                $filenames = get_filenames($filepath);
+                $fileImg = new File($filepath . '/' . $filenames[0]);
+                $fileImg->move(FCPATH . 'media/photos/package');
+                delete_files($filepath);
+                rmdir($filepath);
+                $gallery = $fileImg->getFilename();
+            }
         } else {
-            session()->setFlashdata('failed', 'Failed! Failed to update atraction.');
-            return redirect()->to(site_url('manage_atraction/edit/' . $id));
+            $gallery = '';
+        }
+        $insertRequest = [
+            'id' => $id,
+            'name' => $this->request->getPost('name'),
+            'price' => $this->request->getPost('price'),
+            'min_capacity' => $this->request->getPost('min_capacity'),
+            'contact_person' => $this->request->getPost('contact_person'),
+            'brosur_url' => $gallery,
+            'description' => $this->request->getPost('description')
+        ];
+
+        $insert =  $this->model->updatePackage($id, $insertRequest);
+        if ($insert) {
+            $deletePackage = $this->modelActivities->deleteDetailPackage($id);
+            // insert activities
+            if ($deletePackage) {
+                $activities_id = $this->request->getPost('activities');
+                if ($activities_id) {
+                    foreach ($activities_id as $activity_id) {
+                        $this->modelActivities->updateActivities($id, $activity_id);
+                    }
+                }
+            }
+        }
+        if ($insert) {
+            session()->setFlashdata('success', 'Success! Data updated.');
+            return redirect()->to(site_url('manage_package/edit/') . $id);
+        } else {
+            session()->setFlashdata('failed', 'Failed! Failed to update data.');
+            return redirect()->to(site_url('manage_package/edit/') . $id);
         }
     }
     public function insert()
@@ -151,8 +161,10 @@ class ManagePackageController extends BaseController
         if ($insert) {
             // insert activities
             $activities_id = $this->request->getPost('activities');
-            foreach ($activities_id as $activity_id) {
-                $this->modelActivities->addPackageActivities(['package_id' => $id, 'activities_id' => $activity_id]);
+            if ($activities_id) {
+                foreach ($activities_id as $activity_id) {
+                    $this->modelActivities->addPackageActivities(['package_id' => $id, 'activities_id' => $activity_id]);
+                }
             }
         }
         if ($insert) {
@@ -160,6 +172,61 @@ class ManagePackageController extends BaseController
             return redirect()->to(site_url('manage_package'));
         } else {
             session()->setFlashdata('failed', 'Failed! Failed to add data.');
+            return redirect()->to(site_url('manage_package/insert'));
+        }
+    }
+    public function save_activity($id_package = null)
+    {
+        // ---------------------Data request------------------------------------
+        $request = $this->request->getPost();
+        $id = $this->modelActivities->get_new_id();
+        $insertRequest = [
+            'id' => $id,
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description')
+        ];
+
+        $insert =  $this->modelActivities->addActivities($insertRequest);
+        // ----------------Gallery-----------------------------------------
+        if ($insert) {
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
+                }
+            }
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos/activities');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $insertGallery =  $this->modelActivities->addGallery($id, $gallery);
+            } else {
+                $insertGallery = true;
+            }
+        }
+        $url = $this->request->getPost('url');
+        if ($url == 'edit') {
+            if ($insert && $insertGallery) {
+                session()->setFlashdata('success', 'Success! New activity added.');
+                return redirect()->to(site_url('manage_package/edit/') . $id_package);
+            } else {
+                session()->setFlashdata('failed', 'Failed! Failed to add new activity.');
+                return redirect()->to(site_url('manage_package/edit/') . $id_package);
+            }
+        }
+        if ($insert && $insertGallery) {
+            session()->setFlashdata('success', 'Success! New activity added.');
+            return redirect()->to(site_url('manage_package/insert'));
+        } else {
+            session()->setFlashdata('failed', 'Failed! Failed to add new activity.');
             return redirect()->to(site_url('manage_package/insert'));
         }
     }

@@ -34,19 +34,19 @@
                                 <div class="form-group">
                                     <label for="price" class=" col col-form-label">Price</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="price" autocomplete="off">
+                                        <input type="number" class="form-control" name="price" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="capacity" class="col col-form-label">Capacity</label>
+                                    <label for="min_capacity" class="col col-form-label">Capacity</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="capacity" autocomplete="off">
+                                        <input type="number" class="form-control" name="min_capacity" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="contact_person" class=" col col-form-label">Contact person</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="contact_person" autocomplete="off">
+                                        <input type="number" class="form-control" name="contact_person" autocomplete="off">
                                     </div>
                                 </div>
 
@@ -76,20 +76,23 @@
             </div>
             <div class="col-md-6 col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-12 mb-3">
-                                <button class="btn btn-success btn-sm" title="add new activity"> <i class="fa fa-plus"></i></button>
-                                <h5 class="card-title">Choose activities</h5>
+
+                                <a class="btn btn-outline-success btn-sm my-2" title="add new activity" data-bs-toggle="modal" data-bs-target="#addModal">
+                                    <i class="fa fa-plus"> </i>Add new activity
+                                </a>
+                                <h5 class="card-title my-2 text-secondary">List activities</h5>
                                 <table class="table table-borderless">
                                     <tbody>
-                                        <?php foreach ($activitiesData as $actitivity) : ?>
+                                        <?php foreach ($activitiesData as $activity) : ?>
                                             <tr>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="<?= $actitivity->id; ?>" name="activities[]" multiple>
+                                                        <input class="form-check-input" type="checkbox" value="<?= $activity->id; ?>" name="activities[]" multiple>
                                                         <label class="form-check-label" for="flexCheckDefault">
-                                                            <?= $actitivity->name; ?>
+                                                            <?= $activity->name; ?>
                                                         </label>
                                                     </div>
                                                 </td>
@@ -100,12 +103,48 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                    </div>
                 </div>
             </div>
         </div>
     </form>
+
+    <!-- Add activity Modal-->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form class="form form-vertical" action="<?= base_url('manage_package/save_activity'); ?>" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adding new activity</h5>
+
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form data nonspasial -->
+
+                        <div class="form-group">
+                            <label for="name" class="col col-form-label">Activity name</label>
+                            <div class="col">
+                                <input type="text" class="form-control" name="name" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col col-form-label">Description</label>
+                            <div class="col">
+                                <textarea class="form-control" id="description" name="description" autocomplete="off"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="galleryActivity" class="form-label">Gallery</label>
+                            <input class="form-control" accept="image/*" type="file" name="gallery[]" id="galleryActivity" multiple>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Add</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
@@ -136,6 +175,21 @@
     })
 
     pond.setOptions({
+        server: "<?= base_url('upload/photo') ?>"
+    })
+
+    // add new activity gallery
+    // Get a reference to the file input element
+    const photoActivity = document.querySelector('input[id="galleryActivity"]');
+
+    // Create a FilePond instance
+    const pondActivity = FilePond.create(photoActivity, {
+        imageResizeTargetHeight: 720,
+        imageResizeUpscale: false,
+        credits: false,
+    })
+
+    pondActivity.setOptions({
         server: "<?= base_url('upload/photo') ?>"
     })
 </script>

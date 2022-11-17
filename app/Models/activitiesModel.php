@@ -20,7 +20,7 @@ class activitiesModel extends Model
     {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
         $count = (int)substr($lastId['id'], 2);
-        $id = sprintf('P%03d', $count + 1);
+        $id = sprintf('AC%04d', $count + 1);
         return $id;
     }
 
@@ -59,24 +59,22 @@ class activitiesModel extends Model
         $query = $this->db->table($this->table_detail)->insert($data);
         return $query;
     }
-    public function addActivities($id, $data)
+    public function addActivities($data)
     {
         $query = $this->db->table($this->table)->insert($data);
 
         return $query;
     }
-    public function updateActivities($id, $data)
+    public function updateActivities($id, $activity_id)
     {
-        $query = $this->db->table($this->table)
-            ->where('package.id', $id)
-            ->update($data);
-
+        $query = $this->db->table($this->table_detail)
+            ->insert(['package_id' => $id, 'activities_id' => $activity_id]);
         return $query;
     }
 
-    public function deletePackage($id)
+    public function deleteDetailPackage($id)
     {
-        $query = $this->db->table($this->table)->delete(array('id' => $id));
+        $query = $this->db->table($this->table_detail)->delete(array('package_id' => $id));
         return $query;
     }
     // ----------------------------------------------Gallery APi ----------------------------------
@@ -99,7 +97,7 @@ class activitiesModel extends Model
             $new_id = $this->get_new_id_api();
             $content = [
                 'id' => $new_id,
-                'package_id' => $id,
+                'activities_id' => $id,
                 'url' => $gallery,
                 'created_at' => Time::now(),
                 'updated_at' => Time::now(),
