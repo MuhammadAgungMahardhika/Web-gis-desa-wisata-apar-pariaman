@@ -163,7 +163,31 @@
         credits: false,
     })
     pond.setOptions({
-        server: "<?= base_url('upload/photo') ?>"
+        server: {
+            timeout: 3600000,
+            process: {
+                url: '<?= base_url("upload/photo") ?>',
+                onload: (response) => {
+                    console.log("processed:", response);
+                    return response
+                },
+                onerror: (response) => {
+                    console.log("error:", response);
+                    return response
+                },
+            },
+            revert: {
+                url: '<?= base_url("upload/photo") ?>',
+                onload: (response) => {
+                    console.log("reverted:", response);
+                    return response
+                },
+                onerror: (response) => {
+                    console.log("error:", response);
+                    return response
+                },
+            },
+        }
     })
 </script>
 <script src="<?= base_url('/assets/js/map.js') ?>"></script>
