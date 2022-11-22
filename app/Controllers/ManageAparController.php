@@ -46,13 +46,6 @@ class ManageAparController extends BaseController
 
     public function save_update($id = null)
     {
-        //validation data
-        $validateRules = $this->validate([
-            'name' => 'required|max_length[100]',
-            'type_of_tourism' => 'required|max_length[100]',
-            'address' => 'required|max_length[100]',
-            'contact_person' => 'max_length[14]',
-        ]);
 
         // ---------------------Data request
         $request = $this->request->getPost();
@@ -115,18 +108,13 @@ class ManageAparController extends BaseController
             $updateRequest['video_url'] = null;
         }
         // ----------------------------------UPDATE DATA--------------------------
-        if ($validateRules) {
-            $update =  $this->model->updateApar($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
-            if ($update) {
-                session()->setFlashdata('success', 'Success! Village updated.');
-                return redirect()->to(site_url('manage_apar/edit/' . $id));
-            } else {
-                session()->setFlashdata('failed', 'Failed! Failed to update apar.');
-                return redirect()->to(site_url('manage_apar/edit/' . $id));
-            }
+
+        $update =  $this->model->updateApar($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
+        if ($update) {
+            session()->setFlashdata('success', 'Success! Village updated.');
+            return redirect()->to(site_url('manage_apar/edit/' . $id));
         } else {
-            $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed to update village.');
+            session()->setFlashdata('failed', 'Failed! Failed to update apar.');
             return redirect()->to(site_url('manage_apar/edit/' . $id));
         }
     }

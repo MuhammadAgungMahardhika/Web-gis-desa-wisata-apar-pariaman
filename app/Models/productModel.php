@@ -23,8 +23,8 @@ class productModel extends Model
     public function get_new_id()
     {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
-        $count = (int)substr($lastId['id'], 2);
-        $id = sprintf('PD%04d', $count + 1);
+        $count = intval($lastId['id']);
+        $id =  $count + 1;
         return $id;
     }
 
@@ -55,7 +55,7 @@ class productModel extends Model
         $query = $this->db->table($this->table)
             ->select("{$this->columns}")
             ->join('product_category', 'product_category.id = product.product_category_id')
-            ->where('product_category.id', 'CT0001')
+            ->where('product_category.id', '1')
             ->get();
         return $query;
     }
@@ -65,7 +65,7 @@ class productModel extends Model
         $query = $this->db->table($this->table)
             ->select("{$this->columns}")
             ->join('product_category', 'product_category.id = product.product_category_id')
-            ->where('product_category.id', 'CT0002')
+            ->where('product_category.id', '2')
             ->get();
         return $query;
     }

@@ -135,11 +135,6 @@ class ManageWorshipPlaceController extends BaseController
     }
     public function save_insert()
     {
-        //validation data
-        $validateRules = $this->validate([
-            'name' => 'required|max_length[50]',
-            'description' => 'max_length[255]'
-        ]);
         // ---------------------Data request------------------------------
         $request = $this->request->getPost();
         $id = $this->model->get_new_id();
@@ -147,8 +142,6 @@ class ManageWorshipPlaceController extends BaseController
             'id' => $id,
             'name' => $this->request->getPost('name'),
             'category' => $this->request->getPost('category'),
-            'open' => $this->request->getPost('open'),
-            'close' => $this->request->getPost('close'),
             'building_size' => $this->request->getPost('building_size'),
             'capacity' => $this->request->getPost('capacity'),
             'description' => $this->request->getPost('description')
@@ -160,44 +153,39 @@ class ManageWorshipPlaceController extends BaseController
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 
-        if ($validateRules) {
-            $insert =  $this->model->addWorshipPlace($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
-            if ($insert) {
 
-                // ----------------Gallery-----------------------------------------
-                // check if gallery have empty string then make it become empty array
-                foreach ($request['gallery'] as $key => $value) {
-                    if (!strlen($value)) {
-                        unset($request['gallery'][$key]);
-                    }
-                }
-                if ($request['gallery']) {
-                    $folders = $request['gallery'];
-                    $gallery = array();
-                    foreach ($folders as $folder) {
-                        $filepath = WRITEPATH . 'uploads/' . $folder;
-                        $filenames = get_filenames($filepath);
-                        $fileImg = new File($filepath . '/' . $filenames[0]);
-                        $fileImg->move(FCPATH . 'media/photos');
-                        delete_files($filepath);
-                        rmdir($filepath);
-                        $gallery[] = $fileImg->getFilename();
-                    }
-                    $insertGallery =  $this->model->addGallery($id, $gallery);
-                } else {
-                    $insertGallery = true;
+        $insert =  $this->model->addWorshipPlace($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
+        if ($insert) {
+
+            // ----------------Gallery-----------------------------------------
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
                 }
             }
-            if ($insert && $insertGallery) {
-                session()->setFlashdata('success', 'Success! Data Added.');
-                return redirect()->to(site_url('manage_worship_place'));
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $insertGallery =  $this->model->addGallery($id, $gallery);
             } else {
-                session()->setFlashdata('failed', 'Failed! Failed to update Worship Place');
-                return redirect()->to(site_url('manage_worship_place/insert'));
+                $insertGallery = true;
             }
+        }
+        if ($insert && $insertGallery) {
+            session()->setFlashdata('success', 'Success! Data Added.');
+            return redirect()->to(site_url('manage_worship_place'));
         } else {
-            $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed' . json_encode($listErrors));
+            session()->setFlashdata('failed', 'Failed! Failed to update Worship Place');
             return redirect()->to(site_url('manage_worship_place/insert'));
         }
     }

@@ -49,7 +49,22 @@
                                         <input type="number" class="form-control" name="contact_person" autocomplete="off">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="contact_person" class=" col col-form-label">Facility</label>
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <input type="text" class="form-control" name="facility" autocomplete="off" id="facility">
+                                        </div>
+                                        <div class="col-2">
+                                            <a title="add facility" class="btn btn-success btn-sm form-control" onclick="addNewFacility(`${$('#facility').val()}`)"> Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <ol id="listFacility">
 
+                                    </ol>
+                                </div>
                                 <!-- Description -->
                                 <div class="row my-2">
                                     <div class="col">
@@ -111,7 +126,7 @@
     <!-- Add activity Modal-->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form class="form form-vertical" action="<?= base_url('manage_package/save_activity'); ?>" method="post">
+            <form class="form form-vertical" action="<?= base_url('manage_package/save_activity/') . '/' . 'null'; ?>" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Adding new activity</h5>
@@ -240,5 +255,10 @@
             },
         }
     })
+
+
+    function addNewFacility(val) {
+        $('#listFacility').append(`<li>${val}</li>`)
+    }
 </script>
 <?= $this->endSection() ?>

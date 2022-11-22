@@ -62,11 +62,6 @@ class ManageCulinaryPlaceController extends BaseController
 
     public function save_update($id = null)
     {
-        //validation data
-        $validateRules = $this->validate([
-            'name' => 'required|max_length[100]',
-            'description' => 'max_length[255]',
-        ]);
         // ---------------------Data request------------------------------
         $request = $this->request->getPost();
         $updateRequest = [
@@ -84,45 +79,38 @@ class ManageCulinaryPlaceController extends BaseController
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 
-        if ($validateRules) {
-
-            // ----------------------------------UPDATE DATA--------------------------
-            $update = $this->model->updateCp($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
-            if ($update) {
-                // --------------------------------Gallery------------------------------
-                // check if gallery have empty string then make it become empty array
-                foreach ($request['gallery'] as $key => $value) {
-                    if (!strlen($value)) {
-                        unset($request['gallery'][$key]);
-                    }
-                }
-                if ($request['gallery']) {
-                    $folders = $request['gallery'];
-                    $gallery = array();
-                    foreach ($folders as $folder) {
-                        $filepath = WRITEPATH . 'uploads/' . $folder;
-                        $filenames = get_filenames($filepath);
-                        $fileImg = new File($filepath . '/' . $filenames[0]);
-                        $fileImg->move(FCPATH . 'media/photos');
-                        delete_files($filepath);
-                        rmdir($filepath);
-                        $gallery[] = $fileImg->getFilename();
-                    }
-                    $updateGallery = $this->model->updateGallery($id, $gallery);
-                } else {
-                    $updateGallery = $this->model->deleteGallery($id);
+        // ----------------------------------UPDATE DATA--------------------------
+        $update = $this->model->updateCp($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
+        if ($update) {
+            // --------------------------------Gallery------------------------------
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
                 }
             }
-            if ($update && $updateGallery) {
-                session()->setFlashdata('success', 'Success! culinary Place updated.');
-                return redirect()->to(site_url('manage_culinary_place/edit/' . $id));
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $updateGallery = $this->model->updateGallery($id, $gallery);
             } else {
-                session()->setFlashdata('failed', 'Failed! Failed to updateculinary Place.');
-                return redirect()->to(site_url('manage_culinary_place/edit/' . $id));
+                $updateGallery = $this->model->deleteGallery($id);
             }
+        }
+        if ($update && $updateGallery) {
+            session()->setFlashdata('success', 'Success! culinary Place updated.');
+            return redirect()->to(site_url('manage_culinary_place/edit/' . $id));
         } else {
-            $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed' . json_encode($listErrors));
+            session()->setFlashdata('failed', 'Failed! Failed to updateculinary Place.');
             return redirect()->to(site_url('manage_culinary_place/edit/' . $id));
         }
     }
@@ -138,11 +126,6 @@ class ManageCulinaryPlaceController extends BaseController
     }
     public function save_insert()
     {
-        //validation data
-        $validateRules = $this->validate([
-            'name' => 'required|max_length[100]',
-            'description' => 'max_length[255]'
-        ]);
         // ---------------------Data request------------------------------
         $request = $this->request->getPost();
         $id = $this->model->get_new_id();
@@ -162,43 +145,38 @@ class ManageCulinaryPlaceController extends BaseController
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 
-        if ($validateRules) {
-            $insert =  $this->model->addCulinaryPlace($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
-            if ($insert) {
-                // ----------------Gallery-----------------------------------------
-                // check if gallery have empty string then make it become empty array
-                foreach ($request['gallery'] as $key => $value) {
-                    if (!strlen($value)) {
-                        unset($request['gallery'][$key]);
-                    }
-                }
-                if ($request['gallery']) {
-                    $folders = $request['gallery'];
-                    $gallery = array();
-                    foreach ($folders as $folder) {
-                        $filepath = WRITEPATH . 'uploads/' . $folder;
-                        $filenames = get_filenames($filepath);
-                        $fileImg = new File($filepath . '/' . $filenames[0]);
-                        $fileImg->move(FCPATH . 'media/photos');
-                        delete_files($filepath);
-                        rmdir($filepath);
-                        $gallery[] = $fileImg->getFilename();
-                    }
-                    $insertGallery =  $this->model->addGallery($id, $gallery);
-                } else {
-                    $insertGallery = true;
+
+        $insert =  $this->model->addCulinaryPlace($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
+        if ($insert) {
+            // ----------------Gallery-----------------------------------------
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
                 }
             }
-            if ($insert && $insertGallery) {
-                session()->setFlashdata('success', 'Success! Data Added.');
-                return redirect()->to(site_url('manage_culinary_place'));
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $insertGallery =  $this->model->addGallery($id, $gallery);
             } else {
-                session()->setFlashdata('failed', 'Failed! Failed to update Culinary Place');
-                return redirect()->to(site_url('manage_culinary_place/insert'));
+                $insertGallery = true;
             }
+        }
+        if ($insert && $insertGallery) {
+            session()->setFlashdata('success', 'Success! Data Added.');
+            return redirect()->to(site_url('manage_culinary_place'));
         } else {
-            $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed.' . json_encode($listErrors));
+            session()->setFlashdata('failed', 'Failed! Failed to update Culinary Place');
             return redirect()->to(site_url('manage_culinary_place/insert'));
         }
     }

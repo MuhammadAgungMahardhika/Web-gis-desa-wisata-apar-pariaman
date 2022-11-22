@@ -35,8 +35,8 @@ class atractionModel extends Model
     public function get_new_id()
     {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
-        $count = (int)substr($lastId['id'], 2);
-        $id = sprintf('A%03d', $count + 1);
+        $count = intval($lastId['id']);
+        $id =  $count + 1;
         return $id;
     }
     public function getAtractions()
@@ -144,8 +144,8 @@ class atractionModel extends Model
     public function get_new_id_api()
     {
         $lastId = $this->db->table($this->table_gallery)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
-        $count = (int)substr($lastId['id'], 3);
-        $id = sprintf('IMG%04d', $count + 1);
+        $count = intval($lastId['id']);
+        $id =  $count + 1;
         return $id;
     }
     public function getGallery($id)

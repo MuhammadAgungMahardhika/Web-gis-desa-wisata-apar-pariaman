@@ -60,15 +60,6 @@ class ManageAtractionController extends BaseController
 
     public function save_update($id = null)
     {
-        //---------------validation data------------------------------------
-        $validateRules = $this->validate([
-            'name' => 'required|max_length[100]',
-            'open' => 'max_length[50]',
-            'close' => 'max_length[50]',
-            'employe' => 'max_length[50]',
-            'price' => 'max_length[50]',
-            'contact_person' => 'max_length[14]'
-        ]);
 
         // ---------------------Data request-----------------------------
         $request = $this->request->getPost();
@@ -89,58 +80,52 @@ class ManageAtractionController extends BaseController
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 
-        // ----------------------------------Validate--------------------------
-        if ($validateRules) {
-            // ------------------Video-----------------------------------------
-            if ($request['video']) {
-                $folder = $request['video'];
-                $filepath = WRITEPATH . 'uploads/' . $folder;
-                $filenames = get_filenames($filepath);
-                $vidFile = new File($filepath . '/' . $filenames[0]);
-                $vidFile->move(FCPATH . 'media/videos');
-                delete_files($filepath);
-                rmdir($filepath);
-                $updateRequest['video_url'] = $vidFile->getFilename();
-            } else {
-                $updateRequest['video_url'] = null;
-            }
-            // ---------------------------------Update---------------------
-            $update =  $this->model->updateAtraction($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
-            if ($update) {
-                // -----------------------------Gallery-----------------------------------------
-                // check if gallery have empty string then make it become empty array
-                foreach ($request['gallery'] as $key => $value) {
-                    if (!strlen($value)) {
-                        unset($request['gallery'][$key]);
-                    }
-                }
-                if ($request['gallery']) {
-                    $folders = $request['gallery'];
-                    $gallery = array();
-                    foreach ($folders as $folder) {
-                        $filepath = WRITEPATH . 'uploads/' . $folder;
-                        $filenames = get_filenames($filepath);
-                        $fileImg = new File($filepath . '/' . $filenames[0]);
-                        $fileImg->move(FCPATH . 'media/photos');
-                        delete_files($filepath);
-                        rmdir($filepath);
-                        $gallery[] = $fileImg->getFilename();
-                    }
-                    $updateGallery =  $this->model->updateGallery($id, $gallery);
-                } else {
-                    $updateGallery =   $this->model->deleteGallery($id);
-                }
-            }
 
-            if ($update && $updateGallery) {
-                session()->setFlashdata('success', 'Success! Atraction updated.');
-                return redirect()->to(site_url('manage_atraction/edit/' . $id));
-            } else {
-                session()->setFlashdata('failed', 'Failed! Failed to update atraction.');
-                return redirect()->to(site_url('manage_atraction/edit/' . $id));
-            }
+        // ------------------Video-----------------------------------------
+        if ($request['video']) {
+            $folder = $request['video'];
+            $filepath = WRITEPATH . 'uploads/' . $folder;
+            $filenames = get_filenames($filepath);
+            $vidFile = new File($filepath . '/' . $filenames[0]);
+            $vidFile->move(FCPATH . 'media/videos');
+            delete_files($filepath);
+            rmdir($filepath);
+            $updateRequest['video_url'] = $vidFile->getFilename();
         } else {
-            $listErrors = $this->validation->listErrors();
+            $updateRequest['video_url'] = null;
+        }
+        // ---------------------------------Update---------------------
+        $update =  $this->model->updateAtraction($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
+        if ($update) {
+            // -----------------------------Gallery-----------------------------------------
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
+                }
+            }
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $updateGallery =  $this->model->updateGallery($id, $gallery);
+            } else {
+                $updateGallery =   $this->model->deleteGallery($id);
+            }
+        }
+
+        if ($update && $updateGallery) {
+            session()->setFlashdata('success', 'Success! Atraction updated.');
+            return redirect()->to(site_url('manage_atraction/edit/' . $id));
+        } else {
             session()->setFlashdata('failed', 'Failed! Failed to update atraction.');
             return redirect()->to(site_url('manage_atraction/edit/' . $id));
         }
@@ -159,13 +144,7 @@ class ManageAtractionController extends BaseController
     }
     public function save_insert()
     {
-        //-------------------validation data----------------------------------
-        $validateRules = $this->validate([
-            'name' => 'max_length[50]',
-            'price' => 'max_length[50]',
-            'contact_person' => 'max_length[14]',
-            'description' => 'max_length[255]'
-        ]);
+
         // ---------------------Data request------------------------------------
         $request = $this->request->getPost();
         $id = $this->model->get_new_id();
@@ -186,57 +165,52 @@ class ManageAtractionController extends BaseController
         }
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
-        if ($validateRules) {
-            // ------------------Video----------------------
-            if ($request['video']) {
-                $folder = $request['video'];
-                $filepath = WRITEPATH . 'uploads/' . $folder;
-                $filenames = get_filenames($filepath);
-                $vidFile = new File($filepath . '/' . $filenames[0]);
-                $vidFile->move(FCPATH . 'media/videos');
-                delete_files($filepath);
-                rmdir($filepath);
-                $insertRequest['video_url'] = $vidFile->getFilename();
-            } else {
-                $insertRequest['video_url'] = null;
-            }
 
-            $insert =  $this->model->addAtraction($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
-            // ----------------Gallery-----------------------------------------
-            if ($insert) {
-                // check if gallery have empty string then make it become empty array
-                foreach ($request['gallery'] as $key => $value) {
-                    if (!strlen($value)) {
-                        unset($request['gallery'][$key]);
-                    }
-                }
-                if ($request['gallery']) {
-                    $folders = $request['gallery'];
-                    $gallery = array();
-                    foreach ($folders as $folder) {
-                        $filepath = WRITEPATH . 'uploads/' . $folder;
-                        $filenames = get_filenames($filepath);
-                        $fileImg = new File($filepath . '/' . $filenames[0]);
-                        $fileImg->move(FCPATH . 'media/photos');
-                        delete_files($filepath);
-                        rmdir($filepath);
-                        $gallery[] = $fileImg->getFilename();
-                    }
-                    $insertGallery =  $this->model->addGallery($id, $gallery);
-                } else {
-                    $insertGallery = true;
-                }
-            }
-            if ($insert && $insertGallery) {
-                session()->setFlashdata('success', 'Success! Data Added.');
-                return redirect()->to(site_url('manage_atraction'));
-            } else {
-                session()->setFlashdata('failed', 'Failed! Failed to add data.');
-                return redirect()->to(site_url('manage_atraction/insert'));
-            }
+        // ------------------Video----------------------
+        if ($request['video']) {
+            $folder = $request['video'];
+            $filepath = WRITEPATH . 'uploads/' . $folder;
+            $filenames = get_filenames($filepath);
+            $vidFile = new File($filepath . '/' . $filenames[0]);
+            $vidFile->move(FCPATH . 'media/videos');
+            delete_files($filepath);
+            rmdir($filepath);
+            $insertRequest['video_url'] = $vidFile->getFilename();
         } else {
-            $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! ' . json_encode($listErrors));
+            $insertRequest['video_url'] = null;
+        }
+
+        $insert =  $this->model->addAtraction($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
+        // ----------------Gallery-----------------------------------------
+        if ($insert) {
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
+                }
+            }
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $insertGallery =  $this->model->addGallery($id, $gallery);
+            } else {
+                $insertGallery = true;
+            }
+        }
+        if ($insert && $insertGallery) {
+            session()->setFlashdata('success', 'Success! Data Added.');
+            return redirect()->to(site_url('manage_atraction'));
+        } else {
+            session()->setFlashdata('failed', 'Failed! Failed to add data.');
             return redirect()->to(site_url('manage_atraction/insert'));
         }
     }

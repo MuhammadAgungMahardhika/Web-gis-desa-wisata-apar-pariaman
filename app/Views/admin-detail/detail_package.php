@@ -40,6 +40,19 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <?php if ($facilityPackage) : ?>
+                                <h5 class=" ps-2">Facility</h5>
+                                <?php $no = 1; ?>
+                                <?php foreach ($facilityPackage as $facility) : ?>
+                                    <table class="">
+                                        <tr>
+                                            <td class="ps-2">
+                                                <?= $no++; ?>. <?= $facility->name; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

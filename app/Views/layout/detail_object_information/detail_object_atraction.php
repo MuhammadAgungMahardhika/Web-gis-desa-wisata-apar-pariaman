@@ -20,7 +20,13 @@
 </tr>
 <tr>
     <td class="fw-bold">Ticket Price</td>
-    <td><?= $objectData->price; ?> IDR</td>
+    <td>
+        <?php if ($objectData->price == '0') : ?>
+            FREE IDR
+        <?php else : ?>
+            <?= $objectData->price; ?> IDR
+        <?php endif; ?>
+    </td>
 </tr>
 
 <tr>
