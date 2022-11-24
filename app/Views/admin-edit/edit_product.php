@@ -35,12 +35,12 @@
                                 <div class="form-group">
                                     <label for="category" class="col col-form-label">Category</label>
                                     <div class="col">
-                                        <select class=" form-select" id="category" name="category">
+                                        <select class="form-select" id="category" name="category">
                                             <?php $no = 0; ?>
                                             <?php foreach ($categoryData as $category) : ?>
                                                 <?php if ($objectData->category) : ?>
-                                                    <?php if ($objectData->category == $category->name) : ?>
-                                                        <option value="<?= $objectData->category; ?>" selected><?= esc($objectData->category); ?></option>
+                                                    <?php if ($objectData->product_category_id == $category->id) : ?>
+                                                        <option value="<?= $objectData->product_category_id; ?>" selected><?= esc($objectData->category); ?></option>
                                                     <?php else : ?>
                                                         <option value="<?= $category->id; ?>"><?= esc($category->name); ?></option>
                                                     <?php endif; ?>

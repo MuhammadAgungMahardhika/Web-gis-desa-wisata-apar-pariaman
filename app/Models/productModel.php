@@ -14,6 +14,7 @@ class productModel extends Model
     protected $columns = '
     product.id,
     product.name,
+    product.product_category_id,
     product_category.name as category,
     product.price,
     product.brosur_url as url,
