@@ -20,7 +20,7 @@ class Pages extends BaseController
     public function index()
     {
         $aparData = $this->modelApar->getApar();
-        $galleryData = $this->modelApar->getGallery('A01')->getResult();;
+        $galleryData = $this->modelApar->getGallery('1')->getResult();;
         $data = [
             'title' => 'LandingPage | Tourism Village',
             'aparData' => $aparData,

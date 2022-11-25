@@ -1,6 +1,6 @@
 
-// let base_url = 'http://localhost:8080' //untuk php spark serve
-let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
+let base_url = 'http://localhost:8080' //untuk php spark serve
+// let base_url = 'http://192.168.100.172:80/Codeigniter4-Framework/desa-wisata-apar-pariaman/public/' //Untuk mobile
 let userPosition, userMarker, directionsRenderer, infoWindow, circle, map
 let markerArray = []
 let markerNearby
@@ -677,9 +677,9 @@ function showObject(object, id = null) {
             clearRoute()
           
             if (response.objectData && response.url) {
-                if (response.objectData[0].id == '1') {
+                if (response.objectData[0].id == '01') {
                     activeMenu('mangrove')
-                } else if (response.objectData[0].id == '2') {
+                } else if (response.objectData[0].id == '02') {
                     activeMenu('turtle')
                 }
                 return loopingAllMarker(response.objectData, response.url)

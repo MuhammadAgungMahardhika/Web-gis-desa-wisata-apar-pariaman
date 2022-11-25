@@ -17,9 +17,13 @@ class facilityModel extends Model
     public function get_new_id()
     {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
-        $count = intval($lastId['id']);
-        $id =  $count + 1;
-        return $id;
+        if ($lastId != null) {
+            $count = (int)substr($lastId['id'], 0);
+            $id = sprintf('%02d', $count + 1);
+            return $id;
+        } else {
+            return '01';
+        }
     }
     public function getFacilities()
     {
@@ -87,9 +91,13 @@ class facilityModel extends Model
     public function get_new_id_api()
     {
         $lastId = $this->db->table($this->table_gallery)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
-        $count = intval($lastId['id']);
-        $id =  $count + 1;
-        return $id;
+        if ($lastId != null) {
+            $count = (int)substr($lastId['id'], 0);
+            $id = sprintf('%02d', $count + 1);
+            return $id;
+        } else {
+            return '01';
+        }
     }
     public function getGallery($id)
     {

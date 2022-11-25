@@ -14,7 +14,7 @@ class aparModel extends Model
     protected $allowedFields = ['name', 'type_of_tourism', 'address', 'contact_person', 'description', 'lat', 'lng', 'geom'];
     public function getApar()
     {
-        $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat ,ST_X(ST_Centroid({$this->table}.geom)) AS lng ";
+        $coords = "ST_Y({$this->table}.geom) AS lat ,ST_X({$this->table}.geom) AS lng ";
         $geom_area = "ST_AsGeoJSON({$this->table}.geom_area) AS geoJSON";
         $columns = "
         {$this->table}.id,

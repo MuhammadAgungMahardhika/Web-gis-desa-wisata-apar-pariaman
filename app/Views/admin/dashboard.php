@@ -24,7 +24,7 @@
                         <div class="card  shadow-sm efek" id="users">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_users') ?>">
-                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/users.JPG') ?>" alt="Card image cap">
+                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/users.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Admin</h4>
                                         <p class="card-text">
@@ -39,7 +39,7 @@
                         <div class="card  shadow-sm efek" id="village">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_apar') ?>">
-                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/village.JPG') ?>" alt="Card image cap">
+                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/village.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Village</h4>
                                         <p class="card-text">
@@ -106,7 +106,7 @@
                         <div class="card  shadow-sm efek" id="sp">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_souvenir_place') ?>">
-                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/sp.JPG') ?>" alt="Card image cap">
+                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/sp.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Souvenir place</h4>
                                         <p class="card-text">
@@ -121,7 +121,7 @@
                         <div class="card  shadow-sm efek" id="cp">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_culinary_place') ?>">
-                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/cp.JPG') ?>" alt="Card image cap">
+                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/cp.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Culinary place</h4>
                                         <p class="card-text">
@@ -139,7 +139,7 @@
                         <div class="card  shadow-sm efek" id="wp">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_worship_place') ?>">
-                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/wp.JPG') ?>" alt="Card image cap">
+                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/wp.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Worship place</h4>
                                         <p class="card-text">
@@ -155,7 +155,7 @@
                         <div class="card  shadow-sm efek" id="f">
                             <div class="card-content">
                                 <a href="<?= base_url('manage_facility') ?>">
-                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/f.JPG') ?>" alt="Card image cap">
+                                    <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/f.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Facility</h4>
                                         <p class="card-text">

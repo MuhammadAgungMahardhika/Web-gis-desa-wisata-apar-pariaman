@@ -10,7 +10,7 @@
         <?php if (current_url() == base_url('list_object')) : ?>
             <!-- Apar mangrove Menu -->
             <li class="sidebar-item" id="mangroveMenu">
-                <a class='sidebar-link' onclick="showObject('atraction','1')" style="cursor: pointer;">
+                <a class='sidebar-link' onclick="showObject('atraction','01')" style="cursor: pointer;">
                     <i class="iconify" data-icon="material-symbols:forest-rounded" data-width="25" data-height="25"></i>
                     <span>Apar Mangrove Park</span>
                 </a>
@@ -18,7 +18,7 @@
             </li>
             <!-- Turtle Menu -->
             <li class="sidebar-item" id="turtleMenu">
-                <a class='sidebar-link' onclick="showObject('atraction','2')" style="cursor: pointer;">
+                <a class='sidebar-link' onclick="showObject('atraction','02')" style="cursor: pointer;">
                     <i class="iconify" data-icon="mdi:turtle" data-width="25" data-height="25"></i>
                     <span>Turtle Conservation</span>
                 </a>
