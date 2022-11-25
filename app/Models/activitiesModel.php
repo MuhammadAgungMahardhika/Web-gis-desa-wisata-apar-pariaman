@@ -66,7 +66,6 @@ class activitiesModel extends Model
     public function addActivities($data)
     {
         $query = $this->db->table($this->table)->insert($data);
-
         return $query;
     }
     public function updateActivities($id, $activity_id)
@@ -79,6 +78,11 @@ class activitiesModel extends Model
     public function deleteDetailPackage($id)
     {
         $query = $this->db->table($this->table_detail)->delete(array('package_id' => $id));
+        return $query;
+    }
+    public function deleteActivities($id)
+    {
+        $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
     // ----------------------------------------------Gallery APi ----------------------------------

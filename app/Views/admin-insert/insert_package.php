@@ -49,22 +49,30 @@
                                         <input type="number" class="form-control" name="contact_person" autocomplete="off">
                                     </div>
                                 </div>
+                                <!-- Facility -->
                                 <div class="form-group">
-                                    <label for="contact_person" class=" col col-form-label">Facility</label>
                                     <div class="row">
-                                        <div class="col-10">
-                                            <input type="text" class="form-control" name="facility" autocomplete="off" id="facility">
-                                        </div>
-                                        <div class="col-2">
-                                            <a title="add facility" class="btn btn-success btn-sm form-control" onclick="addNewFacility(`${$('#facility').val()}`)"> Add</a>
+                                        <div class="col">
+                                            <table class="table  table-borderless">
+                                                <thead>
+                                                    <label for="contact_person" class=" col col-form-label">Facility</label>
+                                                </thead>
+                                                <tbody id="listFacility">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="facility" placeholder="Write facility here" autocomplete="off" id="facility">
+                                                        </td>
+                                                        <td>
+                                                            <a title="add facility" class="btn btn-success btn-sm form-control" onclick="addNewFacility(`${$('#facility').val()}`)"> Add</a>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <ol id="listFacility">
 
-                                    </ol>
-                                </div>
                                 <!-- Description -->
                                 <div class="row my-2">
                                     <div class="col">
@@ -130,11 +138,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Adding new activity</h5>
-
                     </div>
                     <div class="modal-body">
                         <!-- Form data nonspasial -->
-
                         <div class="form-group">
                             <label for="name" class="col col-form-label">Activity name</label>
                             <div class="col">
@@ -256,9 +262,10 @@
         }
     })
 
-
     function addNewFacility(val) {
-        $('#listFacility').append(`<li>${val}</li>`)
+        $('#listFacility').append(`<tr><td><input type="text" class="form-control" name="facility_package[]" required value="${val}"></td></tr>`)
+        $('#facility').val('');
+
     }
 </script>
 <?= $this->endSection() ?>

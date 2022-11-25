@@ -49,6 +49,35 @@
                                         <input type="number" class="form-control" name="contact_person" value="<?= $objectData->contact_person; ?>">
                                     </div>
                                 </div>
+                                <!-- Facility -->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <table class="table  table-borderless">
+                                                <thead>
+                                                    <label for="contact_person" class=" col col-form-label">Facility</label>
+                                                </thead>
+                                                <tbody id="listFacility">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="facility" placeholder="Write available facility here" autocomplete="off" id="facility">
+                                                        </td>
+                                                        <td>
+                                                            <a title="add facility" class="btn btn-success btn-sm form-control" onclick="addNewFacility(`${$('#facility').val()}`)"> Add</a>
+                                                        </td>
+                                                    </tr>
+                                                    <?php foreach ($facilityPackages as $fp) : ?>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="text" class="form-control" name="facility_package[]" required value="<?= $fp->name; ?>">
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Description -->
                                 <div class="row my-2">
                                     <div class="col">
@@ -194,6 +223,12 @@
     pondActivity.setOptions({
         server: "<?= base_url('upload/photo') ?>"
     })
+
+    function addNewFacility(val) {
+        $('#listFacility').append(`<tr><td><input type="text" class="form-control" name="facility_package[]" required value="${val}"></td></tr>`)
+        $('#facility').val('');
+
+    }
 </script>
 <script src="<?= base_url('/assets/js/map.js') ?>"></script>
 <!-- Maps JS -->

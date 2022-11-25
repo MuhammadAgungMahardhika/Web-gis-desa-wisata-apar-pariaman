@@ -47,12 +47,14 @@ class ManagePackageController extends BaseController
         $objectData = $this->model->getPackage($id)->getRow();
         $activitiesData  = $this->modelActivities->getActivities()->getResult();
         $activitiesPackage = $this->modelActivities->getPackageActivity($id)->getResult();
+        $facilityPackages = $this->modelFp->getFacilityPackage($id)->getResult();
         $data = [
             'title' => $this->title,
             'config' => config('Auth'),
             'objectData' => $objectData,
             'activitiesData' => $activitiesData,
-            'activitiesPackage' => $activitiesPackage
+            'activitiesPackage' => $activitiesPackage,
+            'facilityPackages' => $facilityPackages
         ];
         return view('admin-edit/edit_package', $data);
     }
@@ -93,14 +95,23 @@ class ManagePackageController extends BaseController
 
         $insert =  $this->model->updatePackage($id, $insertRequest);
         if ($insert) {
-            $deletePackage = $this->modelActivities->deleteDetailPackage($id);
             // insert activities
+            $deletePackage = $this->modelActivities->deleteDetailPackage($id);
             if ($deletePackage) {
                 $activities_id = $this->request->getPost('activities');
                 if ($activities_id) {
                     foreach ($activities_id as $activity_id) {
                         $this->modelActivities->updateActivities($id, $activity_id);
                     }
+                }
+            }
+            // inserrt facility package
+            $deleteFacilityPackages = $this->modelFp->deleteFacilityPackage($id);
+            if ($deleteFacilityPackages) {
+                $facility_packages = $this->request->getPost('facility_package');
+                foreach ($facility_packages as $fp) {
+                    $id_fp = $this->modelFp->get_new_id();
+                    $this->modelFp->addFacilityPackage(['id' => $id_fp, 'package_id' => $id, 'name' => $fp]);
                 }
             }
         }
@@ -164,6 +175,15 @@ class ManagePackageController extends BaseController
             if ($activities_id) {
                 foreach ($activities_id as $activity_id) {
                     $this->modelActivities->addPackageActivities(['package_id' => $id, 'activities_id' => $activity_id]);
+                }
+            }
+
+            // inserrt facility package
+            $facility_packages = $this->request->getPost('facility_package');
+            if ($facility_packages) {
+                foreach ($facility_packages as $fp) {
+                    $id_fp = $this->modelFp->get_new_id();
+                    $this->modelFp->addFacilityPackage(['id' => $id_fp, 'package_id' => $id, 'name' => $fp]);
                 }
             }
         }
