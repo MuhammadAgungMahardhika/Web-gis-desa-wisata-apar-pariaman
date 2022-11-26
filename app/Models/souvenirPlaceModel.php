@@ -92,6 +92,13 @@ class souvenirPlaceModel extends Model
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
+    public function getTotal()
+    {
+        $query =  $this->db->table($this->table)
+            ->selectCount("id")->get()
+            ->getRow();
+        return $query;
+    }
     // ---------------------------------Gallery APi------------------------
     public function get_new_id_api()
     {

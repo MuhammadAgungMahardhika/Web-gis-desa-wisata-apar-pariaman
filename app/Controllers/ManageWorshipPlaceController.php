@@ -69,8 +69,6 @@ class ManageWorshipPlaceController extends BaseController
         $updateRequest = [
             'name' => $this->request->getPost('name'),
             'category' => $this->request->getPost('category'),
-            'open' => $this->request->getPost('open'),
-            'close' => $this->request->getPost('close'),
             'building_size' => $this->request->getPost('building_size'),
             'capacity' => $this->request->getPost('capacity'),
             'description' => $this->request->getPost('description')

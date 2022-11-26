@@ -27,8 +27,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/users.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Admin</h4>
-                                        <p class="card-text">
-                                            Manage all admin </p>
+                                        <p class="card-text"> Manage all admin </p>
+                                        <p class="card-text"> Total : <?= $adminData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -42,9 +42,7 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/village.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Village</h4>
-                                        <p class="card-text">
-                                            Manage village information
-                                        </p>
+                                        <p class="card-text">Manage village information </p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -58,9 +56,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/mangrove.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Atraction</h4>
-                                        <p class="card-text">
-                                            Manage atraction
-                                        </p>
+                                        <p class="card-text"> Manage atraction</p>
+                                        <p class="card-text"> Total atraction : <?= $atractionData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -74,9 +71,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/jelajah_hutan_mangrove_kano.jpeg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Package</h4>
-                                        <p class="card-text">
-                                            Manage tourism package
-                                        </p>
+                                        <p class="card-text">Manage tourism package</p>
+                                        <p class="card-text"> Total package : <?= $packageData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -91,9 +87,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/sandal_rajutan_benang.jpeg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Product</h4>
-                                        <p class="card-text">
-                                            Manage culinary & souvenir
-                                        </p>
+                                        <p class="card-text">Manage culinary & souvenir</p>
+                                        <p class="card-text"> Total culinary place : <?= $productData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -109,8 +104,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/sp.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Souvenir place</h4>
-                                        <p class="card-text">
-                                            Manage souvenir place </p>
+                                        <p class="card-text">Manage souvenir place </p>
+                                        <p class="card-text"> Total souvenir place : <?= $spData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -124,9 +119,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/cp.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Culinary place</h4>
-                                        <p class="card-text">
-                                            Manage culinary place
-                                        </p>
+                                        <p class="card-text">Manage culinary place</p>
+                                        <p class="card-text"> Total culinary place : <?= $cpData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -142,9 +136,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/wp.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Worship place</h4>
-                                        <p class="card-text">
-                                            Manage worship place
-                                        </p>
+                                        <p class="card-text">Manage worship place</p>
+                                        <p class="card-text"> Total worship place : <?= $wpData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>
@@ -158,9 +151,8 @@
                                     <img class="card-img-top img-fluid" src="<?= base_url('assets/images/dashboard-images/f.jpg') ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">Facility</h4>
-                                        <p class="card-text">
-                                            Manage facility
-                                        </p>
+                                        <p class="card-text"> Manage facility</p>
+                                        <p class="card-text"> Total facility : <?= $fData->id; ?></p>
                                         <small class="text-muted">Click to go <i class="fa fa-arrow-right fa-xs"></i> </small>
                                     </div>
                                 </a>

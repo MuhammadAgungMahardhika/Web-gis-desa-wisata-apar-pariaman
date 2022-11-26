@@ -62,4 +62,11 @@ class usersModel extends Model
 
         return $query;
     }
+    public function getTotal()
+    {
+        $query =  $this->db->table($this->table)
+            ->selectCount("id")->get()
+            ->getRow();
+        return $query;
+    }
 }

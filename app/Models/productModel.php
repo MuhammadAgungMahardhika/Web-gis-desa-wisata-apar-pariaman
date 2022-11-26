@@ -92,4 +92,11 @@ class productModel extends Model
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
+    public function getTotal()
+    {
+        $query =  $this->db->table($this->table)
+            ->selectCount("id")->get()
+            ->getRow();
+        return $query;
+    }
 }
