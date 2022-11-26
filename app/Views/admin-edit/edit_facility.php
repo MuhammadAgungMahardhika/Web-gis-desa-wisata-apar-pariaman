@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label for="area_size" class="col col-form-label">Area size</label>
                                     <div class="col">
-                                        <input type="number" class="form-control" name="open" value="<?= $objectData->area_size; ?>" autocomplete="off">
+                                        <input type="number" class="form-control" name="area_size" value="<?= $objectData->area_size; ?>" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -67,6 +67,7 @@ class ManageFacilityController extends BaseController
         $request = $this->request->getPost();
         $updateRequest = [
             'name' => $this->request->getPost('name'),
+            'area_size' => $this->request->getPost('area_size'),
             'open' => $this->request->getPost('open'),
             'close' => $this->request->getPost('close'),
             'description' => $this->request->getPost('description')
