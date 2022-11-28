@@ -12,6 +12,14 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <section class="section">
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_package') ?>">List package</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_package/detail/' . $objectData->id); ?>">Detail package</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit package</li>
+        </ol>
+    </nav>
     <form class="form form-vertical" action="<?= base_url('manage_package/save_update/' . $objectData->id); ?>" method="post">
         <div class="row">
             <!-- Object Detail Information -->
@@ -230,7 +238,5 @@
 
     }
 </script>
-<script src="<?= base_url('/assets/js/map.js') ?>"></script>
-<!-- Maps JS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&callback=initMap&libraries=drawing"></script>
+
 <?= $this->endSection() ?>

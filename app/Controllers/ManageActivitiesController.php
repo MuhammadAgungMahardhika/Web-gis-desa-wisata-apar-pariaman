@@ -26,6 +26,59 @@ class ManageActivitiesController extends BaseController
         return view('admin/manage_activities', $data);
     }
 
+    public function save_update()
+    {
+        // ---------------------Data request------------------------------------
+        $request = $this->request->getPost();
+        $id = $this->request->getPost('id');
+        $updateRequest = [
+            'id' => $this->request->getPost('id'),
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description')
+        ];
+        // unset empty value
+        foreach ($updateRequest as $key => $value) {
+            if (empty($value)) {
+                unset($updateRequest[$key]);
+            }
+        }
+        $update =  $this->model->updateActivities($id, $updateRequest);
+        // ----------------Gallery-----------------------------------------
+        if ($update) {
+            // -----------------------------Gallery-----------------------------------------
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
+                }
+            }
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos/activities/');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $updateGallery =  $this->model->updateGallery($id, $gallery);
+            } else {
+                $updateGallery =   $this->model->deleteGallery($id);
+            }
+        }
+
+        if ($update && $updateGallery) {
+            session()->setFlashdata('success', 'Success! Activity updated.');
+            return redirect()->to(site_url('manage_activities'));
+        } else {
+            session()->setFlashdata('failed', 'Failed! Failed to update activity.');
+            return redirect()->to(site_url('manage_activities'));
+        }
+    }
+
     public function save_insert()
     {
         // ---------------------Data request------------------------------------
@@ -37,6 +90,12 @@ class ManageActivitiesController extends BaseController
             'description' => $this->request->getPost('description')
         ];
 
+        // unset empty value
+        foreach ($insertRequest as $key => $value) {
+            if (empty($value)) {
+                unset($insertRequest[$key]);
+            }
+        }
         $insert =  $this->model->addActivities($insertRequest);
         // ----------------Gallery-----------------------------------------
         if ($insert) {
@@ -83,5 +142,11 @@ class ManageActivitiesController extends BaseController
             session()->setFlashdata('failed', 'Failed to delete activity ');
             return redirect()->to(site_url('manage_activities'));
         }
+    }
+    public function activity($id)
+    {
+        $data['objectData'] = $this->model->getActivity($id)->getResult();
+        $data['galleryData'] = $this->model->getGallery($id)->getResult();
+        return json_encode($data);
     }
 }

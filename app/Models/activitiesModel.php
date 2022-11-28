@@ -58,17 +58,26 @@ class activitiesModel extends Model
 
 
     // --------------------------------------Admin-------------------------------------------
-    public function addPackageActivities($data)
-    {
-        $query = $this->db->table($this->table_detail)->insert($data);
-        return $query;
-    }
+
     public function addActivities($data)
     {
         $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
-    public function updateActivities($id, $activity_id)
+    public function updateActivities($id, $data)
+    {
+        $query = $this->db->table($this->table)
+            ->where('activities.id', $id)
+            ->update($data);
+        return $query;
+    }
+
+    public function addPackageActivities($data)
+    {
+        $query = $this->db->table($this->table_detail)->insert($data);
+        return $query;
+    }
+    public function updatePackageActivities($id, $activity_id)
     {
         $query = $this->db->table($this->table_detail)
             ->insert(['package_id' => $id, 'activities_id' => $activity_id]);
@@ -131,11 +140,6 @@ class activitiesModel extends Model
     }
     public function deleteGallery($id = null)
     {
-        return $this->db->table($this->table_gallery)->delete(['package_id' => $id]);
-    }
-    // -------------------------------------------------Video Api-------------------------------------------
-    public function deleteVideo($id = null)
-    {
-        return $this->db->table($this->table_video)->delete(['package_id' => $id]);
+        return $this->db->table($this->table_gallery)->delete(['activities_id' => $id]);
     }
 }

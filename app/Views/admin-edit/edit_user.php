@@ -5,7 +5,14 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_users') ?>">List admin</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_users/detail/' . $user->userid); ?>">Detail admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit admin</li>
+        </ol>
+    </nav>
     <div class="row">
         <div class="col">
             <div class="card mb-3">

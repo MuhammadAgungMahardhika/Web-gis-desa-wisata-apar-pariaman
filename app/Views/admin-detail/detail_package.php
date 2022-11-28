@@ -1,6 +1,13 @@
 <?= $this->extend('layout/template.php') ?>
 <?= $this->section('content') ?>
 <section class="section">
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_package') ?>">List package</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail package</li>
+        </ol>
+    </nav>
     <div class="row">
         <!-- Object Detail Information -->
         <div class="col-md-6 col-12">
@@ -60,9 +67,11 @@
         </div>
         <div class="col-md-6 col-12">
             <div class="card shadow-sm">
-                <div class="p-4">
-                    <img class="d-block w-100 rounded" src="<?= base_url('media/photos/package/'); ?>/<?= $objectData->url; ?>" alt="">
-                </div>
+                <?php if (isset($objectData->url)) : ?>
+                    <div class="p-4">
+                        <img class="d-block w-100 rounded" src="<?= base_url('media/photos/package/'); ?>/<?= $objectData->url; ?>" alt="">
+                    </div>
+                <?php endif; ?>
                 <?php if ($activitiesData) : ?>
                     <div class="card-header">
                         <h5 class="m-0 font-weight-bold  text-start ps-1"> Activities to do</h5>

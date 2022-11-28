@@ -12,13 +12,20 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <section class="section">
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_souvenir_place') ?>">List souvenir place</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Insert souvenir place</li>
+
+        </ol>
+    </nav>
     <form class="form form-vertical" action="<?= base_url('manage_souvenir_place/save_insert'); ?>" method="post">
         <div class="row">
             <!-- Object Detail Information -->
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?= base_url('manage_souvenir_place'); ?>" role="button" class="btn btn-primary justify-item-center" title="List souvenir place"><i class="fa fa-arrow-left"></i></a>
                         <h4 class="card-title text-center">Insert souvenir place</h4>
                     </div>
                     <div class="card-body">

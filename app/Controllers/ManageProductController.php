@@ -79,6 +79,12 @@ class ManageProductController extends BaseController
             'description' => $this->request->getPost('description')
         ];
 
+        // unset empty value
+        foreach ($updateRequest as $key => $value) {
+            if (empty($value)) {
+                unset($updateRequest[$key]);
+            }
+        }
         $update =  $this->model->updateProduct($id, $updateRequest);
         if ($update) {
             session()->setFlashdata('success', 'Success! Product updated.');
@@ -134,6 +140,12 @@ class ManageProductController extends BaseController
             'brosur_url' => $gallery,
             'description' => $this->request->getPost('description')
         ];
+        // unset empty value
+        foreach ($insertRequest as $key => $value) {
+            if (empty($value)) {
+                unset($insertRequest[$key]);
+            }
+        }
 
         $insert =  $this->model->addProduct($insertRequest);
 

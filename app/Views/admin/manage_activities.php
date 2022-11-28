@@ -13,6 +13,14 @@
 <?= $this->section('content') ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_package') ?>">List package</a></li>
+            <li class="breadcrumb-item active" aria-current="page">List activities</li>
+
+        </ol>
+    </nav>
     <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -40,6 +48,7 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $activities->name; ?></td>
                                 <td class="text-center">
+                                    <a class="btn btn-outline-primary btn-sm" title="Edit activities" onclick="showActivity('<?= $activities->id; ?>')" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa fa-edit"></i> </a>
                                     <a class="btn btn-outline-danger btn-sm" title="Delete activities" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $activities->id; ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -71,6 +80,45 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+<!-- Update activity Modal-->
+<div class="modal fade text-start" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="form form-vertical" action="<?= base_url('manage_activities/save_update/'); ?>" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update activity</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- Form data nonspasial -->
+                    <input type="hidden" id="idUpdate" name="id">
+                    <div class="form-group">
+                        <label for="name" class="col col-form-label">Activity name</label>
+                        <div class="col">
+                            <input type="text" class="form-control" id="nameUpdate" name="name" " autocomplete=" off" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="col col-form-label">Description</label>
+                        <div class="col">
+                            <textarea class="form-control" id="descriptionUpdate" name="description" autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="galleryActivityUpdate" class="form-label">Gallery</label>
+                        <span id="formGallery">
+
+                        </span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Add</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Add activity Modal-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -124,8 +172,6 @@
         FilePondPluginMediaPreview,
     );
 
-
-
     // add new activity gallery
     // Get a reference to the file input element
     const photoActivity = document.querySelector('input[id="galleryActivity"]');
@@ -136,6 +182,7 @@
         imageResizeUpscale: false,
         credits: false,
     })
+
 
     pondActivity.setOptions({
         server: {
@@ -164,5 +211,67 @@
             },
         }
     })
+
+    function showActivity($id = null) {
+        $('#formGallery').html('')
+        $('#formGallery').html('<input class="form-control" accept="image/*" type="file" name="gallery[]" id="galleryActivityUpdate" multiple>')
+        let photoActivityUpdate = document.querySelector(`input[id="galleryActivityUpdate"]`);
+        // Create a FilePond instance
+        let pondActivityUpdate = FilePond.create(photoActivityUpdate, {
+            imageResizeTargetHeight: 720,
+            imageResizeUpscale: false,
+            credits: false,
+        })
+        pondActivityUpdate.setOptions({
+            server: {
+                timeout: 3600000,
+                process: {
+                    url: '<?= base_url("upload/photo") ?>',
+                    onload: (response) => {
+                        console.log("processed:", response);
+                        return response
+                    },
+                    onerror: (response) => {
+                        console.log("error:", response);
+                        return response
+                    },
+                },
+                revert: {
+                    url: '<?= base_url("upload/photo") ?>',
+                    onload: (response) => {
+                        console.log("reverted:", response);
+                        return response
+                    },
+                    onerror: (response) => {
+                        console.log("error:", response);
+                        return response
+                    },
+                },
+            }
+        })
+
+        $.ajax({
+            url: "<?= base_url('manage_activities'); ?>" + "/" + "activity" + "/" + $id,
+            method: "get",
+            dataType: "json",
+            success: function(response) {
+                if (response) {
+
+                    $('#idUpdate').val(response.objectData[0].id)
+                    $('#nameUpdate').val(response.objectData[0].name)
+                    $('#descriptionUpdate').val(response.objectData[0].description)
+                    response.galleryData.forEach(element => {
+                        pondActivityUpdate.addFiles(
+                            `<?= base_url('media/photos/activities/'); ?>/${element.url}`
+                        );
+                    });
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" +
+                    xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
 </script>
 <?= $this->endSection() ?>

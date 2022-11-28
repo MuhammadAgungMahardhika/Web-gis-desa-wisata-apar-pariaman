@@ -6,8 +6,12 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">List culinary place</li>
+        </ol>
+    </nav>
     <!-- DataTales  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">

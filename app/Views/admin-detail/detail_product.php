@@ -1,6 +1,13 @@
 <?= $this->extend('layout/template.php') ?>
 <?= $this->section('content') ?>
 <section class="section">
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_product') ?>">List product</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail product</li>
+        </ol>
+    </nav>
     <div class="row">
         <!-- Object Detail Information -->
         <div class="col-md-6 col-12">

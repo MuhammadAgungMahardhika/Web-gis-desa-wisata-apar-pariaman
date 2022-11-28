@@ -1,11 +1,13 @@
 <?= $this->extend('layout/template.php') ?>
-
-
 <?= $this->section('content') ?>
-
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">List admin</li>
+        </ol>
+    </nav>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary text-center">List Admin</h5>

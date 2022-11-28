@@ -59,11 +59,7 @@ class ManageWorshipPlaceController extends BaseController
 
     public function save_update($id = null)
     {
-        //validation data
-        $validateRules = $this->validate([
-            'name' => 'required|max_length[50]',
-            'description' => 'max_length[255]'
-        ]);
+
         // ---------------------Data request------------------------------
         $request = $this->request->getPost();
         $updateRequest = [
@@ -79,44 +75,45 @@ class ManageWorshipPlaceController extends BaseController
         }
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
-        if ($validateRules) {
-            // ----------------------------------UPDATE DATA--------------------------
-            $update = $this->model->updateWp($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
-            if ($update) {
-                // --------------------------------Gallery------------------------------
-                // check if gallery have empty string then make it become empty array
-                foreach ($request['gallery'] as $key => $value) {
-                    if (!strlen($value)) {
-                        unset($request['gallery'][$key]);
-                    }
-                }
-                if ($request['gallery']) {
-                    $folders = $request['gallery'];
-                    $gallery = array();
-                    foreach ($folders as $folder) {
-                        $filepath = WRITEPATH . 'uploads/' . $folder;
-                        $filenames = get_filenames($filepath);
-                        $fileImg = new File($filepath . '/' . $filenames[0]);
-                        $fileImg->move(FCPATH . 'media/photos');
-                        delete_files($filepath);
-                        rmdir($filepath);
-                        $gallery[] = $fileImg->getFilename();
-                    }
-                    $updateGallery = $this->model->updateGallery($id, $gallery);
-                } else {
-                    $updateGallery = $this->model->deleteGallery($id);
+
+        // unset empty value
+        foreach ($updateRequest as $key => $value) {
+            if (empty($value)) {
+                unset($updateRequest[$key]);
+            }
+        }
+        // ----------------------------------UPDATE DATA--------------------------
+        $update = $this->model->updateWp($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
+        if ($update) {
+            // --------------------------------Gallery------------------------------
+            // check if gallery have empty string then make it become empty array
+            foreach ($request['gallery'] as $key => $value) {
+                if (!strlen($value)) {
+                    unset($request['gallery'][$key]);
                 }
             }
-            if ($update && $updateGallery) {
-                session()->setFlashdata('success', 'Success! Worship place updated.');
-                return redirect()->to(site_url('manage_worship_place/edit/' . $id));
+            if ($request['gallery']) {
+                $folders = $request['gallery'];
+                $gallery = array();
+                foreach ($folders as $folder) {
+                    $filepath = WRITEPATH . 'uploads/' . $folder;
+                    $filenames = get_filenames($filepath);
+                    $fileImg = new File($filepath . '/' . $filenames[0]);
+                    $fileImg->move(FCPATH . 'media/photos');
+                    delete_files($filepath);
+                    rmdir($filepath);
+                    $gallery[] = $fileImg->getFilename();
+                }
+                $updateGallery = $this->model->updateGallery($id, $gallery);
             } else {
-                session()->setFlashdata('failed', 'Failed! Failed to update Worship Place.');
-                return redirect()->to(site_url('manage_worship_place/edit/' . $id));
+                $updateGallery = $this->model->deleteGallery($id);
             }
+        }
+        if ($update && $updateGallery) {
+            session()->setFlashdata('success', 'Success! Worship place updated.');
+            return redirect()->to(site_url('manage_worship_place/edit/' . $id));
         } else {
-            $listErrors = $this->validation->listErrors();
-            session()->setFlashdata('failed', 'Failed! Failed' . json_encode($listErrors));
+            session()->setFlashdata('failed', 'Failed! Failed to update Worship Place.');
             return redirect()->to(site_url('manage_worship_place/edit/' . $id));
         }
     }
@@ -152,6 +149,12 @@ class ManageWorshipPlaceController extends BaseController
         $lng = $this->request->getPost('longitude');
 
 
+        // unset empty value
+        foreach ($insertRequest as $key => $value) {
+            if (empty($value)) {
+                unset($insertRequest[$key]);
+            }
+        }
         $insert =  $this->model->addWorshipPlace($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
         if ($insert) {
 

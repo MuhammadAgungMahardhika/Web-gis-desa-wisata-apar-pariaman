@@ -77,6 +77,12 @@ class ManageSouvenirPlaceController extends BaseController
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 
+        // unset empty value
+        foreach ($updateRequest as $key => $value) {
+            if (empty($value)) {
+                unset($updateRequest[$key]);
+            }
+        }
         // ----------------------------------UPDATE DATA--------------------------
         $update = $this->model->updateSp($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
         if ($update) {
@@ -144,6 +150,12 @@ class ManageSouvenirPlaceController extends BaseController
         $lat = $this->request->getPost('latitude');
         $lng = $this->request->getPost('longitude');
 
+        // unset empty value
+        foreach ($insertRequest as $key => $value) {
+            if (empty($value)) {
+                unset($insertRequest[$key]);
+            }
+        }
         $insert =  $this->model->addSouvenirPlace($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
         if ($insert) {
 

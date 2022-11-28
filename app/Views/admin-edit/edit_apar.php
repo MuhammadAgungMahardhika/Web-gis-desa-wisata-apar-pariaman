@@ -12,6 +12,13 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <section class="section">
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('manage_apar') ?>">Detail village</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit village</li>
+        </ol>
+    </nav>
     <form class="form form-vertical" action="<?= base_url('manage_apar/save_update/' . $aparData->id); ?>" method="post">
         <div class="row">
             <!-- Object Detail Information -->

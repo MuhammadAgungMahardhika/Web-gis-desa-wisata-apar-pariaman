@@ -83,7 +83,7 @@ class ManagePackageController extends BaseController
         } else {
             $gallery = '';
         }
-        $insertRequest = [
+        $updateRequest = [
             'id' => $id,
             'name' => $this->request->getPost('name'),
             'price' => $this->request->getPost('price'),
@@ -93,7 +93,13 @@ class ManagePackageController extends BaseController
             'description' => $this->request->getPost('description')
         ];
 
-        $insert =  $this->model->updatePackage($id, $insertRequest);
+        // unset empty value
+        foreach ($updateRequest as $key => $value) {
+            if (empty($value)) {
+                unset($updateRequest[$key]);
+            }
+        }
+        $insert =  $this->model->updatePackage($id, $updateRequest);
         if ($insert) {
             // insert activities
             $deletePackage = $this->modelActivities->deleteDetailPackage($id);
@@ -101,7 +107,7 @@ class ManagePackageController extends BaseController
                 $activities_id = $this->request->getPost('activities');
                 if ($activities_id) {
                     foreach ($activities_id as $activity_id) {
-                        $this->modelActivities->updateActivities($id, $activity_id);
+                        $this->modelActivities->updatePackageActivities($id, $activity_id);
                     }
                 }
             }
@@ -109,9 +115,11 @@ class ManagePackageController extends BaseController
             $deleteFacilityPackages = $this->modelFp->deleteFacilityPackage($id);
             if ($deleteFacilityPackages) {
                 $facility_packages = $this->request->getPost('facility_package');
-                foreach ($facility_packages as $fp) {
-                    $id_fp = $this->modelFp->get_new_id();
-                    $this->modelFp->addFacilityPackage(['id' => $id_fp, 'package_id' => $id, 'name' => $fp]);
+                if ($facility_packages) {
+                    foreach ($facility_packages as $fp) {
+                        $id_fp = $this->modelFp->get_new_id();
+                        $this->modelFp->addFacilityPackage(['id' => $id_fp, 'package_id' => $id, 'name' => $fp]);
+                    }
                 }
             }
         }
@@ -168,6 +176,12 @@ class ManagePackageController extends BaseController
             'description' => $this->request->getPost('description')
         ];
 
+        // unset empty value
+        foreach ($insertRequest as $key => $value) {
+            if (empty($value)) {
+                unset($insertRequest[$key]);
+            }
+        }
         $insert =  $this->model->addPackage($insertRequest);
         if ($insert) {
             // insert activities

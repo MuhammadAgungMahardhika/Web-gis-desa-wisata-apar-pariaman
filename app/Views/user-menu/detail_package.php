@@ -16,25 +16,32 @@
                                     <td>Name</td>
                                     <td>: <?= $objectData->name; ?></td>
                                 </tr>
-
-                                <tr>
-                                    <td>Price</td>
-                                    <td>: <?= $objectData->price; ?> IDR</td>
-                                </tr>
-                                <tr>
-                                    <td>Minimal</td>
-                                    <td>: <?= $objectData->min_capacity; ?> people</td>
-                                </tr>
-                                <tr>
-                                    <td>Contact</td>
-                                    <td>: <?= $objectData->contact_person; ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">Description</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: justify;" colspan="2"><?= $objectData->description; ?></td>
-                                </tr>
+                                <?php if (isset($objectData->price)) : ?>
+                                    <tr>
+                                        <td>Price</td>
+                                        <td>: <?= $objectData->price; ?> IDR</td>
+                                    </tr>
+                                <?php endif; ?>
+                                <?php if (isset($objectData->min_capacity)) : ?>
+                                    <tr>
+                                        <td>Minimal</td>
+                                        <td>: <?= $objectData->min_capacity; ?> people</td>
+                                    </tr>
+                                <?php endif; ?>
+                                <?php if (isset($objectData->contact_person)) : ?>
+                                    <tr>
+                                        <td>Contact</td>
+                                        <td>: <?= $objectData->contact_person; ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                                <?php if (isset($objectData->description)) : ?>
+                                    <tr>
+                                        <td colspan="2">Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: justify;" colspan="2"><?= $objectData->description; ?></td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                         <?php if ($facilityPackage) : ?>
@@ -74,7 +81,10 @@
                                         <div class="col-12">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?= $activities->name; ?></h5>
-                                                <p class="card-text"><?= $activities->description; ?></p>
+                                                <?php if (isset($activities->description)) : ?>
+                                                    <p class="card-text"><?= $activities->description; ?></p>
+                                                <?php endif; ?>
+
                                                 <button onclick="showGalleryModal('<?= $activities->id; ?>')" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#activitiesModal">
                                                     <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">image</span> Open Gallery
                                                 </button>

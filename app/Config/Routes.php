@@ -280,14 +280,12 @@ $routes->group('manage_product', function ($routes) {
 $routes->group('manage_activities', function ($routes) {
     $routes->get('/', 'ManageActivitiesController::index', ['filter' => 'role:admin']);
     $routes->get('index', 'ManageActivitiesController::index', ['filter' => 'role:admin']);
-    $routes->get('detail/(:segment)', 'ManageActivitiesController::detail/$1', ['filter' => 'role:admin']);
-    $routes->get('edit/(:segment)', 'ManageActivitiesController::edit/$1', ['filter' => 'role:admin']);
-    $routes->post('save_update/(:segment)', 'ManageActivitiesController::save_update/$1', ['filter' => 'role:admin']);
-    $routes->get('insert', 'ManageActivitiesController::insert', ['filter' => 'role:admin']);
+    $routes->post('save_update', 'ManageActivitiesController::save_update', ['filter' => 'role:admin']);
     $routes->post('save_insert', 'ManageActivitiesController::save_insert', ['filter' => 'role:admin']);
     $routes->get('delete/(:segment)', 'ManageActivitiesController::delete/$1', ['filter' => 'role:admin']);
+    $routes->get('activity/(:segment)', 'ManageActivitiesController::activity/$1', ['filter' => 'role:admin']);
 
-    // activity
+    // save activity from package form
     $routes->post('save_activity/(:segment)', 'ManagePackageController::save_activity/$1', ['filter' => 'role:admin']);
 });
 

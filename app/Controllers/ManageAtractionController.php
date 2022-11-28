@@ -94,6 +94,14 @@ class ManageAtractionController extends BaseController
         } else {
             $updateRequest['video_url'] = null;
         }
+
+        // unset empty value
+        foreach ($updateRequest as $key => $value) {
+            if (empty($value)) {
+                unset($updateRequest[$key]);
+            }
+        }
+
         // ---------------------------------Update---------------------
         $update =  $this->model->updateAtraction($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
         if ($update) {
@@ -180,6 +188,12 @@ class ManageAtractionController extends BaseController
             $insertRequest['video_url'] = null;
         }
 
+        // unset empty value
+        foreach ($insertRequest as $key => $value) {
+            if (empty($value)) {
+                unset($insertRequest[$key]);
+            }
+        }
         $insert =  $this->model->addAtraction($id, $insertRequest, floatval($lng), floatval($lat), $geojson);
         // ----------------Gallery-----------------------------------------
         if ($insert) {

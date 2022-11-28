@@ -17,8 +17,12 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $data->name; ?></h5>
-                                        <p class="card-text"><?= $data->description; ?></p>
-                                        <p class="card-text"><small class="text-muted"><?= $data->price; ?> IDR</small></p>
+                                        <?php if (isset($data->description)) : ?>
+                                            <p class="card-text"><?= $data->description; ?></p>
+                                        <?php endif; ?>
+                                        <?php if (isset($data->price)) : ?>
+                                            <p class="card-text"><small class="text-muted"><?= $data->price; ?> IDR</small></p>
+                                        <?php endif; ?>
 
                                     </div>
                                     <div class="card-footer text-end" style="border: none;">
@@ -43,9 +47,11 @@
                                         <?= $data->description; ?>
                                     </p>
                                 </div>
-                                <div class="modal-footer">
-                                    <span class="text-lg"><?= $data->price; ?> IDR</span>
-                                </div>
+                                <?php if (isset($data->price)) : ?>
+                                    <div class="modal-footer">
+                                        <span class="text-lg"><?= $data->price; ?> IDR</span>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

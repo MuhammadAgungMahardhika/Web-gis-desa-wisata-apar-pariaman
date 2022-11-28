@@ -107,8 +107,13 @@ class ManageAparController extends BaseController
         } else {
             $updateRequest['video_url'] = null;
         }
+        // unset empty value
+        foreach ($updateRequest as $key => $value) {
+            if (empty($value)) {
+                unset($updateRequest[$key]);
+            }
+        }
         // ----------------------------------UPDATE DATA--------------------------
-
         $update =  $this->model->updateApar($id, $updateRequest, floatval($lng), floatval($lat), $geojson);
         if ($update) {
             session()->setFlashdata('success', 'Success! Village updated.');
