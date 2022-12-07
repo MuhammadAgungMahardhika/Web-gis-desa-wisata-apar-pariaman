@@ -26,7 +26,7 @@
 
                                     </div>
                                     <div class="card-footer text-end" style="border: none;">
-                                        <a role="button" class="btn btn-success" href="<?= base_url('package/detail') . '/' . $data->id; ?>">Selengkapnya</a>
+                                        <a role="button" class="btn btn-success" href="<?= base_url('package/detail') . '/' . $data->id; ?>">Detail</a>
                                     </div>
                                 </div>
                             </div>

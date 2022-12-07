@@ -13,7 +13,9 @@
                                     <img class=" card-img-top img-fluid" src="<?= base_url('media/photos/product/'); ?>/<?= $data->url; ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title"><?= $data->name; ?></h4>
-                                        <small class="text-muted"><?= $data->price; ?> IDR</small>
+                                        <?php if (isset($data->price)) : ?>
+                                            <small class="text-muted"><?= $data->price; ?> IDR</small>
+                                        <?php endif; ?>
                                     </div>
                                 </a>
                             </div>
@@ -35,7 +37,9 @@
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <span class="text-lg"><?= $data->price; ?> IDR</span>
+                                    <?php if (isset($data->price)) : ?>
+                                        <span class="text-lg"><?= $data->price; ?> IDR</span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

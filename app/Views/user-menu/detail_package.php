@@ -1,6 +1,12 @@
 <?= $this->extend('layout/template.php') ?>
 <?= $this->section('content') ?>
 <section class="section">
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="<?= base_url('package') ?>">List package</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail package</li>
+        </ol>
+    </nav>
     <div class="row">
         <!-- Object Detail Information -->
         <div class="col-md-4 col-12">

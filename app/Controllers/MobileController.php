@@ -275,7 +275,7 @@ class MobileController extends BaseController
                 "Success get list of package"
             ]
         ];
-        return view('user-menu/detail_package', $response);
+        return view('mobile/detail_package', $response);
     }
 
     // Product

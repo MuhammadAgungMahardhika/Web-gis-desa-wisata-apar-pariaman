@@ -21,7 +21,7 @@
 
                                     </div>
                                     <div class="card-footer text-end" style="border: none;">
-                                        <a role="button" class="btn btn-success" href="<?= base_url('mobile/detail_package') . '/' . $data->id; ?>">Selengkapnya</a>
+                                        <a role="button" class="btn btn-success" href="<?= base_url('mobile/detail_package') . '/' . $data->id; ?>">Detail</a>
                                     </div>
                                 </div>
                             </div>

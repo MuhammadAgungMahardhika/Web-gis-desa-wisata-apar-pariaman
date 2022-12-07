@@ -28,6 +28,9 @@ function showMap() {
         map.setOptions({ mapTypeControl: false });
     }
 }
+function panTo(lat,lng){
+    map.panTo(lat,lng)
+}
 
 //show atraction gallery when url is in home
 function showUpcoming() {
@@ -266,7 +269,6 @@ function showPanelList(datas, url) {
     let listPanel = []
     // if object is empty
     if (datas.length == 0) { listPanel.push(`<tr colspan="3"><td></td><td class="text-center">object not found!</td><td></td></tr>`) }
-
     for (let i = 0; i < datas.length; i++) {
         let data = datas[i]
         let id = datas[i].id
@@ -275,6 +277,7 @@ function showPanelList(datas, url) {
         let lng = datas[i].lng
         listPanel.push(`<tr><td>${i + 1}</td><td>${name} ${(() => { if (url == 'event') { return `<br>${data.date_start}` } else { return '' } })()}</td><td class="text-center"><button title="info on map" onclick="showInfoOnMap(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm"><i class="fa fa-info fa-xs"></i></button> <button title="route" onclick="calcRoute(${lat},${lng})" class="btn btn-primary btn-sm"><i class="fa fa-road fa-xs"></i></button>${(() => { if (url != 'atraction' && url != 'event') { return ` <button title="detail" onclick="showSupportModal(${JSON.stringify(data).split('"').join("&quot;")},${JSON.stringify(url).split('"').join("&quot;")})" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#supportModal"><i class="fa fa-eye fa-xs"></i></button>` } else { return '' } })()}</td></tr>`)
     }
+    listPanel =  listPanel.join('')
     if (url == 'atraction') {
         $('#panel').html(`<div class="card-header"><h5 class="card-title text-center">Atraction</h5></div><div class="card-body"><table class="table table-border overflow-auto" width="100%"><thead><tr><th>#</th><th>Name</th><th class="text-center">Action</th></tr></thead><tbody id="tbody">${listPanel}</tbody></table></div>`)
     }
@@ -360,11 +363,6 @@ function clearMarkerNearby() {
         geomNearby = null
     }
 }
-// set center on map
-function setCenter(val) {
-    map.setCenter(val)
-    moveCamera()
-}
 
 //open infowindow
 function openInfoWindow(marker, content = "Info Window") {
@@ -387,7 +385,7 @@ function currentLocation() {
                 clearRoute()
                 addUserMarkerToMap(pos);
                 userPosition = pos
-                map.setCenter(pos);
+                panTo(userPosition)
             }, () => { handleLocationError(true, currentWindow, map.getCenter()); }
             )
     } else { handleLocationError(false, currentWindow, map.getCenter()); } // Browser doesn't support Geolocation
@@ -429,6 +427,16 @@ function clearUser() {
         userMarker = null
     }
 }
+
+// fit zoom to radius
+function boundToRadius(userPosition, rad) {
+    let userBound = new google.maps.LatLng(userPosition);
+    const radiusCircle = new google.maps.Circle({
+        center: userBound,
+        radius: Number(rad)
+    });
+    map.fitBounds(radiusCircle.getBounds());
+}
 //function radius 
 function radius(radius = null) {
     if (circle) { circle.setMap(null) }
@@ -442,7 +450,10 @@ function radius(radius = null) {
         center: userPosition,
         radius: radius
     });
+     boundToRadius(userPosition, radius);
 }
+
+
 function clearRadius() {
     if (circle) { return circle.setMap(null) }
 }
@@ -576,6 +587,8 @@ function supportNearby(val = null) {
                     loopingAllMarker(fData, fUrl)
                 }
                 radius(distance)
+                let pos = new google.maps.LatLng(userPosition.lat,userPosition.lng);
+                panTo(pos)
                 $('#sliderVal').html(distance + " m");
             }
         },
@@ -587,8 +600,8 @@ function supportNearby(val = null) {
 }
 function setNearby(data, url) {
     userPosition = { lat: parseFloat(data.lat), lng: parseFloat(data.lng) }
-    setCenter({ lat: parseFloat(data.lat), lng: parseFloat(data.lng) })
-    moveCamera(17)
+    let pos = new google.maps.LatLng(parseFloat(data.lat),userPosition.lng);
+    panTo(pos)
     setSupportSliderToZero()
     setMainSliderToZero()
     clearUser()
@@ -671,12 +684,12 @@ function showObject(object, id = null) {
         method: "get",
         dataType: "json",
         success: function (response) {
-            setCenter({ lat: latApar, lng: lngApar })
+            moveCamera()
+            panTo({ lat: latApar, lng: lngApar })
             $('#rowObjectArround').css("display", "none")
             clearMarker()
             clearRadius()
             clearRoute()
-          
             if (response.objectData && response.url) {
                 if (response.objectData[0].id == '01') {
                     activeMenu('mangrove')
@@ -739,7 +752,7 @@ function getObjectByName(val = null, url) {
         method: "get",
         dataType: "json",
         success: function (response) {
-            setCenter({ lat: latApar, lng: lngApar })
+            panTo({ lat: latApar, lng: lngApar })
             clearMarker()
             clearRadius()
             clearRoute()
@@ -764,7 +777,7 @@ function getObjectByRate(val, url) {
         method: "get",
         dataType: "json",
         success: function (response) {
-            setCenter({ lat: latApar, lng: lngApar })
+            panTo({ lat: latApar, lng: lngApar })
             clearMarker()
             clearRadius()
             clearRoute()
@@ -900,7 +913,7 @@ function getObjectByCategory(val = null) {
         method: "get",
         dataType: "json",
         success: function (response) {
-            setCenter({ lat: latApar, lng: lngApar })
+            panTo({ lat: latApar, lng: lngApar })
             clearMarker()
             clearRadius()
             clearRoute()
@@ -932,7 +945,7 @@ function getObjectByDate(date_start = null,date_end=null) {
             method: "get",
             dataType: "json",
             success: function (response) {
-                setCenter({ lat: latApar, lng: lngApar })
+                panTo({ lat: latApar, lng: lngApar })
                 clearMarker()
                 clearRadius()
                 clearRoute()
