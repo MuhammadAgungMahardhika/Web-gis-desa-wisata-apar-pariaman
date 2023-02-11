@@ -60,9 +60,9 @@ $routes->get('/register', 'AuthController::register');
 $routes->group('user', function ($routes) {
     $routes->get('profile', 'User::profile', ['filter' => 'role:user,admin']);
     $routes->get('edit_profile', 'User::edit_profile', ['filter' => 'role:user,admin']);
-    $routes->get('save_update/(:segment)', 'User::save_update/$1', ['filter' => 'role:user,admin']);
+    $routes->post('save_update/(:segment)', 'User::save_update/$1', ['filter' => 'role:user,admin']);
     $routes->get('change_password', 'User::change_password', ['filter' => 'role:user,admin']);
-    $routes->get('save_password/(:segment)', 'User::save_password/$1', ['filter' => 'role:user,admin']);
+    $routes->post('save_password/(:segment)', 'User::save_password/$1', ['filter' => 'role:user,admin']);
 });
 
 // Menu list Object
