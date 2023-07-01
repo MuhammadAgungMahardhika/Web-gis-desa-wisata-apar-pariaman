@@ -20,7 +20,7 @@ The user guide corresponding to this version of the framework can be found
 
 ## Installation & updates
 
-Using terminal, run /n
+Using terminal, run \n
 -git clone https://github.com/MuhammadAgungMahardhika/Web-GIS-desa-wisata-apar-pariaman.git
 -go inside the directory with cd desa-wisata-apar-pariaman, 
 -composer install to set up Codeigniter 4 framework.
