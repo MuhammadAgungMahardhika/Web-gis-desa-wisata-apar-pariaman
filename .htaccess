@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteRule ^(.*)$ /public/$1 [NC,L,QSA]
+</IfModule>
+
+php_value upload_max_filesize 1920M
+php_value post_max_size 2000M
+php_value memory_limit 3000M
+php_value display_errors On
