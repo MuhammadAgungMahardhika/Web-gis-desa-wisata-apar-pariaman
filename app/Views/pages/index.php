@@ -105,8 +105,8 @@
     </nav>
     <!-- Akhir navigasi -->
     <div class="bg" id="bg">
-        <video autoplay muted poster="<?= base_url('/assets/images/bg-movie-ss.PNG') ?>" loop class="bg-video">
-            <source src="<?= base_url('media/videos/bg-movie.MP4'); ?>">
+        <video autoplay muted poster="<?= base_url('/assets/images/bg-movie-ss.png') ?>" loop class="bg-video">
+            <source src="<?= base_url('media/videos/bg-movie.mp4'); ?>">
         </video>
         <div class="bg-content">
             <h1 style="color: #eaeaea;">Welcome To Apar Tourism Village</h1>
